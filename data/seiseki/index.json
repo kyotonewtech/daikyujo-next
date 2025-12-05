@@ -1,0 +1,23 @@
+{
+  "archives": [
+    {
+      "year": 2025,
+      "month": 1,
+      "entryCount": 2,
+      "publishedAt": "2025-11-27T07:51:43.093Z"
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "entryCount": 10,
+      "publishedAt": "2024-12-21T09:00:00.000Z"
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "entryCount": 8,
+      "publishedAt": "2024-11-26T09:00:00.000Z"
+    }
+  ],
+  "lastUpdated": "2025-12-02T12:37:53.636Z"
+}

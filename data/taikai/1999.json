@@ -1,0 +1,198 @@
+{
+  "year": 1999,
+  "taikaiName": "平成11年弓術大会",
+  "eventDate": "1999年",
+  "participants": [
+    {
+      "id": "8243109b-e1b4-4488-8ca2-3efb95f24c46",
+      "rank": 1,
+      "name": "岩本",
+      "rankTitle": "二段",
+      "score1": 115,
+      "score2": 85,
+      "totalScore": 200
+    },
+    {
+      "id": "e0bb72d7-dda7-4c05-8dcb-1e69be667086",
+      "rank": 2,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 107,
+      "score2": 73,
+      "totalScore": 180
+    },
+    {
+      "id": "fa58ebea-0deb-4291-a5a6-08e66967f01b",
+      "rank": 3,
+      "name": "端",
+      "rankTitle": "初段",
+      "score1": 96,
+      "score2": 79,
+      "totalScore": 175
+    },
+    {
+      "id": "b8a6e6ae-ecd3-4392-a134-b7c6ab2491c6",
+      "rank": 4,
+      "name": "小西",
+      "rankTitle": "初段",
+      "score1": 90,
+      "score2": 84,
+      "totalScore": 174
+    },
+    {
+      "id": "cc723efc-99f0-4f15-94f3-a1155fb3f04a",
+      "rank": 5,
+      "name": "藤原",
+      "rankTitle": "二級",
+      "score1": 88,
+      "score2": 85,
+      "totalScore": 173
+    },
+    {
+      "id": "4dc8c218-ec29-4516-aab1-869873779fb1",
+      "rank": 6,
+      "name": "中山",
+      "rankTitle": "四段",
+      "score1": 73,
+      "score2": 79,
+      "totalScore": 162
+    },
+    {
+      "id": "9c6927db-34b7-4247-af79-9e52c1ef8d35",
+      "rank": 7,
+      "name": "山本",
+      "rankTitle": "二級",
+      "score1": 86,
+      "score2": 75,
+      "totalScore": 161
+    },
+    {
+      "id": "c0b0d61a-ec46-419d-a2df-4cc703c118aa",
+      "rank": 8,
+      "name": "上南木",
+      "rankTitle": "初段",
+      "score1": 90,
+      "score2": 61,
+      "totalScore": 151
+    },
+    {
+      "id": "d1d9fb33-c0f5-4346-a5bf-25a4a10154d4",
+      "rank": 9,
+      "name": "谷本",
+      "rankTitle": "初段",
+      "score1": 75,
+      "score2": 75,
+      "totalScore": 150
+    },
+    {
+      "id": "d2e66e2f-7ac0-4739-984a-5b5106805d76",
+      "rank": 10,
+      "name": "笠谷",
+      "rankTitle": "四段",
+      "score1": 69,
+      "score2": 63,
+      "totalScore": 132
+    },
+    {
+      "id": "10422cb3-6d85-456f-b4e3-050f0956e659",
+      "rank": 11,
+      "name": "瀬川",
+      "rankTitle": "初段",
+      "score1": 70,
+      "score2": 61,
+      "totalScore": 131
+    },
+    {
+      "id": "78c972fc-2f0b-4a3e-b140-d375fccb9336",
+      "rank": 12,
+      "name": "山口",
+      "rankTitle": "三段",
+      "score1": 65,
+      "score2": 63,
+      "totalScore": 128
+    },
+    {
+      "id": "8522ddab-56e8-46f0-bce2-ffa0ea9da372",
+      "rank": 13,
+      "name": "岩井",
+      "rankTitle": "初段",
+      "score1": 67,
+      "score2": 61,
+      "totalScore": 128
+    },
+    {
+      "id": "5a191283-c366-42a4-ac13-47908b48b0af",
+      "rank": 14,
+      "name": "実由",
+      "rankTitle": "-",
+      "score1": 58,
+      "score2": 65,
+      "totalScore": 123
+    },
+    {
+      "id": "ef1441ec-e3ec-4cd1-88d6-7aa107d3ec4b",
+      "rank": 15,
+      "name": "植塚",
+      "rankTitle": "初段",
+      "score1": 61,
+      "score2": 58,
+      "totalScore": 119
+    },
+    {
+      "id": "6d398ff6-8163-4f95-84d0-4baecbaeb178",
+      "rank": 16,
+      "name": "帆足",
+      "rankTitle": "二級",
+      "score1": 59,
+      "score2": 58,
+      "totalScore": 117
+    },
+    {
+      "id": "a8eb2509-e277-4552-81bb-572f14dabeee",
+      "rank": 17,
+      "name": "藤嶋",
+      "rankTitle": "四級",
+      "score1": 69,
+      "score2": 44,
+      "totalScore": 113
+    },
+    {
+      "id": "f87d45e8-6ea4-4f63-927f-2357b971ffe7",
+      "rank": 18,
+      "name": "岡本",
+      "rankTitle": "三段",
+      "score1": 65,
+      "score2": 49,
+      "totalScore": 114
+    },
+    {
+      "id": "82942fcb-ac52-4f67-9336-08cbe55b3008",
+      "rank": 19,
+      "name": "楠",
+      "rankTitle": "四級",
+      "score1": 59,
+      "score2": 53,
+      "totalScore": 112
+    },
+    {
+      "id": "b3e36abd-f95c-4ba3-a16b-e8f51221fc33",
+      "rank": 20,
+      "name": "木村",
+      "rankTitle": "初段",
+      "score1": 45,
+      "score2": 45,
+      "totalScore": 90
+    },
+    {
+      "id": "5a2898bc-4912-413a-971b-d01cc6dea160",
+      "rank": 21,
+      "name": "由良",
+      "rankTitle": "初段",
+      "score1": 45,
+      "score2": 41,
+      "totalScore": 86
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

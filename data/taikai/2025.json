@@ -1,0 +1,252 @@
+{
+  "year": 2025,
+  "taikaiName": "令和7年弓術大会",
+  "eventDate": "2025年",
+  "participants": [
+    {
+      "id": "6ea46a12-8690-47ab-9e71-4d418461c968",
+      "rank": 1,
+      "name": "大﨑",
+      "rankTitle": "二級",
+      "score1": 117,
+      "score2": 112,
+      "totalScore": 229
+    },
+    {
+      "id": "ba90c07f-3e8e-4ab4-8d1d-be9ac6f746cd",
+      "rank": 2,
+      "name": "駒田",
+      "rankTitle": "三級",
+      "score1": 105,
+      "score2": 117,
+      "totalScore": 222
+    },
+    {
+      "id": "e8763a57-3aff-4165-b457-b883ad6371be",
+      "rank": 3,
+      "name": "土井",
+      "rankTitle": "三級",
+      "score1": 122,
+      "score2": 99,
+      "totalScore": 221
+    },
+    {
+      "id": "9de6fc90-82c9-4d49-8907-2f16bed1541a",
+      "rank": 4,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "score1": 120,
+      "score2": 93,
+      "totalScore": 213
+    },
+    {
+      "id": "2d0472ba-5753-4d72-b45e-5ae9139490b7",
+      "rank": 5,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 109,
+      "score2": 102,
+      "totalScore": 211
+    },
+    {
+      "id": "312ae804-9936-47cf-8856-59020b146b3b",
+      "rank": 6,
+      "name": "荻埜",
+      "rankTitle": "四級",
+      "score1": 111,
+      "score2": 99,
+      "totalScore": 210
+    },
+    {
+      "id": "b810432a-3707-4c20-9161-6bc98621b2be",
+      "rank": 7,
+      "name": "世羽",
+      "rankTitle": "四級",
+      "score1": 109,
+      "score2": 85,
+      "totalScore": 194
+    },
+    {
+      "id": "e39f1f8e-a9dd-4027-8440-be5362b30f2b",
+      "rank": 8,
+      "name": "榎本麻衣",
+      "rankTitle": "五級",
+      "score1": 100,
+      "score2": 90,
+      "totalScore": 190
+    },
+    {
+      "id": "f20fb647-4979-4af2-a190-d6b8e012bc35",
+      "rank": 9,
+      "name": "ちひろ",
+      "rankTitle": "四級",
+      "score1": 104,
+      "score2": 83,
+      "totalScore": 187
+    },
+    {
+      "id": "e28b59a5-c1bd-40b4-9cc7-4b1eee28c67e",
+      "rank": 10,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "score1": 87,
+      "score2": 83,
+      "totalScore": 170
+    },
+    {
+      "id": "d77e9d74-9d7a-49c2-b6da-45e6044c9b56",
+      "rank": 11,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 82,
+      "score2": 77,
+      "totalScore": 159
+    },
+    {
+      "id": "10f6ede5-4d8a-476d-a7f0-3d6ff2bca4b7",
+      "rank": 12,
+      "name": "高淳輔",
+      "rankTitle": "四級",
+      "score1": 85,
+      "score2": 69,
+      "totalScore": 154
+    },
+    {
+      "id": "e63f2dbf-1c08-44bc-8dad-0bafbb378457",
+      "rank": 13,
+      "name": "田川",
+      "rankTitle": "二級",
+      "score1": 69,
+      "score2": 83,
+      "totalScore": 152
+    },
+    {
+      "id": "7bdc2469-f86c-4d93-ab07-ee4a9add37bc",
+      "rank": 14,
+      "name": "古池",
+      "rankTitle": "初段",
+      "score1": 78,
+      "score2": 72,
+      "totalScore": 150
+    },
+    {
+      "id": "75a6f020-da69-45b4-a58d-b717afc55f8e",
+      "rank": 15,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "score1": 72,
+      "score2": 70,
+      "totalScore": 142
+    },
+    {
+      "id": "42985519-3dd6-4a21-92c6-5234d312b1fa",
+      "rank": 16,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "score1": 71,
+      "score2": 64,
+      "totalScore": 135
+    },
+    {
+      "id": "a2d65eb8-a676-46f7-95b8-bff9d720d094",
+      "rank": 17,
+      "name": "ゆかり",
+      "rankTitle": "四級",
+      "score1": 48,
+      "score2": 79,
+      "totalScore": 127
+    },
+    {
+      "id": "9971dd98-5d6c-421b-80e7-231e1316bdbb",
+      "rank": 18,
+      "name": "定延",
+      "rankTitle": "四級",
+      "score1": 63,
+      "score2": 63,
+      "totalScore": 126
+    },
+    {
+      "id": "31e7f813-46e1-4fab-9d83-de8b00bef034",
+      "rank": 19,
+      "name": "中村智子",
+      "rankTitle": "四級",
+      "score1": 63,
+      "score2": 63,
+      "totalScore": 126
+    },
+    {
+      "id": "8adea71a-bb78-43e1-950b-0172b581f403",
+      "rank": 20,
+      "name": "川森",
+      "rankTitle": "初段",
+      "score1": 73,
+      "score2": 49,
+      "totalScore": 122
+    },
+    {
+      "id": "955e6433-badd-4954-b454-eec69c461c2f",
+      "rank": 21,
+      "name": "小西",
+      "rankTitle": "二段",
+      "score1": 61,
+      "score2": 59,
+      "totalScore": 120
+    },
+    {
+      "id": "a73d6a1e-e787-448a-8697-a7a34c7599bb",
+      "rank": 22,
+      "name": "岩井",
+      "rankTitle": "初段",
+      "score1": 53,
+      "score2": 55,
+      "totalScore": 108
+    },
+    {
+      "id": "925f0e89-9eee-4dd4-a304-350cd93e62e4",
+      "rank": 23,
+      "name": "大川",
+      "rankTitle": "初段",
+      "score1": 59,
+      "score2": 45,
+      "totalScore": 104
+    },
+    {
+      "id": "31727d6d-14db-46d2-9169-a4243d1acb95",
+      "rank": 24,
+      "name": "林貴文",
+      "rankTitle": "四級",
+      "score1": 60,
+      "score2": 41,
+      "totalScore": 101
+    },
+    {
+      "id": "f4b01520-9282-4add-9f5c-94cb5b4199cf",
+      "rank": 25,
+      "name": "斉藤",
+      "rankTitle": "初段",
+      "score1": 54,
+      "score2": 43,
+      "totalScore": 97
+    },
+    {
+      "id": "8c2c161f-7770-4802-89bf-dbf25bd4af45",
+      "rank": 26,
+      "name": "雲川",
+      "rankTitle": "五級",
+      "score1": 48,
+      "score2": 48,
+      "totalScore": 96
+    },
+    {
+      "id": "4649d462-593f-43e3-aa34-73748d8746e8",
+      "rank": 27,
+      "name": "澁谷",
+      "rankTitle": "五級",
+      "score1": 47,
+      "score2": 43,
+      "totalScore": 90
+    }
+  ],
+  "publishedAt": "2025-12-02T12:19:21.224Z",
+  "updatedAt": "2025-12-05T10:17:37.079Z"
+}

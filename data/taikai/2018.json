@@ -1,0 +1,90 @@
+{
+  "year": 2018,
+  "taikaiName": "平成30年弓術大会",
+  "eventDate": "2018年",
+  "participants": [
+    {
+      "id": "4b780d42-24b9-438a-8dfe-b73f6997f8f1",
+      "rank": 1,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 100,
+      "score2": 91,
+      "totalScore": 191
+    },
+    {
+      "id": "0c92e03b-ef31-49d6-ac5a-127b9307d02d",
+      "rank": 2,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 103,
+      "score2": 65,
+      "totalScore": 168
+    },
+    {
+      "id": "40aff1e7-2d78-4ac2-a471-8671c1ecff00",
+      "rank": 3,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "score1": 91,
+      "score2": 70,
+      "totalScore": 161
+    },
+    {
+      "id": "921c5868-dd58-4cb7-b82a-563da92205bf",
+      "rank": 4,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "score1": 74,
+      "score2": 71,
+      "totalScore": 145
+    },
+    {
+      "id": "9b965741-2258-4fc3-8b99-1ce39a9329a7",
+      "rank": 5,
+      "name": "飯田",
+      "rankTitle": "五級",
+      "score1": 75,
+      "score2": 67,
+      "totalScore": 138
+    },
+    {
+      "id": "c68fdd26-eed1-4d3a-bb33-8f00e4c147f1",
+      "rank": 6,
+      "name": "上村",
+      "rankTitle": "初段",
+      "score1": 74,
+      "score2": 62,
+      "totalScore": 136
+    },
+    {
+      "id": "593e8246-36a3-4d29-a519-d2ddf7c1d041",
+      "rank": 7,
+      "name": "青山",
+      "rankTitle": "初段",
+      "score1": 68,
+      "score2": 56,
+      "totalScore": 124
+    },
+    {
+      "id": "824e55d8-b4bd-4fdb-9d61-97173c6315c4",
+      "rank": 8,
+      "name": "中村",
+      "rankTitle": "三級",
+      "score1": 61,
+      "score2": 53,
+      "totalScore": 114
+    },
+    {
+      "id": "b2c6dc2c-6c6c-46c5-9b5e-ccb8320c9d51",
+      "rank": 9,
+      "name": "吉田",
+      "rankTitle": "四級",
+      "score1": 50,
+      "score2": 49,
+      "totalScore": 99
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

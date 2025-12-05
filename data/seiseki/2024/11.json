@@ -1,0 +1,80 @@
+{
+  "year": 2024,
+  "month": 11,
+  "entries": [
+    {
+      "id": "2024-11-001",
+      "rank": 1,
+      "name": "斉藤",
+      "rankTitle": "五段",
+      "targetSize": "9分",
+      "updatedDate": "2024年11月25日",
+      "expiryDate": "2025年2月25日"
+    },
+    {
+      "id": "2024-11-002",
+      "rank": 2,
+      "name": "清水",
+      "rankTitle": "四段",
+      "targetSize": "1寸",
+      "updatedDate": "2024年11月22日",
+      "expiryDate": "2025年2月22日"
+    },
+    {
+      "id": "2024-11-003",
+      "rank": 3,
+      "name": "森",
+      "rankTitle": "三段",
+      "targetSize": "1寸1分",
+      "updatedDate": "2024年11月20日",
+      "expiryDate": "2025年2月20日"
+    },
+    {
+      "id": "2024-11-004",
+      "rank": 4,
+      "name": "石井",
+      "rankTitle": "二段",
+      "targetSize": "1寸3分",
+      "updatedDate": "2024年11月18日",
+      "expiryDate": "2025年2月18日"
+    },
+    {
+      "id": "2024-11-005",
+      "rank": 5,
+      "name": "山口",
+      "rankTitle": "初段",
+      "targetSize": "1寸4分",
+      "updatedDate": "2024年11月15日",
+      "expiryDate": "2025年2月15日"
+    },
+    {
+      "id": "2024-11-006",
+      "rank": 6,
+      "name": "長谷川",
+      "rankTitle": "初段",
+      "targetSize": "1寸5分",
+      "updatedDate": "2024年11月12日",
+      "expiryDate": "2025年2月12日"
+    },
+    {
+      "id": "2024-11-007",
+      "rank": 7,
+      "name": "池田",
+      "rankTitle": "初段",
+      "targetSize": "1寸7分",
+      "updatedDate": "2024年11月10日",
+      "expiryDate": "2025年2月10日"
+    },
+    {
+      "id": "2024-11-008",
+      "rank": 8,
+      "name": "藤田",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "2024年11月8日",
+      "expiryDate": "2025年2月8日"
+    }
+  ],
+  "publishedAt": "2024-11-26T09:00:00.000Z",
+  "updatedAt": "2024-11-26T09:00:00.000Z"
+}

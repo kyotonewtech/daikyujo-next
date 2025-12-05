@@ -1,0 +1,26 @@
+{
+  "year": 2025,
+  "month": 1,
+  "entries": [
+    {
+      "id": "61356c17-04a0-44b3-b9c1-ed507cbc4afb",
+      "rank": 1,
+      "name": "大﨑",
+      "rankTitle": "一級",
+      "targetSize": "1寸",
+      "updatedDate": "2025年1月6日",
+      "expiryDate": "2025年4月6日"
+    },
+    {
+      "id": "6fc6e5f6-d014-4139-b798-44aade72a252",
+      "rank": 2,
+      "name": "土井",
+      "rankTitle": "二級",
+      "targetSize": "1寸3分",
+      "updatedDate": "2025年1月7日",
+      "expiryDate": "2025年4月7日"
+    }
+  ],
+  "updatedAt": "2025-12-02T12:37:53.604Z",
+  "publishedAt": "2025-11-27T07:51:43.093Z"
+}

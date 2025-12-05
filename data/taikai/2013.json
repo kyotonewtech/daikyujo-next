@@ -1,0 +1,216 @@
+{
+  "year": 2013,
+  "taikaiName": "平成25年弓術大会",
+  "eventDate": "2013年",
+  "participants": [
+    {
+      "id": "9df39423-0cf3-4ba4-9f44-151c8307a722",
+      "rank": 1,
+      "name": "川島",
+      "rankTitle": "二段",
+      "score1": 119,
+      "score2": 89,
+      "totalScore": 208
+    },
+    {
+      "id": "647be8e6-f65a-4913-b7b4-38c23b44d4fa",
+      "rank": 2,
+      "name": "臼井",
+      "rankTitle": "四級",
+      "score1": 104,
+      "score2": 102,
+      "totalScore": 206
+    },
+    {
+      "id": "55cdb240-5ac1-48f2-8ae7-7c2aa73e57e4",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 95,
+      "score2": 94,
+      "totalScore": 189
+    },
+    {
+      "id": "6a84edce-39b4-42df-847c-5d1cbc2c0608",
+      "rank": 4,
+      "name": "操野",
+      "rankTitle": "五級",
+      "score1": 100,
+      "score2": 86,
+      "totalScore": 186
+    },
+    {
+      "id": "3b8f4ed0-ae2d-4adf-be2d-84890a2a177c",
+      "rank": 5,
+      "name": "泉",
+      "rankTitle": "四級",
+      "score1": 92,
+      "score2": 88,
+      "totalScore": 180
+    },
+    {
+      "id": "702dbf48-47ff-48db-9b75-d7cd4c886fe8",
+      "rank": 6,
+      "name": "笹部",
+      "rankTitle": "五級",
+      "score1": 103,
+      "score2": 76,
+      "totalScore": 179
+    },
+    {
+      "id": "955718d9-816b-45b3-b22d-acb170bb3af2",
+      "rank": 7,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "score1": 86,
+      "score2": 85,
+      "totalScore": 171
+    },
+    {
+      "id": "225be6dc-b9b8-4292-bc0d-48b2e0e88bb6",
+      "rank": 8,
+      "name": "青山",
+      "rankTitle": "初段",
+      "score1": 87,
+      "score2": 78,
+      "totalScore": 165
+    },
+    {
+      "id": "69613aed-afa4-44d0-9a37-577abf3e67e3",
+      "rank": 9,
+      "name": "圭子",
+      "rankTitle": "五級",
+      "score1": 82,
+      "score2": 81,
+      "totalScore": 163
+    },
+    {
+      "id": "cf04d47b-9677-4d70-bf18-8642b5b20110",
+      "rank": 10,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 81,
+      "score2": 81,
+      "totalScore": 162
+    },
+    {
+      "id": "eaf47c89-d165-4985-a8e2-1c91cd010114",
+      "rank": 10,
+      "name": "大島",
+      "rankTitle": "四級",
+      "score1": 86,
+      "score2": 76,
+      "totalScore": 162
+    },
+    {
+      "id": "5b24b83e-413a-4d1e-bd35-0666f0447564",
+      "rank": 12,
+      "name": "昇",
+      "rankTitle": "初段",
+      "score1": 80,
+      "score2": 77,
+      "totalScore": 157
+    },
+    {
+      "id": "06ca25c2-c956-4f46-a5aa-3591b5db49d8",
+      "rank": 13,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "score1": 79,
+      "score2": 77,
+      "totalScore": 156
+    },
+    {
+      "id": "d383d33e-c40c-46e0-b5dd-83400f69fc9c",
+      "rank": 14,
+      "name": "幸平",
+      "rankTitle": "五級",
+      "score1": 81,
+      "score2": 75,
+      "totalScore": 156
+    },
+    {
+      "id": "aa3edcf5-be28-47d6-b40d-9622d234385a",
+      "rank": 15,
+      "name": "寿恵",
+      "rankTitle": "四級",
+      "score1": 78,
+      "score2": 67,
+      "totalScore": 145
+    },
+    {
+      "id": "95336103-eebd-429f-8dc5-22ed726830be",
+      "rank": 16,
+      "name": "聡美",
+      "rankTitle": "二級",
+      "score1": 72,
+      "score2": 71,
+      "totalScore": 143
+    },
+    {
+      "id": "b2749eae-92e5-4293-9010-3a7c9c6be044",
+      "rank": 17,
+      "name": "斉藤",
+      "rankTitle": "初段",
+      "score1": 72,
+      "score2": 71,
+      "totalScore": 143
+    },
+    {
+      "id": "1344d7b9-e228-44f4-853c-4765f356e27c",
+      "rank": 18,
+      "name": "木村",
+      "rankTitle": "四段",
+      "score1": 68,
+      "score2": 64,
+      "totalScore": 132
+    },
+    {
+      "id": "258ccf9d-8fd2-4779-a630-649d7edfa3f3",
+      "rank": 19,
+      "name": "三坂",
+      "rankTitle": "二級",
+      "score1": 67,
+      "score2": 57,
+      "totalScore": 124
+    },
+    {
+      "id": "14393916-4015-4fc4-8d80-1e262d490158",
+      "rank": 20,
+      "name": "古池",
+      "rankTitle": "初段",
+      "score1": 60,
+      "score2": 58,
+      "totalScore": 118
+    },
+    {
+      "id": "5653a992-1890-4a8b-9b38-04fce7750f2f",
+      "rank": 21,
+      "name": "高岡",
+      "rankTitle": "初段",
+      "score1": 55,
+      "score2": 53,
+      "totalScore": 108
+    },
+    {
+      "id": "e14e14c2-1812-4af7-a30e-76f9043ac14a",
+      "rank": 22,
+      "name": "望月",
+      "rankTitle": "五級",
+      "score1": 68,
+      "score2": 0,
+      "totalScore": 68
+    },
+    {
+      "id": "6ca06345-ec32-4da9-b143-2b5a0b0b8a70",
+      "rank": 23,
+      "name": "由良",
+      "rankTitle": "初段",
+      "score1": 50,
+      "score2": 0,
+      "totalScore": 50
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

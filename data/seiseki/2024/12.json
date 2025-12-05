@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 12,
+  "entries": [
+    {
+      "id": "2024-12-001",
+      "rank": 1,
+      "name": "高橋",
+      "rankTitle": "四段",
+      "targetSize": "1寸",
+      "updatedDate": "2024年12月20日",
+      "expiryDate": "2025年3月20日"
+    },
+    {
+      "id": "2024-12-002",
+      "rank": 2,
+      "name": "小林",
+      "rankTitle": "三段",
+      "targetSize": "1寸1分",
+      "updatedDate": "2024年12月18日",
+      "expiryDate": "2025年3月18日"
+    },
+    {
+      "id": "2024-12-003",
+      "rank": 3,
+      "name": "加藤",
+      "rankTitle": "二段",
+      "targetSize": "1寸2分",
+      "updatedDate": "2024年12月15日",
+      "expiryDate": "2025年3月15日"
+    },
+    {
+      "id": "2024-12-004",
+      "rank": 4,
+      "name": "吉田",
+      "rankTitle": "初段",
+      "targetSize": "1寸4分",
+      "updatedDate": "2024年12月12日",
+      "expiryDate": "2025年3月12日"
+    },
+    {
+      "id": "2024-12-005",
+      "rank": 5,
+      "name": "山本",
+      "rankTitle": "初段",
+      "targetSize": "1寸5分",
+      "updatedDate": "2024年12月10日",
+      "expiryDate": "2025年3月10日"
+    },
+    {
+      "id": "2024-12-006",
+      "rank": 6,
+      "name": "中村",
+      "rankTitle": "二段",
+      "targetSize": "1寸6分",
+      "updatedDate": "2024年12月8日",
+      "expiryDate": "2025年3月8日"
+    },
+    {
+      "id": "2024-12-007",
+      "rank": 7,
+      "name": "小川",
+      "rankTitle": "初段",
+      "targetSize": "1寸7分",
+      "updatedDate": "2024年12月5日",
+      "expiryDate": "2025年3月5日"
+    },
+    {
+      "id": "2024-12-008",
+      "rank": 8,
+      "name": "松本",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "2024年12月3日",
+      "expiryDate": "2025年3月3日"
+    },
+    {
+      "id": "2024-12-009",
+      "rank": 9,
+      "name": "井上",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "2024年12月1日",
+      "expiryDate": "2025年3月1日"
+    },
+    {
+      "id": "2024-12-010",
+      "rank": 10,
+      "name": "木村",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "2024年11月28日",
+      "expiryDate": "2025年2月28日"
+    }
+  ],
+  "publishedAt": "2024-12-21T09:00:00.000Z",
+  "updatedAt": "2024-12-21T09:00:00.000Z"
+}

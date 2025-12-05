@@ -1,17 +1,26 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP, Shippori_Mincho } from "next/font/google";
 import "./globals.css";
 
 const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-sans",
   weight: ["400", "500", "700"],
+  display: "block",
 });
 
 const notoSerif = Noto_Serif_JP({
   subsets: ["latin"],
   variable: "--font-noto-serif",
   weight: ["400", "600"],
+  display: "block",
+});
+
+const shipporiMincho = Shippori_Mincho({
+  subsets: ["latin"],
+  variable: "--font-shippori",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "block",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="scroll-smooth">
-      <body className={`${notoSans.variable} ${notoSerif.variable} font-sans bg-background text-foreground antialiased`}>
+      <body className={`${notoSans.variable} ${notoSerif.variable} ${shipporiMincho.variable} font-sans bg-background text-foreground antialiased`}>
         {children}
       </body>
     </html>

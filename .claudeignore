@@ -1,0 +1,36 @@
+# 自動生成・ビルド関連（必須）
+ node_modules/
+ .next/
+ .git/
+ build/
+ dist/
+ out/
+ coverage/
+
+ # 依存関係ファイル（推奨）
+ package-lock.json
+ yarn.lock
+ pnpm-lock.yaml
+ tsconfig.tsbuildinfo
+ next-env.d.ts
+
+ # 画像・バイナリファイル（推奨）
+ public/*.png
+ public/*.jpg
+ public/*.jpeg
+ public/*.gif
+ public/*.svg
+ public/*.webp
+
+ # 環境・設定（推奨）
+ .env
+ .env.local
+ .env.*.local
+
+ # その他の自動生成ファイル（推奨）
+ *.log
+ .DS_Store
+ *.pem
+
+ # ネストされたGitリポジトリ（推奨）
+ daikyujo-site/

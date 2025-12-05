@@ -1,0 +1,108 @@
+{
+  "year": 2016,
+  "taikaiName": "平成28年弓術大会",
+  "eventDate": "2016年",
+  "participants": [
+    {
+      "id": "aaa57ef2-818c-4894-a8c6-2a9c16eb3cb4",
+      "rank": 1,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "score1": 105,
+      "score2": 105,
+      "totalScore": 210
+    },
+    {
+      "id": "cad6fe68-8bb9-4382-ad4c-7dfe0b1fab18",
+      "rank": 2,
+      "name": "宮原",
+      "rankTitle": "二級",
+      "score1": 102,
+      "score2": 95,
+      "totalScore": 197
+    },
+    {
+      "id": "d8e7664d-00ca-4357-b7e4-c9547627a5fd",
+      "rank": 3,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 99,
+      "score2": 93,
+      "totalScore": 192
+    },
+    {
+      "id": "41ecf47d-6d30-4981-b735-8c6f51c94a45",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 101,
+      "score2": 87,
+      "totalScore": 188
+    },
+    {
+      "id": "2206bfa7-d8af-4667-99f3-8e3aab195be5",
+      "rank": 5,
+      "name": "城戸",
+      "rankTitle": "三級",
+      "score1": 86,
+      "score2": 85,
+      "totalScore": 171
+    },
+    {
+      "id": "ebd24f0b-6171-48b4-a7f0-db330ca1e1d5",
+      "rank": 6,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "score1": 94,
+      "score2": 67,
+      "totalScore": 161
+    },
+    {
+      "id": "7e6ff376-6a03-4f3e-93bd-b0824353e456",
+      "rank": 7,
+      "name": "古池",
+      "rankTitle": "初段",
+      "score1": 77,
+      "score2": 59,
+      "totalScore": 136
+    },
+    {
+      "id": "6d6e147a-0ae0-40be-a3a2-3e991d785059",
+      "rank": 8,
+      "name": "上村",
+      "rankTitle": "初段",
+      "score1": 63,
+      "score2": 66,
+      "totalScore": 129
+    },
+    {
+      "id": "6c9531ee-5260-49be-988b-3889c9e1753d",
+      "rank": 9,
+      "name": "青山",
+      "rankTitle": "初段",
+      "score1": 55,
+      "score2": 58,
+      "totalScore": 113
+    },
+    {
+      "id": "7cdff8ac-a36b-406e-9a78-ab4df5a6a79b",
+      "rank": 10,
+      "name": "伊藤",
+      "rankTitle": "初段",
+      "score1": 61,
+      "score2": 51,
+      "totalScore": 112
+    },
+    {
+      "id": "120b8055-13df-4381-8523-65e3b10147b6",
+      "rank": 11,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "score1": 61,
+      "score2": 50,
+      "totalScore": 111
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

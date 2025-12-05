@@ -1,0 +1,99 @@
+{
+  "year": 1998,
+  "taikaiName": "平成10年弓術大会",
+  "eventDate": "1998年",
+  "participants": [
+    {
+      "id": "0941fc07-ead9-4a27-95ad-1ac243198ca2",
+      "rank": 1,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 202
+    },
+    {
+      "id": "c8702e33-3dae-49a7-99b3-d7dad9e8c5e9",
+      "rank": 2,
+      "name": "真由美",
+      "rankTitle": "-",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 170
+    },
+    {
+      "id": "5ab7b9d1-f9fb-4ee1-9225-6c462991ccb5",
+      "rank": 3,
+      "name": "中山",
+      "rankTitle": "四段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 166
+    },
+    {
+      "id": "ab7e6a85-d4d9-44a7-93ed-a52d87d7e07a",
+      "rank": 4,
+      "name": "岩井",
+      "rankTitle": "二級",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 158
+    },
+    {
+      "id": "cf98dc16-01fc-4eaa-98a9-7666a0937393",
+      "rank": 5,
+      "name": "笠谷",
+      "rankTitle": "四段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 154
+    },
+    {
+      "id": "411bb754-9415-4875-85b6-55ec4c8834a2",
+      "rank": 6,
+      "name": "谷本",
+      "rankTitle": "四級",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 147
+    },
+    {
+      "id": "3d72d1a1-446c-4ded-b721-aa587f904e9b",
+      "rank": 7,
+      "name": "岩本",
+      "rankTitle": "二段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 145
+    },
+    {
+      "id": "5a185238-0cc8-4f8d-8548-b784ec7b45aa",
+      "rank": 8,
+      "name": "由良",
+      "rankTitle": "初段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 143
+    },
+    {
+      "id": "99da8eed-f220-4469-92a0-9979449038cc",
+      "rank": 9,
+      "name": "林",
+      "rankTitle": "初段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 143
+    },
+    {
+      "id": "882d4f7e-b67a-4633-a03c-6db853c70efb",
+      "rank": 10,
+      "name": "瀬川",
+      "rankTitle": "初段",
+      "score1": 0,
+      "score2": 0,
+      "totalScore": 142
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

@@ -1,0 +1,99 @@
+{
+  "year": 2011,
+  "taikaiName": "平成23年弓術大会",
+  "eventDate": "2011年",
+  "participants": [
+    {
+      "id": "89927370-7d11-4217-8850-c47cd73cec8a",
+      "rank": 1,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "score1": 97,
+      "score2": 82,
+      "totalScore": 179
+    },
+    {
+      "id": "c8d0b199-552b-464a-83de-5214adeae062",
+      "rank": 2,
+      "name": "伸",
+      "rankTitle": "初段",
+      "score1": 84,
+      "score2": 81,
+      "totalScore": 165
+    },
+    {
+      "id": "d2d974e5-d88d-46d3-859f-d82e8f923761",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "二段",
+      "score1": 78,
+      "score2": 69,
+      "totalScore": 147
+    },
+    {
+      "id": "32f47b73-1231-4397-b840-6945c6738669",
+      "rank": 4,
+      "name": "古池",
+      "rankTitle": "四級",
+      "score1": 78,
+      "score2": 68,
+      "totalScore": 146
+    },
+    {
+      "id": "2272146e-b4dd-4e93-bc37-36d1df12371b",
+      "rank": 5,
+      "name": "川島",
+      "rankTitle": "二段",
+      "score1": 75,
+      "score2": 70,
+      "totalScore": 145
+    },
+    {
+      "id": "079703d9-76f2-4d61-a32e-3771fea7ebe3",
+      "rank": 6,
+      "name": "岩嵜",
+      "rankTitle": "五級",
+      "score1": 80,
+      "score2": 62,
+      "totalScore": 142
+    },
+    {
+      "id": "9b522e34-ff28-4fd3-a55d-62353da3a8c8",
+      "rank": 7,
+      "name": "浩子",
+      "rankTitle": "四級",
+      "score1": 68,
+      "score2": 67,
+      "totalScore": 135
+    },
+    {
+      "id": "fa4743a1-5ed7-4fc9-b181-2d4b0fba4b5e",
+      "rank": 8,
+      "name": "濱口",
+      "rankTitle": "五級",
+      "score1": 62,
+      "score2": 50,
+      "totalScore": 112
+    },
+    {
+      "id": "851b1aa8-fac8-47e3-8516-6a0d0dbf0af0",
+      "rank": 9,
+      "name": "濱口",
+      "rankTitle": "五級",
+      "score1": 52,
+      "score2": 50,
+      "totalScore": 102
+    },
+    {
+      "id": "f80ef3d8-a47e-4e80-8765-a845f4344a8f",
+      "rank": 10,
+      "name": "打田",
+      "rankTitle": "五級",
+      "score1": 53,
+      "score2": 42,
+      "totalScore": 95
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

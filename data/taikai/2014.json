@@ -1,0 +1,189 @@
+{
+  "year": 2014,
+  "taikaiName": "平成26年弓術大会",
+  "eventDate": "2014年",
+  "participants": [
+    {
+      "id": "4bf5d07f-9af3-4991-b447-aaf84049078c",
+      "rank": 1,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "score1": 105,
+      "score2": 92,
+      "totalScore": 197
+    },
+    {
+      "id": "7175ccd2-bd2b-452c-ae1c-fbd798f8e740",
+      "rank": 2,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "score1": 98,
+      "score2": 88,
+      "totalScore": 186
+    },
+    {
+      "id": "d6bb6ffa-6496-4a4f-985d-fa5abffb71f5",
+      "rank": 3,
+      "name": "小澤",
+      "rankTitle": "三段",
+      "score1": 103,
+      "score2": 82,
+      "totalScore": 185
+    },
+    {
+      "id": "e62a7c00-cea1-4a25-a7e8-14a809bbfcf2",
+      "rank": 4,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "score1": 87,
+      "score2": 79,
+      "totalScore": 166
+    },
+    {
+      "id": "691f5e0e-1c2f-4c0f-a518-e3f5363e9666",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 81,
+      "score2": 80,
+      "totalScore": 161
+    },
+    {
+      "id": "3a47ea85-9e71-47a1-a7aa-ed4da501f1eb",
+      "rank": 6,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 87,
+      "score2": 74,
+      "totalScore": 161
+    },
+    {
+      "id": "19dc93ad-ee80-42d5-afc9-fc6fc34f9614",
+      "rank": 7,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "score1": 79,
+      "score2": 78,
+      "totalScore": 157
+    },
+    {
+      "id": "58b84cf1-4fe6-447a-a5e6-c8ad22b96bda",
+      "rank": 8,
+      "name": "忠士",
+      "rankTitle": "四級",
+      "score1": 79,
+      "score2": 77,
+      "totalScore": 156
+    },
+    {
+      "id": "15e8bacf-cc75-4722-ac60-62895a17df2d",
+      "rank": 9,
+      "name": "峯",
+      "rankTitle": "五級",
+      "score1": 77,
+      "score2": 76,
+      "totalScore": 153
+    },
+    {
+      "id": "06918fd8-34f1-456b-96d7-c2727d45645e",
+      "rank": 10,
+      "name": "泉",
+      "rankTitle": "三級",
+      "score1": 77,
+      "score2": 75,
+      "totalScore": 152
+    },
+    {
+      "id": "dd1dc46b-db2b-40a3-b6d6-cc5ad6c04711",
+      "rank": 11,
+      "name": "川森",
+      "rankTitle": "初段",
+      "score1": 84,
+      "score2": 67,
+      "totalScore": 151
+    },
+    {
+      "id": "7f9a6a10-63d9-4b8f-8e7b-f68beb30a87a",
+      "rank": 12,
+      "name": "古池",
+      "rankTitle": "初段",
+      "score1": 76,
+      "score2": 74,
+      "totalScore": 150
+    },
+    {
+      "id": "e17f2af9-3864-4fdd-86ae-dec1c44c94bc",
+      "rank": 13,
+      "name": "昇",
+      "rankTitle": "初段",
+      "score1": 79,
+      "score2": 69,
+      "totalScore": 148
+    },
+    {
+      "id": "15a5ed3c-6ce0-486d-b7a3-7503ab4052fb",
+      "rank": 14,
+      "name": "木村",
+      "rankTitle": "四段",
+      "score1": 74,
+      "score2": 72,
+      "totalScore": 146
+    },
+    {
+      "id": "98d7f509-b0b1-4716-8914-c6e1da45154c",
+      "rank": 15,
+      "name": "川島",
+      "rankTitle": "二段",
+      "score1": 80,
+      "score2": 62,
+      "totalScore": 142
+    },
+    {
+      "id": "04a6f1a4-dbd8-45e7-84da-b1b7ea375e7a",
+      "rank": 16,
+      "name": "青山",
+      "rankTitle": "初段",
+      "score1": 71,
+      "score2": 67,
+      "totalScore": 138
+    },
+    {
+      "id": "bfb5a8cc-20ba-45ea-bb9e-235bfadab85b",
+      "rank": 17,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "score1": 69,
+      "score2": 65,
+      "totalScore": 134
+    },
+    {
+      "id": "ac103af8-bc23-48e2-9ac1-4380b79a9624",
+      "rank": 18,
+      "name": "幸子",
+      "rankTitle": "四級",
+      "score1": 62,
+      "score2": 59,
+      "totalScore": 121
+    },
+    {
+      "id": "c27ba976-69a7-4c71-a5d3-076cd60e05cc",
+      "rank": 19,
+      "name": "幸三",
+      "rankTitle": "二級",
+      "score1": 58,
+      "score2": 55,
+      "totalScore": 113
+    },
+    {
+      "id": "ecf12e6c-0d28-4041-9c4e-16c8540d5ab3",
+      "rank": 20,
+      "name": "望月",
+      "rankTitle": "五級",
+      "score1": 60,
+      "score2": 60,
+      "totalScore": 120
+    }
+  ],
+  "publishedAt": "2025-12-05T09:29:31.496Z",
+  "updatedAt": "2025-12-05T09:29:31.496Z"
+}

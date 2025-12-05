@@ -1,0 +1,189 @@
+{
+  "year": 2024,
+  "taikaiName": "令和6年弓術大会",
+  "eventDate": "2024年",
+  "participants": [
+    {
+      "id": "a1b2c3d4-e5f6-4a1b-8c9d-0e1f2a3b4c5d",
+      "rank": 1,
+      "name": "萩野",
+      "rankTitle": "五級",
+      "score1": 123,
+      "score2": 119,
+      "totalScore": 242
+    },
+    {
+      "id": "b2c3d4e5-f6a7-4b2c-9d0e-1f2a3b4c5d6e",
+      "rank": 2,
+      "name": "津守",
+      "rankTitle": "三段",
+      "score1": 101,
+      "score2": 95,
+      "totalScore": 196
+    },
+    {
+      "id": "c3d4e5f6-a7b8-4c3d-0e1f-2a3b4c5d6e7f",
+      "rank": 3,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "score1": 99,
+      "score2": 93,
+      "totalScore": 192
+    },
+    {
+      "id": "d4e5f6a7-b8c9-4d4e-1f2a-3b4c5d6e7f8a",
+      "rank": 4,
+      "name": "瑞希",
+      "rankTitle": "五級",
+      "score1": 110,
+      "score2": 64,
+      "totalScore": 174
+    },
+    {
+      "id": "e5f6a7b8-c9d0-4e5f-2a3b-4c5d6e7f8a9b",
+      "rank": 5,
+      "name": "高",
+      "rankTitle": "四級",
+      "score1": 87,
+      "score2": 84,
+      "totalScore": 171
+    },
+    {
+      "id": "f6a7b8c9-d0e1-4f6a-3b4c-5d6e7f8a9b0c",
+      "rank": 6,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "score1": 87,
+      "score2": 84,
+      "totalScore": 171
+    },
+    {
+      "id": "a7b8c9d0-e1f2-4a7b-4c5d-6e7f8a9b0c1d",
+      "rank": 7,
+      "name": "万次郎",
+      "rankTitle": "四級",
+      "score1": 83,
+      "score2": 83,
+      "totalScore": 166
+    },
+    {
+      "id": "b8c9d0e1-f2a3-4b8c-5d6e-7f8a9b0c1d2e",
+      "rank": 8,
+      "name": "甲斐田",
+      "rankTitle": "五級",
+      "score1": 84,
+      "score2": 79,
+      "totalScore": 163
+    },
+    {
+      "id": "c9d0e1f2-a3b4-4c9d-6e7f-8a9b0c1d2e3f",
+      "rank": 9,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "score1": 80,
+      "score2": 80,
+      "totalScore": 160
+    },
+    {
+      "id": "d0e1f2a3-b4c5-4d0e-7f8a-9b0c1d2e3f4a",
+      "rank": 10,
+      "name": "田之中",
+      "rankTitle": "五級",
+      "score1": 94,
+      "score2": 62,
+      "totalScore": 156
+    },
+    {
+      "id": "e1f2a3b4-c5d6-4e1f-8a9b-0c1d2e3f4a5b",
+      "rank": 11,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "score1": 79,
+      "score2": 77,
+      "totalScore": 156
+    },
+    {
+      "id": "f2a3b4c5-d6e7-4f2a-9b0c-1d2e3f4a5b6c",
+      "rank": 12,
+      "name": "堀内",
+      "rankTitle": "四級",
+      "score1": 79,
+      "score2": 74,
+      "totalScore": 153
+    },
+    {
+      "id": "a3b4c5d6-e7f8-4a3b-0c1d-2e3f4a5b6c7d",
+      "rank": 13,
+      "name": "山田",
+      "rankTitle": "三級",
+      "score1": 81,
+      "score2": 71,
+      "totalScore": 152
+    },
+    {
+      "id": "b4c5d6e7-f8a9-4b4c-1d2e-3f4a5b6c7d8e",
+      "rank": 14,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "score1": 80,
+      "score2": 67,
+      "totalScore": 147
+    },
+    {
+      "id": "c5d6e7f8-a9b0-4c5d-2e3f-4a5b6c7d8e9f",
+      "rank": 15,
+      "name": "定延",
+      "rankTitle": "四級",
+      "score1": 78,
+      "score2": 68,
+      "totalScore": 146
+    },
+    {
+      "id": "d6e7f8a9-b0c1-4d6e-3f4a-5b6c7d8e9f0a",
+      "rank": 16,
+      "name": "中村",
+      "rankTitle": "三級",
+      "score1": 68,
+      "score2": 64,
+      "totalScore": 132
+    },
+    {
+      "id": "e7f8a9b0-c1d2-4e7f-4a5b-6c7d8e9f0a1b",
+      "rank": 17,
+      "name": "大川",
+      "rankTitle": "初段",
+      "score1": 69,
+      "score2": 41,
+      "totalScore": 110
+    },
+    {
+      "id": "f8a9b0c1-d2e3-4f8a-5b6c-7d8e9f0a1b2c",
+      "rank": 18,
+      "name": "中道",
+      "rankTitle": "四級",
+      "score1": 56,
+      "score2": 53,
+      "totalScore": 109
+    },
+    {
+      "id": "a9b0c1d2-e3f4-4a9b-6c7d-8e9f0a1b2c3d",
+      "rank": 19,
+      "name": "山田ゆかり",
+      "rankTitle": "四級",
+      "score1": 47,
+      "score2": 46,
+      "totalScore": 93
+    },
+    {
+      "id": "b0c1d2e3-f4a5-4b0c-7d8e-9f0a1b2c3d4e",
+      "rank": 20,
+      "name": "古池",
+      "rankTitle": "初段",
+      "score1": 51,
+      "score2": 0,
+      "totalScore": 51
+    }
+  ],
+  "publishedAt": "2024-12-04T00:00:00.000Z",
+  "updatedAt": "2024-12-04T00:00:00.000Z"
+}
