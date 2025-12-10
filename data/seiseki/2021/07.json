@@ -1,0 +1,89 @@
+{
+  "year": 2021,
+  "month": 7,
+  "entries": [
+    {
+      "id": "e5aa93ea-0cef-4290-8bce-0cb5a42a3a24",
+      "rank": 1,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "82633df3-6d52-46a8-8c38-914f101bad76",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e0e942ed-5610-436f-8c40-50cd36847e12",
+      "rank": 3,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8e2180ff-735c-4f9b-bf12-de2d5d9791e2",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "57ebc225-79d3-4962-8631-d02d4f144e3c",
+      "rank": 5,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "233b1b2d-c551-42c4-bcfe-7e08d503bcf9",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4d4bc4c1-9c80-406f-beb2-bd0b2670354b",
+      "rank": 7,
+      "name": "本村",
+      "rankTitle": "初段",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2c7f0b10-bfe1-4eff-83ed-e90e6de62bf4",
+      "rank": 8,
+      "name": "望月",
+      "rankTitle": "四級",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "38526449-549f-4d1d-bd5a-a59e9cf52d1f",
+      "rank": 9,
+      "name": "城戸快成",
+      "rankTitle": "",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:32.457Z",
+  "updatedAt": "2025-12-09T11:37:32.457Z"
+}

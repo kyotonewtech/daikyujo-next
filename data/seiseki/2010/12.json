@@ -1,0 +1,98 @@
+{
+  "year": 2010,
+  "month": 12,
+  "entries": [
+    {
+      "id": "8c04530f-b62e-41fc-8593-43798d28562e",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "初段",
+      "targetSize": "9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c0643bba-ab80-4c1b-b5bd-f31ddacc04a2",
+      "rank": 2,
+      "name": "昇",
+      "rankTitle": "三級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "27ff33d3-e679-4f91-9d27-78de5c10c816",
+      "rank": 3,
+      "name": "水野",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "92e58631-3f66-44b3-9dd5-8537d3d85b44",
+      "rank": 4,
+      "name": "伸",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "211064a3-0918-481b-8968-1227b08cbe43",
+      "rank": 5,
+      "name": "知也",
+      "rankTitle": "三段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e63a43ef-c4b3-4649-997f-4b52f36ded2b",
+      "rank": 6,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c9c2ea2d-2735-4715-b841-69c2df88fcc3",
+      "rank": 7,
+      "name": "三坂",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "370f82d9-47cc-425d-b9ac-f9d55b491fe4",
+      "rank": 8,
+      "name": "濱田",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "81662a62-5297-4288-ad43-d421145e3153",
+      "rank": 9,
+      "name": "上方",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a622396e-ad03-4f39-95ab-27c800a1d574",
+      "rank": 10,
+      "name": "古池",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-10T06:01:20.725Z",
+  "updatedAt": "2025-12-10T06:01:20.725Z"
+}

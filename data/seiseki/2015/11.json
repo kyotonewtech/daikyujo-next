@@ -1,0 +1,98 @@
+{
+  "year": 2015,
+  "month": 11,
+  "entries": [
+    {
+      "id": "2f5a0e3d-c4d6-427f-b113-a7a6b0669146",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6a05e906-c8db-4b70-89c7-b9a20841a77b",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "47ce8318-4cf0-4903-979c-921253d67bcb",
+      "rank": 3,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3839618f-ae64-4955-8998-a14e4d13d34a",
+      "rank": 4,
+      "name": "本村",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "532a2a15-c7da-4890-b6fe-567737580d73",
+      "rank": 5,
+      "name": "松木",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e8ea4499-d048-4e43-bdae-b7a26d438e8c",
+      "rank": 6,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a7f69e4c-5234-4704-8861-3a46178d285e",
+      "rank": 7,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "758c6838-230e-4f7e-9089-eee726f9f32c",
+      "rank": 8,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9a78009d-ff75-40ac-a952-b45e8a54c549",
+      "rank": 9,
+      "name": "岩本",
+      "rankTitle": "二段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "bf834bf7-76d0-406c-9691-5aabe61eb855",
+      "rank": 10,
+      "name": "李憲正",
+      "rankTitle": "三級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:53:36.886Z",
+  "updatedAt": "2025-12-09T11:53:36.886Z"
+}

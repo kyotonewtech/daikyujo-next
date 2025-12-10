@@ -10,3 +10,42 @@
 .text-upright {
   text-orientation: upright;
 }
+
+/* ビューポート高さベースのレスポンシブクラス */
+/* 「日本の心を引く。」用 - 大きめのタイトル */
+.hero-main-text {
+  font-size: clamp(2rem, 6vh, 4.5rem);
+  /* 最小32px、最大72px、画面高さの6%でスケーリング */
+}
+
+/* 「創業百六十余年...」用 - サブタイトル */
+.hero-subtitle-text {
+  font-size: clamp(0.875rem, 2.5vh, 1.5rem);
+  /* 最小14px、最大24px、画面高さの2.5%でスケーリング */
+}
+
+/* 高さが低い画面用（横向きスマホ、低解像度ノートPC） */
+@media (max-height: 600px) {
+  .hero-main-text {
+    font-size: clamp(1.5rem, 5vh, 3rem);
+    /* より小さく調整: 最小24px、最大48px */
+  }
+
+  .hero-subtitle-text {
+    font-size: clamp(0.75rem, 2vh, 1.125rem);
+    /* より小さく調整: 最小12px、最大18px */
+  }
+}
+
+/* 非常に低い画面用（極端な横向き） */
+@media (max-height: 450px) {
+  .hero-main-text {
+    font-size: clamp(1.25rem, 4vh, 2.5rem);
+    /* さらに小さく: 最小20px、最大40px */
+  }
+
+  .hero-subtitle-text {
+    font-size: clamp(0.625rem, 1.5vh, 1rem);
+    /* さらに小さく: 最小10px、最大16px */
+  }
+}

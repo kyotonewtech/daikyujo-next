@@ -1,0 +1,98 @@
+{
+  "year": 2018,
+  "month": 6,
+  "entries": [
+    {
+      "id": "1c52f3d6-e7bb-420a-b952-2f5e9677dffe",
+      "rank": 1,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "679a638f-9c0c-48bc-80e7-47cf90344429",
+      "rank": 2,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "20cc0e96-7624-4ad4-9628-a5afae308cb1",
+      "rank": 3,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "fb3584d6-ac1e-4e01-bb93-c95cf34e0988",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "de4c8d34-8462-48ab-bb1a-8ded439296a4",
+      "rank": 5,
+      "name": "田川",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "cbd71b6b-1520-4b8e-8933-1c290b8a9ded",
+      "rank": 6,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7b1f0c15-bf89-4aa7-9134-e35da9eb0b4b",
+      "rank": 7,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e94fc283-34c4-4a42-80c3-52899f813880",
+      "rank": 8,
+      "name": "川本聖爾",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "df72dc26-a24a-4f05-a7ce-c48172a0df29",
+      "rank": 9,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7612010a-3662-408f-983a-34eaac0c5e96",
+      "rank": 10,
+      "name": "信岡",
+      "rankTitle": "四級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:50.627Z",
+  "updatedAt": "2025-12-09T11:37:50.627Z"
+}

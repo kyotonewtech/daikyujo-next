@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 4,
+  "entries": [
+    {
+      "id": "0a3298f2-c150-4f7c-b63e-eb470f48d27e",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ee907894-5ed2-4256-9b50-9221dab7a507",
+      "rank": 2,
+      "name": "世羽",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9845d211-4777-4063-bfad-b9c845057601",
+      "rank": 3,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "bbc47984-9256-4980-aeda-81a036e0d45e",
+      "rank": 4,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d8efaad0-59c0-4c2d-91e3-754f724a6cb4",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0d281b2e-cd90-4d07-baf2-1fb273db26ba",
+      "rank": 6,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "26532096-6abb-41e8-b5a5-1bb14633cdd0",
+      "rank": 7,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ee385f04-8360-4543-9346-eee4e36ab9ee",
+      "rank": 8,
+      "name": "山田ゆかり",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8373daa6-704a-46c9-bcbf-1d6c84fdc50f",
+      "rank": 9,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c32864ec-8430-42a2-bd6a-dd0ec5b4e00d",
+      "rank": 10,
+      "name": "中道",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:08:28.827Z",
+  "updatedAt": "2025-12-09T11:08:28.827Z"
+}

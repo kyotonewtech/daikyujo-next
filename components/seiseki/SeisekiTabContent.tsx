@@ -8,6 +8,8 @@ import type { SeisekiMonth, SeisekiEntry } from "@/types/seiseki";
 interface SeisekiTabContentProps {
   availableYears: number[];
   yearDataMap: Map<number, SeisekiMonth[]>;
+  latestYear: number | null;
+  latestMonth: number | null;
 }
 
 // 空エントリーを生成（10件未満の場合に埋めるため）
@@ -35,7 +37,19 @@ function padEntriesToTen(entries: SeisekiEntry[]): SeisekiEntry[] {
   return padded;
 }
 
-export default function SeisekiTabContent({ availableYears, yearDataMap }: SeisekiTabContentProps) {
+// エントリーを再配置（デスクトップ用: 左列1-5位、右列6-10位）
+function reorderEntriesForDesktop(entries: SeisekiEntry[]): SeisekiEntry[] {
+  if (entries.length !== 10) return entries;
+
+  const reordered: SeisekiEntry[] = [];
+  for (let i = 0; i < 5; i++) {
+    reordered.push(entries[i]);      // 1位, 2位, 3位, 4位, 5位
+    reordered.push(entries[i + 5]);  // 6位, 7位, 8位, 9位, 10位
+  }
+  return reordered;
+}
+
+export default function SeisekiTabContent({ availableYears, yearDataMap, latestYear, latestMonth }: SeisekiTabContentProps) {
   // デフォルトは最新年（配列は降順なので先頭）
   const [selectedYear, setSelectedYear] = useState(availableYears[0]);
 
@@ -72,6 +86,11 @@ export default function SeisekiTabContent({ availableYears, yearDataMap }: Seise
           {monthsData.map((monthData) => {
             const paddedEntries = padEntriesToTen(monthData.entries);
 
+            // この月が最新かどうかを判定
+            const isLatestMonth =
+              selectedYear === latestYear &&
+              monthData.month === latestMonth;
+
             return (
               <motion.section
                 key={`${monthData.year}-${monthData.month}`}
@@ -85,16 +104,33 @@ export default function SeisekiTabContent({ availableYears, yearDataMap }: Seise
                   {monthData.month}月の成績
                 </h2>
 
-                {/* 成績カードグリッド */}
+                {/* 成績カードグリッド（モバイル: 1-10位、デスクトップ: 左列1-5位、右列6-10位） */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {paddedEntries.map((entry, index) => (
-                    <SeisekiCard
-                      key={entry.id}
-                      entry={entry}
-                      index={index}
-                      isEmpty={entry.isEmpty}
-                    />
-                  ))}
+                  {/* モバイル: 元の順序で表示 */}
+                  <div className="block md:hidden space-y-4">
+                    {paddedEntries.map((entry, index) => (
+                      <SeisekiCard
+                        key={entry.id}
+                        entry={entry}
+                        index={index}
+                        isEmpty={entry.isEmpty}
+                        isLatestMonth={isLatestMonth}
+                      />
+                    ))}
+                  </div>
+
+                  {/* デスクトップ: 再配置した順序で表示 */}
+                  <div className="hidden md:grid md:grid-cols-2 gap-4 w-full col-span-2">
+                    {reorderEntriesForDesktop(paddedEntries).map((entry, index) => (
+                      <SeisekiCard
+                        key={entry.id}
+                        entry={entry}
+                        index={index}
+                        isEmpty={entry.isEmpty}
+                        isLatestMonth={isLatestMonth}
+                      />
+                    ))}
+                  </div>
                 </div>
               </motion.section>
             );

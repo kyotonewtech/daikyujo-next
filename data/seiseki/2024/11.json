@@ -3,78 +3,96 @@
   "month": 11,
   "entries": [
     {
-      "id": "2024-11-001",
+      "id": "584934a8-9c94-4053-9d89-4787d02bcd78",
       "rank": 1,
-      "name": "斉藤",
-      "rankTitle": "五段",
-      "targetSize": "9分",
-      "updatedDate": "2024年11月25日",
-      "expiryDate": "2025年2月25日"
-    },
-    {
-      "id": "2024-11-002",
-      "rank": 2,
-      "name": "清水",
-      "rankTitle": "四段",
-      "targetSize": "1寸",
-      "updatedDate": "2024年11月22日",
-      "expiryDate": "2025年2月22日"
-    },
-    {
-      "id": "2024-11-003",
-      "rank": 3,
-      "name": "森",
+      "name": "津守",
       "rankTitle": "三段",
-      "targetSize": "1寸1分",
-      "updatedDate": "2024年11月20日",
-      "expiryDate": "2025年2月20日"
+      "targetSize": "1寸",
+      "updatedDate": "",
+      "expiryDate": ""
     },
     {
-      "id": "2024-11-004",
-      "rank": 4,
-      "name": "石井",
-      "rankTitle": "二段",
-      "targetSize": "1寸3分",
-      "updatedDate": "2024年11月18日",
-      "expiryDate": "2025年2月18日"
-    },
-    {
-      "id": "2024-11-005",
-      "rank": 5,
-      "name": "山口",
-      "rankTitle": "初段",
-      "targetSize": "1寸4分",
-      "updatedDate": "2024年11月15日",
-      "expiryDate": "2025年2月15日"
-    },
-    {
-      "id": "2024-11-006",
-      "rank": 6,
-      "name": "長谷川",
-      "rankTitle": "初段",
-      "targetSize": "1寸5分",
-      "updatedDate": "2024年11月12日",
-      "expiryDate": "2025年2月12日"
-    },
-    {
-      "id": "2024-11-007",
-      "rank": 7,
-      "name": "池田",
-      "rankTitle": "初段",
-      "targetSize": "1寸7分",
-      "updatedDate": "2024年11月10日",
-      "expiryDate": "2025年2月10日"
-    },
-    {
-      "id": "2024-11-008",
-      "rank": 8,
-      "name": "藤田",
-      "rankTitle": "初段",
+      "id": "71513479-a2fa-475f-8ea4-43eac16eb6f6",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "二級",
       "targetSize": "1寸8分",
-      "updatedDate": "2024年11月8日",
-      "expiryDate": "2025年2月8日"
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "cfc9942a-714c-45de-a194-e9b750702690",
+      "rank": 3,
+      "name": "尹柤雄",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b409237d-647f-4fe9-9d48-29f798c810ff",
+      "rank": 4,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9da0c43e-1056-4af5-a3ef-525fb63eddc1",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "aa2d14cb-cd50-42c3-8325-2c13709bb392",
+      "rank": 6,
+      "name": "荻野",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "783d3c0f-f68e-432f-9e90-effcbe168efa",
+      "rank": 7,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a9ee0822-d7aa-461f-aaf0-e17f4a7d31ef",
+      "rank": 8,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "70c383a1-209c-4508-9a12-e1f2a98d4654",
+      "rank": 9,
+      "name": "萬次郎",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f40ce507-566a-4d56-a97c-5eccb47067bf",
+      "rank": 10,
+      "name": "朴柱奐",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
     }
   ],
-  "publishedAt": "2024-11-26T09:00:00.000Z",
-  "updatedAt": "2024-11-26T09:00:00.000Z"
+  "publishedAt": "2025-12-09T11:08:28.880Z",
+  "updatedAt": "2025-12-09T11:08:28.880Z"
 }

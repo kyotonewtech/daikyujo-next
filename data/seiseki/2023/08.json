@@ -1,0 +1,98 @@
+{
+  "year": 2023,
+  "month": 8,
+  "entries": [
+    {
+      "id": "ca3dd033-6961-4fad-85a7-46d0ecfa5805",
+      "rank": 1,
+      "name": "佐藤",
+      "rankTitle": "三級",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d7f6bbe0-ffc5-42db-a881-a44fa9efdd80",
+      "rank": 2,
+      "name": "吉田",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f437e84c-5ba2-4ddc-97e0-ba4b36c90834",
+      "rank": 3,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "82904f7f-6cf1-4c3c-bd34-942b40b93712",
+      "rank": 4,
+      "name": "田川",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "81558582-5ab2-4b38-a403-c4b1df5ac45b",
+      "rank": 5,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "cacc84d1-83c1-41ed-adcd-1fefe48cb0d4",
+      "rank": 6,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7fb36f3e-5e42-4e52-ba2f-424376a544cd",
+      "rank": 7,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f7fce9db-9d2b-432a-af1c-6fe03eddaa8b",
+      "rank": 8,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2b668077-c757-40f9-961f-b19c364a30ac",
+      "rank": 9,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8e0673c0-4955-49e1-88c7-ffc05a31ee61",
+      "rank": 10,
+      "name": "高",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:14:13.668Z",
+  "updatedAt": "2025-12-09T11:14:13.668Z"
+}

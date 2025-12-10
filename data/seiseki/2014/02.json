@@ -1,0 +1,98 @@
+{
+  "year": 2014,
+  "month": 2,
+  "entries": [
+    {
+      "id": "36e2c083-6607-49f5-85ff-9a6e0440f9c6",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b42ff38d-0caf-4e11-844a-328d5dc59763",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f832d2e7-22e4-4e43-b47c-e189999666b1",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8d5b9534-0e5e-485b-8aec-f2fa917e3304",
+      "rank": 4,
+      "name": "松木",
+      "rankTitle": "三級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1066b72f-bb3f-4725-99f5-91cd72b11261",
+      "rank": 5,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "df0b3652-9dec-4e23-a4a6-83a6d529d6a7",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "5eaf43bc-40d8-4cf5-95fa-2a1f539fcd91",
+      "rank": 7,
+      "name": "今井",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "81d295af-1711-4636-ad82-e734b5677c8c",
+      "rank": 8,
+      "name": "川本聖爾",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "15c5a6dc-8957-4b5c-918a-c7dba7d5c81a",
+      "rank": 9,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "841663de-feda-4b01-a4cc-48f913525766",
+      "rank": 10,
+      "name": "田川博雅",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:54:42.129Z",
+  "updatedAt": "2025-12-09T11:54:42.129Z"
+}

@@ -1,0 +1,98 @@
+{
+  "year": 2021,
+  "month": 8,
+  "entries": [
+    {
+      "id": "428c42e6-153b-4dc6-a8f5-e37665355c8d",
+      "rank": 1,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "22f2f6a8-9c48-4851-a291-eec3ccf7de1c",
+      "rank": 2,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "38b2331c-c63e-42d1-8568-a7400b5c8b58",
+      "rank": 3,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d13831b8-d732-4f48-a7ee-519859ae3d28",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8faf7d4f-4d08-4cbb-a84b-eedab494425c",
+      "rank": 5,
+      "name": "中村智子",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6b63d1c1-14f5-4948-bd5f-57bc0951a1a5",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ef78ceb7-35c8-4072-8d36-23355c20b0f9",
+      "rank": 7,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c8e8c658-bd95-4879-bcae-a716f75facee",
+      "rank": 8,
+      "name": "雲川",
+      "rankTitle": "五級",
+      "targetSize": "3寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "af42ed6a-75af-40e4-bff5-d1cacac4218f",
+      "rank": 9,
+      "name": "本村",
+      "rankTitle": "初段",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "631b8672-01d3-4ffd-87be-b78aeb41035e",
+      "rank": 10,
+      "name": "城戸快成",
+      "rankTitle": "",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:32.468Z",
+  "updatedAt": "2025-12-09T11:37:32.468Z"
+}

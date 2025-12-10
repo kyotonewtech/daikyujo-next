@@ -6,6 +6,8 @@ interface SeisekiCardProps {
   entry: SeisekiEntry;
   index: number;
   isEmpty?: boolean;
+  className?: string;
+  isLatestMonth?: boolean;
 }
 
 // 日付フォーマット関数: "2025年11月26日" → "11月26日"
@@ -13,7 +15,7 @@ function formatShortDate(fullDate: string): string {
   return fullDate.replace(/^\d{4}年/, '');
 }
 
-export default function SeisekiCard({ entry, index, isEmpty = false }: SeisekiCardProps) {
+export default function SeisekiCard({ entry, index, isEmpty = false, className, isLatestMonth = false }: SeisekiCardProps) {
   // 順位に応じた色
   const getRankColor = (rank: number) => {
     if (rank === 1) return "text-yellow-600"; // 金
@@ -26,7 +28,7 @@ export default function SeisekiCard({ entry, index, isEmpty = false }: SeisekiCa
     <div
       className={`bg-white rounded-lg shadow-md p-4 transition-shadow duration-300 ${
         isEmpty ? 'opacity-50 cursor-default' : 'hover:shadow-lg'
-      }`}
+      } ${className || ''}`}
     >
       <div className="flex items-center gap-6">
         {/* 順位 */}
@@ -44,8 +46,8 @@ export default function SeisekiCard({ entry, index, isEmpty = false }: SeisekiCa
           {entry.targetSize}
         </span>
 
-        {/* 更新日・有効期限は空の場合は非表示 */}
-        {!isEmpty && (
+        {/* 更新日・有効期限は最新の月かつ空でない場合のみ表示 */}
+        {!isEmpty && isLatestMonth && (
           <>
             {/* 更新日 */}
             <span className="text-sm text-gray-600">

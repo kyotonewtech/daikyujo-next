@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 8,
+  "entries": [
+    {
+      "id": "15ba8bc0-0ad0-4a30-a601-b8bef3f8e122",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸1分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ee0efc5f-a8e2-4572-9c98-2314e3a94414",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "68a8c1c8-0226-4543-88a3-477fd10cfabb",
+      "rank": 3,
+      "name": "田川",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "17ea90fb-6d8c-4566-a2cc-1b69281c5d2b",
+      "rank": 4,
+      "name": "世羽",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "602a8ea1-e420-4890-9309-a77bebe44710",
+      "rank": 5,
+      "name": "荻野",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9304c2fd-1cdf-4cb2-a3c0-297cfe8a8d2d",
+      "rank": 6,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "be007a49-8c43-466c-9712-6d049baca809",
+      "rank": 7,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "12bcbcdb-7b0d-4806-8e5e-6c12aa310b36",
+      "rank": 8,
+      "name": "大川",
+      "rankTitle": "初段",
+      "targetSize": "3寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "83ade906-fd6a-4270-818f-4079f7edba8d",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "bc87a192-9de2-44a6-9471-61eef2433a4b",
+      "rank": 10,
+      "name": "斎藤庸顕",
+      "rankTitle": "",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:08:28.859Z",
+  "updatedAt": "2025-12-09T11:08:28.859Z"
+}

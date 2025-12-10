@@ -10,8 +10,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // /seiseki ページでは常にスクロール済みスタイルを適用
-  const shouldUseScrolledStyle = isScrolled || pathname === '/seiseki';
+  // /seiseki, /beginners ページでは常にスクロール済みスタイルを適用
+  const shouldUseScrolledStyle = isScrolled || pathname === '/seiseki' || pathname === '/beginners';
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

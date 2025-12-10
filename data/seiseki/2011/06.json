@@ -1,0 +1,98 @@
+{
+  "year": 2011,
+  "month": 6,
+  "entries": [
+    {
+      "id": "028458a0-9d4a-47c5-8aa8-3312ee1d71f5",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "二段",
+      "targetSize": "1寸3分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "07d95600-85f3-4408-87be-83526f37685a",
+      "rank": 2,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "56d9e1c2-4502-490a-a674-7c14b634078a",
+      "rank": 3,
+      "name": "古池",
+      "rankTitle": "三級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "074cacad-e159-4d8d-a6ff-7e54cc803d0c",
+      "rank": 4,
+      "name": "浩子",
+      "rankTitle": "三級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b1ad1995-7a39-4607-a814-f66d50861009",
+      "rank": 5,
+      "name": "水野",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c87bee39-06f1-4cc5-8330-e23103c4207d",
+      "rank": 6,
+      "name": "知也",
+      "rankTitle": "三段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e3c4f775-8239-44cb-a188-24b6fcf1311c",
+      "rank": 7,
+      "name": "岩嵜",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8255bcc7-3338-4364-b273-ecb85f253cee",
+      "rank": 8,
+      "name": "髙橋",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4bf47479-71e1-4af8-be4e-86c1e5115d2b",
+      "rank": 9,
+      "name": "昇",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "fc42267d-19bc-42d2-8efe-89199ad13c34",
+      "rank": 10,
+      "name": "伸",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-10T06:01:20.236Z",
+  "updatedAt": "2025-12-10T06:01:20.236Z"
+}

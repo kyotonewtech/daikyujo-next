@@ -40,7 +40,12 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
             </div>
 
             {/* 参加者カードグリッド */}
-            <div className="grid grid-cols-1 gap-4">
+            <div
+              className="grid grid-cols-2 grid-flow-col gap-4"
+              style={{
+                gridTemplateRows: `repeat(${Math.ceil(taikai.participants.length / 2)}, minmax(0, 1fr))`
+              }}
+            >
               {taikai.participants.map((participant, index) => (
                 <TaikaiCard
                   key={participant.id}

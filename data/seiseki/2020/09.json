@@ -1,0 +1,98 @@
+{
+  "year": 2020,
+  "month": 9,
+  "entries": [
+    {
+      "id": "8770ea8c-8aab-450d-a1ee-77510b9bd657",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9aaa42b1-652e-4970-9378-bb96b5ec4ec2",
+      "rank": 2,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4f753c6c-2a94-4a83-8480-d6d0694a36a5",
+      "rank": 3,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "54d8ada1-9d88-451e-b71d-ff76d3e3408b",
+      "rank": 4,
+      "name": "銀太郎",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6b9bccd9-bc8f-4bd5-ae62-bd5ef3038c54",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d7b2aed0-2b68-4670-93ab-d97bb639491d",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "958f1025-b31f-4b84-8708-d51ed2d7c810",
+      "rank": 7,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "81ea5c05-3346-449f-8e3c-468687a59f02",
+      "rank": 8,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8f662e20-abea-4277-a4db-f4a66eeaaef8",
+      "rank": 9,
+      "name": "澁谷",
+      "rankTitle": "五級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4f888cb8-a62e-487a-9a4f-6be24563e0c4",
+      "rank": 10,
+      "name": "山田ゆかり",
+      "rankTitle": "四級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:34.776Z",
+  "updatedAt": "2025-12-09T11:37:34.776Z"
+}

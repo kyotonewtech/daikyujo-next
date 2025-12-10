@@ -1,0 +1,98 @@
+{
+  "year": 2022,
+  "month": 8,
+  "entries": [
+    {
+      "id": "6511eda2-8929-408a-8d88-55e952516f6e",
+      "rank": 1,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2dd72f49-3446-469e-a4b1-256dd11147c4",
+      "rank": 2,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "dbdf7a41-e75c-4ee4-85c1-d894983b8471",
+      "rank": 3,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "34fbbb69-0e2f-4d36-99b8-8cf298d4cb72",
+      "rank": 4,
+      "name": "宮原",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ac5c88d6-4ef1-4ee9-bd48-6ade1f33b65f",
+      "rank": 5,
+      "name": "佐藤",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9da9a931-47a7-4df4-a51b-157133be53c7",
+      "rank": 6,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "89a71583-5ede-4381-b52d-4f65a1c19f07",
+      "rank": 7,
+      "name": "高",
+      "rankTitle": "五級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ade49afb-ca37-44a7-8a62-5093accb5ca7",
+      "rank": 8,
+      "name": "望月",
+      "rankTitle": "四級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d0b89918-65ce-4029-ba02-0f91adcc0b99",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "80398044-ac21-4464-b5b3-7d517a329666",
+      "rank": 10,
+      "name": "永見あいり",
+      "rankTitle": "五級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:18:24.602Z",
+  "updatedAt": "2025-12-09T11:18:24.602Z"
+}

@@ -1,4 +1,4 @@
-import { getAvailableYears, getYearSeisekiData } from "@/lib/seiseki";
+import { getAvailableYears, getYearSeisekiData, getLatestSeisekiData } from "@/lib/seiseki";
 import { getTaikaiArchiveList, getTaikaiData } from "@/lib/taikai";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -21,6 +21,11 @@ export default async function SeisekiPage() {
       yearDataMap.set(year, monthsData);
     }
   }
+
+  // 最新の成績データを取得
+  const latestData = getLatestSeisekiData();
+  const latestYear = latestData?.year ?? null;
+  const latestMonth = latestData?.month ?? null;
 
   // 大会成績データ取得
   const taikaiArchiveList = getTaikaiArchiveList();
@@ -88,6 +93,8 @@ export default async function SeisekiPage() {
             availableYears={availableYears}
             yearDataObject={yearDataObject}
             taikaiList={taikaiList}
+            latestYear={latestYear}
+            latestMonth={latestMonth}
           />
         </div>
       </section>

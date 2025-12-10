@@ -3,24 +3,96 @@
   "month": 1,
   "entries": [
     {
-      "id": "61356c17-04a0-44b3-b9c1-ed507cbc4afb",
+      "id": "1742e1a1-9ec1-4260-ac14-1d4a73144333",
       "rank": 1,
-      "name": "大﨑",
-      "rankTitle": "一級",
+      "name": "津守",
+      "rankTitle": "三段",
       "targetSize": "1寸",
-      "updatedDate": "2025年1月6日",
-      "expiryDate": "2025年4月6日"
+      "updatedDate": "",
+      "expiryDate": ""
     },
     {
-      "id": "6fc6e5f6-d014-4139-b798-44aade72a252",
+      "id": "37556e53-9aef-4d9d-bf6f-5431b377e18f",
       "rank": 2,
-      "name": "土井",
+      "name": "濱野",
       "rankTitle": "二級",
-      "targetSize": "1寸3分",
-      "updatedDate": "2025年1月7日",
-      "expiryDate": "2025年4月7日"
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e85a2374-1149-4a3c-a1c8-9701e8357376",
+      "rank": 3,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1b759fb7-d35e-4082-b211-94b1495dc4a9",
+      "rank": 4,
+      "name": "尹柤雄",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2925183a-9156-42ed-b8d8-fb549d1e4ae4",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "cd6fe31e-94a7-4995-aede-78244b3a783e",
+      "rank": 6,
+      "name": "荻野",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7cd2883f-447e-4a1c-afca-27ebacc737b6",
+      "rank": 7,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c1bfef4e-ef07-418e-9b6e-3fee1b48eee1",
+      "rank": 8,
+      "name": "林友通",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "099ddb81-d94d-470e-a4ca-002fac39118c",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ebd0c381-5cfb-41ed-a38e-403d24276696",
+      "rank": 10,
+      "name": "萬次郎",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
     }
   ],
-  "updatedAt": "2025-12-02T12:37:53.604Z",
-  "publishedAt": "2025-11-27T07:51:43.093Z"
+  "publishedAt": "2025-12-09T10:54:02.478Z",
+  "updatedAt": "2025-12-09T10:54:02.478Z"
 }

@@ -11,6 +11,8 @@ interface SeisekiPageClientProps {
   availableYears: number[];
   yearDataObject: Record<number, SeisekiMonth[]>;
   taikaiList: TaikaiData[];
+  latestYear: number | null;
+  latestMonth: number | null;
 }
 
 const tabs: SeisekiTab[] = [
@@ -22,6 +24,8 @@ export default function SeisekiPageClient({
   availableYears,
   yearDataObject,
   taikaiList,
+  latestYear,
+  latestMonth,
 }: SeisekiPageClientProps) {
   const [activeTab, setActiveTab] = useState<SeisekiTabId>("seiseki");
 
@@ -50,6 +54,8 @@ export default function SeisekiPageClient({
           <SeisekiTabContent
             availableYears={availableYears}
             yearDataMap={yearDataMap}
+            latestYear={latestYear}
+            latestMonth={latestMonth}
           />
         )}
         {activeTab === "taikai" && <TaikaiTabContent taikaiList={taikaiList} />}

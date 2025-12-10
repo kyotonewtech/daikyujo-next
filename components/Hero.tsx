@@ -8,8 +8,11 @@ const HERO_IMAGES = ['/hero-image.png', '/hero2.jpg'] as const;
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
     }, 7000);
@@ -23,7 +26,7 @@ export default function Hero() {
       <AnimatePresence mode="wait">
         <motion.div
           key={HERO_IMAGES[currentImageIndex]}
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={isMounted ? { opacity: 0, scale: 1.1 } : false}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{
@@ -40,23 +43,23 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-        <div className="flex flex-col md:flex-row items-center justify-center h-[60vh]">
+        <div className="flex flex-row items-center justify-center h-[70vh] sm:h-[65vh] md:h-[60vh] max-h-[800px]">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={isMounted ? { opacity: 0, y: 20 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
             className="writing-vertical text-upright tracking-[0.4em] flex flex-col items-center h-full border-r-2 border-white/30 pr-8 mr-8 md:mr-12"
           >
-            <h1 className="font-shippori text-5xl md:text-7xl drop-shadow-lg whitespace-nowrap leading-relaxed">
+            <h1 className="font-shippori hero-main-text drop-shadow-lg whitespace-nowrap leading-relaxed">
               日本の心を引く。
             </h1>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={isMounted ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="mt-8 md:mt-0 font-serif text-xl tracking-widest drop-shadow-md writing-vertical text-upright h-[40vh] flex items-center"
+            className="font-serif hero-subtitle-text tracking-widest drop-shadow-md writing-vertical text-upright h-auto max-h-[40vh] flex items-center"
           >
             <p>創業百六十余年 園山大弓場</p>
           </motion.div>
@@ -64,13 +67,13 @@ export default function Hero() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={isMounted ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={isMounted ? { y: [0, 10, 0] } : {}}
           transition={{ repeat: Infinity, duration: 2 }}
         >
           <ChevronDown className="text-white/80" size={32} />

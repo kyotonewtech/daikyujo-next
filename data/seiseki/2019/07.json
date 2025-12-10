@@ -1,0 +1,98 @@
+{
+  "year": 2019,
+  "month": 7,
+  "entries": [
+    {
+      "id": "c04c66a3-c6ae-41d9-a817-eae3867842de",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d7bf3e41-1e88-49f4-9d68-34df8b916b9b",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "三級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "faa3410b-44cc-4434-b455-68d5165af5fb",
+      "rank": 3,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6fee0cd8-b525-4c36-ad02-cb464cc70273",
+      "rank": 4,
+      "name": "山田",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "27f45f6a-8d4b-4d7e-8e25-918534aaf61d",
+      "rank": 5,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0b991d5d-ab2f-4698-ab00-c8622929f0c5",
+      "rank": 6,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "565b0ed6-1840-42ca-9d14-5def0cbd6f18",
+      "rank": 7,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c6da078b-cba0-437b-9d1c-faf9720b40d7",
+      "rank": 8,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d3c197df-c927-41bb-b537-f9245b824090",
+      "rank": 9,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4e6a4490-984a-4981-abf8-928ca8b1a638",
+      "rank": 10,
+      "name": "喜多",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:42.778Z",
+  "updatedAt": "2025-12-09T11:37:42.778Z"
+}

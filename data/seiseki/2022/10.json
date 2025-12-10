@@ -1,0 +1,89 @@
+{
+  "year": 2022,
+  "month": 10,
+  "entries": [
+    {
+      "id": "66aaf5b4-3446-4aac-8155-ba98094aa6e2",
+      "rank": 1,
+      "name": "佐藤",
+      "rankTitle": "三級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a35de5b4-fa52-458c-bbb1-fa8f2019c93a",
+      "rank": 2,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d8b0a553-bf99-41fc-90a8-f312243cf922",
+      "rank": 3,
+      "name": "宮原",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e15fb129-1ee9-499c-91eb-b13f7b23f060",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d7968a83-dcb5-48db-ae09-4993bd1c2bd8",
+      "rank": 5,
+      "name": "永見あいり",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c9152fbb-4117-4d59-8cb4-4de7d82bbace",
+      "rank": 6,
+      "name": "萬次郎",
+      "rankTitle": "四級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ad0e2735-88ee-4873-ac9b-33db5374e028",
+      "rank": 7,
+      "name": "高",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7fc0feeb-625a-4616-9fce-f703e9a650e5",
+      "rank": 8,
+      "name": "藤嶋",
+      "rankTitle": "初段",
+      "targetSize": "3寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b616604e-fe24-4e48-a6a6-b9c1136ff31e",
+      "rank": 9,
+      "name": "古池",
+      "rankTitle": "初段",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:18:24.625Z",
+  "updatedAt": "2025-12-09T11:18:24.625Z"
+}

@@ -1,0 +1,98 @@
+{
+  "year": 2018,
+  "month": 10,
+  "entries": [
+    {
+      "id": "c622ea0a-bac2-4487-9d5d-6eafc8ec0663",
+      "rank": 1,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f4d6cdc0-f213-453a-a90d-30f66630eff7",
+      "rank": 2,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0ecb0ae3-aa1f-4d7d-9204-b967a9cbaecd",
+      "rank": 3,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "21560f91-cae5-422e-b5a4-80b177127fa2",
+      "rank": 4,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0c3b849d-3d2a-4161-9427-ee4247ea0f7b",
+      "rank": 5,
+      "name": "濱野",
+      "rankTitle": "三級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ed12d75f-f107-4c78-bd1b-f128436dbdeb",
+      "rank": 6,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6372bed4-1233-404f-a611-18301b21e90e",
+      "rank": 7,
+      "name": "望月",
+      "rankTitle": "五級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8b930f02-d595-42b0-94a4-d20218a15971",
+      "rank": 8,
+      "name": "岩戸",
+      "rankTitle": "初段",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a17e0c35-ce4e-4469-be71-db485772e30e",
+      "rank": 9,
+      "name": "澁谷",
+      "rankTitle": "五級",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e353385d-896f-4d1d-ac18-4cb34ce76884",
+      "rank": 10,
+      "name": "藤原亮",
+      "rankTitle": "",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:50.712Z",
+  "updatedAt": "2025-12-09T11:37:50.712Z"
+}
