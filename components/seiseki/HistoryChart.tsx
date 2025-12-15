@@ -137,17 +137,18 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
 
           <Tooltip
             contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
-            formatter={(value: number | null, name: string) => {
-              if (value === null) {
+            formatter={(value: unknown, name: string) => {
+              if (value === null || value === undefined) {
                 return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
               }
+              const numValue = typeof value === 'number' ? value : Number(value);
               if (name === 'rank') {
-                return [`${value}位`, '順位'];
+                return [`${numValue}位`, '順位'];
               }
               if (name === 'targetSize') {
-                return [value, '的の大きさ'];
+                return [numValue, '的の大きさ'];
               }
-              return [value, name];
+              return [numValue, name];
             }}
             labelFormatter={(label) => `期間: ${label}`}
           />

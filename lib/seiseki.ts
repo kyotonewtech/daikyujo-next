@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { SeisekiMonth, ArchiveIndex, ArchiveMetadata, PersonHistory, PersonHistoryEntry } from '@/types/seiseki';
+import type { SeisekiMonth, SeisekiEntry, ArchiveIndex, ArchiveMetadata, PersonHistory, PersonHistoryEntry } from '@/types/seiseki';
 import { parseTargetSize } from './utils';
 
 const DATA_DIR = path.join(process.cwd(), 'data', 'seiseki');
