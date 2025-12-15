@@ -1,0 +1,98 @@
+{
+  "year": 2012,
+  "month": 8,
+  "entries": [
+    {
+      "id": "cb249c59-fee2-4b34-8b80-a5916bc80ac5",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7af1d5b6-6389-49a0-8858-4fbd18a233a9",
+      "rank": 2,
+      "name": "前田",
+      "rankTitle": "三級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "846d19f6-019b-468d-aba0-8967eb91c139",
+      "rank": 3,
+      "name": "髙橋",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e30e8e3d-1a2a-44db-a303-4e4a2f059ac7",
+      "rank": 4,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a1b0df95-5113-46e6-86ad-b9acb4dfacfe",
+      "rank": 5,
+      "name": "七海",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "5f8ad5a5-6f47-46ac-9de1-c3fedf131d6e",
+      "rank": 6,
+      "name": "木村",
+      "rankTitle": "四段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4ee012bf-944a-465c-8a9f-ebff4578f66c",
+      "rank": 7,
+      "name": "川島",
+      "rankTitle": "二段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d0cf1d74-000d-4b2f-8c53-19fc3660ca86",
+      "rank": 8,
+      "name": "三坂",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8bf9b74f-7290-4ad0-8659-25a1feb93433",
+      "rank": 9,
+      "name": "廣田",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f2570d2f-3858-49be-a359-49d45173682d",
+      "rank": 10,
+      "name": "知也",
+      "rankTitle": "三段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-10T06:01:19.741Z",
+  "updatedAt": "2025-12-10T06:01:19.741Z"
+}

@@ -9,7 +9,8 @@
       "rankTitle": "二級",
       "targetSize": "1寸6分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_059"
     },
     {
       "id": "c9ebb1a8-96c3-4ae8-812e-4b1f5889aae9",
@@ -18,7 +19,8 @@
       "rankTitle": "二級",
       "targetSize": "1寸7分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_065"
     },
     {
       "id": "cdc382b4-b771-40cc-a760-d6f92203c541",
@@ -27,7 +29,8 @@
       "rankTitle": "三級",
       "targetSize": "1寸8分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_086"
     },
     {
       "id": "a555ab76-9d59-4829-962c-f7e07e8b7f2d",
@@ -36,7 +39,8 @@
       "rankTitle": "三級",
       "targetSize": "2寸4分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_084"
     },
     {
       "id": "47bc269a-4093-41e9-9bcf-bb6ebd3c7891",
@@ -45,7 +49,8 @@
       "rankTitle": "五段",
       "targetSize": "2寸6分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_024"
     },
     {
       "id": "0bcf5ff3-2d5f-47e2-9674-1492cbfae7dc",
@@ -54,7 +59,8 @@
       "rankTitle": "初段",
       "targetSize": "2寸6分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_003"
     },
     {
       "id": "6e125b9c-f970-496f-a8c4-6bf6af7febd0",
@@ -63,7 +69,8 @@
       "rankTitle": "三段",
       "targetSize": "2寸8分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_001"
     },
     {
       "id": "617b85cb-3d08-401a-a1a8-aee1220c9a34",
@@ -72,7 +79,8 @@
       "rankTitle": "三級",
       "targetSize": "2寸8分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_074"
     },
     {
       "id": "0bda388e-57d4-43d2-be9c-bda9527b9dfc",
@@ -81,7 +89,8 @@
       "rankTitle": "一級",
       "targetSize": "3寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_038"
     },
     {
       "id": "96932ec5-51e9-49c3-9071-1b5460ec7596",
@@ -90,9 +99,10 @@
       "rankTitle": "四級",
       "targetSize": "3寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_085"
     }
   ],
   "publishedAt": "2025-12-09T11:37:34.822Z",
-  "updatedAt": "2025-12-09T11:37:34.822Z"
+  "updatedAt": "2025-12-11T09:34:06.737Z"
 }

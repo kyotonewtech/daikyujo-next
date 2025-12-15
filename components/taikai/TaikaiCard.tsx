@@ -5,6 +5,7 @@ import type { TaikaiParticipant } from "@/types/taikai";
 interface TaikaiCardProps {
   participant: TaikaiParticipant;
   index: number;
+  onClick?: (personName: string) => void;
 }
 
 const getRankColor = (rank: number): string => {
@@ -33,13 +34,37 @@ const getRankBgColor = (rank: number): string => {
   }
 };
 
-export default function TaikaiCard({ participant, index }: TaikaiCardProps) {
+export default function TaikaiCard({ participant, index, onClick }: TaikaiCardProps) {
   const rankColor = getRankColor(participant.rank);
   const bgColor = getRankBgColor(participant.rank);
 
+  // クリックハンドラー
+  const handleClick = () => {
+    // 全順位でクリック可能
+    if (onClick) {
+      onClick(participant.name);
+    }
+  };
+
+  // キーボードハンドラー
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.key === 'Enter' || e.key === ' ') && onClick) {
+      e.preventDefault();
+      onClick(participant.name);
+    }
+  };
+
+  const isClickable = onClick !== undefined;
+
   return (
     <div
-      className={`${bgColor} border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300`}
+      className={`${bgColor} border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 ${
+        isClickable ? 'cursor-pointer' : ''
+      }`}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role={isClickable ? "button" : undefined}
+      tabIndex={isClickable ? 0 : undefined}
     >
       <div className="flex items-center gap-6">
         {/* 順位 */}

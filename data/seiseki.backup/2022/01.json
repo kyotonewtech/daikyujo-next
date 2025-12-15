@@ -1,0 +1,98 @@
+{
+  "year": 2022,
+  "month": 1,
+  "entries": [
+    {
+      "id": "c9bbb4cd-8494-4b5c-9607-b6d4c3bd899b",
+      "rank": 1,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4be044ec-bac4-498e-9596-2fff896e799f",
+      "rank": 2,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "64de38d1-2b73-495d-b131-9088a640ce67",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "26f23956-4f0c-4774-af9a-df01ddd5f3bd",
+      "rank": 4,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ecc65187-c845-4f5d-92ff-b931f7e2612b",
+      "rank": 5,
+      "name": "近藤和希",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "957bf86d-3a89-49e9-afb1-147d6403c953",
+      "rank": 6,
+      "name": "中村智子",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9df8dd93-a219-4d34-9e22-cef29533364f",
+      "rank": 7,
+      "name": "知也",
+      "rankTitle": "三段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8719d056-237a-4836-a657-d1f575082a81",
+      "rank": 8,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a4b03c00-8479-4070-b483-33a7c4ed1ce9",
+      "rank": 9,
+      "name": "宮原",
+      "rankTitle": "初段",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3beef177-f320-4f01-b6d3-94d8e9e9f43b",
+      "rank": 10,
+      "name": "銀太郎",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:18:24.522Z",
+  "updatedAt": "2025-12-09T11:18:24.534Z"
+}

@@ -1,0 +1,98 @@
+{
+  "year": 2016,
+  "month": 5,
+  "entries": [
+    {
+      "id": "140ca965-6b9d-4101-b36f-e0a0bb54909e",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "44b1f1da-6b5e-4174-9ffd-75eb0cb486e0",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "de0db77c-6945-4942-b250-7bc855294c22",
+      "rank": 3,
+      "name": "松木",
+      "rankTitle": "三級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "350c9897-9bcd-439c-b191-6f5d26cafcef",
+      "rank": 4,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b959cf68-58b8-430f-ac13-799e6d24be1e",
+      "rank": 5,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "28392394-8c87-493b-a445-27c7c2f41d7a",
+      "rank": 6,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ac6be3b0-8af1-47b7-a0c2-2405b2c12e00",
+      "rank": 7,
+      "name": "田川",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a5ab76fd-8443-434e-b555-36e8900f2f10",
+      "rank": 8,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1cdc3fe9-254c-4939-b71f-b2eb67764fa5",
+      "rank": 9,
+      "name": "李憲正",
+      "rankTitle": "三級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "054498f8-437f-402d-bef8-bf5adfb1dc68",
+      "rank": 10,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:50:36.389Z",
+  "updatedAt": "2025-12-09T11:50:36.389Z"
+}

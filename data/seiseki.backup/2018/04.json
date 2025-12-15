@@ -1,0 +1,98 @@
+{
+  "year": 2018,
+  "month": 4,
+  "entries": [
+    {
+      "id": "d74a31e5-d9b0-42dc-8ed8-2453a7211ef7",
+      "rank": 1,
+      "name": "松木",
+      "rankTitle": "初段",
+      "targetSize": "9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3ccb2603-2bac-47f2-8bf4-3a8f5f8d8b88",
+      "rank": 2,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "643ff3ec-4368-4bf7-ab2f-c68484d2bb74",
+      "rank": 3,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "654f3be1-4681-4eca-a77b-2956788f2651",
+      "rank": 4,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "41a91c37-1501-4e5d-a362-d4700526271a",
+      "rank": 5,
+      "name": "津守",
+      "rankTitle": "段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a93f4668-765b-432b-967e-1151c387db80",
+      "rank": 6,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4ab1050f-bf16-4447-8c71-c0b25621de89",
+      "rank": 7,
+      "name": "吉田",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "89162f86-c2c0-43a6-aad9-4fc2cfbfd815",
+      "rank": 8,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1b8c76d5-cef2-47fc-8e97-bb9be1525b5d",
+      "rank": 9,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "01585e94-1b86-416c-86f9-6ea47a9ccf19",
+      "rank": 10,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:50.561Z",
+  "updatedAt": "2025-12-09T11:37:50.561Z"
+}

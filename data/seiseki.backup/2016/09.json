@@ -1,0 +1,98 @@
+{
+  "year": 2016,
+  "month": 9,
+  "entries": [
+    {
+      "id": "3c842fe8-d6af-43ad-aabb-0f705c7b1ea7",
+      "rank": 1,
+      "name": "宮原亮平",
+      "rankTitle": "二級",
+      "targetSize": "1寸1分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "35b15708-76d0-4d66-8cf6-5c8688437874",
+      "rank": 2,
+      "name": "松木",
+      "rankTitle": "二級",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "796fc50d-f125-4127-9168-0cbe5ecb5d28",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2bf4c48e-9c96-42dd-8b0d-7963b405d822",
+      "rank": 4,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4509cc1d-cc86-42be-bae4-136782e4ae58",
+      "rank": 5,
+      "name": "城戸",
+      "rankTitle": "三級",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f63e50bc-5208-4294-9e14-15f12f2ba78a",
+      "rank": 6,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "15091161-0cd7-4f7e-895f-fbeed18cb33e",
+      "rank": 7,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b5702d4b-55a3-4d8f-846f-edd5c0f5a9fb",
+      "rank": 8,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "fa8773e3-1c6f-4dea-8e3e-6ef76705acb2",
+      "rank": 9,
+      "name": "本村健治",
+      "rankTitle": "初段",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "920d47ee-4138-42c1-b857-cfea6aca9ad1",
+      "rank": 10,
+      "name": "野口隆三",
+      "rankTitle": "五級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:50:36.449Z",
+  "updatedAt": "2025-12-09T11:50:36.449Z"
+}

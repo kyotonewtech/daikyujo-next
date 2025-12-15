@@ -1,0 +1,98 @@
+{
+  "year": 2025,
+  "month": 10,
+  "entries": [
+    {
+      "id": "837de3ff-22b7-4f28-8715-41a0b5fcffe0",
+      "rank": 1,
+      "name": "大﨑",
+      "rankTitle": "二級",
+      "targetSize": "1寸1分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "dbcb981b-0d15-462e-a762-8f8da442554f",
+      "rank": 2,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "65e13c83-13ab-4f95-b755-7053fe8dcc2d",
+      "rank": 3,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸3分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9b4bea44-1a4e-4d87-921d-2aae00db2e34",
+      "rank": 4,
+      "name": "駒田",
+      "rankTitle": "三級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2f5ca806-b1a2-449a-b362-f5cf48e618ed",
+      "rank": 5,
+      "name": "土井",
+      "rankTitle": "三級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "30b579d5-0f36-45d0-a99e-0ae57e7a25eb",
+      "rank": 6,
+      "name": "荻野",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "64560c18-74b3-499a-9d9d-96e6ec818466",
+      "rank": 7,
+      "name": "松本",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "00276147-cec9-48e9-833d-6690b9630750",
+      "rank": 8,
+      "name": "林貴史",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "046b92a3-980e-4b15-827a-38f231233b3b",
+      "rank": 9,
+      "name": "近藤",
+      "rankTitle": "三級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f52b1717-c260-48e9-8d23-c2c1f8caea2b",
+      "rank": 10,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T10:54:02.545Z",
+  "updatedAt": "2025-12-09T10:54:02.545Z"
+}

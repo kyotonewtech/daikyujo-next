@@ -5,6 +5,7 @@
  */
 export interface SeisekiEntry {
   id: string;              // UUID (React key、編集時の識別子として使用)
+  personId: string;        // 個人識別子 (例: "person_001") 月を跨いだ追跡用
   rank: number;            // 順位 (1, 2, 3...)
   name: string;            // 選手名
   rankTitle: string;       // 段位・称号 (例: "初段", "二段", "教士")
@@ -62,4 +63,25 @@ export type SeisekiTabId = "seiseki" | "taikai";
 export interface SeisekiTab {
   id: SeisekiTabId;
   label: string;
+}
+
+/**
+ * 個人の成績推移データ
+ */
+export interface PersonHistory {
+  personId: string;
+  name: string;
+  history: PersonHistoryEntry[];
+}
+
+/**
+ * 個人の月次成績エントリー
+ */
+export interface PersonHistoryEntry {
+  year: number;
+  month: number;
+  rank: number | null;              // 1-10位、データなしはnull
+  targetSize: string;               // "1寸2分" データなしは"-"
+  targetSizeNumeric: number | null; // 1.2（寸単位）、データなしはnull
+  rankTitle: string;
 }

@@ -69,11 +69,11 @@ export default function Experience() {
                 <p className="text-gray-600 text-sm leading-relaxed mb-8 min-h-[80px]">
                   {item.desc}
                 </p>
-                <a 
-                  href="#access" 
+                <a
+                  href={index === 0 ? "/beginners" : "#access"}
                   className="inline-flex items-center text-sm font-medium border-b border-accent pb-1 hover:text-accent transition-colors group/link"
                 >
-                  {item.linkText} 
+                  {item.linkText}
                   <span className="ml-2 group-hover/link:translate-x-1 transition-transform">→</span>
                 </a>
               </div>

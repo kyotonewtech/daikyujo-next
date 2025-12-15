@@ -1,0 +1,98 @@
+{
+  "year": 2017,
+  "month": 12,
+  "entries": [
+    {
+      "id": "cc3d951e-6517-4d5a-a7bc-6f2711b6c054",
+      "rank": 1,
+      "name": "松木",
+      "rankTitle": "初段",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a6a6832a-07f5-4758-b215-a1d383f3d80a",
+      "rank": 2,
+      "name": "野口",
+      "rankTitle": "三級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0ffd0f8b-4ce4-4ad4-851e-25ef4832b914",
+      "rank": 3,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "bdd314da-3653-4cc8-a0ff-f84628300e8d",
+      "rank": 4,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "243fd81f-4d1a-4d37-9ff6-2a6a9fe4b685",
+      "rank": 5,
+      "name": "宮原",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "990508ce-ee7e-4204-acfd-d1e7bd17c7b2",
+      "rank": 6,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a170612c-5e52-48d4-9d66-c9e86f180400",
+      "rank": 7,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "56f8fe46-b449-44bf-bde1-90842cf17015",
+      "rank": 8,
+      "name": "濱野",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2b5ba323-a507-469f-a70b-277381148955",
+      "rank": 9,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b7a48e9a-e106-4a4d-9dba-2c9f8fa54ee1",
+      "rank": 10,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:54.051Z",
+  "updatedAt": "2025-12-09T11:37:54.051Z"
+}

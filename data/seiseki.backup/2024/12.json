@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 12,
+  "entries": [
+    {
+      "id": "06e91234-abeb-44b2-8c5c-ec81be57bd26",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a7dfb62c-026d-4528-b44f-6214fd40bfb3",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "cea8513c-c57d-4518-8d90-181fbd1a0f23",
+      "rank": 3,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "779ec740-cbad-4943-83ac-25ad2fe04e63",
+      "rank": 4,
+      "name": "尹柤雄",
+      "rankTitle": "四級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8e15c799-c724-42e6-a903-e96e2a940f6b",
+      "rank": 5,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f60b8cbb-34f9-44c0-9a71-41b17076b726",
+      "rank": 6,
+      "name": "荻野",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7c8b54eb-44d5-4e28-b394-fc57a5594eb2",
+      "rank": 7,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f6b1c480-cc90-43c7-8ab3-53383442600d",
+      "rank": 8,
+      "name": "林友通",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "be03cea0-0296-4f24-b2b0-fd9757607329",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "135cabbc-8199-40ef-9c63-b9d80e7c3fad",
+      "rank": 10,
+      "name": "萬次郎",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:08:28.889Z",
+  "updatedAt": "2025-12-09T11:08:28.889Z"
+}

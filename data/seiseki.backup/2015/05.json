@@ -1,0 +1,98 @@
+{
+  "year": 2015,
+  "month": 5,
+  "entries": [
+    {
+      "id": "fb0d6107-79d2-4bf7-9b33-4ea9a1383bf3",
+      "rank": 1,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8dccd28f-ddfb-4d44-a8b4-541eb9323ed2",
+      "rank": 2,
+      "name": "山田伸治",
+      "rankTitle": "二級",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "231e6a2f-a48f-4240-a63f-015bcf2f005a",
+      "rank": 3,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "71b14723-23a1-49c7-a023-3c09211f5d9f",
+      "rank": 4,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "aa026355-6ede-455b-8be8-500ce8577361",
+      "rank": 5,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3bfc708a-08d7-4892-a243-2b406246e393",
+      "rank": 6,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "927167bf-2693-47a7-a98e-09fafc5dcc9a",
+      "rank": 7,
+      "name": "今井",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "62902aab-ebe7-430b-9cc7-a05b3f460da3",
+      "rank": 8,
+      "name": "田川博雅",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8c765cd0-78ff-4253-9bd4-b5253eb29b15",
+      "rank": 9,
+      "name": "川森",
+      "rankTitle": "初段",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7fb04435-ab88-4eff-8cbb-083682716f9c",
+      "rank": 10,
+      "name": "本村謙冶",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:53:36.832Z",
+  "updatedAt": "2025-12-09T11:53:36.832Z"
+}

@@ -9,7 +9,8 @@
       "rankTitle": "二級",
       "targetSize": "2寸6分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_059"
     },
     {
       "id": "82633df3-6d52-46a8-8c38-914f101bad76",
@@ -18,7 +19,8 @@
       "rankTitle": "二級",
       "targetSize": "2寸6分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_065"
     },
     {
       "id": "e0e942ed-5610-436f-8c40-50cd36847e12",
@@ -27,7 +29,8 @@
       "rankTitle": "三級",
       "targetSize": "2寸8分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_074"
     },
     {
       "id": "8e2180ff-735c-4f9b-bf12-de2d5d9791e2",
@@ -36,7 +39,8 @@
       "rankTitle": "三段",
       "targetSize": "3寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_001"
     },
     {
       "id": "57ebc225-79d3-4962-8631-d02d4f144e3c",
@@ -45,7 +49,8 @@
       "rankTitle": "四級",
       "targetSize": "3寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_076"
     },
     {
       "id": "233b1b2d-c551-42c4-bcfe-7e08d503bcf9",
@@ -54,7 +59,8 @@
       "rankTitle": "初段",
       "targetSize": "3寸4分",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_003"
     },
     {
       "id": "4d4bc4c1-9c80-406f-beb2-bd0b2670354b",
@@ -63,7 +69,8 @@
       "rankTitle": "初段",
       "targetSize": "4寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_050"
     },
     {
       "id": "2c7f0b10-bfe1-4eff-83ed-e90e6de62bf4",
@@ -72,7 +79,8 @@
       "rankTitle": "四級",
       "targetSize": "4寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_080"
     },
     {
       "id": "38526449-549f-4d1d-bd5a-a59e9cf52d1f",
@@ -81,9 +89,10 @@
       "rankTitle": "",
       "targetSize": "4寸",
       "updatedDate": "",
-      "expiryDate": ""
+      "expiryDate": "",
+      "personId": "person_089"
     }
   ],
   "publishedAt": "2025-12-09T11:37:32.457Z",
-  "updatedAt": "2025-12-09T11:37:32.457Z"
+  "updatedAt": "2025-12-11T09:34:06.785Z"
 }

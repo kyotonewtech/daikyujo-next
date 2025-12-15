@@ -1,0 +1,98 @@
+{
+  "year": 2018,
+  "month": 7,
+  "entries": [
+    {
+      "id": "ab50a5f2-c9c2-49ac-b09b-127e7c805848",
+      "rank": 1,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e9263687-d12a-440e-9c2d-c684bf3880b9",
+      "rank": 2,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c532fdf8-1347-43a0-a7dc-9969eb63cd51",
+      "rank": 3,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4bc10b46-cf00-4ba7-b9ba-9dbd6e84590f",
+      "rank": 4,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "50401c99-d5f0-4333-9fb3-63473310b087",
+      "rank": 5,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "4e7f955b-8dc6-4366-9f9b-ad5f27b87536",
+      "rank": 6,
+      "name": "上村",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "df7b408a-cf21-4bb9-9ce2-52d8ec190140",
+      "rank": 7,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a55c5654-3c3c-453d-a906-47a5efbe73af",
+      "rank": 8,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7eed17f9-8039-45b3-bfae-6a5eb6295ba3",
+      "rank": 9,
+      "name": "濱野",
+      "rankTitle": "三級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8f2a9b6c-4d3e-11ef-a1bc-0242ac120002",
+      "rank": 10,
+      "name": "澁谷",
+      "rankTitle": "五級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:50.651Z",
+  "updatedAt": "2025-12-09T11:37:50.651Z"
+}

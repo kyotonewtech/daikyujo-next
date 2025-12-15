@@ -43,3 +43,24 @@ export interface TaikaiArchiveIndex {
   archives: TaikaiArchiveMetadata[];  // Archive list
   lastUpdated: string;                // Last update datetime (ISO8601 format)
 }
+
+/**
+ * 個人の大会参加履歴エントリー
+ */
+export interface PersonTaikaiHistoryEntry {
+  year: number;                    // 開催年
+  taikaiName: string;              // 大会名
+  rank: number;                    // 順位（1-10位）
+  score1: number | "";             // 1回目スコア
+  score2: number | "";             // 2回目スコア
+  totalScore: number;              // 合計スコア
+  rankTitle: string;               // 段位
+}
+
+/**
+ * 個人の大会参加履歴
+ */
+export interface PersonTaikaiHistory {
+  name: string;                    // 参加者名
+  history: PersonTaikaiHistoryEntry[];  // 参加履歴（年度降順）
+}

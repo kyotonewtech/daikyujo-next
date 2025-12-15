@@ -1,0 +1,98 @@
+{
+  "year": 2015,
+  "month": 10,
+  "entries": [
+    {
+      "id": "6c0952a9-c93c-4f89-ad95-30b3b34ced08",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e3b26db9-3ebd-4b34-8696-343f76b6cddc",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6d7f7259-1a61-493f-b018-37676ed8908b",
+      "rank": 3,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "31a2d2b0-3474-4a2a-a806-1de7a8a236f7",
+      "rank": 4,
+      "name": "本村",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0f6e78c5-184d-47fd-b3dc-0bd56fbc975a",
+      "rank": 5,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "164e4503-8c5e-40ab-97c8-4907b71ec800",
+      "rank": 6,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b3afbc08-7c00-4dcc-955f-7a7e61c8f2b3",
+      "rank": 7,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9188d4ab-3a08-4a24-813f-ed049e671e93",
+      "rank": 8,
+      "name": "李憲正",
+      "rankTitle": "三級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f271c5d4-9071-46aa-b8d7-c67c55da93a2",
+      "rank": 9,
+      "name": "藤丸幸三",
+      "rankTitle": "三級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1841b7ae-09cb-4871-9d91-c5269f82d66a",
+      "rank": 10,
+      "name": "渡邊千穂",
+      "rankTitle": "四級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:53:36.880Z",
+  "updatedAt": "2025-12-09T11:53:36.880Z"
+}

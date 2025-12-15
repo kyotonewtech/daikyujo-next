@@ -1,0 +1,98 @@
+{
+  "year": 2015,
+  "month": 9,
+  "entries": [
+    {
+      "id": "5dd83b47-c8fd-4643-82f3-57723d30e334",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ca6fd131-6e28-4136-872c-ec15f54dd105",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d8ebd376-8015-498f-89ca-c48a680820cc",
+      "rank": 3,
+      "name": "今井",
+      "rankTitle": "四級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2871fc95-a416-4e72-af22-6091a43a1aad",
+      "rank": 4,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "e702c6c9-8f31-4571-bdc0-b3380e2c8b0d",
+      "rank": 5,
+      "name": "本村",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7b3b4966-8226-4d28-acdb-ddca678e4688",
+      "rank": 6,
+      "name": "梅本",
+      "rankTitle": "二段",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8fe19d54-cab3-4b6f-9d74-517ca53e6e09",
+      "rank": 7,
+      "name": "川本聖爾",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "fdd2caa3-18b5-4328-8658-410db34586a1",
+      "rank": 8,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a44b640b-b71e-44fa-bf51-8a2ad1dc4574",
+      "rank": 9,
+      "name": "澤本敦子",
+      "rankTitle": "五級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "dc80bcaa-4e79-45ef-b8b1-e09c00e7381f",
+      "rank": 10,
+      "name": "城戸遥",
+      "rankTitle": "五級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:53:36.866Z",
+  "updatedAt": "2025-12-09T11:53:36.866Z"
+}

@@ -1,0 +1,98 @@
+{
+  "year": 2021,
+  "month": 2,
+  "entries": [
+    {
+      "id": "9469f42c-4895-431b-98ee-ac532a4034d5",
+      "rank": 1,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "1fe9c7ee-d050-4b3f-bcd2-a5e0b64e918c",
+      "rank": 2,
+      "name": "銀太郎",
+      "rankTitle": "三級",
+      "targetSize": "1寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0b41419d-dbc4-4984-bb64-4ec5bc15ba13",
+      "rank": 3,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ea140226-201a-46f7-b2d1-e13f7f6d0a6d",
+      "rank": 4,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ec8f7cd3-2d7e-4920-b401-b04adffae923",
+      "rank": 5,
+      "name": "岩本",
+      "rankTitle": "二段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a6830bd3-cc42-4b29-891c-f50d7ccffc75",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "169f7624-f778-4211-9b91-154cc5ae2354",
+      "rank": 7,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b317de37-5d5e-45c4-8f18-f58b768abcb3",
+      "rank": 8,
+      "name": "山田ゆかり",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ed5e00ef-5c03-4a33-8131-6d9b22e40845",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "二段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3123e1d9-e5a7-49af-a09b-4618133cf90c",
+      "rank": 10,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "3寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:32.408Z",
+  "updatedAt": "2025-12-09T11:37:32.408Z"
+}

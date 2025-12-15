@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import type { SeisekiMonth, ArchiveIndex, ArchiveMetadata } from '@/types/seiseki';
+import type { SeisekiMonth, ArchiveIndex, ArchiveMetadata, PersonHistory, PersonHistoryEntry } from '@/types/seiseki';
+import { parseTargetSize } from './utils';
 
 const DATA_DIR = path.join(process.cwd(), 'data', 'seiseki');
 const INDEX_FILE = path.join(DATA_DIR, 'index.json');
@@ -219,4 +220,96 @@ export function getAvailableYears(): number[] {
   const index = getArchiveList();
   const years = [...new Set(index.archives.map(a => a.year))];
   return years.sort((a, b) => b - a); // 降順
+}
+
+/**
+ * 指定されたpersonIdの成績推移を取得
+ * 個人の最初のデータがある月から最後のデータがある月までの期間を対象
+ * データがない月はnull値として記録
+ */
+export function getPersonHistory(personId: string): PersonHistory | null {
+  console.log('[getPersonHistory] Called with personId:', personId);
+
+  const index = getArchiveList();
+  console.log('[getPersonHistory] Total archives:', index.archives.length);
+
+  let personName = '';
+  const dataPoints: Array<{ year: number; month: number; entry: SeisekiEntry }> = [];
+
+  // 1. まず全期間でデータがある月を収集
+  const sortedArchives = [...index.archives].reverse();
+  console.log('[getPersonHistory] Searching through archives...');
+
+  for (const archive of sortedArchives) {
+    const monthData = getSeisekiData(archive.year, archive.month);
+    if (!monthData) continue;
+
+    const entry = monthData.entries.find(e => e.personId === personId);
+    if (entry) {
+      personName = entry.name;
+      dataPoints.push({ year: archive.year, month: archive.month, entry });
+      console.log(`[getPersonHistory] Found data: ${archive.year}/${archive.month} - ${entry.name}`);
+    }
+  }
+
+  console.log('[getPersonHistory] Total data points found:', dataPoints.length);
+
+  if (dataPoints.length === 0) {
+    console.log('[getPersonHistory] No data found for personId:', personId);
+    return null;
+  }
+
+  // 2. 最初と最後の年月を特定
+  const firstData = dataPoints[0];
+  const lastData = dataPoints[dataPoints.length - 1];
+
+  // 3. 最初〜最後の期間の全ての月を生成
+  const history: PersonHistoryEntry[] = [];
+  let currentYear = firstData.year;
+  let currentMonth = firstData.month;
+
+  while (
+    currentYear < lastData.year ||
+    (currentYear === lastData.year && currentMonth <= lastData.month)
+  ) {
+    // その月のデータを探す
+    const found = dataPoints.find(
+      dp => dp.year === currentYear && dp.month === currentMonth
+    );
+
+    if (found) {
+      // データあり
+      history.push({
+        year: currentYear,
+        month: currentMonth,
+        rank: found.entry.rank,
+        targetSize: found.entry.targetSize,
+        targetSizeNumeric: parseTargetSize(found.entry.targetSize) ?? 0,
+        rankTitle: found.entry.rankTitle,
+      });
+    } else {
+      // データなし（null値として追加）
+      history.push({
+        year: currentYear,
+        month: currentMonth,
+        rank: null,
+        targetSize: '-',
+        targetSizeNumeric: null,
+        rankTitle: '',
+      });
+    }
+
+    // 次の月へ
+    currentMonth++;
+    if (currentMonth > 12) {
+      currentMonth = 1;
+      currentYear++;
+    }
+  }
+
+  return {
+    personId,
+    name: personName,
+    history,
+  };
 }

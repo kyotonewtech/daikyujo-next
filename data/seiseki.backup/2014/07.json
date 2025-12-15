@@ -1,0 +1,98 @@
+{
+  "year": 2014,
+  "month": 7,
+  "entries": [
+    {
+      "id": "b7fefc97-d4b6-4090-93d6-b42432df93c6",
+      "rank": 1,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "1寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9a9063d2-db9a-4a63-8274-bf27d8f9b9ee",
+      "rank": 2,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸3分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9616ed4d-5660-4082-b26e-11b214d77f9a",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "319d6e0b-451e-470b-bc91-bcfe61572a92",
+      "rank": 4,
+      "name": "松木",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "aca832a1-c94f-4e0e-992f-1e0a003f0280",
+      "rank": 5,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0b9cb2bd-e576-4e10-ba9f-a9fefc4b90b0",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "35a73b92-3d1d-4d5d-a42c-0a9c535b779d",
+      "rank": 7,
+      "name": "秋澤",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b075ccdf-cb27-4fbd-b255-375533c348f5",
+      "rank": 8,
+      "name": "田川博雅",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8f59ef9a-fce7-4329-bf94-4521828381d7",
+      "rank": 9,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b9d036f4-e7ec-4137-9eb1-08002279eba1",
+      "rank": 10,
+      "name": "川島",
+      "rankTitle": "二段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:54:42.154Z",
+  "updatedAt": "2025-12-09T11:54:42.155Z"
+}

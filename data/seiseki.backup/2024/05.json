@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 5,
+  "entries": [
+    {
+      "id": "cd5e42a2-34c5-4176-a47f-b7aa039e90ac",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸3分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ae4d7d68-5702-4765-9cd1-107ce44ee638",
+      "rank": 2,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6ba11ae6-cbfc-4574-bc3e-adc71c2a4409",
+      "rank": 3,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "9721858a-a2f6-44fd-98eb-3c65fb18a4fb",
+      "rank": 4,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "8158f420-cded-47b7-873d-2841abd206b6",
+      "rank": 5,
+      "name": "林貴史",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "436151a2-4a58-4d17-92d2-ab0035e42703",
+      "rank": 6,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "888413d9-0a3b-4dd2-b7f1-7c57d10193dd",
+      "rank": 7,
+      "name": "定延",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2038f734-fca9-432d-9f69-20a7c471a034",
+      "rank": 8,
+      "name": "中道",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "60c47b2b-378a-4ac4-822a-5c07338fed5a",
+      "rank": 9,
+      "name": "林かおり",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "c93d733f-eccc-4211-a9e2-397a6c9cf21d",
+      "rank": 10,
+      "name": "近藤和希",
+      "rankTitle": "三級",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:08:28.833Z",
+  "updatedAt": "2025-12-09T11:08:28.833Z"
+}

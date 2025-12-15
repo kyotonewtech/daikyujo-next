@@ -1,0 +1,98 @@
+{
+  "year": 2012,
+  "month": 10,
+  "entries": [
+    {
+      "id": "efcfbb93-b973-4e45-8035-cdf313b1c737",
+      "rank": 1,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸3分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "41e68d07-5a05-4bd6-b95c-e6ca458cfbc1",
+      "rank": 2,
+      "name": "髙橋",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "003a2508-21a4-4171-810b-5b742485b07d",
+      "rank": 3,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6a96c66a-4352-4753-a54a-e9cc39750e16",
+      "rank": 4,
+      "name": "七海",
+      "rankTitle": "三級",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "17bc07a5-42f4-41a7-bbb2-2e57cfa78971",
+      "rank": 5,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ab9f1a29-695b-4024-8e87-ff70a5d21258",
+      "rank": 6,
+      "name": "岩戸",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "532e0a5a-07db-405f-a249-1489c7d0af78",
+      "rank": 7,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "81e83300-416b-4f5e-bbf1-69b14f1f02b7",
+      "rank": 8,
+      "name": "庄村",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "0bfff919-9fd7-4006-b40c-4f5e5aa4ffe0",
+      "rank": 9,
+      "name": "泉",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "43fa9a3c-fdc0-4192-86b8-e91c97922de4",
+      "rank": 10,
+      "name": "木村",
+      "rankTitle": "四段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-10T06:01:19.757Z",
+  "updatedAt": "2025-12-10T06:01:19.757Z"
+}

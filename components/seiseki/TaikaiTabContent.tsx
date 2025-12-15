@@ -1,14 +1,45 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import TaikaiCard from "@/components/taikai/TaikaiCard";
-import type { TaikaiData } from "@/types/taikai";
+import TaikaiHistoryModal from "@/components/taikai/TaikaiHistoryModal";
+import type { TaikaiData, PersonTaikaiHistory } from "@/types/taikai";
 
 interface TaikaiTabContentProps {
   taikaiList: TaikaiData[];
 }
 
 export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) {
+  // モーダル状態管理
+  const [selectedPersonHistory, setSelectedPersonHistory] = useState<PersonTaikaiHistory | null>(null);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+
+  // カードクリック処理
+  const handleCardClick = async (personName: string) => {
+    setIsLoadingHistory(true);
+    try {
+      const encodedName = encodeURIComponent(personName);
+      const response = await fetch(`/api/taikai/person/${encodedName}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch person taikai history');
+      }
+
+      const personHistory: PersonTaikaiHistory = await response.json();
+      setSelectedPersonHistory(personHistory);
+    } catch (error) {
+      console.error('Error fetching person taikai history:', error);
+      alert('大会参加履歴の取得に失敗しました');
+    } finally {
+      setIsLoadingHistory(false);
+    }
+  };
+
+  // モーダルを閉じる
+  const handleCloseModal = () => {
+    setSelectedPersonHistory(null);
+  };
   if (taikaiList.length === 0) {
     return (
       <div className="text-center text-gray-500 py-12">
@@ -51,12 +82,33 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
                   key={participant.id}
                   participant={participant}
                   index={index}
+                  onClick={handleCardClick}
                 />
               ))}
             </div>
           </motion.section>
         );
       })}
+
+      {/* 大会参加履歴グラフモーダル */}
+      {selectedPersonHistory && (
+        <TaikaiHistoryModal
+          personHistory={selectedPersonHistory}
+          onClose={handleCloseModal}
+        />
+      )}
+
+      {/* ローディング表示 */}
+      {isLoadingHistory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-lg p-6 shadow-2xl">
+            <div className="flex items-center space-x-3">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+              <span className="text-lg font-bold text-gray-800">データ読み込み中...</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

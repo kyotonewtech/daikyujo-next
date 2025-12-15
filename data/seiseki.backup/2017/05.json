@@ -1,0 +1,98 @@
+{
+  "year": 2017,
+  "month": 5,
+  "entries": [
+    {
+      "id": "9894fcd3-4b02-45d8-a1cf-e7b91b96e897",
+      "rank": 1,
+      "name": "宮原亮平",
+      "rankTitle": "一級",
+      "targetSize": "6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b294799b-b674-4607-a2a1-8aaa45126204",
+      "rank": 2,
+      "name": "山田",
+      "rankTitle": "一級",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2232a1b8-ac89-4bf1-b0b8-db39dbda1755",
+      "rank": 3,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b7911445-650b-47b9-871e-f78e7ff20155",
+      "rank": 4,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "bb0e2fb5-45c4-4edc-8d4a-0832f1e210df",
+      "rank": 5,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b6b0c3c8-94d7-4db3-adcc-9a8047bf51c8",
+      "rank": 6,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "2寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "fe8c3dae-bc3c-4792-935d-488cc765d8b6",
+      "rank": 7,
+      "name": "野口",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "78c3d1dc-535f-450a-b9bd-7e9132cc10e5",
+      "rank": 8,
+      "name": "城戸",
+      "rankTitle": "三級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "59247747-a287-4282-92b1-da69deb079f3",
+      "rank": 9,
+      "name": "昇",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "33ed754b-c53c-4c8e-934a-9787f429d5c6",
+      "rank": 10,
+      "name": "中村修",
+      "rankTitle": "四級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:53.930Z",
+  "updatedAt": "2025-12-09T11:37:53.930Z"
+}

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { TaikaiData, TaikaiArchiveIndex, TaikaiArchiveMetadata } from '@/types/taikai';
+import type { TaikaiData, TaikaiArchiveIndex, TaikaiArchiveMetadata, PersonTaikaiHistory, PersonTaikaiHistoryEntry } from '@/types/taikai';
 
 const DATA_DIR = path.join(process.cwd(), 'data', 'taikai');
 const INDEX_FILE = path.join(DATA_DIR, 'index.json');
@@ -170,4 +170,47 @@ export function getLatestTaikaiData(): TaikaiData | null {
   // Get latest archive (already sorted by year descending)
   const latest = index.archives[0];
   return getTaikaiData(latest.year);
+}
+
+/**
+ * 指定された参加者名の大会参加履歴を取得
+ * すべての順位のデータを含む
+ * 大会が開催されない年は含まれない
+ */
+export function getPersonTaikaiHistory(personName: string): PersonTaikaiHistory | null {
+  const index = getTaikaiArchiveList();
+  const historyEntries: PersonTaikaiHistoryEntry[] = [];
+
+  // 全ての大会データを降順でチェック
+  for (const archive of index.archives) {
+    const taikaiData = getTaikaiData(archive.year);
+    if (!taikaiData) continue;
+
+    // 該当者を検索（全順位）
+    const participant = taikaiData.participants.find(
+      p => p.name === personName
+    );
+
+    if (participant) {
+      historyEntries.push({
+        year: archive.year,
+        taikaiName: archive.taikaiName,
+        rank: participant.rank,
+        score1: participant.score1,
+        score2: participant.score2,
+        totalScore: participant.totalScore,
+        rankTitle: participant.rankTitle,
+      });
+    }
+  }
+
+  // データが見つからない場合
+  if (historyEntries.length === 0) {
+    return null;
+  }
+
+  return {
+    name: personName,
+    history: historyEntries,  // 既に降順（index.archivesが降順のため）
+  };
 }

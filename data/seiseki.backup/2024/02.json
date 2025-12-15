@@ -1,0 +1,98 @@
+{
+  "year": 2024,
+  "month": 2,
+  "entries": [
+    {
+      "id": "bb5eb431-7334-483a-986a-984b35356f42",
+      "rank": 1,
+      "name": "佐藤",
+      "rankTitle": "二級",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "835ae7e8-1b7b-4d2f-8c58-1ce1058f353d",
+      "rank": 2,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d8831fb2-60b9-4ceb-bdca-65d011bf3aab",
+      "rank": 3,
+      "name": "世羽",
+      "rankTitle": "四級",
+      "targetSize": "2寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2db322a3-8100-43e8-bd44-a5a034235c5f",
+      "rank": 4,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7a79568e-e479-4cb4-8cc9-4acbac23ee78",
+      "rank": 5,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6ecf2c32-b208-4e51-9007-e207a97ca6c8",
+      "rank": 6,
+      "name": "竹ヶ鼻",
+      "rankTitle": "五段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ab120251-3e2b-436b-a134-2f947958487e",
+      "rank": 7,
+      "name": "吉田",
+      "rankTitle": "三級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "05b0a040-4244-4769-a214-b4fb2e2c9a51",
+      "rank": 8,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "43deb256-78c3-4972-8541-bf08a389f508",
+      "rank": 9,
+      "name": "山田ゆかり",
+      "rankTitle": "四級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f4e6a269-06ce-47ac-9399-d14eb7c2870f",
+      "rank": 10,
+      "name": "土井",
+      "rankTitle": "五級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:08:28.808Z",
+  "updatedAt": "2025-12-09T11:08:28.808Z"
+}

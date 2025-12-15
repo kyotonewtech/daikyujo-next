@@ -1,0 +1,98 @@
+{
+  "year": 2015,
+  "month": 4,
+  "entries": [
+    {
+      "id": "813470dd-d7bd-4011-8cdc-bc4cfa2428e2",
+      "rank": 1,
+      "name": "笹部",
+      "rankTitle": "二段",
+      "targetSize": "1寸1分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f91c8c91-02bf-4103-966d-50323815646c",
+      "rank": 2,
+      "name": "臼井",
+      "rankTitle": "一級",
+      "targetSize": "1寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "7633e2e8-661a-4d5d-8759-777a3a92e7e5",
+      "rank": 3,
+      "name": "岩戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "3a0c96aa-e85a-4ae2-a177-07d92ffa066d",
+      "rank": 4,
+      "name": "松葉",
+      "rankTitle": "初段",
+      "targetSize": "1寸7分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6f935594-33aa-4330-a916-49e377fbc8bf",
+      "rank": 5,
+      "name": "山田伸治",
+      "rankTitle": "三級",
+      "targetSize": "1寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "a271417f-0fa4-45fc-b133-9c1ee2ff2559",
+      "rank": 6,
+      "name": "青山",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2e5b0411-7495-4200-9575-b45494e775fa",
+      "rank": 7,
+      "name": "岩嵜",
+      "rankTitle": "初段",
+      "targetSize": "1寸9分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "ac3f4846-0702-47ec-9907-a531bd3ca376",
+      "rank": 8,
+      "name": "誠之",
+      "rankTitle": "初段",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b666a6a9-67e4-4b8d-89c2-4a66a894fb32",
+      "rank": 9,
+      "name": "川島",
+      "rankTitle": "二段",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "de5eda95-add1-4bc5-9e57-5157aeb79eba",
+      "rank": 10,
+      "name": "川森",
+      "rankTitle": "初段",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:53:36.818Z",
+  "updatedAt": "2025-12-09T11:53:36.818Z"
+}

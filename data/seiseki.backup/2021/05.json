@@ -1,0 +1,71 @@
+{
+  "year": 2021,
+  "month": 5,
+  "entries": [
+    {
+      "id": "865972e3-68aa-4133-8b6e-969035058bb6",
+      "rank": 1,
+      "name": "銀太郎",
+      "rankTitle": "二級",
+      "targetSize": "1寸5分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "6f8bc25d-ca37-40e5-ac25-fc2fe7cee70e",
+      "rank": 2,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "294f9058-7729-40b1-b20f-d12334a08097",
+      "rank": 3,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "b39daffc-e433-4db0-a749-c1291d04c167",
+      "rank": 4,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f4d7d300-a15f-4d2b-a7d0-34d2ad6b919c",
+      "rank": 5,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "3寸2分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "2ff9457b-3923-4128-8391-4a2e25609920",
+      "rank": 6,
+      "name": "伸二",
+      "rankTitle": "初段",
+      "targetSize": "3寸4分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "f671bc68-29f6-4461-95f7-b98bda595c93",
+      "rank": 7,
+      "name": "望月",
+      "rankTitle": "四級",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:32.438Z",
+  "updatedAt": "2025-12-09T11:37:32.438Z"
+}

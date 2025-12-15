@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SeisekiCard from "./SeisekiCard";
-import type { SeisekiMonth, SeisekiEntry } from "@/types/seiseki";
+import HistoryModal from "./HistoryModal";
+import type { SeisekiMonth, SeisekiEntry, PersonHistory } from "@/types/seiseki";
 
 interface SeisekiTabContentProps {
   availableYears: number[];
@@ -16,6 +17,7 @@ interface SeisekiTabContentProps {
 function createEmptyEntry(rank: number): SeisekiEntry {
   return {
     id: `empty-${rank}`,
+    personId: "",
     rank,
     name: "該当なし",
     rankTitle: "",
@@ -53,7 +55,34 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
   // デフォルトは最新年（配列は降順なので先頭）
   const [selectedYear, setSelectedYear] = useState(availableYears[0]);
 
+  // モーダル状態管理
+  const [selectedPersonHistory, setSelectedPersonHistory] = useState<PersonHistory | null>(null);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+
   const monthsData = yearDataMap.get(selectedYear) || [];
+
+  // カードクリック時の処理
+  const handleCardClick = async (personId: string) => {
+    setIsLoadingHistory(true);
+    try {
+      const response = await fetch(`/api/seiseki/person/${personId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch person history');
+      }
+      const personHistory: PersonHistory = await response.json();
+      setSelectedPersonHistory(personHistory);
+    } catch (error) {
+      console.error('Error fetching person history:', error);
+      alert('成績履歴の取得に失敗しました');
+    } finally {
+      setIsLoadingHistory(false);
+    }
+  };
+
+  // モーダルを閉じる
+  const handleCloseModal = () => {
+    setSelectedPersonHistory(null);
+  };
 
   return (
     <div>
@@ -115,6 +144,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
                         index={index}
                         isEmpty={entry.isEmpty}
                         isLatestMonth={isLatestMonth}
+                        onClick={handleCardClick}
                       />
                     ))}
                   </div>
@@ -128,6 +158,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
                         index={index}
                         isEmpty={entry.isEmpty}
                         isLatestMonth={isLatestMonth}
+                        onClick={handleCardClick}
                       />
                     ))}
                   </div>
@@ -135,6 +166,26 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
               </motion.section>
             );
           })}
+        </div>
+      )}
+
+      {/* 成績推移グラフモーダル */}
+      {selectedPersonHistory && (
+        <HistoryModal
+          personHistory={selectedPersonHistory}
+          onClose={handleCloseModal}
+        />
+      )}
+
+      {/* ローディング表示 */}
+      {isLoadingHistory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-lg p-6 shadow-2xl">
+            <div className="flex items-center space-x-3">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+              <span className="text-lg font-bold text-gray-800">データ読み込み中...</span>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -1,0 +1,62 @@
+{
+  "year": 2021,
+  "month": 6,
+  "entries": [
+    {
+      "id": "e2425c68-bd09-4973-8cbd-a244641879f5",
+      "rank": 1,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "142a5a6d-05f9-4615-81fb-a6b4f71332ef",
+      "rank": 2,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸6分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "352b1b41-4076-452a-889e-6093afe1cea0",
+      "rank": 3,
+      "name": "中村",
+      "rankTitle": "三級",
+      "targetSize": "2寸8分",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "194557bf-c7e1-4bcc-9e0f-326197a2f860",
+      "rank": 4,
+      "name": "片井",
+      "rankTitle": "四級",
+      "targetSize": "3寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "d4a1ba4d-7993-4bb0-b739-7709e163106b",
+      "rank": 5,
+      "name": "望月",
+      "rankTitle": "四級",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    },
+    {
+      "id": "da657461-87c7-4690-bf8d-e75d7daa4408",
+      "rank": 6,
+      "name": "城戸快成",
+      "rankTitle": "",
+      "targetSize": "4寸",
+      "updatedDate": "",
+      "expiryDate": ""
+    }
+  ],
+  "publishedAt": "2025-12-09T11:37:32.448Z",
+  "updatedAt": "2025-12-09T11:37:32.448Z"
+}
