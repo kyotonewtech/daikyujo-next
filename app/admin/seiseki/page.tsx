@@ -73,6 +73,7 @@ export default function AdminSeisekiPage() {
       targetSize: "",
       updatedDate: "",
       expiryDate: "",
+      personId: "",
     };
 
     setEntries([...entries, newEntry]);
