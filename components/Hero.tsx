@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const HERO_IMAGES = ['/hero-image.png', '/hero2.jpg'] as const;
+const HERO_IMAGES = ['/hero-image.jpg', '/hero2.jpg'] as const;
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
