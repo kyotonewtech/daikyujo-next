@@ -70,7 +70,7 @@ export default function Experience() {
                   {item.desc}
                 </p>
                 <a
-                  href={index === 0 ? "/beginners" : "#access"}
+                  href={index === 0 ? "/beginners" : index === 2 ? "https://www.the-true-works.com/location-data/enzan-daikyujo" : "#access"}
                   className="inline-flex items-center text-sm font-medium border-b border-accent pb-1 hover:text-accent transition-colors group/link"
                 >
                   {item.linkText}
