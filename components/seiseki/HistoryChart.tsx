@@ -173,6 +173,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
           inverse: true, // 反転（小さい値が上）
           axisLabel: {
             fontSize: 11,
+            formatter: (value: number) => `${value.toFixed(1)}寸`,
           },
           splitLine: {
             show: false,
