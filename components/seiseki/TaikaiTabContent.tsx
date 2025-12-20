@@ -61,22 +61,17 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
           >
             {/* 大会情報ヘッダー */}
             <div className="mb-8 border-l-4 border-accent pl-4">
-              <h2 className="text-3xl font-bold text-accent mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-accent mb-2">
                 {taikai.taikaiName}
               </h2>
-              <div className="flex gap-4 text-sm text-gray-600">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm text-gray-600">
                 <span>開催: {taikai.eventDate}</span>
                 <span>参加者: {taikai.participants.length}名</span>
               </div>
             </div>
 
             {/* 参加者カードグリッド */}
-            <div
-              className="grid grid-cols-2 grid-flow-col gap-4"
-              style={{
-                gridTemplateRows: `repeat(${Math.ceil(taikai.participants.length / 2)}, minmax(0, 1fr))`
-              }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {taikai.participants.map((participant, index) => (
                 <TaikaiCard
                   key={participant.id}

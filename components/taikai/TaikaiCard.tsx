@@ -66,19 +66,21 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
       role={isClickable ? "button" : undefined}
       tabIndex={isClickable ? 0 : undefined}
     >
-      <div className="flex items-center gap-6">
-        {/* 順位 */}
-        <span className={`${rankColor} font-bold text-xl flex-shrink-0`}>
-          {participant.rank}位
-        </span>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
+          {/* 順位 */}
+          <span className={`${rankColor} font-bold text-xl flex-shrink-0`}>
+            {participant.rank}位
+          </span>
 
-        {/* 名前+段位 */}
-        <span className="font-shippori text-lg text-gray-800 flex-shrink-0">
-          {participant.name}{participant.rankTitle}
-        </span>
+          {/* 名前+段位 */}
+          <span className="font-shippori text-lg text-gray-800 flex-shrink-0">
+            {participant.name}{participant.rankTitle}
+          </span>
+        </div>
 
         {/* スコア */}
-        <span className="text-lg text-gray-700">
+        <span className="text-base sm:text-lg text-gray-700 ml-8 sm:ml-0">
           {participant.score1}+{participant.score2}={" "}
           <span className={`font-bold text-xl ${rankColor}`}>
             {participant.totalScore}
