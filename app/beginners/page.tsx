@@ -301,7 +301,7 @@ function HistoryContent() {
                 交通アクセス
               </h3>
               <ul className="text-gray-700 space-y-2 ml-7">
-                <li>京阪線「祇園四条」駅より 徒歩8分</li>
+                <li>京阪本線「祇園四条駅」より徒歩約15分</li>
                 <li>阪急「河原町」駅より 徒歩12分</li>
               </ul>
             </div>
