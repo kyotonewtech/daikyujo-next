@@ -11,7 +11,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { PersonHistory } from '@/types/seiseki';
 
 interface HistoryChartProps {
@@ -72,9 +71,10 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
 
 export default function HistoryChart({ personHistory }: HistoryChartProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('all');
-  const [yearOffset, setYearOffset] = useState(0); // 0=直近1年, 1=1年前, etc.
+  const [monthOffset, setMonthOffset] = useState(0); // 0=直近12ヶ月, 1=1ヶ月前から12ヶ月, etc.
   const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
+  const dragStartOffset = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
 
   // グラフ用にデータを整形 - Updated
   const allChartData = personHistory.history.map(h => ({
@@ -90,10 +90,10 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
       return allChartData;
     }
 
-    // 1年表示: 直近から yearOffset * 12 ヶ月前から12ヶ月分を取得
-    const startIndex = yearOffset * 12;
-    const endIndex = startIndex + 12;
-    return allChartData.slice(-endIndex, -startIndex || undefined);
+    // 1年表示: 月単位でオフセット（0=直近12ヶ月）
+    const endIndex = allChartData.length - monthOffset;
+    const startIndex = Math.max(0, endIndex - 12);
+    return allChartData.slice(startIndex, endIndex);
   };
 
   const chartData = getFilteredData();
@@ -106,56 +106,53 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
     0  // デフォルト値として0を設定
   );
 
-  // 最大オフセット数を計算（データの期間数 / 12ヶ月）
-  const maxYearOffset = Math.max(0, Math.floor(allChartData.length / 12) - 1);
+  // 最大オフセット数を計算（月単位）
+  const maxMonthOffset = Math.max(0, allChartData.length - 12);
 
-  // スワイプハンドラー
+  // 表示期間のラベルを取得
+  const getPeriodLabel = () => {
+    if (viewMode === 'all' || chartData.length === 0) return '';
+    const startPeriod = chartData[0].period;
+    const endPeriod = chartData[chartData.length - 1].period;
+    return `${startPeriod} 〜 ${endPeriod}`;
+  };
+
+  // リアルタイムスワイプハンドラー
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (viewMode !== 'year') return;
     touchStartX.current = e.touches[0].clientX;
+    dragStartOffset.current = monthOffset;
+    isDragging.current = true;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
+    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null) return;
+
+    const currentX = e.touches[0].clientX;
+    const diff = touchStartX.current - currentX;
+
+    // スワイプ距離を月数に変換（100pxで約1ヶ月）
+    const monthDiff = Math.round(diff / 100);
+    const newOffset = Math.max(0, Math.min(maxMonthOffset, dragStartOffset.current + monthDiff));
+
+    setMonthOffset(newOffset);
   };
 
   const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-
-    const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50; // 最小スワイプ距離
-
-    if (viewMode === 'year') {
-      if (diff > threshold && yearOffset < maxYearOffset) {
-        // 左スワイプ: 過去へ
-        setYearOffset(prev => prev + 1);
-      } else if (diff < -threshold && yearOffset > 0) {
-        // 右スワイプ: 未来へ
-        setYearOffset(prev => prev - 1);
-      }
-    }
-
+    isDragging.current = false;
     touchStartX.current = null;
-    touchEndX.current = null;
   };
 
-  // 期間切り替えハンドラー
-  const handlePrevYear = () => {
-    if (yearOffset < maxYearOffset) {
-      setYearOffset(prev => prev + 1);
-    }
-  };
-
-  const handleNextYear = () => {
-    if (yearOffset > 0) {
-      setYearOffset(prev => prev - 1);
-    }
+  // スライダー変更ハンドラー
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMonthOffset(Number(e.target.value));
   };
 
   // 表示モード変更時にオフセットをリセット
   const handleViewModeChange = (mode: ViewMode) => {
     setViewMode(mode);
     if (mode === 'year') {
-      setYearOffset(0);
+      setMonthOffset(0);
     }
   };
 
@@ -187,36 +184,42 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         </div>
       </div>
 
-      {/* 1年表示時のナビゲーション */}
+      {/* 1年表示時のスライダーと期間表示 */}
       {viewMode === 'year' && (
-        <div className="flex justify-center items-center gap-4">
-          <button
-            onClick={handlePrevYear}
-            disabled={yearOffset >= maxYearOffset}
-            className={`p-2 rounded-full transition-all ${
-              yearOffset >= maxYearOffset
-                ? 'text-gray-300 cursor-not-allowed'
-                : 'text-accent hover:bg-accent/10'
-            }`}
-            aria-label="前の1年"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <span className="text-sm text-gray-600 min-w-[120px] text-center">
-            {yearOffset === 0 ? '直近1年' : `${yearOffset}年前`}
-          </span>
-          <button
-            onClick={handleNextYear}
-            disabled={yearOffset <= 0}
-            className={`p-2 rounded-full transition-all ${
-              yearOffset <= 0
-                ? 'text-gray-300 cursor-not-allowed'
-                : 'text-accent hover:bg-accent/10'
-            }`}
-            aria-label="次の1年"
-          >
-            <ChevronRight size={24} />
-          </button>
+        <div className="space-y-3 px-4">
+          {/* 期間ラベル */}
+          <div className="text-center text-sm text-gray-700 font-medium">
+            {getPeriodLabel()}
+          </div>
+
+          {/* スライダー */}
+          <div className="relative">
+            <input
+              type="range"
+              min="0"
+              max={maxMonthOffset}
+              value={monthOffset}
+              onChange={handleSliderChange}
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent
+                [&::-webkit-slider-thumb]:appearance-none
+                [&::-webkit-slider-thumb]:w-4
+                [&::-webkit-slider-thumb]:h-4
+                [&::-webkit-slider-thumb]:rounded-full
+                [&::-webkit-slider-thumb]:bg-accent
+                [&::-webkit-slider-thumb]:cursor-pointer
+                [&::-moz-range-thumb]:w-4
+                [&::-moz-range-thumb]:h-4
+                [&::-moz-range-thumb]:rounded-full
+                [&::-moz-range-thumb]:bg-accent
+                [&::-moz-range-thumb]:border-0
+                [&::-moz-range-thumb]:cursor-pointer"
+            />
+            {/* スライダーのラベル */}
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>直近</span>
+              <span>過去</span>
+            </div>
+          </div>
         </div>
       )}
 
