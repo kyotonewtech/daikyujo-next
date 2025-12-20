@@ -104,7 +104,10 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
             if (param.seriesName === '順位') {
               result += `${param.marker} 順位: ${param.value}位<br/>`;
             } else if (param.seriesName === '的の大きさ') {
-              result += `${param.marker} 的の大きさ: ${param.value ?? 'データなし'}<br/>`;
+              const value = param.value !== null && param.value !== undefined
+                ? Number(param.value).toFixed(1)
+                : 'データなし';
+              result += `${param.marker} 的の大きさ: ${value}<br/>`;
             }
           });
 
