@@ -129,7 +129,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
     if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null) return;
 
     const currentX = e.touches[0].clientX;
-    const diff = touchStartX.current - currentX;
+    const diff = currentX - touchStartX.current;
 
     // スワイプ距離を月数に変換（100pxで約1ヶ月）
     const monthDiff = Math.round(diff / 100);

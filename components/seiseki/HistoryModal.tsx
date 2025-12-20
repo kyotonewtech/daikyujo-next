@@ -38,7 +38,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
         {/* ヘッダー */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-800">
-            {personHistory.name} の成績推移
+            {personHistory.name}{personHistory.history[personHistory.history.length - 1]?.rankTitle || ''} の成績推移
           </h2>
           <button
             onClick={onClose}
