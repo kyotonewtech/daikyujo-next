@@ -278,7 +278,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
               />
             )}
             tick={{ fontSize: 11 }}
-            tickFormatter={(value) => Number(value).toFixed(1)}
+            tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
           />
 
           <Tooltip
