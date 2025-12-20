@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef } from 'react';
 import {
   ComposedChart,
   Line,
@@ -10,11 +11,14 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { PersonHistory } from '@/types/seiseki';
 
 interface HistoryChartProps {
   personHistory: PersonHistory;
 }
+
+type ViewMode = 'all' | 'year';
 
 // 縦書きラベルコンポーネント
 interface VerticalLabelProps {
@@ -67,13 +71,32 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
 };
 
 export default function HistoryChart({ personHistory }: HistoryChartProps) {
+  const [viewMode, setViewMode] = useState<ViewMode>('all');
+  const [yearOffset, setYearOffset] = useState(0); // 0=直近1年, 1=1年前, etc.
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
   // グラフ用にデータを整形 - Updated
-  const chartData = personHistory.history.map(h => ({
+  const allChartData = personHistory.history.map(h => ({
     period: `${h.year}/${String(h.month).padStart(2, '0')}`,
     rank: h.rank,
     targetSize: h.targetSizeNumeric,
     rankTitle: h.rankTitle,
   }));
+
+  // 1年表示時のデータフィルタリング
+  const getFilteredData = () => {
+    if (viewMode === 'all') {
+      return allChartData;
+    }
+
+    // 1年表示: 直近から yearOffset * 12 ヶ月前から12ヶ月分を取得
+    const startIndex = yearOffset * 12;
+    const endIndex = startIndex + 12;
+    return allChartData.slice(-endIndex, -startIndex || undefined);
+  };
+
+  const chartData = getFilteredData();
 
   // 的のサイズの最大値を計算（null値を除外）
   const maxTargetSize = Math.max(
@@ -83,13 +106,132 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
     0  // デフォルト値として0を設定
   );
 
+  // 最大オフセット数を計算（データの期間数 / 12ヶ月）
+  const maxYearOffset = Math.max(0, Math.floor(allChartData.length / 12) - 1);
+
+  // スワイプハンドラー
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50; // 最小スワイプ距離
+
+    if (viewMode === 'year') {
+      if (diff > threshold && yearOffset < maxYearOffset) {
+        // 左スワイプ: 過去へ
+        setYearOffset(prev => prev + 1);
+      } else if (diff < -threshold && yearOffset > 0) {
+        // 右スワイプ: 未来へ
+        setYearOffset(prev => prev - 1);
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  // 期間切り替えハンドラー
+  const handlePrevYear = () => {
+    if (yearOffset < maxYearOffset) {
+      setYearOffset(prev => prev + 1);
+    }
+  };
+
+  const handleNextYear = () => {
+    if (yearOffset > 0) {
+      setYearOffset(prev => prev - 1);
+    }
+  };
+
+  // 表示モード変更時にオフセットをリセット
+  const handleViewModeChange = (mode: ViewMode) => {
+    setViewMode(mode);
+    if (mode === 'year') {
+      setYearOffset(0);
+    }
+  };
+
   return (
-    <div className="w-full h-[500px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <ComposedChart
-          data={chartData}
-          margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
-        >
+    <div className="w-full space-y-4">
+      {/* 期間選択トグルボタン */}
+      <div className="flex justify-center items-center gap-4">
+        <div className="inline-flex bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => handleViewModeChange('all')}
+            className={`px-6 py-2 rounded-md font-medium transition-all ${
+              viewMode === 'all'
+                ? 'bg-white text-accent shadow-sm'
+                : 'text-gray-600 hover:text-gray-800'
+            }`}
+          >
+            全期間
+          </button>
+          <button
+            onClick={() => handleViewModeChange('year')}
+            className={`px-6 py-2 rounded-md font-medium transition-all ${
+              viewMode === 'year'
+                ? 'bg-white text-accent shadow-sm'
+                : 'text-gray-600 hover:text-gray-800'
+            }`}
+          >
+            1年
+          </button>
+        </div>
+      </div>
+
+      {/* 1年表示時のナビゲーション */}
+      {viewMode === 'year' && (
+        <div className="flex justify-center items-center gap-4">
+          <button
+            onClick={handlePrevYear}
+            disabled={yearOffset >= maxYearOffset}
+            className={`p-2 rounded-full transition-all ${
+              yearOffset >= maxYearOffset
+                ? 'text-gray-300 cursor-not-allowed'
+                : 'text-accent hover:bg-accent/10'
+            }`}
+            aria-label="前の1年"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <span className="text-sm text-gray-600 min-w-[120px] text-center">
+            {yearOffset === 0 ? '直近1年' : `${yearOffset}年前`}
+          </span>
+          <button
+            onClick={handleNextYear}
+            disabled={yearOffset <= 0}
+            className={`p-2 rounded-full transition-all ${
+              yearOffset <= 0
+                ? 'text-gray-300 cursor-not-allowed'
+                : 'text-accent hover:bg-accent/10'
+            }`}
+            aria-label="次の1年"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+      )}
+
+      {/* グラフ（スワイプ対応） */}
+      <div
+        className="w-full h-[500px]"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <ComposedChart
+            data={chartData}
+            margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
+          >
           <CartesianGrid strokeDasharray="3 3" />
 
           {/* X軸: 年月 */}
@@ -185,6 +327,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
           />
         </ComposedChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }
