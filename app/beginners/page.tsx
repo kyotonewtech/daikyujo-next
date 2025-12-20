@@ -302,7 +302,7 @@ function HistoryContent() {
               </h3>
               <ul className="text-gray-700 space-y-2 ml-7">
                 <li>京阪本線「祇園四条駅」より徒歩約15分</li>
-                <li>阪急「河原町」駅より 徒歩12分</li>
+                <li>阪急「河原町」駅より徒歩約20分</li>
               </ul>
             </div>
             <div>
