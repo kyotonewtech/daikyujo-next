@@ -278,6 +278,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
               />
             )}
             tick={{ fontSize: 11 }}
+            tickFormatter={(value) => Number(value).toFixed(1)}
           />
 
           <Tooltip
@@ -291,7 +292,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
                 return [`${numValue}位`, '順位'];
               }
               if (name === 'targetSize') {
-                return [numValue, '的の大きさ'];
+                return [numValue.toFixed(1), '的の大きさ'];
               }
               return [numValue, name];
             }}
