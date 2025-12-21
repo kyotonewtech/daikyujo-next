@@ -64,21 +64,21 @@ export default function SeisekiCard({ entry, index, isEmpty = false, className, 
       {/* 最新月の場合は2行表示 */}
       {!isEmpty && isLatestMonth ? (
         <div className="flex flex-col gap-2">
-          {/* 1行目: 順位・名前・級・的のサイズ */}
+          {/* 1行目: 順位・的のサイズ・名前・級 */}
           <div className="flex items-center gap-6">
             {/* 順位 */}
             <span className={`font-bold text-xl ${getRankColor(entry.rank)}`}>
               {entry.rank}位
             </span>
 
-            {/* 名前+段位 */}
-            <span className="font-shippori text-lg text-gray-800">
-              {entry.name}{entry.rankTitle}
-            </span>
-
             {/* 的の大きさ */}
             <span className="text-xl font-bold text-accent">
               {entry.targetSize}
+            </span>
+
+            {/* 名前+段位 */}
+            <span className="font-shippori text-lg text-gray-800">
+              {entry.name}{entry.rankTitle}
             </span>
           </div>
 
@@ -103,14 +103,14 @@ export default function SeisekiCard({ entry, index, isEmpty = false, className, 
             {entry.rank}位
           </span>
 
-          {/* 名前+段位 */}
-          <span className={`font-shippori text-lg ${isEmpty ? 'text-gray-400' : 'text-gray-800'}`}>
-            {entry.name}{entry.rankTitle}
-          </span>
-
           {/* 的の大きさ */}
           <span className={`text-xl font-bold ${isEmpty ? 'text-gray-400' : 'text-accent'}`}>
             {entry.targetSize}
+          </span>
+
+          {/* 名前+段位 */}
+          <span className={`font-shippori text-lg ${isEmpty ? 'text-gray-400' : 'text-gray-800'}`}>
+            {entry.name}{entry.rankTitle}
           </span>
         </div>
       )}
