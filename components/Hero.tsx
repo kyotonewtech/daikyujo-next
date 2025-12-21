@@ -43,26 +43,41 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-        <div className="flex flex-row items-center justify-center h-[70vh] sm:h-[65vh] md:h-[60vh] max-h-[800px]">
-          <motion.div
-            initial={isMounted ? { opacity: 0, y: 20 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="writing-vertical text-upright tracking-[0.4em] flex flex-col items-center h-full border-r-2 border-white/30 pr-8 mr-8 md:mr-12"
-          >
-            <h1 className="font-shippori hero-main-text drop-shadow-lg whitespace-nowrap leading-relaxed">
-              日本の心を引く。
-            </h1>
-          </motion.div>
+        <div className="flex flex-col items-center justify-center h-[70vh] sm:h-[65vh] md:h-[60vh] max-h-[800px]">
+          {/* 縦書きレイアウト: 創業百六十余年 / 園山大弓場 / 日本の心を引く。 */}
+          <div className="writing-vertical text-upright flex flex-col items-start">
+            {/* 創業百六十余年 */}
+            <motion.div
+              initial={isMounted ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="font-serif hero-subtitle-text tracking-widest drop-shadow-md mb-4"
+            >
+              <p>創業百六十余年</p>
+            </motion.div>
 
-          <motion.div
-            initial={isMounted ? { opacity: 0 } : false}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="font-serif hero-subtitle-text tracking-widest drop-shadow-md writing-vertical text-upright h-auto max-h-[40vh] flex items-center"
-          >
-            <p>創業百六十余年 園山大弓場</p>
-          </motion.div>
+            {/* 園山大弓場 (メインテキスト) */}
+            <motion.div
+              initial={isMounted ? { opacity: 0, y: 20 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1 }}
+              className="font-shippori hero-main-text drop-shadow-lg ml-8 mb-4"
+            >
+              <h1 className="tracking-[0.4em] whitespace-nowrap leading-relaxed">
+                園山大弓場
+              </h1>
+            </motion.div>
+
+            {/* 日本の心を引く。 */}
+            <motion.div
+              initial={isMounted ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="font-serif hero-subtitle-text tracking-widest drop-shadow-md ml-16"
+            >
+              <p>日本の心を引く。</p>
+            </motion.div>
+          </div>
         </div>
       </div>
 
