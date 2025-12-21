@@ -344,14 +344,15 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
 
       {/* パン可能なグラフ（Y軸固定） */}
       <div
-        className="w-full select-none h-[60vh] min-h-[400px] max-h-[600px]"
-        style={{ position: 'relative' }}
+        className="w-full select-none"
+        style={{ position: 'relative', height: 'clamp(400px, 60vh, 600px)' }}
       >
         <div
-          className="cursor-grab active:cursor-grabbing h-full"
+          className="cursor-grab active:cursor-grabbing"
           style={{
+            height: 'clamp(400px, 60vh, 600px)',
             overflowX: 'hidden',
-            overflowY: 'visible',
+            overflowY: 'hidden',
             position: 'relative',
             paddingLeft: 60,
             paddingRight: 80,
