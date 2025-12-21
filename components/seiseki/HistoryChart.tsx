@@ -370,11 +370,10 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
           >
             <div
               style={{
-                transform: `translateX(${panOffset}px)`,
+                transform: `translateX(${panOffset + 60}px)`,
                 transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
                 width: totalWidth,
                 willChange: 'transform',
-                marginLeft: -60,
               }}
             >
           <ComposedChart
