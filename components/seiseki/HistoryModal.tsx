@@ -10,6 +10,19 @@ interface HistoryModalProps {
 }
 
 export default function HistoryModal({ personHistory, onClose }: HistoryModalProps) {
+  // モーダル表示中は背景のスクロールを無効化
+  useEffect(() => {
+    // 現在のoverflow値を保存
+    const originalOverflow = document.body.style.overflow;
+    // スクロールを無効化
+    document.body.style.overflow = 'hidden';
+
+    // クリーンアップ: モーダルが閉じたら元に戻す
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   // ESCキーで閉じる
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -33,8 +46,9 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
       onClick={handleBackgroundClick}
+      style={{ touchAction: 'none' }}
     >
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-white rounded-lg shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col" style={{ touchAction: 'auto' }}>
         {/* ヘッダー */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="text-2xl font-bold text-gray-800">
