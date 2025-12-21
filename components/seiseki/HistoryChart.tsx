@@ -342,16 +342,22 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         {getPeriodLabel()}
       </div>
 
-      {/* パン可能なグラフ（Y軸固定、データ部のみパン） */}
-      <div className="w-full" style={{ position: 'relative' }}>
+      {/* パン可能なグラフ（Y軸固定） */}
+      <div
+        className="w-full select-none"
+        style={{ position: 'relative', height: 500 }}
+      >
         <div
-          className="select-none cursor-grab active:cursor-grabbing"
+          className="cursor-grab active:cursor-grabbing"
           style={{
             height: 500,
-            marginLeft: 60,
-            marginRight: 80,
-            overflow: 'hidden',
+            overflowX: 'hidden',
+            overflowY: 'visible',
             position: 'relative',
+            paddingLeft: 60,
+            paddingRight: 80,
+            marginLeft: -60,
+            marginRight: -80,
           }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -363,10 +369,10 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         >
           <div
             style={{
-              transform: `translateX(${panOffset + 60}px)`,
+              transform: `translateX(${panOffset}px)`,
               transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
               width: totalWidth,
-              marginLeft: -60,
+              willChange: 'transform',
             }}
           >
           <ComposedChart
