@@ -345,36 +345,38 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
       {/* パン可能なグラフ（Y軸固定） */}
       <div
         className="w-full select-none"
-        style={{ position: 'relative', height: 'clamp(400px, 60vh, 600px)' }}
+        style={{
+          position: 'relative',
+          height: 'clamp(400px, 60vh, 600px)',
+        }}
       >
-        <div
-          className="cursor-grab active:cursor-grabbing"
-          style={{
-            height: 'clamp(400px, 60vh, 600px)',
-            overflowX: 'hidden',
-            overflowY: 'hidden',
-            position: 'relative',
-            paddingLeft: 60,
-            paddingRight: 80,
-            marginLeft: -60,
-            marginRight: -80,
-          }}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
+        {/* Y軸を常に表示するため、overflowはdata領域のみに適用 */}
+        <div style={{ position: 'relative', height: '100%', paddingLeft: 60, paddingRight: 80 }}>
           <div
+            className="cursor-grab active:cursor-grabbing"
             style={{
-              transform: `translateX(${panOffset}px)`,
-              transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
-              width: totalWidth,
-              willChange: 'transform',
+              height: '100%',
+              overflowX: 'hidden',
+              overflowY: 'hidden',
+              position: 'relative',
             }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
           >
+            <div
+              style={{
+                transform: `translateX(${panOffset}px)`,
+                transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
+                width: totalWidth,
+                willChange: 'transform',
+                marginLeft: -60,
+              }}
+            >
           <ComposedChart
             data={allChartData}
             width={totalWidth}
@@ -475,6 +477,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
             />
           </ComposedChart>
           </div>
+        </div>
         </div>
       </div>
 
