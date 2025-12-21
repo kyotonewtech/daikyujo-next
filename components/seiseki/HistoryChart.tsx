@@ -73,8 +73,10 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('all');
   const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
+  const isHorizontalSwipe = useRef<boolean>(false);
 
   // 定数: 1ヶ月あたりの幅（レスポンシブ対応）
   const MONTH_WIDTH_MOBILE = 80;
@@ -123,24 +125,38 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
   const handleTouchStart = (e: React.TouchEvent) => {
     if (viewMode !== 'year') return;
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
     dragStartOffset.current = panOffset;
     isDragging.current = true;
+    isHorizontalSwipe.current = false;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null) return;
+    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null || touchStartY.current === null) return;
 
     const currentX = e.touches[0].clientX;
-    const diff = currentX - touchStartX.current;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
 
-    // panOffsetを更新（自由な位置で止まる）
-    const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
-    setPanOffset(newOffset);
+    // 初回の移動で横スワイプか縦スワイプか判定
+    if (!isHorizontalSwipe.current && (Math.abs(diffX) > 5 || Math.abs(diffY) > 5)) {
+      isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
+    }
+
+    // 横スワイプの場合のみパン
+    if (isHorizontalSwipe.current) {
+      e.preventDefault(); // 横スワイプ時のみスクロール防止
+      const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diffX));
+      setPanOffset(newOffset);
+    }
   };
 
   const handleTouchEnd = () => {
     isDragging.current = false;
     touchStartX.current = null;
+    touchStartY.current = null;
+    isHorizontalSwipe.current = false;
   };
 
   // マウスドラッグ対応
