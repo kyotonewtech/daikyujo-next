@@ -213,7 +213,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         </div>
 
         {/* 全期間グラフ（ResponsiveContainer使用） */}
-        <div className="w-full h-[500px]">
+        <div className="w-full h-[60vh] min-h-[400px] max-h-[600px]">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={allChartData}
@@ -344,13 +344,12 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
 
       {/* パン可能なグラフ（Y軸固定） */}
       <div
-        className="w-full select-none"
-        style={{ position: 'relative', height: 500 }}
+        className="w-full select-none h-[60vh] min-h-[400px] max-h-[600px]"
+        style={{ position: 'relative' }}
       >
         <div
-          className="cursor-grab active:cursor-grabbing"
+          className="cursor-grab active:cursor-grabbing h-full"
           style={{
-            height: 500,
             overflowX: 'hidden',
             overflowY: 'visible',
             position: 'relative',
