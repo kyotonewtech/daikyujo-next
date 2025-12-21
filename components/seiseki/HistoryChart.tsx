@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from 'recharts';
 import type { PersonHistory } from '@/types/seiseki';
 
@@ -195,14 +196,13 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
           </div>
         </div>
 
-        {/* 全期間グラフ（従来通りResponsiveContainer） */}
-        <div className="w-full" style={{ height: 500 }}>
-          <ComposedChart
-            data={allChartData}
-            width={800}
-            height={500}
-            margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
-          >
+        {/* 全期間グラフ（ResponsiveContainer使用） */}
+        <div className="w-full h-[500px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={allChartData}
+              margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
+            >
             <CartesianGrid strokeDasharray="3 3" />
 
             <XAxis
@@ -294,6 +294,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
               name="targetSize"
             />
           </ComposedChart>
+          </ResponsiveContainer>
         </div>
       </div>
     );
