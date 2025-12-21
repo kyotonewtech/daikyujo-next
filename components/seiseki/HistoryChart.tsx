@@ -169,7 +169,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
   const handleViewModeChange = (mode: ViewMode) => {
     setViewMode(mode);
     if (mode === 'year') {
-      setPanOffset(0);
+      setPanOffset(maxPanOffset); // 直近12ヶ月を表示
     }
   };
 
