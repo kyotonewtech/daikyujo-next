@@ -348,17 +348,25 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         style={{
           position: 'relative',
           height: 'clamp(400px, 60vh, 600px)',
+          paddingLeft: 60,
+          paddingRight: 80,
         }}
       >
-        {/* Y軸を常に表示するため、overflowはdata領域のみに適用 */}
-        <div style={{ position: 'relative', height: '100%', paddingLeft: 60, paddingRight: 80 }}>
+        {/* データ部分のみoverflowでクリップ */}
+        <div
+          style={{
+            position: 'absolute',
+            left: 60,
+            right: 80,
+            top: 0,
+            bottom: 0,
+            overflow: 'hidden',
+          }}
+        >
           <div
             className="cursor-grab active:cursor-grabbing"
             style={{
               height: '100%',
-              overflowX: 'hidden',
-              overflowY: 'hidden',
-              position: 'relative',
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -370,7 +378,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
           >
             <div
               style={{
-                transform: `translateX(${panOffset + 60}px)`,
+                transform: `translateX(${panOffset}px)`,
                 transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
                 width: totalWidth,
                 willChange: 'transform',
