@@ -342,29 +342,33 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         {getPeriodLabel()}
       </div>
 
-      {/* パン可能なグラフ（overflow: hidden + transform） */}
-      <div
-        className="w-full select-none cursor-grab active:cursor-grabbing"
-        style={{
-          height: 500,
-          overflow: 'hidden',
-          position: 'relative',
-        }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
+      {/* パン可能なグラフ（Y軸固定、データ部のみパン） */}
+      <div className="w-full" style={{ position: 'relative' }}>
         <div
+          className="select-none cursor-grab active:cursor-grabbing"
           style={{
-            transform: `translateX(${panOffset}px)`,
-            transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
-            width: totalWidth,
+            height: 500,
+            marginLeft: 60,
+            marginRight: 80,
+            overflow: 'hidden',
+            position: 'relative',
           }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
+          <div
+            style={{
+              transform: `translateX(${panOffset + 60}px)`,
+              transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
+              width: totalWidth,
+              marginLeft: -60,
+            }}
+          >
           <ComposedChart
             data={allChartData}
             width={totalWidth}
@@ -464,6 +468,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
               isAnimationActive={false}
             />
           </ComposedChart>
+          </div>
         </div>
       </div>
 
