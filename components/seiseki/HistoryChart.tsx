@@ -238,7 +238,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
 
   // 実際の表示領域幅を取得してmaxPanOffsetを計算
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (viewMode !== 'year') {
+      setMaxPanOffset(0);
+      return;
+    }
 
     const updateMaxPanOffset = () => {
       if (containerRef.current) {
@@ -248,15 +251,22 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       }
     };
 
-    updateMaxPanOffset();
+    // DOMが完全にレンダリングされた後に実行
+    const timer = setTimeout(updateMaxPanOffset, 0);
     window.addEventListener('resize', updateMaxPanOffset);
-    return () => window.removeEventListener('resize', updateMaxPanOffset);
-  }, [totalWidth]);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateMaxPanOffset);
+    };
+  }, [totalWidth, viewMode, chartMargin]);
 
   // 表示モード変更時にオフセットをリセット
   useEffect(() => {
-    if (viewMode === 'year' && maxPanOffset !== 0) {
+    if (viewMode === 'year' && maxPanOffset < 0) {
       setPanOffset(maxPanOffset); // 直近データを表示
+    } else if (viewMode === 'all') {
+      setPanOffset(0);
     }
   }, [viewMode, maxPanOffset]);
 
