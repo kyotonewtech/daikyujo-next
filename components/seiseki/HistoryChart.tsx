@@ -422,9 +422,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
           >
             <svg width="100%" height={chartHeight}>
               {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
-              <g transform={`translate(0, ${chartMargin.top})`}>
+              <g transform={`translate(0, 0)`}>
                 {Array.from({ length: 11 }, (_, i) => i + 1).map((value) => {
-                  const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
+                  const chartAreaHeight = chartHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
                   const y = ((value - 1) / 10) * chartAreaHeight;
                   return (
@@ -446,16 +446,16 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   x1={chartMargin.left}
                   y1={0}
                   x2={chartMargin.left}
-                  y2={chartHeight - chartMargin.top - chartMargin.bottom}
+                  y2={chartHeight}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
               </g>
 
               {/* 右Y軸エリア (的の大きさ: 小さい方が上) */}
-              <g transform={`translate(${containerWidth + chartMargin.left}, ${chartMargin.top})`}>
+              <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
-                  const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
+                  const chartAreaHeight = chartHeight;
                   const ticks = [];
                   const step = maxTargetSize > 3 ? 0.5 : 0.2;
                   for (let v = 0; v <= maxTargetSize; v += step) {
@@ -484,7 +484,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   x1={0}
                   y1={0}
                   x2={0}
-                  y2={chartHeight - chartMargin.top - chartMargin.bottom}
+                  y2={chartHeight}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
@@ -532,7 +532,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 data={allChartData}
                 width={totalWidth}
                 height={chartHeight}
-                margin={chartMargin}
+                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
