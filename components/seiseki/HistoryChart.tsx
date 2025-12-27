@@ -32,26 +32,28 @@ interface VerticalLabelProps {
   fill: string;
   text: string;
   position: 'left' | 'right';
+  fontSize?: number;
 }
 
-const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) => {
+const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
   const chars = text.split('');
-  const lineHeight = 16; // 文字間の縦方向間隔
+  const lineHeight = fontSize + 2; // 文字間の縦方向間隔
 
   // Y軸の中央位置を計算
   const centerY = viewBox.y + viewBox.height / 2;
   const startY = centerY - ((chars.length - 1) * lineHeight) / 2;
 
-  // X座標を計算
+  // X座標を計算（フォントサイズに応じて調整）
+  const xOffset = position === 'left' ? Math.min(30, fontSize * 2.2) : Math.min(30, fontSize * 2.2);
   let finalX: number;
   if (position === 'left') {
-    // 左側Y軸: viewBoxの左端から右に30px
-    finalX = viewBox.x + 30;
+    // 左側Y軸: viewBoxの左端から右に調整
+    finalX = viewBox.x + xOffset;
   } else {
-    // 右側Y軸: viewBoxの右端から左に30px
-    finalX = viewBox.x + viewBox.width - 30;
+    // 右側Y軸: viewBoxの右端から左に調整
+    finalX = viewBox.x + viewBox.width - xOffset;
   }
 
   return (
@@ -60,7 +62,7 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
       y={startY}
       fill={fill}
       textAnchor="middle"
-      style={{ fontSize: 14, fontWeight: 'normal' }}
+      style={{ fontSize, fontWeight: 'normal' }}
     >
       {chars.map((char, i) => (
         <tspan key={i} x={finalX} dy={i === 0 ? 0 : lineHeight}>
@@ -74,19 +76,21 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
 export default function HistoryChart({ personHistory, viewMode, onViewModeChange }: HistoryChartProps) {
   const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
   const [isLandscape, setIsLandscape] = useState(false);
+  const [isMobilePortrait, setIsMobilePortrait] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
   const isHorizontalSwipe = useRef<boolean>(false);
 
-  // 横画面検知
+  // 画面方向・サイズ検知
   useEffect(() => {
     const checkOrientation = () => {
-      setIsLandscape(
-        window.innerHeight < window.innerWidth &&
-        window.innerHeight < 500
-      );
+      const isLandscapeMode = window.innerHeight < window.innerWidth && window.innerHeight < 500;
+      const isMobilePortraitMode = window.innerWidth < 640 && window.innerHeight > window.innerWidth;
+
+      setIsLandscape(isLandscapeMode);
+      setIsMobilePortrait(isMobilePortraitMode);
     };
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
@@ -122,6 +126,41 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       .filter((size): size is number => size !== null),
     0
   );
+
+  // レスポンシブmargin設定
+  const getChartMargin = () => {
+    if (isMobilePortrait) {
+      // スマホ縦画面: 左右を大幅に削減
+      return {
+        top: 15,
+        right: 50,
+        bottom: 60,
+        left: 40,
+      };
+    }
+    if (isLandscape) {
+      // 横画面: 上下を削減
+      return {
+        top: 10,
+        right: 80,
+        bottom: 60,
+        left: 60,
+      };
+    }
+    // 通常（タブレット・PC）
+    return {
+      top: 20,
+      right: 80,
+      bottom: 80,
+      left: 60,
+    };
+  };
+
+  const chartMargin = getChartMargin();
+
+  // レスポンシブフォントサイズ設定
+  const labelFontSize = isMobilePortrait ? 11 : 14;
+  const tickFontSize = isMobilePortrait ? 9 : 11;
 
   // 表示期間のラベルを取得（panOffsetから逆算）
   const getPeriodLabel = () => {
@@ -213,12 +252,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={allChartData}
-              margin={{
-                top: isLandscape ? 10 : 20,
-                right: 80,
-                bottom: isLandscape ? 60 : 80,
-                left: 60
-              }}
+              margin={chartMargin}
             >
             <CartesianGrid strokeDasharray="3 3" />
 
@@ -227,7 +261,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               angle={-45}
               textAnchor="end"
               height={100}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               interval="preserveStartEnd"
             />
 
@@ -241,9 +275,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   fill="#8B0000"
                   text="順位"
                   position="left"
+                  fontSize={labelFontSize}
                 />
               )}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
             />
 
@@ -258,9 +293,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   fill="#4A90E2"
                   text="的の大きさ"
                   position="right"
+                  fontSize={labelFontSize}
                 />
               )}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
 
@@ -335,16 +371,16 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
         style={{
           position: 'relative',
           height: graphHeight,
-          paddingLeft: 60,
-          paddingRight: 80,
+          paddingLeft: chartMargin.left,
+          paddingRight: chartMargin.right,
         }}
       >
         {/* データ部分のみoverflowでクリップ */}
         <div
           style={{
             position: 'absolute',
-            left: 60,
-            right: 80,
+            left: chartMargin.left,
+            right: chartMargin.right,
             top: 0,
             bottom: 0,
             overflow: 'hidden',
@@ -375,12 +411,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             data={allChartData}
             width={totalWidth}
             height={500}
-            margin={{
-              top: isLandscape ? 10 : 20,
-              right: 80,
-              bottom: isLandscape ? 60 : 80,
-              left: 60
-            }}
+            margin={chartMargin}
           >
             <CartesianGrid strokeDasharray="3 3" />
 
@@ -389,7 +420,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               angle={-45}
               textAnchor="end"
               height={100}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               interval={2} // 3ヶ月ごとにラベル表示
             />
 
@@ -403,9 +434,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   fill="#8B0000"
                   text="順位"
                   position="left"
+                  fontSize={labelFontSize}
                 />
               )}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
             />
 
@@ -420,9 +452,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   fill="#4A90E2"
                   text="的の大きさ"
                   position="right"
+                  fontSize={labelFontSize}
                 />
               )}
-              tick={{ fontSize: 11 }}
+              tick={{ fontSize: tickFontSize }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
 
