@@ -563,7 +563,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 data={allChartData}
                 width={totalWidth}
                 height={containerHeight}
-                margin={{ top: 10, right: 4, bottom: 0, left: 4 }}
+                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
