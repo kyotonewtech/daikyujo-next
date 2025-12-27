@@ -417,33 +417,79 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               top: 0,
               bottom: 0,
               pointerEvents: 'none',
-              paddingLeft: chartMargin.left,
-              paddingRight: chartMargin.right,
+              zIndex: 10,
             }}
           >
-            <ComposedChart
-              data={[]}
-              width={containerWidth}
-              height={chartHeight}
-              margin={chartMargin}
-            >
-              <YAxis
-                yAxisId="rank"
-                domain={[1, 11]}
-                reversed
-                tick={{ fontSize: tickFontSize }}
-                tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
-              />
+            <svg width="100%" height={chartHeight}>
+              {/* 左Y軸エリア (順位: reversed, 1位=下, 11位=上) */}
+              <g transform={`translate(0, ${chartMargin.top})`}>
+                {Array.from({ length: 11 }, (_, i) => i + 1).map((value) => {
+                  const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
+                  // reversedなので: 1位=bottom(100%), 11位=top(0%)
+                  const y = chartAreaHeight - ((value - 1) / 10) * chartAreaHeight;
+                  return (
+                    <text
+                      key={value}
+                      x={chartMargin.left - 5}
+                      y={y}
+                      textAnchor="end"
+                      dominantBaseline="middle"
+                      fontSize={tickFontSize}
+                      fill="#666"
+                    >
+                      {value === 11 ? '圏外' : `${value}位`}
+                    </text>
+                  );
+                })}
+                {/* Y軸線 */}
+                <line
+                  x1={chartMargin.left}
+                  y1={0}
+                  x2={chartMargin.left}
+                  y2={chartHeight - chartMargin.top - chartMargin.bottom}
+                  stroke="#ccc"
+                  strokeWidth={1}
+                />
+              </g>
 
-              <YAxis
-                yAxisId="size"
-                orientation="right"
-                domain={[maxTargetSize, 'auto']}
-                reversed
-                tick={{ fontSize: tickFontSize }}
-                tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
-              />
-            </ComposedChart>
+              {/* 右Y軸エリア (的の大きさ: reversed, 大=下, 小=上) */}
+              <g transform={`translate(${containerWidth + chartMargin.left}, ${chartMargin.top})`}>
+                {(() => {
+                  const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
+                  const ticks = [];
+                  const step = maxTargetSize > 3 ? 0.5 : 0.2;
+                  for (let v = 0; v <= maxTargetSize; v += step) {
+                    ticks.push(v);
+                  }
+                  return ticks.map((value, index) => {
+                    // reversedなので: maxTargetSize=bottom(100%), 0=top(0%)
+                    const y = chartAreaHeight - (value / maxTargetSize) * chartAreaHeight;
+                    return (
+                      <text
+                        key={index}
+                        x={5}
+                        y={y}
+                        textAnchor="start"
+                        dominantBaseline="middle"
+                        fontSize={tickFontSize}
+                        fill="#666"
+                      >
+                        {value.toFixed(1)}寸
+                      </text>
+                    );
+                  });
+                })()}
+                {/* Y軸線 */}
+                <line
+                  x1={0}
+                  y1={0}
+                  x2={0}
+                  y2={chartHeight - chartMargin.top - chartMargin.bottom}
+                  stroke="#ccc"
+                  strokeWidth={1}
+                />
+              </g>
+            </svg>
           </div>
         )}
 
@@ -457,6 +503,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             top: 0,
             bottom: 0,
             overflow: 'hidden',
+            zIndex: 5,
           }}
         >
           <div
@@ -478,6 +525,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
                 width: totalWidth,
                 willChange: 'transform',
+                background: 'rgba(255, 255, 255, 0.01)',
               }}
             >
               <ComposedChart
