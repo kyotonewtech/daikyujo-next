@@ -445,9 +445,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               overflow: 'visible',
             }}
           >
-            <svg width="100%" height={chartHeight} style={{ overflow: 'visible' }}>
+            <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
               {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
-              <g transform={`translate(0, 0)`}>
+              <g transform={`translate(0, 20)`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = chartHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
@@ -478,7 +478,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               </g>
 
               {/* 右Y軸エリア (的の大きさ: 人物ごとに可変、X軸は視覚的に底辺) */}
-              <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
+              <g transform={`translate(${containerWidth + chartMargin.left}, 20)`}>
                 {(() => {
                   const chartAreaHeight = chartHeight;
                   const { min, max } = targetSizeRange;
@@ -563,7 +563,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 data={allChartData}
                 width={totalWidth}
                 height={containerHeight}
-                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                margin={{ top: 20, right: 0, bottom: 0, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
