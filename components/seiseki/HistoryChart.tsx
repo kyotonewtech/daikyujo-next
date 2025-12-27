@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import {
   ComposedChart,
   Line,
@@ -35,18 +35,23 @@ interface VerticalLabelProps {
   fontSize?: number;
 }
 
+// 定数: Y軸ラベル配置
+const MAX_LABEL_OFFSET = 22;
+const LABEL_OFFSET_RATIO = 1.6;
+const LINE_HEIGHT_MARGIN = 2;
+
 const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
   const chars = text.split('');
-  const lineHeight = fontSize + 2; // 文字間の縦方向間隔
+  const lineHeight = fontSize + LINE_HEIGHT_MARGIN;
 
   // Y軸の中央位置を計算
   const centerY = viewBox.y + viewBox.height / 2;
   const startY = centerY - ((chars.length - 1) * lineHeight) / 2;
 
   // X座標を計算（フォントサイズに応じて調整）
-  const xOffset = Math.min(22, fontSize * 1.6);
+  const xOffset = Math.min(MAX_LABEL_OFFSET, fontSize * LABEL_OFFSET_RATIO);
   let finalX: number;
   if (position === 'left') {
     // 左側Y軸: viewBoxの左端から右に調整
@@ -99,68 +104,46 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     return () => window.removeEventListener('resize', checkOrientation);
   }, []);
 
-  // 定数: 1ヶ月あたりの幅（レスポンシブ対応）
-  const MONTH_WIDTH_MOBILE = 80;
-  const MONTH_WIDTH_TABLET = 70;
-  const MONTH_WIDTH_DESKTOP = 60;
+  // 定数: 1ヶ月あたりの幅
+  const MONTH_WIDTH = 60;
   const VISIBLE_MONTHS = 12;
 
   // グラフ用にデータを整形
-  const allChartData = personHistory.history.map(h => ({
-    period: `${h.year}/${String(h.month).padStart(2, '0')}`,
-    rank: h.rank,
-    targetSize: h.targetSizeNumeric,
-    rankTitle: h.rankTitle,
-  }));
+  const allChartData = useMemo(() =>
+    personHistory.history.map(h => ({
+      period: `${h.year}/${String(h.month).padStart(2, '0')}`,
+      rank: h.rank,
+      targetSize: h.targetSizeNumeric,
+      rankTitle: h.rankTitle,
+    })),
+    [personHistory.history]
+  );
 
   const totalMonths = allChartData.length;
-
-  // レスポンシブ: デフォルトはデスクトップ幅を使用
-  const MONTH_WIDTH = MONTH_WIDTH_DESKTOP;
   const totalWidth = totalMonths * MONTH_WIDTH;
 
   // 全データの的のサイズの最大値を計算（1年表示でもY軸が変わらないように）
-  const maxTargetSize = Math.max(
-    ...allChartData
-      .map(d => d.targetSize)
-      .filter((size): size is number => size !== null),
-    0
+  const maxTargetSize = useMemo(() =>
+    allChartData.reduce((max, d) => {
+      return d.targetSize !== null && d.targetSize > max ? d.targetSize : max;
+    }, 0),
+    [allChartData]
   );
 
-  // レスポンシブmargin設定
-  const getChartMargin = () => {
+  // レスポンシブmargin設定（useMemoでメモ化）
+  const chartMargin = useMemo(() => {
     if (isMobilePortrait) {
-      // スマホ縦画面: 左右を大幅に削減
-      return {
-        top: 15,
-        right: 35,
-        bottom: 60,
-        left: 30,
-      };
+      return { top: 15, right: 35, bottom: 60, left: 30 };
     }
     if (isLandscape) {
-      // 横画面: 上下を削減
-      return {
-        top: 10,
-        right: 55,
-        bottom: 60,
-        left: 45,
-      };
+      return { top: 10, right: 55, bottom: 60, left: 45 };
     }
-    // 通常（タブレット・PC）
-    return {
-      top: 20,
-      right: 60,
-      bottom: 80,
-      left: 50,
-    };
-  };
+    return { top: 20, right: 60, bottom: 80, left: 50 };
+  }, [isMobilePortrait, isLandscape]);
 
-  const chartMargin = getChartMargin();
-
-  // レスポンシブフォントサイズ設定
-  const labelFontSize = isMobilePortrait ? 10 : 12;
-  const tickFontSize = isMobilePortrait ? 8 : 10;
+  // レスポンシブフォントサイズ設定（useMemoでメモ化）
+  const labelFontSize = useMemo(() => isMobilePortrait ? 10 : 12, [isMobilePortrait]);
+  const tickFontSize = useMemo(() => isMobilePortrait ? 8 : 10, [isMobilePortrait]);
 
   // 表示期間のラベルを取得（panOffsetから逆算）
   const getPeriodLabel = () => {
@@ -175,17 +158,25 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     return `${startPeriod} 〜 ${endPeriod}`;
   };
 
+  // 共通のパンオフセット更新関数
+  const updatePanOffset = useCallback((clientX: number) => {
+    if (touchStartX.current === null) return;
+    const diff = clientX - touchStartX.current;
+    const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
+    setPanOffset(newOffset);
+  }, [maxPanOffset]);
+
   // リアルタイムパンハンドラー
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (viewMode !== 'year') return;
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
     dragStartOffset.current = panOffset;
     isDragging.current = true;
     isHorizontalSwipe.current = false;
-  };
+  }, [viewMode, panOffset]);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null || touchStartY.current === null) return;
 
     const currentX = e.touches[0].clientX;
@@ -200,41 +191,35 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
 
     // 横スワイプの場合のみパン
     if (isHorizontalSwipe.current) {
-      e.preventDefault(); // 横スワイプ時のみスクロール防止
-      const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diffX));
-      setPanOffset(newOffset);
+      e.preventDefault();
+      updatePanOffset(currentX);
     }
-  };
+  }, [viewMode, updatePanOffset]);
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
     isDragging.current = false;
     touchStartX.current = null;
     touchStartY.current = null;
     isHorizontalSwipe.current = false;
-  };
+  }, []);
 
   // マウスドラッグ対応
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (viewMode !== 'year') return;
     touchStartX.current = e.clientX;
     dragStartOffset.current = panOffset;
     isDragging.current = true;
-  };
+  }, [viewMode, panOffset]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null) return;
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (viewMode !== 'year' || !isDragging.current) return;
+    updatePanOffset(e.clientX);
+  }, [viewMode, updatePanOffset]);
 
-    const currentX = e.clientX;
-    const diff = currentX - touchStartX.current;
-
-    const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
-    setPanOffset(newOffset);
-  };
-
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     isDragging.current = false;
     touchStartX.current = null;
-  };
+  }, []);
 
   // 実際の表示領域幅を取得してmaxPanOffsetを計算
   useEffect(() => {
@@ -259,7 +244,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       clearTimeout(timer);
       window.removeEventListener('resize', updateMaxPanOffset);
     };
-  }, [totalWidth, viewMode, chartMargin]);
+  }, [totalWidth, viewMode, isMobilePortrait, isLandscape]);
 
   // 表示モード変更時にオフセットをリセット
   useEffect(() => {
@@ -385,6 +370,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     ? 'clamp(250px, 45vh, 350px)'
     : 'clamp(400px, 60vh, 600px)';
 
+  // グラフの実際のheight（数値）
+  const chartHeight = isLandscape ? 300 : 500;
+
   return (
     <div className="w-full space-y-2">
       {/* 期間ラベル */}
@@ -438,7 +426,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
           <ComposedChart
             data={allChartData}
             width={totalWidth}
-            height={500}
+            height={chartHeight}
             margin={chartMargin}
           >
             <CartesianGrid strokeDasharray="3 3" />

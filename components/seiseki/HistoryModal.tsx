@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import type { PersonHistory } from '@/types/seiseki';
 import HistoryChart, { type ViewMode } from './HistoryChart';
 
@@ -52,11 +52,11 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
   }, [onClose]);
 
   // 背景クリックで閉じる
-  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackgroundClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
-  };
+  }, [onClose]);
 
   return (
     <div
