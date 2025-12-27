@@ -314,7 +314,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             <YAxis
               yAxisId="size"
               orientation="right"
-              domain={[maxTargetSize, 'auto']}
+              domain={[maxTargetSize, 0]}
               reversed
               label={(props) => (
                 <VerticalLabel
@@ -557,7 +557,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 <YAxis
                   yAxisId="size"
                   orientation="right"
-                  domain={[maxTargetSize, 'auto']}
+                  domain={[maxTargetSize, 0]}
                   reversed
                   axisLine={false}
                   tick={false}
