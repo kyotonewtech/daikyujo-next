@@ -104,9 +104,23 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     return () => window.removeEventListener('resize', checkOrientation);
   }, []);
 
-  // 定数: 1ヶ月あたりの幅
-  const MONTH_WIDTH = 60;
+  // 定数: 表示月数
   const VISIBLE_MONTHS = 12;
+
+  // レスポンシブMONTH_WIDTH設定（12ヶ月が画面に収まるように調整）
+  const monthWidth = useMemo(() => {
+    if (isMobilePortrait) {
+      // スマホ縦画面: 画面幅から左右マージン(18+28=46px)を引いた幅を12で割る
+      const availableWidth = window.innerWidth - 46;
+      return Math.max(30, Math.floor(availableWidth / VISIBLE_MONTHS));
+    }
+    if (isLandscape) {
+      // 横画面: 画面幅から左右マージン(35+45=80px)を引いた幅を12で割る
+      const availableWidth = window.innerWidth - 80;
+      return Math.max(40, Math.floor(availableWidth / VISIBLE_MONTHS));
+    }
+    return 60; // デスクトップは固定
+  }, [isMobilePortrait, isLandscape]);
 
   // グラフ用にデータを整形
   const allChartData = useMemo(() =>
@@ -120,7 +134,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   );
 
   const totalMonths = allChartData.length;
-  const totalWidth = totalMonths * MONTH_WIDTH;
+  const totalWidth = totalMonths * monthWidth;
 
   // 全データの的のサイズの最大値を計算（1年表示でもY軸が変わらないように）
   const maxTargetSize = useMemo(() =>
@@ -133,10 +147,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   // レスポンシブmargin設定（useMemoでメモ化）
   const chartMargin = useMemo(() => {
     if (isMobilePortrait) {
-      return { top: 15, right: 22, bottom: 60, left: 18 };
+      return { top: 15, right: 28, bottom: 45, left: 18 };
     }
     if (isLandscape) {
-      return { top: 10, right: 40, bottom: 60, left: 35 };
+      return { top: 10, right: 45, bottom: 50, left: 35 };
     }
     return { top: 20, right: 50, bottom: 80, left: 40 };
   }, [isMobilePortrait, isLandscape]);
@@ -149,7 +163,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   const getPeriodLabel = () => {
     if (viewMode === 'all' || allChartData.length === 0) return '';
 
-    const startMonthIndex = Math.max(0, Math.floor(-panOffset / MONTH_WIDTH));
+    const startMonthIndex = Math.max(0, Math.floor(-panOffset / monthWidth));
     const endMonthIndex = Math.min(startMonthIndex + VISIBLE_MONTHS, totalMonths);
 
     const startPeriod = allChartData[startMonthIndex]?.period || '';
