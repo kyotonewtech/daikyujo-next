@@ -295,17 +295,24 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     }
   }, [viewMode, maxPanOffset]);
 
-  // 全期間モード用のResponsive Container
+  // グラフの実際のheight（数値）- 両モード共通
+  const chartHeight = isLandscape ? 300 : 500;
+
+  // 全期間モード: 固定サイズグラフ（1年モードと同じサイズ）
   if (viewMode === 'all') {
+    // 全期間グラフ用の最適化マージン
+    const allPeriodMargin = { top: 20, right: 50, bottom: 80, left: 50 };
+
     return (
       <div className="w-full">
-        {/* 全期間グラフ（ResponsiveContainer使用） */}
-        <div className="w-full h-[60vh] min-h-[400px] max-h-[600px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart
-              data={allChartData}
-              margin={chartMargin}
-            >
+        {/* 全期間グラフ（固定サイズ、凡例なし） */}
+        <div className="w-full flex justify-center" style={{ height: chartHeight }}>
+          <ComposedChart
+            data={allChartData}
+            width={typeof window !== 'undefined' ? Math.min(window.innerWidth - 40, 1200) : 800}
+            height={chartHeight}
+            margin={allPeriodMargin}
+          >
             <CartesianGrid strokeDasharray="3 3" />
 
             <XAxis
@@ -354,15 +361,6 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               labelFormatter={(label) => `期間: ${label}`}
             />
 
-            <Legend
-              wrapperStyle={{ paddingTop: '20px' }}
-              formatter={(value) => {
-                if (value === 'rank') return '順位';
-                if (value === 'targetSize') return '的の大きさ';
-                return value;
-              }}
-            />
-
             <Line
               yAxisId="rank"
               type="monotone"
@@ -383,16 +381,12 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               name="targetSize"
             />
           </ComposedChart>
-          </ResponsiveContainer>
         </div>
       </div>
     );
   }
 
-  // グラフの実際のheight（数値）
-  const chartHeight = isLandscape ? 300 : 500;
-
-  // Rechartsのmargin設定
+  // Rechartsのmargin設定（1年モード用）
   const rechartsMargin = { top: 20, right: 0, bottom: 0, left: 0 };
 
   // Rechartsのプロット領域の高さ
