@@ -83,6 +83,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
   const [isLandscape, setIsLandscape] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(0); // Y軸固定表示用のコンテナ幅
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -239,13 +240,15 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   useEffect(() => {
     if (viewMode !== 'year') {
       setMaxPanOffset(0);
+      setContainerWidth(0);
       return;
     }
 
     const updateMaxPanOffset = () => {
       if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        const calculatedMaxPanOffset = -(totalWidth - containerWidth);
+        const width = containerRef.current.offsetWidth;
+        setContainerWidth(width);
+        const calculatedMaxPanOffset = -(totalWidth - width);
         setMaxPanOffset(calculatedMaxPanOffset);
       }
     };
@@ -404,7 +407,47 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
           paddingRight: chartMargin.right,
         }}
       >
-        {/* データ部分のみoverflowでクリップ */}
+        {/* 固定Y軸背景層（スワイプしても動かない） */}
+        {containerWidth > 0 && (
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              pointerEvents: 'none',
+              paddingLeft: chartMargin.left,
+              paddingRight: chartMargin.right,
+            }}
+          >
+            <ComposedChart
+              data={[]}
+              width={containerWidth}
+              height={chartHeight}
+              margin={chartMargin}
+            >
+              <YAxis
+                yAxisId="rank"
+                domain={[1, 11]}
+                reversed
+                tick={{ fontSize: tickFontSize }}
+                tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
+              />
+
+              <YAxis
+                yAxisId="size"
+                orientation="right"
+                domain={[maxTargetSize, 'auto']}
+                reversed
+                tick={{ fontSize: tickFontSize }}
+                tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
+              />
+            </ComposedChart>
+          </div>
+        )}
+
+        {/* スクロール可能なデータ層 */}
         <div
           ref={containerRef}
           style={{
@@ -437,109 +480,92 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 willChange: 'transform',
               }}
             >
-          <ComposedChart
-            data={allChartData}
-            width={totalWidth}
-            height={chartHeight}
-            margin={chartMargin}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
+              <ComposedChart
+                data={allChartData}
+                width={totalWidth}
+                height={chartHeight}
+                margin={chartMargin}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis
-              dataKey="period"
-              angle={-45}
-              textAnchor="end"
-              height={100}
-              tick={{ fontSize: tickFontSize }}
-              interval={2} // 3ヶ月ごとにラベル表示
-            />
-
-            <YAxis
-              yAxisId="rank"
-              domain={[1, 11]}
-              reversed
-              label={(props) => (
-                <VerticalLabel
-                  {...props}
-                  fill="#8B0000"
-                  text="順位"
-                  position="left"
-                  fontSize={labelFontSize}
+                <XAxis
+                  dataKey="period"
+                  angle={-45}
+                  textAnchor="end"
+                  height={100}
+                  tick={{ fontSize: tickFontSize }}
+                  interval={2}
                 />
-              )}
-              tick={{ fontSize: tickFontSize }}
-              tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
-            />
 
-            <YAxis
-              yAxisId="size"
-              orientation="right"
-              domain={[maxTargetSize, 'auto']}
-              reversed
-              label={(props) => (
-                <VerticalLabel
-                  {...props}
-                  fill="#4A90E2"
-                  text="的の大きさ"
-                  position="right"
-                  fontSize={labelFontSize}
+                {/* Y軸は座標系のみ使用、表示は固定層で行う */}
+                <YAxis
+                  yAxisId="rank"
+                  domain={[1, 11]}
+                  reversed
+                  axisLine={false}
+                  tick={false}
                 />
-              )}
-              tick={{ fontSize: tickFontSize }}
-              tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
-            />
 
-            <Tooltip
-              contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
-              formatter={(value: unknown, name: string) => {
-                if (value === null || value === undefined) {
-                  return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
-                }
-                const numValue = typeof value === 'number' ? value : Number(value);
-                if (name === 'rank') {
-                  return [`${numValue}位`, '順位'];
-                }
-                if (name === 'targetSize') {
-                  return [numValue.toFixed(1), '的の大きさ'];
-                }
-                return [numValue, name];
-              }}
-              labelFormatter={(label) => `期間: ${label}`}
-            />
+                <YAxis
+                  yAxisId="size"
+                  orientation="right"
+                  domain={[maxTargetSize, 'auto']}
+                  reversed
+                  axisLine={false}
+                  tick={false}
+                />
 
-            <Legend
-              wrapperStyle={{ paddingTop: '20px' }}
-              formatter={(value) => {
-                if (value === 'rank') return '順位';
-                if (value === 'targetSize') return '的の大きさ';
-                return value;
-              }}
-            />
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
+                  formatter={(value: unknown, name: string) => {
+                    if (value === null || value === undefined) {
+                      return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
+                    }
+                    const numValue = typeof value === 'number' ? value : Number(value);
+                    if (name === 'rank') {
+                      return [`${numValue}位`, '順位'];
+                    }
+                    if (name === 'targetSize') {
+                      return [numValue.toFixed(1), '的の大きさ'];
+                    }
+                    return [numValue, name];
+                  }}
+                  labelFormatter={(label) => `期間: ${label}`}
+                />
 
-            <Line
-              yAxisId="rank"
-              type="monotone"
-              dataKey="rank"
-              stroke="#8B0000"
-              strokeWidth={2}
-              dot={{ r: 4 }}
-              name="rank"
-              isAnimationActive={false}
-            />
+                <Legend
+                  wrapperStyle={{ paddingTop: '20px' }}
+                  formatter={(value) => {
+                    if (value === 'rank') return '順位';
+                    if (value === 'targetSize') return '的の大きさ';
+                    return value;
+                  }}
+                />
 
-            <Line
-              yAxisId="size"
-              type="monotone"
-              dataKey="targetSize"
-              stroke="#4A90E2"
-              strokeWidth={2}
-              dot={{ r: 4 }}
-              name="targetSize"
-              isAnimationActive={false}
-            />
-          </ComposedChart>
+                <Line
+                  yAxisId="rank"
+                  type="monotone"
+                  dataKey="rank"
+                  stroke="#8B0000"
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  name="rank"
+                  isAnimationActive={false}
+                />
+
+                <Line
+                  yAxisId="size"
+                  type="monotone"
+                  dataKey="targetSize"
+                  stroke="#4A90E2"
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  name="targetSize"
+                  isAnimationActive={false}
+                />
+              </ComposedChart>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
