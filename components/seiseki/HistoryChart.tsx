@@ -142,7 +142,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     [personHistory.history]
   );
 
-  // 的の大きさの最小値・最大値を計算（変動式、但しX軸位置は固定）
+  // 的の大きさの最小値・最大値を計算（メモリ表示用、domain自体は固定）
   const targetSizeRange = useMemo(() => {
     const sizes = allChartData
       .map(d => d.targetSize)
@@ -152,12 +152,15 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
       return { min: 0, max: TARGET_SIZE_MAX };
     }
 
+    const min = Math.min(...sizes);
     const max = Math.max(...sizes);
 
-    // 余白を追加（最大値の10%）
-    const padding = max * 0.1;
+    // 余白を追加（範囲の10%、最小0.2）
+    const range = max - min;
+    const padding = Math.max(range * 0.1, 0.2);
+
     return {
-      min: 0,
+      min: Math.max(0, min - padding),
       max: Math.min(TARGET_SIZE_MAX, max + padding)
     };
   }, [allChartData]);
@@ -335,7 +338,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             <YAxis
               yAxisId="size"
               orientation="right"
-              domain={[0, targetSizeRange.max]}
+              domain={[0, TARGET_SIZE_MAX]}
               reversed
               allowDataOverflow={true}
               label={(props) => (
@@ -348,6 +351,14 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 />
               )}
               tick={{ fontSize: tickFontSize }}
+              ticks={(() => {
+                const ticks = [];
+                const { min, max } = targetSizeRange;
+                for (let v = Math.floor(min / 0.2) * 0.2; v <= max; v += 0.2) {
+                  ticks.push(Number(v.toFixed(1)));
+                }
+                return ticks;
+              })()}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
 
@@ -407,8 +418,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）
   const chartHeight = isLandscape ? 300 : 500;
 
-  // 上部パディング（○の見切れ防止: dotのradius 4px + 余白）
-  const topPadding = 12;
+  // 上部パディング（○の見切れ防止: dotのradius 4px * 2 + 余分な余白）
+  const topPadding = 20;
 
   // 1年モード: コンテナ高さ（上部パディング + プロットエリア + X軸ラベルエリア）
   const containerHeight = topPadding + chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
@@ -475,22 +486,22 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 />
               </g>
 
-              {/* 右Y軸エリア (的の大きさ: 0から変動最大値、小さい方が上) */}
+              {/* 右Y軸エリア (的の大きさ: 人物の最小〜最大のみ表示、X軸は3.0寸で固定) */}
               <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
                   const chartAreaHeight = chartHeight;
-                  const { max } = targetSizeRange;
+                  const { min, max } = targetSizeRange;
 
-                  // 適切な間隔でtickを生成（0.2寸刻み）
+                  // 人物の範囲内のみtickを生成（0.2寸刻み）
                   const ticks = [];
                   const tickInterval = 0.2;
-                  for (let v = 0; v <= max; v += tickInterval) {
-                    ticks.push(v);
+                  for (let v = Math.floor(min / tickInterval) * tickInterval; v <= max; v += tickInterval) {
+                    ticks.push(Number(v.toFixed(1)));
                   }
 
                   return ticks.map((value, index) => {
-                    // 小さい値が上: 0=top(0%), max=bottom(100%)
-                    const y = (value / max) * chartAreaHeight;
+                    // 座標系は0〜TARGET_SIZE_MAXで固定、小さい値が上
+                    const y = (value / TARGET_SIZE_MAX) * chartAreaHeight;
                     return (
                       <text
                         key={index}
@@ -506,12 +517,12 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                     );
                   });
                 })()}
-                {/* Y軸線 */}
+                {/* Y軸線（人物の範囲のみ） */}
                 <line
                   x1={0}
-                  y1={0}
+                  y1={(targetSizeRange.min / TARGET_SIZE_MAX) * chartHeight}
                   x2={0}
-                  y2={chartHeight}
+                  y2={(targetSizeRange.max / TARGET_SIZE_MAX) * chartHeight}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
@@ -560,7 +571,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 data={allChartData}
                 width={totalWidth}
                 height={chartHeight + X_AXIS_LABEL_AREA_HEIGHT}
-                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                margin={{ top: 8, right: 0, bottom: 0, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
@@ -587,7 +598,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 <YAxis
                   yAxisId="size"
                   orientation="right"
-                  domain={[0, targetSizeRange.max]}
+                  domain={[0, TARGET_SIZE_MAX]}
                   reversed
                   allowDataOverflow={true}
                   axisLine={false}
