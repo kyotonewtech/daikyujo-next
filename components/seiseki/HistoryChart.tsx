@@ -40,6 +40,11 @@ const MAX_LABEL_OFFSET = 18;
 const LABEL_OFFSET_RATIO = 1.4;
 const LINE_HEIGHT_MARGIN = 2;
 
+// 定数: グラフの固定値
+const TARGET_SIZE_MAX = 3.0;
+const RANK_MIN = 1;
+const RANK_MAX = 11;
+
 const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
@@ -83,7 +88,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
   const [isLandscape, setIsLandscape] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(0); // Y軸固定表示用のコンテナ幅
+  const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth - 100 : 300); // Y軸固定表示用のコンテナ幅（初期推定値）
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -137,14 +142,6 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   const totalMonths = allChartData.length;
   const totalWidth = totalMonths * monthWidth;
 
-  // 全データの的のサイズの最大値を計算（1年表示でもY軸が変わらないように）
-  const maxTargetSize = useMemo(() =>
-    allChartData.reduce((max, d) => {
-      return d.targetSize !== null && d.targetSize > max ? d.targetSize : max;
-    }, 0),
-    [allChartData]
-  );
-
   // レスポンシブmargin設定（useMemoでメモ化）
   const chartMargin = useMemo(() => {
     if (isMobilePortrait) {
@@ -161,7 +158,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   const tickFontSize = useMemo(() => isMobilePortrait ? 8 : 10, [isMobilePortrait]);
 
   // 表示期間のラベルを取得（panOffsetから逆算）
-  const getPeriodLabel = () => {
+  const getPeriodLabel = useMemo(() => {
     if (viewMode === 'all' || allChartData.length === 0) return '';
 
     const startMonthIndex = Math.max(0, Math.floor(-panOffset / monthWidth));
@@ -171,7 +168,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     const endPeriod = allChartData[endMonthIndex - 1]?.period || '';
 
     return `${startPeriod} 〜 ${endPeriod}`;
-  };
+  }, [viewMode, allChartData, panOffset, monthWidth, VISIBLE_MONTHS, totalMonths]);
 
   // 共通のパンオフセット更新関数
   const updatePanOffset = useCallback((clientX: number) => {
@@ -308,13 +305,13 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 />
               )}
               tick={{ fontSize: tickFontSize }}
-              tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
+              tickFormatter={(value) => value === RANK_MAX ? '圏外' : `${value}位`}
             />
 
             <YAxis
               yAxisId="size"
               orientation="right"
-              domain={[0, 3]}
+              domain={[0, TARGET_SIZE_MAX]}
               reversed
               label={(props) => (
                 <VerticalLabel
@@ -408,7 +405,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
         }}
       >
         {/* 固定Y軸背景層（スワイプしても動かない） */}
-        {containerWidth > 0 && (
+        {containerWidth > 100 && (
           <div
             style={{
               position: 'absolute',
@@ -423,10 +420,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             <svg width="100%" height={chartHeight}>
               {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
               <g transform={`translate(0, 0)`}>
-                {Array.from({ length: 11 }, (_, i) => i + 1).map((value) => {
+                {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = chartHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
-                  const y = ((value - 1) / 10) * chartAreaHeight;
+                  const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
                   return (
                     <text
                       key={value}
@@ -437,7 +434,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                       fontSize={tickFontSize}
                       fill="#666"
                     >
-                      {value === 11 ? '圏外' : `${value}位`}
+                      {value === RANK_MAX ? '圏外' : `${value}位`}
                     </text>
                   );
                 })}
@@ -456,14 +453,13 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
                   const chartAreaHeight = chartHeight;
-                  const maxSize = 3.0; // 固定値
                   const ticks = [];
-                  for (let v = 0; v <= maxSize; v += 0.2) {
+                  for (let v = 0; v <= TARGET_SIZE_MAX; v += 0.2) {
                     ticks.push(v);
                   }
                   return ticks.map((value, index) => {
-                    // 小さい値が上: 0=top(0%), 3.0=bottom(100%)
-                    const y = (value / maxSize) * chartAreaHeight;
+                    // 小さい値が上: 0=top(0%), TARGET_SIZE_MAX=bottom(100%)
+                    const y = (value / TARGET_SIZE_MAX) * chartAreaHeight;
                     return (
                       <text
                         key={index}
@@ -548,7 +544,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 {/* Y軸は座標系のみ使用、表示は固定層で行う */}
                 <YAxis
                   yAxisId="rank"
-                  domain={[1, 11]}
+                  domain={[RANK_MIN, RANK_MAX]}
                   reversed
                   axisLine={false}
                   tick={false}
@@ -557,7 +553,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 <YAxis
                   yAxisId="size"
                   orientation="right"
-                  domain={[0, 3]}
+                  domain={[0, TARGET_SIZE_MAX]}
                   reversed
                   axisLine={false}
                   tick={false}
