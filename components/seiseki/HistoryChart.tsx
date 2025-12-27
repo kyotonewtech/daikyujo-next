@@ -45,6 +45,9 @@ const TARGET_SIZE_MAX = 3.0;
 const RANK_MIN = 1;
 const RANK_MAX = 11;
 
+// 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
+const X_AXIS_LABEL_AREA_HEIGHT = 80;
+
 const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
@@ -381,13 +384,11 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     );
   }
 
-  // 1年モード: パン可能なグラフ
-  const graphHeight = isLandscape
-    ? 'clamp(250px, 45vh, 350px)'
-    : 'clamp(400px, 60vh, 600px)';
-
   // グラフの実際のheight（数値）
   const chartHeight = isLandscape ? 300 : 500;
+
+  // 1年モード: コンテナ高さ（プロットエリア + X軸ラベルエリア）
+  const containerHeight = chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
 
   return (
     <div className="w-full space-y-2">
@@ -401,7 +402,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
         className="w-full select-none"
         style={{
           position: 'relative',
-          height: graphHeight,
+          height: containerHeight,
           paddingLeft: chartMargin.left,
           paddingRight: chartMargin.right,
         }}
@@ -529,7 +530,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               <ComposedChart
                 data={allChartData}
                 width={totalWidth}
-                height={chartHeight}
+                height={chartHeight + X_AXIS_LABEL_AREA_HEIGHT}
                 margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -538,9 +539,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   dataKey="period"
                   angle={-45}
                   textAnchor="end"
-                  height={100}
-                  tick={{ fontSize: tickFontSize }}
+                  height={X_AXIS_LABEL_AREA_HEIGHT}
+                  tick={{ fontSize: tickFontSize, dy: 5 }}
                   interval={2}
+                  tickLine={{ transform: 'translate(0, 0)' }}
                 />
 
                 {/* Y軸は座標系のみ使用、表示は固定層で行う */}
@@ -581,14 +583,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   labelFormatter={(label) => `期間: ${label}`}
                 />
 
-                <Legend
-                  wrapperStyle={{ paddingTop: '20px' }}
-                  formatter={(value) => {
-                    if (value === 'rank') return '順位';
-                    if (value === 'targetSize') return '的の大きさ';
-                    return value;
-                  }}
-                />
+                {/* Legendはplot areaに影響させないため外部に移動 */}
 
                 <Line
                   yAxisId="rank"
@@ -614,6 +609,18 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               </ComposedChart>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* 凡例（固定表示） */}
+      <div className="flex justify-center gap-6 py-2">
+        <div className="flex items-center gap-1">
+          <div className="w-4 h-0.5 bg-[#8B0000]" />
+          <span className="text-xs text-gray-700">順位</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-4 h-0.5 bg-[#4A90E2]" />
+          <span className="text-xs text-gray-700">的の大きさ</span>
         </div>
       </div>
 
