@@ -293,8 +293,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
 
             <YAxis
               yAxisId="rank"
-              domain={[1, 11]}
+              domain={[RANK_MIN, RANK_MAX]}
               reversed
+              allowDataOverflow={true}
               label={(props) => (
                 <VerticalLabel
                   {...props}
@@ -313,6 +314,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               orientation="right"
               domain={[0, TARGET_SIZE_MAX]}
               reversed
+              allowDataOverflow={true}
               label={(props) => (
                 <VerticalLabel
                   {...props}
@@ -546,6 +548,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   yAxisId="rank"
                   domain={[RANK_MIN, RANK_MAX]}
                   reversed
+                  allowDataOverflow={true}
                   axisLine={false}
                   tick={false}
                 />
@@ -555,6 +558,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                   orientation="right"
                   domain={[0, TARGET_SIZE_MAX]}
                   reversed
+                  allowDataOverflow={true}
                   axisLine={false}
                   tick={false}
                 />
