@@ -424,9 +424,11 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
               <g transform={`translate(0, 0)`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
-                  const chartAreaHeight = chartHeight;
-                  // reversedなので: 1位=top(0%), 11位=bottom(100%)
-                  const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
+                  // 上下に10pxのパディングを追加して見切れを防止
+                  const padding = 10;
+                  const chartAreaHeight = chartHeight - padding * 2;
+                  // reversedなので: 1位=top(padding), 11位=bottom(chartHeight-padding)
+                  const y = padding + ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
                   return (
                     <text
                       key={value}
@@ -444,9 +446,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 {/* Y軸線 */}
                 <line
                   x1={chartMargin.left}
-                  y1={0}
+                  y1={10}
                   x2={chartMargin.left}
-                  y2={chartHeight}
+                  y2={chartHeight - 10}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
@@ -455,14 +457,16 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               {/* 右Y軸エリア (的の大きさ: 小さい方が上) */}
               <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
-                  const chartAreaHeight = chartHeight;
+                  // 上下に10pxのパディングを追加して見切れを防止
+                  const padding = 10;
+                  const chartAreaHeight = chartHeight - padding * 2;
                   const ticks = [];
                   for (let v = 0; v <= TARGET_SIZE_MAX; v += 0.2) {
                     ticks.push(v);
                   }
                   return ticks.map((value, index) => {
-                    // 小さい値が上: 0=top(0%), TARGET_SIZE_MAX=bottom(100%)
-                    const y = (value / TARGET_SIZE_MAX) * chartAreaHeight;
+                    // 小さい値が上: 0=top(padding), TARGET_SIZE_MAX=bottom(chartHeight-padding)
+                    const y = padding + (value / TARGET_SIZE_MAX) * chartAreaHeight;
                     return (
                       <text
                         key={index}
@@ -481,9 +485,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 {/* Y軸線 */}
                 <line
                   x1={0}
-                  y1={0}
+                  y1={10}
                   x2={0}
-                  y2={chartHeight}
+                  y2={chartHeight - 10}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
@@ -500,8 +504,9 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             left: chartMargin.left,
             right: chartMargin.right,
             top: 0,
-            bottom: 0,
-            overflow: 'hidden',
+            height: containerHeight,
+            overflowX: 'hidden',
+            overflowY: 'visible',
             zIndex: 5,
           }}
         >
@@ -531,7 +536,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 data={allChartData}
                 width={totalWidth}
                 height={chartHeight + X_AXIS_LABEL_AREA_HEIGHT}
-                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                margin={{ top: 10, right: 0, bottom: 10, left: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
