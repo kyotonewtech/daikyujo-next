@@ -421,12 +421,12 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             }}
           >
             <svg width="100%" height={chartHeight}>
-              {/* 左Y軸エリア (順位: reversed, 1位=下, 11位=上) */}
+              {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
               <g transform={`translate(0, ${chartMargin.top})`}>
                 {Array.from({ length: 11 }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
-                  // reversedなので: 1位=bottom(100%), 11位=top(0%)
-                  const y = chartAreaHeight - ((value - 1) / 10) * chartAreaHeight;
+                  // reversedなので: 1位=top(0%), 11位=bottom(100%)
+                  const y = ((value - 1) / 10) * chartAreaHeight;
                   return (
                     <text
                       key={value}
@@ -452,7 +452,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 />
               </g>
 
-              {/* 右Y軸エリア (的の大きさ: reversed, 大=下, 小=上) */}
+              {/* 右Y軸エリア (的の大きさ: reversed, 大=上, 小=下) */}
               <g transform={`translate(${containerWidth + chartMargin.left}, ${chartMargin.top})`}>
                 {(() => {
                   const chartAreaHeight = chartHeight - chartMargin.top - chartMargin.bottom;
@@ -462,8 +462,8 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                     ticks.push(v);
                   }
                   return ticks.map((value, index) => {
-                    // reversedなので: maxTargetSize=bottom(100%), 0=top(0%)
-                    const y = chartAreaHeight - (value / maxTargetSize) * chartAreaHeight;
+                    // reversedなので: maxTargetSize=top(0%), 0=bottom(100%)
+                    const y = (1 - value / maxTargetSize) * chartAreaHeight;
                     return (
                       <text
                         key={index}
