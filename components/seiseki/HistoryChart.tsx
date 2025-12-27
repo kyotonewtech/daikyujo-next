@@ -86,17 +86,17 @@ const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertica
   );
 };
 
-export default function HistoryChart({ personHistory, viewMode, onViewModeChange }: HistoryChartProps) {
+export default function HistoryChart({ personHistory, viewMode }: HistoryChartProps) {
   const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
   const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
   const [isLandscape, setIsLandscape] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
   const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth - 100 : 300); // Y軸固定表示用のコンテナ幅（初期推定値）
+  const [isDragging, setIsDragging] = useState(false); // ドラッグ中フラグ（レンダリングに使用）
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
-  const isDragging = useRef<boolean>(false);
   const isHorizontalSwipe = useRef<boolean>(false);
 
   // 画面方向・サイズ検知
@@ -187,12 +187,12 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
     dragStartOffset.current = panOffset;
-    isDragging.current = true;
+    setIsDragging(true);
     isHorizontalSwipe.current = false;
   }, [viewMode, panOffset]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null || touchStartY.current === null) return;
+    if (viewMode !== 'year' || !isDragging || touchStartX.current === null || touchStartY.current === null) return;
 
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
@@ -209,10 +209,10 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       e.preventDefault();
       updatePanOffset(currentX);
     }
-  }, [viewMode, updatePanOffset]);
+  }, [viewMode, isDragging, updatePanOffset]);
 
   const handleTouchEnd = useCallback(() => {
-    isDragging.current = false;
+    setIsDragging(false);
     touchStartX.current = null;
     touchStartY.current = null;
     isHorizontalSwipe.current = false;
@@ -223,16 +223,16 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     if (viewMode !== 'year') return;
     touchStartX.current = e.clientX;
     dragStartOffset.current = panOffset;
-    isDragging.current = true;
+    setIsDragging(true);
   }, [viewMode, panOffset]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (viewMode !== 'year' || !isDragging.current) return;
+    if (viewMode !== 'year' || !isDragging) return;
     updatePanOffset(e.clientX);
-  }, [viewMode, updatePanOffset]);
+  }, [viewMode, isDragging, updatePanOffset]);
 
   const handleMouseUp = useCallback(() => {
-    isDragging.current = false;
+    setIsDragging(false);
     touchStartX.current = null;
   }, []);
 
@@ -526,7 +526,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             <div
               style={{
                 transform: `translateX(${panOffset}px)`,
-                transition: isDragging.current ? 'none' : 'transform 0.2s ease-out',
+                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
                 width: totalWidth,
                 willChange: 'transform',
                 background: 'rgba(255, 255, 255, 0.01)',
