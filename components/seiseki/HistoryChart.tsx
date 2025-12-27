@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   ComposedChart,
   Line,
@@ -13,11 +13,13 @@ import {
 } from 'recharts';
 import type { PersonHistory } from '@/types/seiseki';
 
+export type ViewMode = 'all' | 'year';
+
 interface HistoryChartProps {
   personHistory: PersonHistory;
+  viewMode: ViewMode;
+  onViewModeChange: (mode: ViewMode) => void;
 }
-
-type ViewMode = 'all' | 'year';
 
 // 縦書きラベルコンポーネント
 interface VerticalLabelProps {
@@ -69,14 +71,27 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
   );
 };
 
-export default function HistoryChart({ personHistory }: HistoryChartProps) {
-  const [viewMode, setViewMode] = useState<ViewMode>('all');
+export default function HistoryChart({ personHistory, viewMode, onViewModeChange }: HistoryChartProps) {
   const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
+  const [isLandscape, setIsLandscape] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
   const isHorizontalSwipe = useRef<boolean>(false);
+
+  // 横画面検知
+  useEffect(() => {
+    const checkOrientation = () => {
+      setIsLandscape(
+        window.innerHeight < window.innerWidth &&
+        window.innerHeight < 500
+      );
+    };
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    return () => window.removeEventListener('resize', checkOrientation);
+  }, []);
 
   // 定数: 1ヶ月あたりの幅（レスポンシブ対応）
   const MONTH_WIDTH_MOBILE = 80;
@@ -183,41 +198,27 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
   };
 
   // 表示モード変更時にオフセットをリセット
-  const handleViewModeChange = (mode: ViewMode) => {
-    setViewMode(mode);
-    if (mode === 'year') {
+  useEffect(() => {
+    if (viewMode === 'year') {
       setPanOffset(maxPanOffset); // 直近12ヶ月を表示
     }
-  };
+  }, [viewMode, maxPanOffset]);
 
   // 全期間モード用のResponsive Container
   if (viewMode === 'all') {
     return (
-      <div className="w-full space-y-4">
-        {/* 期間選択トグルボタン */}
-        <div className="flex justify-center items-center gap-4">
-          <div className="inline-flex bg-gray-100 rounded-lg p-1">
-            <button
-              onClick={() => handleViewModeChange('all')}
-              className="px-6 py-2 rounded-md font-medium bg-white text-accent shadow-sm"
-            >
-              全期間
-            </button>
-            <button
-              onClick={() => handleViewModeChange('year')}
-              className="px-6 py-2 rounded-md font-medium text-gray-600 hover:text-gray-800"
-            >
-              1年
-            </button>
-          </div>
-        </div>
-
+      <div className="w-full">
         {/* 全期間グラフ（ResponsiveContainer使用） */}
         <div className="w-full h-[60vh] min-h-[400px] max-h-[600px]">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
               data={allChartData}
-              margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
+              margin={{
+                top: isLandscape ? 10 : 20,
+                right: 80,
+                bottom: isLandscape ? 60 : 80,
+                left: 60
+              }}
             >
             <CartesianGrid strokeDasharray="3 3" />
 
@@ -317,26 +318,12 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
   }
 
   // 1年モード: パン可能なグラフ
-  return (
-    <div className="w-full space-y-4">
-      {/* 期間選択トグルボタン */}
-      <div className="flex justify-center items-center gap-4">
-        <div className="inline-flex bg-gray-100 rounded-lg p-1">
-          <button
-            onClick={() => handleViewModeChange('all')}
-            className="px-6 py-2 rounded-md font-medium text-gray-600 hover:text-gray-800"
-          >
-            全期間
-          </button>
-          <button
-            onClick={() => handleViewModeChange('year')}
-            className="px-6 py-2 rounded-md font-medium bg-white text-accent shadow-sm"
-          >
-            1年
-          </button>
-        </div>
-      </div>
+  const graphHeight = isLandscape
+    ? 'clamp(250px, 45vh, 350px)'
+    : 'clamp(400px, 60vh, 600px)';
 
+  return (
+    <div className="w-full space-y-2">
       {/* 期間ラベル */}
       <div className="text-center text-sm text-gray-700 font-medium">
         {getPeriodLabel()}
@@ -347,7 +334,7 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
         className="w-full select-none"
         style={{
           position: 'relative',
-          height: 'clamp(400px, 60vh, 600px)',
+          height: graphHeight,
           paddingLeft: 60,
           paddingRight: 80,
         }}
@@ -388,7 +375,12 @@ export default function HistoryChart({ personHistory }: HistoryChartProps) {
             data={allChartData}
             width={totalWidth}
             height={500}
-            margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
+            margin={{
+              top: isLandscape ? 10 : 20,
+              right: 80,
+              bottom: isLandscape ? 60 : 80,
+              left: 60
+            }}
           >
             <CartesianGrid strokeDasharray="3 3" />
 
