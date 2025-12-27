@@ -391,7 +391,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     <div className="w-full space-y-2">
       {/* 期間ラベル */}
       <div className="text-center text-sm text-gray-700 font-medium">
-        {getPeriodLabel()}
+        {getPeriodLabel}
       </div>
 
       {/* パン可能なグラフ（Y軸固定） */}
