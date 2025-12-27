@@ -142,6 +142,27 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     [personHistory.history]
   );
 
+  // 的の大きさの最小値・最大値を計算（変動式）
+  const targetSizeRange = useMemo(() => {
+    const sizes = allChartData
+      .map(d => d.targetSize)
+      .filter((size): size is number => size !== null && size !== undefined);
+
+    if (sizes.length === 0) {
+      return { min: 0, max: TARGET_SIZE_MAX };
+    }
+
+    const min = Math.min(...sizes);
+    const max = Math.max(...sizes);
+
+    // 余白を追加（範囲の10%）
+    const padding = (max - min) * 0.1;
+    return {
+      min: Math.max(0, min - padding),
+      max: Math.min(TARGET_SIZE_MAX, max + padding)
+    };
+  }, [allChartData]);
+
   const totalMonths = allChartData.length;
   const totalWidth = totalMonths * monthWidth;
 
@@ -315,7 +336,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             <YAxis
               yAxisId="size"
               orientation="right"
-              domain={[0, TARGET_SIZE_MAX]}
+              domain={[targetSizeRange.min, targetSizeRange.max]}
               reversed
               allowDataOverflow={true}
               label={(props) => (
@@ -387,8 +408,11 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）
   const chartHeight = isLandscape ? 300 : 500;
 
-  // 1年モード: コンテナ高さ（プロットエリア + X軸ラベルエリア）
-  const containerHeight = chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
+  // 上部パディング（○の見切れ防止）
+  const topPadding = 8;
+
+  // 1年モード: コンテナ高さ（上部パディング + プロットエリア + X軸ラベルエリア）
+  const containerHeight = topPadding + chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
 
   return (
     <div className="w-full space-y-2">
@@ -414,7 +438,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               position: 'absolute',
               left: 0,
               right: 0,
-              top: 0,
+              top: topPadding,
               bottom: 0,
               pointerEvents: 'none',
               zIndex: 10,
@@ -452,17 +476,23 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 />
               </g>
 
-              {/* 右Y軸エリア (的の大きさ: 小さい方が上) */}
+              {/* 右Y軸エリア (的の大きさ: 変動式、小さい方が上) */}
               <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
                   const chartAreaHeight = chartHeight;
+                  const { min, max } = targetSizeRange;
+                  const range = max - min;
+
+                  // 適切な間隔でtickを生成
                   const ticks = [];
-                  for (let v = 0; v <= TARGET_SIZE_MAX; v += 0.2) {
+                  const tickInterval = range > 1.5 ? 0.2 : 0.1;
+                  for (let v = Math.ceil(min / tickInterval) * tickInterval; v <= max; v += tickInterval) {
                     ticks.push(v);
                   }
+
                   return ticks.map((value, index) => {
-                    // 小さい値が上: 0=top(0%), TARGET_SIZE_MAX=bottom(100%)
-                    const y = (value / TARGET_SIZE_MAX) * chartAreaHeight;
+                    // 小さい値が上: min=top(0%), max=bottom(100%)
+                    const y = ((value - min) / range) * chartAreaHeight;
                     return (
                       <text
                         key={index}
@@ -499,8 +529,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             position: 'absolute',
             left: chartMargin.left,
             right: chartMargin.right,
-            top: 0,
-            height: containerHeight,
+            top: topPadding,
+            height: chartHeight + X_AXIS_LABEL_AREA_HEIGHT,
             overflowX: 'hidden',
             overflowY: 'visible',
             zIndex: 5,
@@ -559,7 +589,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 <YAxis
                   yAxisId="size"
                   orientation="right"
-                  domain={[0, TARGET_SIZE_MAX]}
+                  domain={[targetSizeRange.min, targetSizeRange.max]}
                   reversed
                   allowDataOverflow={true}
                   axisLine={false}
