@@ -36,8 +36,8 @@ interface VerticalLabelProps {
 }
 
 // 定数: Y軸ラベル配置
-const MAX_LABEL_OFFSET = 22;
-const LABEL_OFFSET_RATIO = 1.6;
+const MAX_LABEL_OFFSET = 18;
+const LABEL_OFFSET_RATIO = 1.4;
 const LINE_HEIGHT_MARGIN = 2;
 
 const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
@@ -133,12 +133,12 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   // レスポンシブmargin設定（useMemoでメモ化）
   const chartMargin = useMemo(() => {
     if (isMobilePortrait) {
-      return { top: 15, right: 35, bottom: 60, left: 30 };
+      return { top: 15, right: 22, bottom: 60, left: 18 };
     }
     if (isLandscape) {
-      return { top: 10, right: 55, bottom: 60, left: 45 };
+      return { top: 10, right: 40, bottom: 60, left: 35 };
     }
-    return { top: 20, right: 60, bottom: 80, left: 50 };
+    return { top: 20, right: 50, bottom: 80, left: 40 };
   }, [isMobilePortrait, isLandscape]);
 
   // レスポンシブフォントサイズ設定（useMemoでメモ化）
