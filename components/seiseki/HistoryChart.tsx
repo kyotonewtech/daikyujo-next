@@ -300,8 +300,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
   // 全期間モード: モーダル領域を最大限活用（1年モードより大きく）
   if (viewMode === 'all') {
-    // 全期間グラフ用の最適化マージン
-    const allPeriodMargin = { top: 20, right: 50, bottom: 80, left: 50 };
+    // 全期間グラフ用の最適化マージン（左右を最小化してグラフ領域を拡大）
+    const allPeriodMargin = { top: 20, right: 20, bottom: 80, left: 20 };
     // 全期間グラフは凡例・ヒント不要なので、より大きな高さを使用
     const allPeriodHeight = isLandscape ? 400 : 700;
 
@@ -311,7 +311,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
         <div className="w-full" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
-            width={typeof window !== 'undefined' ? window.innerWidth - 80 : 800}
+            width={typeof window !== 'undefined' ? window.innerWidth - 60 : 800}
             height={allPeriodHeight}
             margin={allPeriodMargin}
           >
