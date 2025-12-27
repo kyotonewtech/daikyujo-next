@@ -410,11 +410,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）
   const chartHeight = isLandscape ? 300 : 500;
 
-  // 上部パディング（○の見切れ防止: dotのradius 4px * 2 + 余分な余白）
-  const topPadding = 20;
-
-  // 1年モード: コンテナ高さ（上部パディング + プロットエリア + X軸ラベルエリア）
-  const containerHeight = topPadding + chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
+  // 1年モード: コンテナ高さ（プロットエリア + X軸ラベルエリア）
+  const containerHeight = chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
 
   return (
     <div className="w-full space-y-2">
@@ -431,6 +428,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
           height: containerHeight,
           paddingLeft: chartMargin.left,
           paddingRight: chartMargin.right,
+          overflow: 'visible',
         }}
       >
         {/* 固定Y軸背景層（スワイプしても動かない） */}
@@ -440,10 +438,11 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               position: 'absolute',
               left: 0,
               right: 0,
-              top: topPadding,
+              top: 0,
               bottom: 0,
               pointerEvents: 'none',
               zIndex: 10,
+              overflow: 'visible',
             }}
           >
             <svg width="100%" height={chartHeight} style={{ overflow: 'visible' }}>
@@ -531,8 +530,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             position: 'absolute',
             left: chartMargin.left,
             right: chartMargin.right,
-            top: topPadding,
-            height: chartHeight + X_AXIS_LABEL_AREA_HEIGHT,
+            top: 0,
+            height: containerHeight,
             overflowX: 'hidden',
             overflowY: 'visible',
             zIndex: 5,
@@ -563,8 +562,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               <ComposedChart
                 data={allChartData}
                 width={totalWidth}
-                height={chartHeight + X_AXIS_LABEL_AREA_HEIGHT}
-                margin={{ top: 10, right: 0, bottom: 0, left: 0 }}
+                height={containerHeight}
+                margin={{ top: 10, right: 4, bottom: 0, left: 4 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
