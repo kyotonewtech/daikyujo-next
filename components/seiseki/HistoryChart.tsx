@@ -42,7 +42,7 @@ const LINE_HEIGHT_MARGIN = 2;
 
 // 定数: グラフの固定値
 const TARGET_SIZE_MAX = 3.0;
-const RANK_MIN = 1;
+const RANK_MIN = 0; // 0位を追加（メモリは非表示、1位の上に余白確保）
 const RANK_MAX = 11;
 
 // 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
@@ -331,6 +331,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[RANK_MIN, RANK_MAX]}
               reversed
               allowDataOverflow={true}
+              ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
               tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
               tickFormatter={(value) => value === RANK_MAX ? '圏外' : `${value}位`}
             />
@@ -432,9 +433,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             }}
           >
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
-              {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
+              {/* 左Y軸エリア (順位: reversed, 0位は非表示、1位=上, 11位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
-                {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
+                {Array.from({ length: RANK_MAX - RANK_MIN }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = plotAreaHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
                   const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
