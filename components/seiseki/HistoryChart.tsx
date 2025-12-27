@@ -413,11 +413,13 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // Rechartsのmargin設定
   const rechartsMargin = { top: 20, right: 0, bottom: 0, left: 0 };
 
-  // Rechartsのプロット領域の高さ（手動SVGと一致させる）
-  const plotAreaHeight = chartHeight - rechartsMargin.top;
+  // Rechartsのプロット領域の高さ
+  // 重要: XAxis height は chartHeight の中から確保されるため、引く必要がある
+  // plotAreaHeight = chartHeight - margin.top - margin.bottom - XAxis.height
+  const plotAreaHeight = chartHeight - rechartsMargin.top - X_AXIS_LABEL_AREA_HEIGHT;
 
-  // 1年モード: コンテナ高さ（プロットエリア + X軸ラベルエリア）
-  const containerHeight = chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
+  // 1年モード: コンテナ高さ（chartHeightにはXAxisが含まれているのでそのまま使用）
+  const containerHeight = chartHeight;
 
   return (
     <div className="w-full space-y-2">
