@@ -75,8 +75,10 @@ const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertica
 
 export default function HistoryChart({ personHistory, viewMode, onViewModeChange }: HistoryChartProps) {
   const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
+  const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
   const [isLandscape, setIsLandscape] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
@@ -116,8 +118,6 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
   // レスポンシブ: デフォルトはデスクトップ幅を使用
   const MONTH_WIDTH = MONTH_WIDTH_DESKTOP;
   const totalWidth = totalMonths * MONTH_WIDTH;
-  const visibleWidth = VISIBLE_MONTHS * MONTH_WIDTH;
-  const maxPanOffset = -(totalWidth - visibleWidth);
 
   // 全データの的のサイズの最大値を計算（1年表示でもY軸が変わらないように）
   const maxTargetSize = Math.max(
@@ -236,10 +236,27 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
     touchStartX.current = null;
   };
 
+  // 実際の表示領域幅を取得してmaxPanOffsetを計算
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const updateMaxPanOffset = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const calculatedMaxPanOffset = -(totalWidth - containerWidth);
+        setMaxPanOffset(calculatedMaxPanOffset);
+      }
+    };
+
+    updateMaxPanOffset();
+    window.addEventListener('resize', updateMaxPanOffset);
+    return () => window.removeEventListener('resize', updateMaxPanOffset);
+  }, [totalWidth]);
+
   // 表示モード変更時にオフセットをリセット
   useEffect(() => {
-    if (viewMode === 'year') {
-      setPanOffset(maxPanOffset); // 直近12ヶ月を表示
+    if (viewMode === 'year' && maxPanOffset !== 0) {
+      setPanOffset(maxPanOffset); // 直近データを表示
     }
   }, [viewMode, maxPanOffset]);
 
@@ -377,6 +394,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       >
         {/* データ部分のみoverflowでクリップ */}
         <div
+          ref={containerRef}
           style={{
             position: 'absolute',
             left: chartMargin.left,
