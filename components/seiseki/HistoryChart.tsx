@@ -308,10 +308,10 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     return (
       <div className="w-full">
         {/* 全期間グラフ（モーダル領域最大化、凡例なし） */}
-        <div className="w-full flex justify-center" style={{ height: allPeriodHeight }}>
+        <div className="w-full" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
-            width={typeof window !== 'undefined' ? Math.min(window.innerWidth - 40, 1200) : 800}
+            width={typeof window !== 'undefined' ? window.innerWidth - 80 : 800}
             height={allPeriodHeight}
             margin={allPeriodMargin}
           >
