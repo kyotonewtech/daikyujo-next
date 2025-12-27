@@ -42,7 +42,7 @@ const LINE_HEIGHT_MARGIN = 2;
 
 // 定数: グラフの固定値
 const TARGET_SIZE_MAX = 3.0;
-const RANK_MIN = 0.5; // 0.5位を追加（メモリは非表示、1位の上に余白確保）
+const RANK_MIN = 0.2; // 0.2位を追加（メモリは非表示、1位の上に余白確保）
 const RANK_MAX = 11;
 
 // 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
@@ -433,7 +433,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             }}
           >
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
-              {/* 左Y軸エリア (順位: reversed, 0.5位は非表示、1位=上, 11位=下) */}
+              {/* 左Y軸エリア (順位: reversed, 0.2位は非表示、1位=上, 11位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX - RANK_MIN }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = plotAreaHeight;
