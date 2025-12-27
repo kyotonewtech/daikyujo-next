@@ -410,6 +410,12 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）
   const chartHeight = isLandscape ? 300 : 500;
 
+  // Rechartsのmargin設定
+  const rechartsMargin = { top: 20, right: 0, bottom: 0, left: 0 };
+
+  // Rechartsのプロット領域の高さ（手動SVGと一致させる）
+  const plotAreaHeight = chartHeight - rechartsMargin.top;
+
   // 1年モード: コンテナ高さ（プロットエリア + X軸ラベルエリア）
   const containerHeight = chartHeight + X_AXIS_LABEL_AREA_HEIGHT;
 
@@ -447,9 +453,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
           >
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
               {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
-              <g transform={`translate(0, 20)`}>
+              <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
-                  const chartAreaHeight = chartHeight;
+                  const chartAreaHeight = plotAreaHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
                   const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
                   return (
@@ -471,16 +477,16 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   x1={chartMargin.left}
                   y1={0}
                   x2={chartMargin.left}
-                  y2={chartHeight}
+                  y2={plotAreaHeight}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
               </g>
 
               {/* 右Y軸エリア (的の大きさ: 人物ごとに可変、X軸は視覚的に底辺) */}
-              <g transform={`translate(${containerWidth + chartMargin.left}, 20)`}>
+              <g transform={`translate(${containerWidth + chartMargin.left}, ${rechartsMargin.top})`}>
                 {(() => {
-                  const chartAreaHeight = chartHeight;
+                  const chartAreaHeight = plotAreaHeight;
                   const { min, max } = targetSizeRange;
                   const range = max - min;
 
@@ -514,7 +520,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   x1={0}
                   y1={0}
                   x2={0}
-                  y2={chartHeight}
+                  y2={plotAreaHeight}
                   stroke="#ccc"
                   strokeWidth={1}
                 />
@@ -562,8 +568,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               <ComposedChart
                 data={allChartData}
                 width={totalWidth}
-                height={containerHeight}
-                margin={{ top: 20, right: 0, bottom: 0, left: 0 }}
+                height={chartHeight}
+                margin={rechartsMargin}
               >
                 <CartesianGrid strokeDasharray="3 3" />
 
