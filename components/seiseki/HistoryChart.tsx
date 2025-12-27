@@ -435,7 +435,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
               {/* 左Y軸エリア (順位: reversed, 0.2位は非表示、1位=上, 11位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
-                {Array.from({ length: RANK_MAX - RANK_MIN }, (_, i) => i + 1).map((value) => {
+                {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = plotAreaHeight;
                   // reversedなので: 1位=top(0%), 11位=bottom(100%)
                   const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
