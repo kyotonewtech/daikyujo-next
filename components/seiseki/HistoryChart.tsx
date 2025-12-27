@@ -322,16 +322,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[RANK_MIN, RANK_MAX]}
               reversed
               allowDataOverflow={true}
-              label={(props) => (
-                <VerticalLabel
-                  {...props}
-                  fill="#8B0000"
-                  text="順位"
-                  position="left"
-                  fontSize={labelFontSize}
-                />
-              )}
-              tick={{ fontSize: tickFontSize }}
+              tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
               tickFormatter={(value) => value === RANK_MAX ? '圏外' : `${value}位`}
             />
 
@@ -341,16 +332,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[targetSizeRange.min, targetSizeRange.max]}
               reversed
               allowDataOverflow={true}
-              label={(props) => (
-                <VerticalLabel
-                  {...props}
-                  fill="#4A90E2"
-                  text="的の大きさ"
-                  position="right"
-                  fontSize={labelFontSize}
-                />
-              )}
-              tick={{ fontSize: tickFontSize }}
+              tick={{ fontSize: tickFontSize, fill: '#4A90E2' }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
 
@@ -468,7 +450,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                       textAnchor="end"
                       dominantBaseline="middle"
                       fontSize={tickFontSize}
-                      fill="#666"
+                      fill="#8B0000"
                     >
                       {value === RANK_MAX ? '圏外' : `${value}位`}
                     </text>
@@ -510,7 +492,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                         textAnchor="start"
                         dominantBaseline="middle"
                         fontSize={tickFontSize}
-                        fill="#666"
+                        fill="#4A90E2"
                       >
                         {value.toFixed(1)}寸
                       </text>
