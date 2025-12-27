@@ -298,19 +298,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）- 両モード共通
   const chartHeight = isLandscape ? 300 : 500;
 
-  // 全期間モード: 固定サイズグラフ（1年モードと同じサイズ）
+  // 全期間モード: モーダル領域を最大限活用（1年モードより大きく）
   if (viewMode === 'all') {
     // 全期間グラフ用の最適化マージン
     const allPeriodMargin = { top: 20, right: 50, bottom: 80, left: 50 };
+    // 全期間グラフは凡例・ヒント不要なので、より大きな高さを使用
+    const allPeriodHeight = isLandscape ? 400 : 700;
 
     return (
       <div className="w-full">
-        {/* 全期間グラフ（固定サイズ、凡例なし） */}
-        <div className="w-full flex justify-center" style={{ height: chartHeight }}>
+        {/* 全期間グラフ（モーダル領域最大化、凡例なし） */}
+        <div className="w-full flex justify-center" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
             width={typeof window !== 'undefined' ? Math.min(window.innerWidth - 40, 1200) : 800}
-            height={chartHeight}
+            height={allPeriodHeight}
             margin={allPeriodMargin}
           >
             <CartesianGrid strokeDasharray="3 3" />
