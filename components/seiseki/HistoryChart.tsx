@@ -314,7 +314,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
             <YAxis
               yAxisId="size"
               orientation="right"
-              domain={[0, maxTargetSize]}
+              domain={[0, 3]}
               reversed
               label={(props) => (
                 <VerticalLabel
@@ -456,14 +456,14 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
               <g transform={`translate(${containerWidth + chartMargin.left}, 0)`}>
                 {(() => {
                   const chartAreaHeight = chartHeight;
+                  const maxSize = 3.0; // 固定値
                   const ticks = [];
-                  const step = maxTargetSize > 3 ? 0.5 : 0.2;
-                  for (let v = 0; v <= maxTargetSize; v += step) {
+                  for (let v = 0; v <= maxSize; v += 0.2) {
                     ticks.push(v);
                   }
                   return ticks.map((value, index) => {
-                    // 小さい値が上: 0=top(0%), maxTargetSize=bottom(100%)
-                    const y = (value / maxTargetSize) * chartAreaHeight;
+                    // 小さい値が上: 0=top(0%), 3.0=bottom(100%)
+                    const y = (value / maxSize) * chartAreaHeight;
                     return (
                       <text
                         key={index}
@@ -557,7 +557,7 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
                 <YAxis
                   yAxisId="size"
                   orientation="right"
-                  domain={[0, maxTargetSize]}
+                  domain={[0, 3]}
                   reversed
                   axisLine={false}
                   tick={false}
