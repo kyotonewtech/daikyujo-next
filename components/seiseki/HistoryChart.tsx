@@ -46,7 +46,7 @@ const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertica
   const startY = centerY - ((chars.length - 1) * lineHeight) / 2;
 
   // X座標を計算（フォントサイズに応じて調整）
-  const xOffset = position === 'left' ? Math.min(30, fontSize * 2.2) : Math.min(30, fontSize * 2.2);
+  const xOffset = Math.min(22, fontSize * 1.6);
   let finalX: number;
   if (position === 'left') {
     // 左側Y軸: viewBoxの左端から右に調整
@@ -133,34 +133,34 @@ export default function HistoryChart({ personHistory, viewMode, onViewModeChange
       // スマホ縦画面: 左右を大幅に削減
       return {
         top: 15,
-        right: 50,
+        right: 35,
         bottom: 60,
-        left: 40,
+        left: 30,
       };
     }
     if (isLandscape) {
       // 横画面: 上下を削減
       return {
         top: 10,
-        right: 80,
+        right: 55,
         bottom: 60,
-        left: 60,
+        left: 45,
       };
     }
     // 通常（タブレット・PC）
     return {
       top: 20,
-      right: 80,
+      right: 60,
       bottom: 80,
-      left: 60,
+      left: 50,
     };
   };
 
   const chartMargin = getChartMargin();
 
   // レスポンシブフォントサイズ設定
-  const labelFontSize = isMobilePortrait ? 11 : 14;
-  const tickFontSize = isMobilePortrait ? 9 : 11;
+  const labelFontSize = isMobilePortrait ? 10 : 12;
+  const tickFontSize = isMobilePortrait ? 8 : 10;
 
   // 表示期間のラベルを取得（panOffsetから逆算）
   const getPeriodLabel = () => {
