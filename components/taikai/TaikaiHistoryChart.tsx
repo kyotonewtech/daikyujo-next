@@ -11,6 +11,9 @@ import {
 } from 'recharts';
 import type { PersonTaikaiHistory } from '@/types/taikai';
 
+// 定数: グラフの固定値
+const RANK_MIN = 0.2; // 1位の上に余白確保（メモリは非表示）
+
 interface TaikaiHistoryChartProps {
   personHistory: PersonTaikaiHistory;
 }
@@ -67,9 +70,9 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           interval="preserveStartEnd"
         />
 
-        {/* Y軸: 順位（1位が上） */}
+        {/* Y軸: 順位（1位が上、RANK_MINで上部余白確保） */}
         <YAxis
-          domain={[1, maxRank]}
+          domain={[RANK_MIN, maxRank]}
           reversed
           allowDataOverflow={true}
           ticks={Array.from({ length: maxRank }, (_, i) => i + 1)}
