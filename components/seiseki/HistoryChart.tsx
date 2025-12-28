@@ -149,7 +149,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
       .filter((size): size is number => size !== null && size !== undefined);
 
     if (sizes.length === 0) {
-      return { min: 0, max: TARGET_SIZE_MAX };
+      return { min: 0, max: TARGET_SIZE_MAX, actualMin: 0, actualMax: TARGET_SIZE_MAX };
     }
 
     const minTargetSize = Math.min(...sizes);
@@ -175,7 +175,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
     return {
       min: Math.max(0, calculatedMin),
-      max: Math.min(TARGET_SIZE_MAX, calculatedMax)
+      max: Math.min(TARGET_SIZE_MAX, calculatedMax),
+      actualMin: minTargetSize,
+      actualMax: maxTargetSize
     };
   }, [allChartData]);
 
@@ -358,6 +360,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[targetSizeRange.min, targetSizeRange.max]}
               reversed
               allowDataOverflow={true}
+              ticks={[targetSizeRange.actualMin, targetSizeRange.actualMax]}
               tick={{ fontSize: tickFontSize, fill: '#4A90E2' }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
@@ -486,15 +489,11 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               <g transform={`translate(${containerWidth + chartMargin.left}, ${rechartsMargin.top})`}>
                 {(() => {
                   const chartAreaHeight = plotAreaHeight;
-                  const { min, max } = targetSizeRange;
+                  const { min, max, actualMin, actualMax } = targetSizeRange;
                   const range = max - min;
 
-                  // 人物の範囲でtickを生成（0.2寸刻み）
-                  const ticks = [];
-                  const tickInterval = 0.2;
-                  for (let v = Math.floor(min / tickInterval) * tickInterval; v <= max; v += tickInterval) {
-                    ticks.push(Number(v.toFixed(1)));
-                  }
+                  // 最小値と最大値のみ表示
+                  const ticks = [actualMin, actualMax];
 
                   return ticks.map((value, index) => {
                     // 座標系は動的min〜max、小さい値が上（reversed）
