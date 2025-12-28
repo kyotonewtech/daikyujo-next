@@ -316,8 +316,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
   // 全期間モード: 1年モードと同じモーダルサイズ
   if (viewMode === 'all') {
-    // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はX軸ラベル用に確保）
-    const allPeriodMargin = { top: 5, right: 0, bottom: 100, left: 0 };
+    // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はXAxis heightで確保）
+    const allPeriodMargin = { top: 5, right: 0, bottom: 0, left: 0 };
     // 全期間グラフと1年グラフで同じ高さを使用
     const allPeriodHeight = chartHeight; // isLandscape ? 300 : 500
 
@@ -337,7 +337,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               dataKey="period"
               angle={-45}
               textAnchor="end"
-              height={110}
+              height={X_AXIS_LABEL_AREA_HEIGHT}
               tick={{ fontSize: tickFontSize }}
               interval="preserveStartEnd"
             />
