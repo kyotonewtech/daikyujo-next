@@ -44,8 +44,11 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   // Y軸の最大順位を計算
   const maxRank = Math.max(...chartData.map(d => d.rank));
 
-  // グラフサイズ設定（親divの高さを50px減らす）
-  const chartHeight = isLandscape ? 350 : 650;
+  // dotの見切れ防止のための余白定数
+  const RANK_PADDING = 0.5;
+
+  // グラフサイズ設定
+  const chartHeight = isLandscape ? 400 : 700;
 
   return (
     <div className="w-full" style={{ height: chartHeight }}>
@@ -68,7 +71,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
 
         {/* Y軸: 順位（1位が上） */}
         <YAxis
-          domain={[1, maxRank]}
+          domain={[1 - RANK_PADDING, maxRank + RANK_PADDING]}
           reversed
           allowDataOverflow={true}
           ticks={Array.from({ length: maxRank }, (_, i) => i + 1)}
