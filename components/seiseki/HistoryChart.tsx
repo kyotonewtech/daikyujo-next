@@ -314,12 +314,12 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // グラフの実際のheight（数値）- 両モード共通
   const chartHeight = isLandscape ? 300 : 500;
 
-  // 全期間モード: モーダル領域を最大限活用（1年モードより大きく）
+  // 全期間モード: 1年モードと同じモーダルサイズ
   if (viewMode === 'all') {
     // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はX軸ラベル用に確保）
     const allPeriodMargin = { top: 5, right: 0, bottom: 100, left: 0 };
-    // 全期間グラフは凡例・ヒント不要なので、より大きな高さを使用
-    const allPeriodHeight = isLandscape ? 430 : 730;
+    // 全期間グラフと1年グラフで同じ高さを使用
+    const allPeriodHeight = chartHeight; // isLandscape ? 300 : 500
 
     return (
       <div className="w-full">
