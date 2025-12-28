@@ -142,7 +142,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     [personHistory.history]
   );
 
-  // 的の大きさの最小値・最大値を計算（順位1位と最小的サイズが同じ高さになるように調整）
+  // 的の大きさの最小値・最大値を計算（minTargetSize=1位、maxTargetSize=11位圏外に配置）
   const targetSizeRange = useMemo(() => {
     const sizes = allChartData
       .map(d => d.targetSize)
@@ -159,23 +159,25 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     const rankDomainMin = 1 - RANK_PADDING; // 0.5
     const rankDomainMax = RANK_MAX + RANK_PADDING; // 11.5
 
-    // 実際のデータから的サイズの変化率を計算
-    // 最小的サイズを1位の位置に配置するため、データ範囲から単位あたりの変化率を算出
+    // 実際のデータ範囲（1位から11位に対応）
     const actualTargetRange = maxTargetSize - minTargetSize;
-    const actualRankRange = RANK_MAX - 1; // 1位から11位までの範囲
+    const actualRankRange = RANK_MAX - 1; // 10 (1位から11位までの範囲)
 
     // 順位1単位あたりの的サイズの変化量
+    // この計算により、minTargetSize=1位、maxTargetSize=11位(圏外)と同じ高さに配置される
     const targetSizePerRankUnit = actualRankRange > 0
-      ? actualTargetRange / actualRankRange
+      ? actualTargetRange / actualRankRange  // = dataRange / 10
       : 0.3; // データが1つしかない場合のデフォルト値
 
-    // 的の大きさのdomainを計算（1位の位置に最小的サイズが来るように調整）
+    // 的の大きさのdomainを計算
+    // - calculatedMin: minTargetSize - dataRange/20 → minTargetSizeが1位の高さに配置
+    // - calculatedMax: minTargetSize + dataRange*10.5/10 → maxTargetSizeが11位の高さに配置
     const calculatedMin = minTargetSize - (1 - rankDomainMin) * targetSizePerRankUnit;
     const calculatedMax = minTargetSize + (rankDomainMax - 1) * targetSizePerRankUnit;
 
     return {
-      min: Math.max(0, calculatedMin),
-      max: Math.min(TARGET_SIZE_MAX, calculatedMax),
+      min: calculatedMin,
+      max: calculatedMax,
       actualMin: minTargetSize,
       actualMax: maxTargetSize
     };
