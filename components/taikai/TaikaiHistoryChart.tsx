@@ -44,12 +44,12 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   // Y軸の最大順位を計算
   const maxRank = Math.max(...chartData.map(d => d.rank));
 
-  // グラフサイズ設定
-  const chartHeight = isLandscape ? 400 : 700;
+  // グラフサイズ設定（親divの高さを50px減らす）
+  const chartHeight = isLandscape ? 350 : 650;
 
   return (
     <div className="w-full" style={{ height: chartHeight }}>
-      <ResponsiveContainer width="100%" height="97%">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={chartData}
           margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
