@@ -52,7 +52,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={chartData}
-          margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
+          margin={{ top: 30, right: 10, bottom: 80, left: 0 }}
         >
         <CartesianGrid strokeDasharray="3 3" />
 
