@@ -311,8 +311,8 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     }
   }, [viewMode, maxPanOffset]);
 
-  // グラフの実際のheight（数値）- 両モード共通（大会成績グラフと統一）
-  const chartHeight = isLandscape ? 400 : 700;
+  // グラフの実際のheight（数値）- 両モード共通
+  const chartHeight = isLandscape ? 300 : 500;
 
   // 全期間モード: 1年モードと同じモーダルサイズ
   if (viewMode === 'all') {
