@@ -42,7 +42,7 @@ const LINE_HEIGHT_MARGIN = 2;
 
 // 定数: グラフの固定値
 const TARGET_SIZE_MAX = 3.0;
-const RANK_MIN = 0.2; // 0.2位を追加（メモリは非表示、1位の上に余白確保）
+const RANK_PADDING = 0.5; // dotの見切れ防止のための余白定数
 const RANK_MAX = 11;
 
 // 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
@@ -328,7 +328,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
             <YAxis
               yAxisId="rank"
-              domain={[() => RANK_MIN, () => RANK_MAX]}
+              domain={[() => 1 - RANK_PADDING, () => RANK_MAX + RANK_PADDING]}
               reversed
               allowDataOverflow={true}
               ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
@@ -435,12 +435,14 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             }}
           >
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
-              {/* 左Y軸エリア (順位: reversed, 0.2位は非表示、1位=上, 11位=下) */}
+              {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = plotAreaHeight;
-                  // reversedなので: 1位=top(0%), 11位=bottom(100%)
-                  const y = ((value - RANK_MIN) / (RANK_MAX - RANK_MIN)) * chartAreaHeight;
+                  const domainMin = 1 - RANK_PADDING;
+                  const domainMax = RANK_MAX + RANK_PADDING;
+                  // reversedなので: 1位=top, 11位=bottom
+                  const y = ((value - domainMin) / (domainMax - domainMin)) * chartAreaHeight;
                   return (
                     <text
                       key={value}
@@ -569,7 +571,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 {/* Y軸は座標系のみ使用、表示は固定層で行う */}
                 <YAxis
                   yAxisId="rank"
-                  domain={[() => RANK_MIN, () => RANK_MAX]}
+                  domain={[() => 1 - RANK_PADDING, () => RANK_MAX + RANK_PADDING]}
                   reversed
                   allowDataOverflow={true}
                   axisLine={false}
