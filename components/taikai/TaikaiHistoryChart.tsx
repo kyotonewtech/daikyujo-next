@@ -44,18 +44,19 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   // Y軸の最大順位を計算
   const maxRank = Math.max(...chartData.map(d => d.rank));
 
+  // dotの見切れ防止のための余白定数
+  const RANK_PADDING = 0.5;
+
   // グラフサイズ設定
   const chartHeight = isLandscape ? 400 : 700;
 
   return (
     <div className="w-full" style={{ height: chartHeight }}>
-      <ResponsiveContainer width="100%" height="97%">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={chartData}
           margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
         >
-        <CartesianGrid strokeDasharray="3 3" />
-
         {/* X軸: 年度 */}
         <XAxis
           dataKey="year"
@@ -68,7 +69,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
 
         {/* Y軸: 順位（1位が上） */}
         <YAxis
-          domain={[1, maxRank]}
+          domain={[1 - RANK_PADDING, maxRank + RANK_PADDING]}
           reversed
           allowDataOverflow={true}
           ticks={Array.from({ length: maxRank }, (_, i) => i + 1)}
