@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ResponsiveContainer,
 } from 'recharts';
 import type { PersonTaikaiHistory } from '@/types/taikai';
 
@@ -46,18 +47,16 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   // Y軸の最大順位を計算
   const maxRank = Math.max(...chartData.map(d => d.rank));
 
-  // グラフサイズ設定（全期間成績グラフと同様）
+  // グラフサイズ設定
   const chartHeight = isLandscape ? 400 : 700;
-  const chartWidth = typeof window !== 'undefined' ? window.innerWidth - 40 : 800;
 
   return (
     <div className="w-full" style={{ height: chartHeight }}>
-      <LineChart
-        data={chartData}
-        width={chartWidth}
-        height={chartHeight}
-        margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
-      >
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          data={chartData}
+          margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
+        >
         <CartesianGrid strokeDasharray="3 3" />
 
         {/* X軸: 年度 */}
@@ -106,6 +105,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           name="rank"
         />
       </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }
