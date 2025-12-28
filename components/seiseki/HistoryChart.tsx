@@ -360,7 +360,17 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[targetSizeRange.min, targetSizeRange.max]}
               reversed
               allowDataOverflow={true}
-              ticks={[targetSizeRange.actualMin, targetSizeRange.actualMax]}
+              ticks={(() => {
+                // 実際のデータ範囲内でtickを生成（0.2寸刻み）
+                const ticks = [];
+                const tickInterval = 0.2;
+                const start = Math.ceil(targetSizeRange.actualMin / tickInterval) * tickInterval;
+                const end = Math.floor(targetSizeRange.actualMax / tickInterval) * tickInterval;
+                for (let v = start; v <= end; v += tickInterval) {
+                  ticks.push(Number(v.toFixed(1)));
+                }
+                return ticks;
+              })()}
               tick={{ fontSize: tickFontSize, fill: '#4A90E2' }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
@@ -492,8 +502,14 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   const { min, max, actualMin, actualMax } = targetSizeRange;
                   const range = max - min;
 
-                  // 最小値と最大値のみ表示
-                  const ticks = [actualMin, actualMax];
+                  // 実際のデータ範囲内でtickを生成（0.2寸刻み）
+                  const ticks = [];
+                  const tickInterval = 0.2;
+                  const start = Math.ceil(actualMin / tickInterval) * tickInterval;
+                  const end = Math.floor(actualMax / tickInterval) * tickInterval;
+                  for (let v = start; v <= end; v += tickInterval) {
+                    ticks.push(Number(v.toFixed(1)));
+                  }
 
                   return ticks.map((value, index) => {
                     // 座標系は動的min〜max、小さい値が上（reversed）
