@@ -29,9 +29,6 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
     return () => window.removeEventListener('resize', checkOrientation);
   }, []);
 
-  // 最新の段級位を取得
-  const latestRankTitle = personHistory.history[0]?.rankTitle || '';
-
   // グラフ用にデータを整形（逆順にして新しい年を右側に）
   const chartData = personHistory.history
     .slice()
@@ -51,19 +48,13 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   const chartWidth = typeof window !== 'undefined' ? window.innerWidth - 40 : 800;
 
   return (
-    <div className="w-full">
-      {/* タイトル */}
-      <h2 className="text-center text-lg font-bold mb-2">
-        {personHistory.name}{latestRankTitle}の大会成績推移
-      </h2>
-
-      <div className="w-full" style={{ height: chartHeight }}>
-        <LineChart
-          data={chartData}
-          width={chartWidth}
-          height={chartHeight}
-          margin={{ top: 0, right: 10, bottom: 80, left: 0 }}
-        >
+    <div className="w-full" style={{ height: chartHeight }}>
+      <LineChart
+        data={chartData}
+        width={chartWidth}
+        height={chartHeight}
+        margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
+      >
         <CartesianGrid strokeDasharray="3 3" />
 
         {/* X軸: 年度 */}
@@ -112,7 +103,6 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           name="rank"
         />
       </LineChart>
-      </div>
     </div>
   );
 }
