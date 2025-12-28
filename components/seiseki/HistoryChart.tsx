@@ -328,12 +328,14 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
             <YAxis
               yAxisId="rank"
-              domain={[RANK_MIN, RANK_MAX]}
+              domain={[() => RANK_MIN, () => RANK_MAX]}
               reversed
               allowDataOverflow={true}
               ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
               tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
               tickFormatter={(value) => value === RANK_MAX ? '圏外' : `${value}位`}
+              scale="linear"
+              type="number"
             />
 
             <YAxis
@@ -567,11 +569,13 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 {/* Y軸は座標系のみ使用、表示は固定層で行う */}
                 <YAxis
                   yAxisId="rank"
-                  domain={[RANK_MIN, RANK_MAX]}
+                  domain={[() => RANK_MIN, () => RANK_MAX]}
                   reversed
                   allowDataOverflow={true}
                   axisLine={false}
                   tick={false}
+                  scale="linear"
+                  type="number"
                 />
 
                 <YAxis
@@ -628,18 +632,6 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               </ComposedChart>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* 凡例（固定表示） */}
-      <div className="flex justify-center gap-6 py-2">
-        <div className="flex items-center gap-1">
-          <div className="w-4 h-0.5 bg-[#8B0000]" />
-          <span className="text-xs text-gray-700">順位</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="w-4 h-0.5 bg-[#4A90E2]" />
-          <span className="text-xs text-gray-700">的の大きさ</span>
         </div>
       </div>
 
