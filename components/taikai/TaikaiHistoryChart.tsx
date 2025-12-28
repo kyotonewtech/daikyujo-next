@@ -11,9 +11,6 @@ import {
 } from 'recharts';
 import type { PersonTaikaiHistory } from '@/types/taikai';
 
-// 定数: グラフの固定値
-const RANK_MIN = 0.2; // 1位の上に余白確保（メモリは非表示）
-
 interface TaikaiHistoryChartProps {
   personHistory: PersonTaikaiHistory;
 }
@@ -31,6 +28,10 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
     window.addEventListener('resize', checkOrientation);
     return () => window.removeEventListener('resize', checkOrientation);
   }, []);
+
+  // 最新の段級位を取得
+  const latestRankTitle = personHistory.history[0]?.rankTitle || '';
+
   // グラフ用にデータを整形（逆順にして新しい年を右側に）
   const chartData = personHistory.history
     .slice()
@@ -50,13 +51,19 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   const chartWidth = typeof window !== 'undefined' ? window.innerWidth - 40 : 800;
 
   return (
-    <div className="w-full" style={{ height: chartHeight }}>
-      <LineChart
-        data={chartData}
-        width={chartWidth}
-        height={chartHeight}
-        margin={{ top: 20, right: 0, bottom: 80, left: 0 }}
-      >
+    <div className="w-full">
+      {/* タイトル */}
+      <h2 className="text-center text-lg font-bold mb-2">
+        {personHistory.name}{latestRankTitle}の大会成績推移
+      </h2>
+
+      <div className="w-full" style={{ height: chartHeight }}>
+        <LineChart
+          data={chartData}
+          width={chartWidth}
+          height={chartHeight}
+          margin={{ top: 0, right: 10, bottom: 80, left: 0 }}
+        >
         <CartesianGrid strokeDasharray="3 3" />
 
         {/* X軸: 年度 */}
@@ -69,9 +76,9 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           interval="preserveStartEnd"
         />
 
-        {/* Y軸: 順位（1位が上、RANK_MINで上部余白確保） */}
+        {/* Y軸: 順位（1位が上） */}
         <YAxis
-          domain={[() => RANK_MIN, () => maxRank]}
+          domain={[1, maxRank]}
           reversed
           allowDataOverflow={true}
           ticks={Array.from({ length: maxRank }, (_, i) => i + 1)}
@@ -105,6 +112,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           name="rank"
         />
       </LineChart>
+      </div>
     </div>
   );
 }
