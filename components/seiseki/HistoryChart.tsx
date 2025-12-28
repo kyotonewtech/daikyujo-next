@@ -142,7 +142,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     [personHistory.history]
   );
 
-  // 的の大きさの最小値・最大値を計算（人物ごとに可変、X軸は視覚的に底辺で固定）
+  // 的の大きさの最小値・最大値を計算（順位1位と最小的サイズが同じ高さになるように調整）
   const targetSizeRange = useMemo(() => {
     const sizes = allChartData
       .map(d => d.targetSize)
@@ -152,16 +152,30 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
       return { min: 0, max: TARGET_SIZE_MAX };
     }
 
-    const min = Math.min(...sizes);
-    const max = Math.max(...sizes);
+    const minTargetSize = Math.min(...sizes);
+    const maxTargetSize = Math.max(...sizes);
 
-    // 余白を追加（範囲の15%、最小0.3寸で○の見切れを防止）
-    const range = max - min;
-    const padding = Math.max(range * 0.15, 0.3);
+    // 順位のdomain範囲
+    const rankDomainMin = 1 - RANK_PADDING; // 0.5
+    const rankDomainMax = RANK_MAX + RANK_PADDING; // 11.5
+
+    // 実際のデータから的サイズの変化率を計算
+    // 最小的サイズを1位の位置に配置するため、データ範囲から単位あたりの変化率を算出
+    const actualTargetRange = maxTargetSize - minTargetSize;
+    const actualRankRange = RANK_MAX - 1; // 1位から11位までの範囲
+
+    // 順位1単位あたりの的サイズの変化量
+    const targetSizePerRankUnit = actualRankRange > 0
+      ? actualTargetRange / actualRankRange
+      : 0.3; // データが1つしかない場合のデフォルト値
+
+    // 的の大きさのdomainを計算（1位の位置に最小的サイズが来るように調整）
+    const calculatedMin = minTargetSize - (1 - rankDomainMin) * targetSizePerRankUnit;
+    const calculatedMax = minTargetSize + (rankDomainMax - 1) * targetSizePerRankUnit;
 
     return {
-      min: Math.max(0, min - padding),
-      max: Math.min(TARGET_SIZE_MAX, max + padding)
+      min: Math.max(0, calculatedMin),
+      max: Math.min(TARGET_SIZE_MAX, calculatedMax)
     };
   }, [allChartData]);
 
