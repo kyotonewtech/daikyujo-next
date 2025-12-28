@@ -43,7 +43,7 @@ const LINE_HEIGHT_MARGIN = 2;
 // 定数: グラフの固定値
 const TARGET_SIZE_MAX = 3.0;
 const RANK_PADDING = 0.5; // dotの見切れ防止のための余白定数
-const RANK_MAX = 11;
+const RANK_MAX = 10;
 
 // 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
 const X_AXIS_LABEL_AREA_HEIGHT = 100;
@@ -142,7 +142,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     [personHistory.history]
   );
 
-  // 的の大きさの最小値・最大値を計算（minTargetSize=1位、maxTargetSize=11位圏外に配置）
+  // 的の大きさの最小値・最大値を計算（minTargetSize=1位、maxTargetSize=10位に配置）
   const targetSizeRange = useMemo(() => {
     const sizes = allChartData
       .map(d => d.targetSize)
@@ -157,21 +157,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
     // 順位のdomain範囲
     const rankDomainMin = 1 - RANK_PADDING; // 0.5
-    const rankDomainMax = RANK_MAX + RANK_PADDING; // 11.5
+    const rankDomainMax = RANK_MAX + RANK_PADDING; // 10.5
 
-    // 実際のデータ範囲（1位から11位に対応）
+    // 実際のデータ範囲（1位から10位に対応）
     const actualTargetRange = maxTargetSize - minTargetSize;
-    const actualRankRange = RANK_MAX - 1; // 10 (1位から11位までの範囲)
+    const actualRankRange = RANK_MAX - 1; // 9 (1位から10位までの範囲)
 
     // 順位1単位あたりの的サイズの変化量
-    // この計算により、minTargetSize=1位、maxTargetSize=11位(圏外)と同じ高さに配置される
+    // この計算により、minTargetSize=1位、maxTargetSize=10位と同じ高さに配置される
     const targetSizePerRankUnit = actualRankRange > 0
-      ? actualTargetRange / actualRankRange  // = dataRange / 10
+      ? actualTargetRange / actualRankRange  // = dataRange / 9
       : 0.3; // データが1つしかない場合のデフォルト値
 
     // 的の大きさのdomainを計算
-    // - calculatedMin: minTargetSize - dataRange/20 → minTargetSizeが1位の高さに配置
-    // - calculatedMax: minTargetSize + dataRange*10.5/10 → maxTargetSizeが11位の高さに配置
+    // - calculatedMin: minTargetSize - dataRange/18 → minTargetSizeが1位の高さに配置
+    // - calculatedMax: minTargetSize + dataRange*9.5/9 → maxTargetSizeが10位の高さに配置
     const calculatedMin = minTargetSize - (1 - rankDomainMin) * targetSizePerRankUnit;
     const calculatedMax = minTargetSize + (rankDomainMax - 1) * targetSizePerRankUnit;
 
@@ -349,9 +349,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               domain={[() => 1 - RANK_PADDING, () => RANK_MAX + RANK_PADDING]}
               reversed
               allowDataOverflow={true}
-              ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+              ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
               tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
-              tickFormatter={(value) => value === RANK_MAX ? '圏外' : `${value}位`}
+              tickFormatter={(value) => `${value}位`}
               scale="linear"
               type="number"
             />
@@ -464,13 +464,13 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             }}
           >
             <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
-              {/* 左Y軸エリア (順位: reversed, 1位=上, 11位=下) */}
+              {/* 左Y軸エリア (順位: reversed, 1位=上, 10位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
                   const chartAreaHeight = plotAreaHeight;
                   const domainMin = 1 - RANK_PADDING;
                   const domainMax = RANK_MAX + RANK_PADDING;
-                  // reversedなので: 1位=top, 11位=bottom
+                  // reversedなので: 1位=top, 10位=bottom
                   const y = ((value - domainMin) / (domainMax - domainMin)) * chartAreaHeight;
                   return (
                     <text
@@ -482,7 +482,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                       fontSize={tickFontSize}
                       fill="#8B0000"
                     >
-                      {value === RANK_MAX ? '圏外' : `${value}位`}
+                      {`${value}位`}
                     </text>
                   );
                 })}
