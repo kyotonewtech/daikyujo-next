@@ -52,11 +52,33 @@ function getAllDataFiles(): string[] {
 function main() {
   const files = getAllDataFiles();
   const nameToPersonId = new Map<string, string>();
-  let nextPersonId = 1;
+
+  // 既存のpersonIdの最大値を見つける
+  let maxExistingPersonId = 0;
+  for (const filePath of files) {
+    try {
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const data: SeisekiMonth = JSON.parse(content);
+      for (const entry of data.entries) {
+        if (entry.personId && entry.personId.startsWith('person_')) {
+          const idNum = parseInt(entry.personId.replace('person_', ''));
+          if (!isNaN(idNum) && idNum > maxExistingPersonId) {
+            maxExistingPersonId = idNum;
+          }
+        }
+      }
+    } catch (error) {
+      // エラーは後で処理するのでスキップ
+    }
+  }
+
+  let nextPersonId = maxExistingPersonId + 1;
   let processedFiles = 0;
   let processedEntries = 0;
 
   console.log(`処理対象ファイル数: ${files.length}`);
+  console.log(`既存の最大personId: person_${String(maxExistingPersonId).padStart(3, '0')}`);
+  console.log(`次のpersonId開始番号: ${nextPersonId}`);
   console.log('データ移行を開始します...\n');
 
   for (const filePath of files) {
