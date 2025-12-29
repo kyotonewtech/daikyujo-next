@@ -6,6 +6,7 @@ const DATA_DIR = path.join(process.cwd(), 'data', 'seiseki');
 interface SeisekiEntry {
   id: string;
   personId?: string;
+  personKey?: string;  // 同名の別人を区別するためのキー（任意）
   rank: number;
   name: string;
   rankTitle: string;
@@ -70,13 +71,21 @@ function main() {
 
         // personIdがない、または空文字の場合のみ処理
         if (!entry.personId || entry.personId === '') {
-          if (!nameToPersonId.has(entry.name)) {
+          // personKeyがある場合は「名前_personKey」、ない場合は「名前」をユニークキーとする
+          const uniqueKey = entry.personKey
+            ? `${entry.name}_${entry.personKey}`
+            : entry.name;
+
+          if (!nameToPersonId.has(uniqueKey)) {
             const newPersonId = `person_${String(nextPersonId).padStart(3, '0')}`;
-            nameToPersonId.set(entry.name, newPersonId);
-            console.log(`新規割り当て: ${entry.name} → ${newPersonId}`);
+            nameToPersonId.set(uniqueKey, newPersonId);
+            const displayKey = entry.personKey
+              ? `${entry.name} (${entry.personKey})`
+              : entry.name;
+            console.log(`新規割り当て: ${displayKey} → ${newPersonId}`);
             nextPersonId++;
           }
-          entry.personId = nameToPersonId.get(entry.name)!;
+          entry.personId = nameToPersonId.get(uniqueKey)!;
           modified = true;
           processedEntries++;
         }
@@ -98,12 +107,12 @@ function main() {
   console.log(`処理エントリー数: ${processedEntries}`);
   console.log(`割り当てたpersonId数: ${nameToPersonId.size}`);
 
-  console.log('\n=== 名前 → personId マッピング ===');
+  console.log('\n=== ユニークキー → personId マッピング ===');
   const sortedMapping = Array.from(nameToPersonId.entries())
     .sort((a, b) => a[1].localeCompare(b[1]));
 
-  for (const [name, personId] of sortedMapping) {
-    console.log(`${personId}: ${name}`);
+  for (const [uniqueKey, personId] of sortedMapping) {
+    console.log(`${personId}: ${uniqueKey}`);
   }
 }
 
