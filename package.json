@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "add-person-ids": "npx tsx scripts/add-person-ids.ts",
+    "migrate-persons": "npx tsx scripts/migrate-persons.ts",
+    "generate-persons-md": "npx tsx scripts/generate-persons-md.ts",
+    "validate-person-ids": "npx tsx scripts/validate-person-ids.ts"
   },
   "dependencies": {
     "echarts": "^6.0.0",
