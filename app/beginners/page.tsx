@@ -35,7 +35,15 @@ export default function BeginnersPage() {
         if (hash) {
           const element = document.getElementById(hash.substring(1));
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // ヘッダーの高さを考慮したオフセットでスクロール
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
           }
         }
       }, 600); // ExpandableDetailのアニメーション(300ms)を考慮して少し長めに

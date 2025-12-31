@@ -15,9 +15,9 @@ const experiences = [
     title: "経験者向け利用",
     price: "注意事項",
     unit: "",
-    desc: "弓道経験のある方向けの練習利用も可能です。的までの距離14m。",
+    desc: "弓道経験のある方向けの練習利用も可能です。当弓場独自の作法がございますので、ご利用前に必ず注意事項をご確認ください。",
     image: "/image3.jpg",
-    linkText: "注意事項",
+    linkText: "注意事項を見る",
   },
   {
     title: "For Visitors",
