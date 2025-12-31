@@ -29,7 +29,7 @@ export default function BeginnersPage() {
     if (tabParam && tabs.some(t => t.id === tabParam)) {
       setActiveTab(tabParam);
 
-      // ハッシュがある場合は少し遅延してスクロール
+      // ハッシュがある場合は、タブ切り替えとExpandableDetailの展開を待ってからスクロール
       setTimeout(() => {
         const hash = window.location.hash;
         if (hash) {
@@ -38,7 +38,7 @@ export default function BeginnersPage() {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }
-      }, 300);
+      }, 600); // ExpandableDetailのアニメーション(300ms)を考慮して少し長めに
     }
   }, []);
 

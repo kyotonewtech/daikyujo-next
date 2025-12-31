@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { ExpandableDetailProps } from "@/types/beginners";
@@ -11,6 +11,13 @@ export default function ExpandableDetail({
   id,
 }: ExpandableDetailProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // URLハッシュと一致する場合は自動的に開く
+  useEffect(() => {
+    if (id && window.location.hash === `#${id}`) {
+      setIsOpen(true);
+    }
+  }, [id]);
 
   return (
     <div id={id} className="border border-gray-200 rounded-sm overflow-hidden bg-white mb-[10px]">
