@@ -21,6 +21,7 @@ export interface InfoCardProps {
 export interface ExpandableDetailProps {
   summary: string;
   children: React.ReactNode;
+  id?: string;
 }
 
 export interface ChecklistItemProps {

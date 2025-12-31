@@ -13,11 +13,11 @@ const experiences = [
   },
   {
     title: "経験者向け利用",
-    price: "お問い合わせ",
+    price: "注意事項",
     unit: "",
     desc: "弓道経験のある方向けの練習利用も可能です。的までの距離14m。",
     image: "/image3.jpg",
-    linkText: "お問い合わせ",
+    linkText: "注意事項",
   },
   {
     title: "For Visitors",
@@ -70,7 +70,7 @@ export default function Experience() {
                   {item.desc}
                 </p>
                 <a
-                  href={index === 0 ? "/beginners" : index === 2 ? "https://www.the-true-works.com/location-data/enzan-daikyujo" : "#access"}
+                  href={index === 0 ? "/beginners" : index === 1 ? "/beginners?tab=guide#experienced" : "https://www.the-true-works.com/location-data/enzan-daikyujo"}
                   className="inline-flex items-center text-sm font-medium border-b border-accent pb-1 hover:text-accent transition-colors group/link"
                 >
                   {item.linkText}

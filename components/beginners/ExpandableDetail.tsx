@@ -8,11 +8,12 @@ import type { ExpandableDetailProps } from "@/types/beginners";
 export default function ExpandableDetail({
   summary,
   children,
+  id,
 }: ExpandableDetailProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border border-gray-200 rounded-sm overflow-hidden bg-white mb-[10px]">
+    <div id={id} className="border border-gray-200 rounded-sm overflow-hidden bg-white mb-[10px]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between p-[15px] text-left transition-colors ${

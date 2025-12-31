@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Coins, Clock, MapPin, Phone } from "lucide-react";
 import Header from "@/components/Header";
@@ -21,6 +21,26 @@ const tabs: Tab[] = [
 
 export default function BeginnersPage() {
   const [activeTab, setActiveTab] = useState<TabId>("top");
+
+  // URLクエリパラメータからタブを設定
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab') as TabId | null;
+    if (tabParam && tabs.some(t => t.id === tabParam)) {
+      setActiveTab(tabParam);
+
+      // ハッシュがある場合は少し遅延してスクロール
+      setTimeout(() => {
+        const hash = window.location.hash;
+        if (hash) {
+          const element = document.getElementById(hash.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 300);
+    }
+  }, []);
 
   return (
     <>
@@ -169,7 +189,7 @@ function GuideContent() {
             </p>
           </ExpandableDetail>
 
-          <ExpandableDetail summary="経験者の方へ">
+          <ExpandableDetail summary="経験者の方へ" id="experienced">
             <p className="mb-3">
               園山大弓場の射法は、一般的な弓道とは異なる独自のスタイルです。
               <br />
