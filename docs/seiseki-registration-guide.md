@@ -155,7 +155,10 @@ node /tmp/convert_seiseki_data_2025.js
 📁 Location: /path/to/project/data/seiseki/2025
 ```
 
-### ステップ3: index.json更新
+### ステップ3: index.json更新（重要：グラフ反映に必須）
+
+⚠️ **重要**: `index.json` を更新しないと、成績推移グラフに新しいデータが反映されません。
+月次JSONファイル（`/data/seiseki/{YEAR}/{MM}.json`）を作成・更新した場合は、**必ず** `index.json` も更新してください。
 
 **方法1: スクリプトで一括更新**
 

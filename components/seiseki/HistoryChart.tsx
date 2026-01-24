@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import {
   ComposedChart,
   Line,
@@ -13,11 +13,13 @@ import {
 } from 'recharts';
 import type { PersonHistory } from '@/types/seiseki';
 
+export type ViewMode = 'all' | 'year';
+
 interface HistoryChartProps {
   personHistory: PersonHistory;
+  viewMode: ViewMode;
+  onViewModeChange: (mode: ViewMode) => void;
 }
-
-type ViewMode = 'all' | 'year';
 
 // 縦書きラベルコンポーネント
 interface VerticalLabelProps {
@@ -30,26 +32,41 @@ interface VerticalLabelProps {
   fill: string;
   text: string;
   position: 'left' | 'right';
+  fontSize?: number;
 }
 
-const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) => {
+// 定数: Y軸ラベル配置
+const MAX_LABEL_OFFSET = 18;
+const LABEL_OFFSET_RATIO = 1.4;
+const LINE_HEIGHT_MARGIN = 2;
+
+// 定数: グラフの固定値
+const TARGET_SIZE_MAX = 3.0;
+const RANK_PADDING = 0.5; // dotの見切れ防止のための余白定数
+const RANK_MAX = 10;
+
+// 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
+const X_AXIS_LABEL_AREA_HEIGHT = 100;
+
+const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
   const chars = text.split('');
-  const lineHeight = 16; // 文字間の縦方向間隔
+  const lineHeight = fontSize + LINE_HEIGHT_MARGIN;
 
   // Y軸の中央位置を計算
   const centerY = viewBox.y + viewBox.height / 2;
   const startY = centerY - ((chars.length - 1) * lineHeight) / 2;
 
-  // X座標を計算
+  // X座標を計算（フォントサイズに応じて調整）
+  const xOffset = Math.min(MAX_LABEL_OFFSET, fontSize * LABEL_OFFSET_RATIO);
   let finalX: number;
   if (position === 'left') {
-    // 左側Y軸: viewBoxの左端から右に30px
-    finalX = viewBox.x + 30;
+    // 左側Y軸: viewBoxの左端から右に調整
+    finalX = viewBox.x + xOffset;
   } else {
-    // 右側Y軸: viewBoxの右端から左に30px
-    finalX = viewBox.x + viewBox.width - 30;
+    // 右側Y軸: viewBoxの右端から左に調整
+    finalX = viewBox.x + viewBox.width - xOffset;
   }
 
   return (
@@ -58,7 +75,7 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
       y={startY}
       fill={fill}
       textAnchor="middle"
-      style={{ fontSize: 14, fontWeight: 'normal' }}
+      style={{ fontSize, fontWeight: 'normal' }}
     >
       {chars.map((char, i) => (
         <tspan key={i} x={finalX} dy={i === 0 ? 0 : lineHeight}>
@@ -69,268 +86,591 @@ const VerticalLabel = ({ viewBox, fill, text, position }: VerticalLabelProps) =>
   );
 };
 
-export default function HistoryChart({ personHistory }: HistoryChartProps) {
-  const [viewMode, setViewMode] = useState<ViewMode>('all');
-  const [monthOffset, setMonthOffset] = useState(0); // 0=直近12ヶ月, 1=1ヶ月前から12ヶ月, etc.
+export default function HistoryChart({ personHistory, viewMode }: HistoryChartProps) {
+  const [panOffset, setPanOffset] = useState(0); // px単位のオフセット
+  const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
+  const [isLandscape, setIsLandscape] = useState(false);
+  const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth - 100 : 300); // Y軸固定表示用のコンテナ幅（初期推定値）
+  const [isDragging, setIsDragging] = useState(false); // ドラッグ中フラグ（レンダリングに使用）
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
   const dragStartOffset = useRef<number>(0);
-  const isDragging = useRef<boolean>(false);
+  const isHorizontalSwipe = useRef<boolean>(false);
 
-  // グラフ用にデータを整形 - Updated
-  const allChartData = personHistory.history.map(h => ({
-    period: `${h.year}/${String(h.month).padStart(2, '0')}`,
-    rank: h.rank,
-    targetSize: h.targetSizeNumeric,
-    rankTitle: h.rankTitle,
-  }));
+  // 画面方向・サイズ検知
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isLandscapeMode = window.innerHeight < window.innerWidth && window.innerHeight < 500;
+      const isMobilePortraitMode = window.innerWidth < 640 && window.innerHeight > window.innerWidth;
 
-  // 1年表示時のデータフィルタリング
-  const getFilteredData = () => {
-    if (viewMode === 'all') {
-      return allChartData;
+      setIsLandscape(isLandscapeMode);
+      setIsMobilePortrait(isMobilePortraitMode);
+    };
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    return () => window.removeEventListener('resize', checkOrientation);
+  }, []);
+
+  // 定数: 表示月数
+  const VISIBLE_MONTHS = 12;
+
+  // レスポンシブMONTH_WIDTH設定（12ヶ月が画面に収まるように調整）
+  const monthWidth = useMemo(() => {
+    if (isMobilePortrait) {
+      // スマホ縦画面: 画面幅から左右マージン(18+28=46px)を引いた幅を12で割る
+      const availableWidth = window.innerWidth - 46;
+      return Math.max(30, Math.floor(availableWidth / VISIBLE_MONTHS));
     }
+    if (isLandscape) {
+      // 横画面: 画面幅から左右マージン(35+45=80px)を引いた幅を12で割る
+      const availableWidth = window.innerWidth - 80;
+      return Math.max(40, Math.floor(availableWidth / VISIBLE_MONTHS));
+    }
+    return 60; // デスクトップは固定
+  }, [isMobilePortrait, isLandscape]);
 
-    // 1年表示: 月単位でオフセット（0=直近12ヶ月）
-    const endIndex = allChartData.length - monthOffset;
-    const startIndex = Math.max(0, endIndex - 12);
-    return allChartData.slice(startIndex, endIndex);
-  };
-
-  const chartData = getFilteredData();
-
-  // 的のサイズの最大値を計算（null値を除外）
-  const maxTargetSize = Math.max(
-    ...chartData
-      .map(d => d.targetSize)
-      .filter((size): size is number => size !== null),
-    0  // デフォルト値として0を設定
+  // グラフ用にデータを整形
+  const allChartData = useMemo(() =>
+    personHistory.history.map(h => ({
+      period: `${h.year}/${String(h.month).padStart(2, '0')}`,
+      rank: h.rank,
+      targetSize: h.targetSizeNumeric,
+      rankTitle: h.rankTitle,
+    })),
+    [personHistory.history]
   );
 
-  // 最大オフセット数を計算（月単位）
-  const maxMonthOffset = Math.max(0, allChartData.length - 12);
+  // 的の大きさの最小値・最大値を計算（minTargetSize=1位、maxTargetSize=10位に配置）
+  const targetSizeRange = useMemo(() => {
+    const sizes = allChartData
+      .map(d => d.targetSize)
+      .filter((size): size is number => size !== null && size !== undefined);
 
-  // 表示期間のラベルを取得
-  const getPeriodLabel = () => {
-    if (viewMode === 'all' || chartData.length === 0) return '';
-    const startPeriod = chartData[0].period;
-    const endPeriod = chartData[chartData.length - 1].period;
+    if (sizes.length === 0) {
+      return { min: 0, max: TARGET_SIZE_MAX, actualMin: 0, actualMax: TARGET_SIZE_MAX };
+    }
+
+    const minTargetSize = Math.min(...sizes);
+    const maxTargetSize = Math.max(...sizes);
+
+    // 順位のdomain範囲
+    const rankDomainMin = 1 - RANK_PADDING; // 0.5
+    const rankDomainMax = RANK_MAX + RANK_PADDING; // 10.5
+
+    // 実際のデータ範囲（1位から10位に対応）
+    const actualTargetRange = maxTargetSize - minTargetSize;
+    const actualRankRange = RANK_MAX - 1; // 9 (1位から10位までの範囲)
+
+    // 順位1単位あたりの的サイズの変化量
+    // この計算により、minTargetSize=1位、maxTargetSize=10位と同じ高さに配置される
+    const targetSizePerRankUnit = actualRankRange > 0
+      ? actualTargetRange / actualRankRange  // = dataRange / 9
+      : 0.3; // データが1つしかない場合のデフォルト値
+
+    // 的の大きさのdomainを計算
+    // - calculatedMin: minTargetSize - dataRange/18 → minTargetSizeが1位の高さに配置
+    // - calculatedMax: minTargetSize + dataRange*9.5/9 → maxTargetSizeが10位の高さに配置
+    const calculatedMin = minTargetSize - (1 - rankDomainMin) * targetSizePerRankUnit;
+    const calculatedMax = minTargetSize + (rankDomainMax - 1) * targetSizePerRankUnit;
+
+    return {
+      min: calculatedMin,
+      max: calculatedMax,
+      actualMin: minTargetSize,
+      actualMax: maxTargetSize
+    };
+  }, [allChartData]);
+
+  const totalMonths = allChartData.length;
+  const totalWidth = totalMonths * monthWidth;
+
+  // レスポンシブmargin設定（useMemoでメモ化）
+  const chartMargin = useMemo(() => {
+    if (isMobilePortrait) {
+      return { top: 15, right: 28, bottom: 45, left: 18 };
+    }
+    if (isLandscape) {
+      return { top: 10, right: 45, bottom: 50, left: 35 };
+    }
+    return { top: 20, right: 50, bottom: 80, left: 40 };
+  }, [isMobilePortrait, isLandscape]);
+
+  // レスポンシブフォントサイズ設定（useMemoでメモ化）
+  const labelFontSize = useMemo(() => isMobilePortrait ? 10 : 12, [isMobilePortrait]);
+  const tickFontSize = useMemo(() => isMobilePortrait ? 8 : 10, [isMobilePortrait]);
+
+  // 表示期間のラベルを取得（panOffsetから逆算）
+  const getPeriodLabel = useMemo(() => {
+    if (viewMode === 'all' || allChartData.length === 0) return '';
+
+    const startMonthIndex = Math.max(0, Math.floor(-panOffset / monthWidth));
+    const endMonthIndex = Math.min(startMonthIndex + VISIBLE_MONTHS, totalMonths);
+
+    const startPeriod = allChartData[startMonthIndex]?.period || '';
+    const endPeriod = allChartData[endMonthIndex - 1]?.period || '';
+
     return `${startPeriod} 〜 ${endPeriod}`;
-  };
+  }, [viewMode, allChartData, panOffset, monthWidth, VISIBLE_MONTHS, totalMonths]);
 
-  // リアルタイムスワイプハンドラー
-  const handleTouchStart = (e: React.TouchEvent) => {
+  // 共通のパンオフセット更新関数
+  const updatePanOffset = useCallback((clientX: number) => {
+    if (touchStartX.current === null) return;
+    const diff = clientX - touchStartX.current;
+    const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
+    setPanOffset(newOffset);
+  }, [maxPanOffset]);
+
+  // リアルタイムパンハンドラー
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (viewMode !== 'year') return;
     touchStartX.current = e.touches[0].clientX;
-    dragStartOffset.current = monthOffset;
-    isDragging.current = true;
-  };
+    touchStartY.current = e.touches[0].clientY;
+    dragStartOffset.current = panOffset;
+    setIsDragging(true);
+    isHorizontalSwipe.current = false;
+  }, [viewMode, panOffset]);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (viewMode !== 'year' || !isDragging.current || touchStartX.current === null) return;
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (viewMode !== 'year' || !isDragging || touchStartX.current === null || touchStartY.current === null) return;
 
     const currentX = e.touches[0].clientX;
-    const diff = touchStartX.current - currentX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
 
-    // スワイプ距離を月数に変換（100pxで約1ヶ月）
-    const monthDiff = Math.round(diff / 100);
-    const newOffset = Math.max(0, Math.min(maxMonthOffset, dragStartOffset.current + monthDiff));
+    // 初回の移動で横スワイプか縦スワイプか判定
+    if (!isHorizontalSwipe.current && (Math.abs(diffX) > 5 || Math.abs(diffY) > 5)) {
+      isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
+    }
 
-    setMonthOffset(newOffset);
-  };
+    // 横スワイプの場合のみパン
+    if (isHorizontalSwipe.current) {
+      e.preventDefault();
+      updatePanOffset(currentX);
+    }
+  }, [viewMode, isDragging, updatePanOffset]);
 
-  const handleTouchEnd = () => {
-    isDragging.current = false;
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
     touchStartX.current = null;
-  };
+    touchStartY.current = null;
+    isHorizontalSwipe.current = false;
+  }, []);
 
-  // スライダー変更ハンドラー
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonthOffset(Number(e.target.value));
-  };
+  // マウスドラッグ対応
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (viewMode !== 'year') return;
+    touchStartX.current = e.clientX;
+    dragStartOffset.current = panOffset;
+    setIsDragging(true);
+  }, [viewMode, panOffset]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (viewMode !== 'year' || !isDragging) return;
+    updatePanOffset(e.clientX);
+  }, [viewMode, isDragging, updatePanOffset]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    touchStartX.current = null;
+  }, []);
+
+  // 実際の表示領域幅を取得してmaxPanOffsetを計算
+  useEffect(() => {
+    if (viewMode !== 'year') {
+      setMaxPanOffset(0);
+      setContainerWidth(0);
+      return;
+    }
+
+    const updateMaxPanOffset = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        setContainerWidth(width);
+        const calculatedMaxPanOffset = -(totalWidth - width);
+        setMaxPanOffset(calculatedMaxPanOffset);
+      }
+    };
+
+    // DOMが完全にレンダリングされた後に実行
+    const timer = setTimeout(updateMaxPanOffset, 0);
+    window.addEventListener('resize', updateMaxPanOffset);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateMaxPanOffset);
+    };
+  }, [totalWidth, viewMode, isMobilePortrait, isLandscape]);
 
   // 表示モード変更時にオフセットをリセット
-  const handleViewModeChange = (mode: ViewMode) => {
-    setViewMode(mode);
-    if (mode === 'year') {
-      setMonthOffset(0);
+  useEffect(() => {
+    if (viewMode === 'year' && maxPanOffset < 0) {
+      setPanOffset(maxPanOffset); // 直近データを表示
+    } else if (viewMode === 'all') {
+      setPanOffset(0);
     }
-  };
+  }, [viewMode, maxPanOffset]);
 
-  return (
-    <div className="w-full space-y-4">
-      {/* 期間選択トグルボタン */}
-      <div className="flex justify-center items-center gap-4">
-        <div className="inline-flex bg-gray-100 rounded-lg p-1">
-          <button
-            onClick={() => handleViewModeChange('all')}
-            className={`px-6 py-2 rounded-md font-medium transition-all ${
-              viewMode === 'all'
-                ? 'bg-white text-accent shadow-sm'
-                : 'text-gray-600 hover:text-gray-800'
-            }`}
+  // グラフの実際のheight（数値）- 両モード共通
+  const chartHeight = isLandscape ? 300 : 500;
+
+  // 全期間モード: 1年モードと同じモーダルサイズ
+  if (viewMode === 'all') {
+    // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はXAxis heightで確保）
+    const allPeriodMargin = { top: 5, right: 0, bottom: 0, left: 0 };
+    // 全期間グラフと1年グラフで同じ高さを使用
+    const allPeriodHeight = chartHeight; // isLandscape ? 300 : 500
+
+    return (
+      <div className="w-full">
+        {/* 全期間グラフ（モーダル領域最大化、凡例なし） */}
+        <div className="w-full" style={{ height: allPeriodHeight }}>
+          <ComposedChart
+            data={allChartData}
+            width={typeof window !== 'undefined' ? window.innerWidth - 40 : 800}
+            height={allPeriodHeight}
+            margin={allPeriodMargin}
           >
-            全期間
-          </button>
-          <button
-            onClick={() => handleViewModeChange('year')}
-            className={`px-6 py-2 rounded-md font-medium transition-all ${
-              viewMode === 'year'
-                ? 'bg-white text-accent shadow-sm'
-                : 'text-gray-600 hover:text-gray-800'
-            }`}
-          >
-            1年
-          </button>
+            <CartesianGrid strokeDasharray="3 3" />
+
+            <XAxis
+              dataKey="period"
+              angle={-45}
+              textAnchor="end"
+              height={X_AXIS_LABEL_AREA_HEIGHT}
+              tick={{ fontSize: tickFontSize }}
+              interval="preserveStartEnd"
+            />
+
+            <YAxis
+              yAxisId="rank"
+              domain={[() => 1 - RANK_PADDING, () => RANK_MAX + RANK_PADDING]}
+              reversed
+              allowDataOverflow={true}
+              ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+              tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
+              tickFormatter={(value) => `${value}位`}
+              scale="linear"
+              type="number"
+            />
+
+            <YAxis
+              yAxisId="size"
+              orientation="right"
+              domain={[targetSizeRange.min, targetSizeRange.max]}
+              reversed
+              allowDataOverflow={true}
+              ticks={(() => {
+                // 実際のデータ範囲内でtickを生成（0.2寸刻み）
+                const ticks = [];
+                const tickInterval = 0.2;
+                const start = Math.ceil(targetSizeRange.actualMin / tickInterval) * tickInterval;
+                const end = Math.floor(targetSizeRange.actualMax / tickInterval) * tickInterval;
+                for (let v = start; v <= end; v += tickInterval) {
+                  ticks.push(Number(v.toFixed(1)));
+                }
+                return ticks;
+              })()}
+              tick={{ fontSize: tickFontSize, fill: '#4A90E2' }}
+              tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
+            />
+
+            <Tooltip
+              contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
+              formatter={(value: unknown, name: string) => {
+                if (value === null || value === undefined) {
+                  return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
+                }
+                const numValue = typeof value === 'number' ? value : Number(value);
+                if (name === 'rank') {
+                  return [`${numValue}位`, '順位'];
+                }
+                if (name === 'targetSize') {
+                  return [numValue.toFixed(1), '的の大きさ'];
+                }
+                return [numValue, name];
+              }}
+              labelFormatter={(label) => `期間: ${label}`}
+            />
+
+            <Line
+              yAxisId="rank"
+              type="monotone"
+              dataKey="rank"
+              stroke="#8B0000"
+              strokeWidth={2}
+              dot={{ r: 4 }}
+              name="rank"
+            />
+
+            <Line
+              yAxisId="size"
+              type="monotone"
+              dataKey="targetSize"
+              stroke="#4A90E2"
+              strokeWidth={2}
+              dot={{ r: 4 }}
+              name="targetSize"
+            />
+          </ComposedChart>
         </div>
       </div>
+    );
+  }
 
-      {/* 1年表示時のスライダーと期間表示 */}
-      {viewMode === 'year' && (
-        <div className="space-y-3 px-4">
-          {/* 期間ラベル */}
-          <div className="text-center text-sm text-gray-700 font-medium">
-            {getPeriodLabel()}
+  // Rechartsのmargin設定（1年モード用）
+  const rechartsMargin = { top: 20, right: 0, bottom: 0, left: 0 };
+
+  // Rechartsのプロット領域の高さ
+  // 重要: XAxis height は chartHeight の中から確保されるため、引く必要がある
+  // plotAreaHeight = chartHeight - margin.top - margin.bottom - XAxis.height
+  const plotAreaHeight = chartHeight - rechartsMargin.top - X_AXIS_LABEL_AREA_HEIGHT;
+
+  // 1年モード: コンテナ高さ（chartHeightにはXAxisが含まれているのでそのまま使用）
+  const containerHeight = chartHeight;
+
+  return (
+    <div className="w-full space-y-2">
+      {/* 期間ラベル */}
+      <div className="text-center text-sm text-gray-700 font-medium">
+        {getPeriodLabel}
+      </div>
+
+      {/* パン可能なグラフ（Y軸固定） */}
+      <div
+        className="w-full select-none"
+        style={{
+          position: 'relative',
+          height: containerHeight,
+          paddingLeft: chartMargin.left,
+          paddingRight: chartMargin.right,
+          overflow: 'visible',
+        }}
+      >
+        {/* 固定Y軸背景層（スワイプしても動かない） */}
+        {containerWidth > 100 && (
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              pointerEvents: 'none',
+              zIndex: 10,
+              overflow: 'visible',
+            }}
+          >
+            <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
+              {/* 左Y軸エリア (順位: reversed, 1位=上, 10位=下) */}
+              <g transform={`translate(0, ${rechartsMargin.top})`}>
+                {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
+                  const chartAreaHeight = plotAreaHeight;
+                  const domainMin = 1 - RANK_PADDING;
+                  const domainMax = RANK_MAX + RANK_PADDING;
+                  // reversedなので: 1位=top, 10位=bottom
+                  const y = ((value - domainMin) / (domainMax - domainMin)) * chartAreaHeight;
+                  return (
+                    <text
+                      key={value}
+                      x={chartMargin.left - 5}
+                      y={y}
+                      textAnchor="end"
+                      dominantBaseline="middle"
+                      fontSize={tickFontSize}
+                      fill="#8B0000"
+                    >
+                      {`${value}位`}
+                    </text>
+                  );
+                })}
+                {/* Y軸線 */}
+                <line
+                  x1={chartMargin.left}
+                  y1={0}
+                  x2={chartMargin.left}
+                  y2={plotAreaHeight}
+                  stroke="#ccc"
+                  strokeWidth={1}
+                />
+              </g>
+
+              {/* 右Y軸エリア (的の大きさ: 人物ごとに可変、X軸は視覚的に底辺) */}
+              <g transform={`translate(${containerWidth + chartMargin.left}, ${rechartsMargin.top})`}>
+                {(() => {
+                  const chartAreaHeight = plotAreaHeight;
+                  const { min, max, actualMin, actualMax } = targetSizeRange;
+                  const range = max - min;
+
+                  // 実際のデータ範囲内でtickを生成（0.2寸刻み）
+                  const ticks = [];
+                  const tickInterval = 0.2;
+                  const start = Math.ceil(actualMin / tickInterval) * tickInterval;
+                  const end = Math.floor(actualMax / tickInterval) * tickInterval;
+                  for (let v = start; v <= end; v += tickInterval) {
+                    ticks.push(Number(v.toFixed(1)));
+                  }
+
+                  return ticks.map((value, index) => {
+                    // 座標系は動的min〜max、小さい値が上（reversed）
+                    const y = ((value - min) / range) * chartAreaHeight;
+                    return (
+                      <text
+                        key={index}
+                        x={5}
+                        y={y}
+                        textAnchor="start"
+                        dominantBaseline="middle"
+                        fontSize={tickFontSize}
+                        fill="#4A90E2"
+                      >
+                        {value.toFixed(1)}寸
+                      </text>
+                    );
+                  });
+                })()}
+                {/* Y軸線（全範囲） */}
+                <line
+                  x1={0}
+                  y1={0}
+                  x2={0}
+                  y2={plotAreaHeight}
+                  stroke="#ccc"
+                  strokeWidth={1}
+                />
+              </g>
+            </svg>
           </div>
+        )}
 
-          {/* スライダー */}
-          <div className="relative">
-            <input
-              type="range"
-              min="0"
-              max={maxMonthOffset}
-              value={monthOffset}
-              onChange={handleSliderChange}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent
-                [&::-webkit-slider-thumb]:appearance-none
-                [&::-webkit-slider-thumb]:w-4
-                [&::-webkit-slider-thumb]:h-4
-                [&::-webkit-slider-thumb]:rounded-full
-                [&::-webkit-slider-thumb]:bg-accent
-                [&::-webkit-slider-thumb]:cursor-pointer
-                [&::-moz-range-thumb]:w-4
-                [&::-moz-range-thumb]:h-4
-                [&::-moz-range-thumb]:rounded-full
-                [&::-moz-range-thumb]:bg-accent
-                [&::-moz-range-thumb]:border-0
-                [&::-moz-range-thumb]:cursor-pointer"
-            />
-            {/* スライダーのラベル */}
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>直近</span>
-              <span>過去</span>
+        {/* スクロール可能なデータ層 */}
+        <div
+          ref={containerRef}
+          style={{
+            position: 'absolute',
+            left: chartMargin.left,
+            right: chartMargin.right,
+            top: 0,
+            height: containerHeight,
+            overflowX: 'hidden',
+            overflowY: 'visible',
+            zIndex: 5,
+          }}
+        >
+          <div
+            className="cursor-grab active:cursor-grabbing"
+            style={{
+              height: '100%',
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
+            <div
+              style={{
+                transform: `translateX(${panOffset}px)`,
+                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                width: totalWidth,
+                willChange: 'transform',
+                background: 'rgba(255, 255, 255, 0.01)',
+              }}
+            >
+              <ComposedChart
+                data={allChartData}
+                width={totalWidth}
+                height={chartHeight}
+                margin={rechartsMargin}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+
+                <XAxis
+                  dataKey="period"
+                  angle={-45}
+                  textAnchor="end"
+                  height={X_AXIS_LABEL_AREA_HEIGHT}
+                  tick={{ fontSize: tickFontSize, dy: 5 }}
+                  interval={2}
+                  tickLine={{ transform: 'translate(0, 0)' }}
+                />
+
+                {/* Y軸は座標系のみ使用、表示は固定層で行う */}
+                <YAxis
+                  yAxisId="rank"
+                  domain={[() => 1 - RANK_PADDING, () => RANK_MAX + RANK_PADDING]}
+                  reversed
+                  allowDataOverflow={true}
+                  axisLine={false}
+                  tick={false}
+                  scale="linear"
+                  type="number"
+                />
+
+                <YAxis
+                  yAxisId="size"
+                  orientation="right"
+                  domain={[targetSizeRange.min, targetSizeRange.max]}
+                  reversed
+                  allowDataOverflow={true}
+                  axisLine={false}
+                  tick={false}
+                />
+
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
+                  formatter={(value: unknown, name: string) => {
+                    if (value === null || value === undefined) {
+                      return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
+                    }
+                    const numValue = typeof value === 'number' ? value : Number(value);
+                    if (name === 'rank') {
+                      return [`${numValue}位`, '順位'];
+                    }
+                    if (name === 'targetSize') {
+                      return [numValue.toFixed(1), '的の大きさ'];
+                    }
+                    return [numValue, name];
+                  }}
+                  labelFormatter={(label) => `期間: ${label}`}
+                />
+
+                {/* Legendはplot areaに影響させないため外部に移動 */}
+
+                <Line
+                  yAxisId="rank"
+                  type="monotone"
+                  dataKey="rank"
+                  stroke="#8B0000"
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  name="rank"
+                  isAnimationActive={false}
+                />
+
+                <Line
+                  yAxisId="size"
+                  type="monotone"
+                  dataKey="targetSize"
+                  stroke="#4A90E2"
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  name="targetSize"
+                  isAnimationActive={false}
+                />
+              </ComposedChart>
             </div>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* グラフ（スワイプ対応） */}
-      <div
-        className="w-full h-[500px]"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart
-            data={chartData}
-            margin={{ top: 20, right: 80, bottom: 80, left: 60 }}
-          >
-          <CartesianGrid strokeDasharray="3 3" />
-
-          {/* X軸: 年月 */}
-          <XAxis
-            dataKey="period"
-            angle={-45}
-            textAnchor="end"
-            height={100}
-            tick={{ fontSize: 11 }}
-          />
-
-          {/* Y軸（左）: 順位（1位が上） */}
-          <YAxis
-            yAxisId="rank"
-            domain={[1, 11]}
-            reversed
-            label={(props) => (
-              <VerticalLabel
-                {...props}
-                fill="#8B0000"
-                text="順位"
-                position="left"
-              />
-            )}
-            tick={{ fontSize: 11 }}
-            tickFormatter={(value) => value === 11 ? '圏外' : `${value}位`}
-          />
-
-          {/* Y軸（右）: 的の大きさ（小さい値が上） */}
-          <YAxis
-            yAxisId="size"
-            orientation="right"
-            domain={[maxTargetSize, 'auto']}
-            reversed
-            label={(props) => (
-              <VerticalLabel
-                {...props}
-                fill="#4A90E2"
-                text="的の大きさ"
-                position="right"
-              />
-            )}
-            tick={{ fontSize: 11 }}
-            tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
-          />
-
-          <Tooltip
-            contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
-            formatter={(value: unknown, name: string) => {
-              if (value === null || value === undefined) {
-                return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
-              }
-              const numValue = typeof value === 'number' ? value : Number(value);
-              if (name === 'rank') {
-                return [`${numValue}位`, '順位'];
-              }
-              if (name === 'targetSize') {
-                return [numValue.toFixed(1), '的の大きさ'];
-              }
-              return [numValue, name];
-            }}
-            labelFormatter={(label) => `期間: ${label}`}
-          />
-
-          <Legend
-            wrapperStyle={{ paddingTop: '20px' }}
-            formatter={(value) => {
-              if (value === 'rank') return '順位';
-              if (value === 'targetSize') return '的の大きさ';
-              return value;
-            }}
-          />
-
-          {/* 順位の折れ線グラフ（赤色） */}
-          <Line
-            yAxisId="rank"
-            type="monotone"
-            dataKey="rank"
-            stroke="#8B0000"
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            name="rank"
-          />
-
-          {/* 的のサイズの折れ線グラフ（青色） */}
-          <Line
-            yAxisId="size"
-            type="monotone"
-            dataKey="targetSize"
-            stroke="#4A90E2"
-            strokeWidth={2}
-            dot={{ r: 4 }}
-            name="targetSize"
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
+      {/* 操作ヒント */}
+      <div className="text-center text-xs text-gray-500">
+        グラフをドラッグ/スワイプして期間を移動できます
       </div>
     </div>
   );
