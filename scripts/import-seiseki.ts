@@ -132,7 +132,8 @@ function parseSeisekiData(html: string, year: number, month: number): SeisekiEnt
     console.log(`Found ${tables.length} table(s)`);
 
     // 最も大きいテーブル（またはメインのテーブル）を探す
-    let mainTable: cheerio.Cheerio<cheerio.Element> | null = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let mainTable: any = null;
     let maxRows = 0;
 
     tables.each((_, table) => {
@@ -149,7 +150,8 @@ function parseSeisekiData(html: string, year: number, month: number): SeisekiEnt
       // ヘッダー行をスキップして、データ行を処理
       const rows = mainTable.find('tr').slice(1); // 最初の行（ヘッダー）をスキップ
 
-      rows.each((i, row) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rows.each((_i: number, row: any) => {
         const cells = $(row).find('td');
 
         if (cells.length >= 4) {
