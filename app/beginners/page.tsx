@@ -20,31 +20,34 @@ const tabs: Tab[] = [
 ];
 
 export default function BeginnersPage() {
-  const [activeTab, setActiveTab] = useState<TabId>("top");
+  const [activeTab, setActiveTab] = useState<TabId>(() => {
+    // 初期値としてURLクエリパラメータから取得
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab') as TabId | null;
+      if (tabParam && tabs.some(t => t.id === tabParam)) {
+        return tabParam;
+      }
+    }
+    return "top";
+  });
 
-  // URLクエリパラメータからタブを設定
+  // ハッシュがある場合のスクロール処理
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tabParam = params.get('tab') as TabId | null;
-    if (tabParam && tabs.some(t => t.id === tabParam)) {
-      setActiveTab(tabParam);
-
-      // ハッシュがある場合は、タブ切り替えとExpandableDetailの展開を待ってからスクロール
+    const hash = window.location.hash;
+    if (hash) {
       setTimeout(() => {
-        const hash = window.location.hash;
-        if (hash) {
-          const element = document.getElementById(hash.substring(1));
-          if (element) {
-            // ヘッダーの高さを考慮したオフセットでスクロール
-            const headerOffset = 100;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          // ヘッダーの高さを考慮したオフセットでスクロール
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
       }, 600); // ExpandableDetailのアニメーション(300ms)を考慮して少し長めに
     }

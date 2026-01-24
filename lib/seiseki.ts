@@ -64,7 +64,7 @@ export function getSeisekiData(year: number, month: number): SeisekiMonth | null
 /**
  * 月次データを保存し、index.jsonを自動更新
  */
-export function saveSeisekiData(year: number, month: number, entries: any[]): void {
+export function saveSeisekiData(year: number, month: number, entries: SeisekiEntry[]): void {
   validateYearMonth(year, month);
 
   console.log('saveSeisekiData called with:', { year, month, entries });

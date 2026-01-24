@@ -280,7 +280,10 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // 実際の表示領域幅を取得してmaxPanOffsetを計算
   useEffect(() => {
     if (viewMode !== 'year') {
+      // viewMode変更に応じた状態リセット
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMaxPanOffset(0);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setContainerWidth(0);
       return;
     }
@@ -307,8 +310,11 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // 表示モード変更時にオフセットをリセット
   useEffect(() => {
     if (viewMode === 'year' && maxPanOffset < 0) {
+      // viewMode変更時の初期位置設定
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPanOffset(maxPanOffset); // 直近データを表示
     } else if (viewMode === 'all') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPanOffset(0);
     }
   }, [viewMode, maxPanOffset]);

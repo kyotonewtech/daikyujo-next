@@ -61,8 +61,12 @@ export default function DateInput({
 
   useEffect(() => {
     const parsed = parseJapaneseDate(value);
+    // 外部からのvalue変更を内部stateに同期（制御されたコンポーネント）
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setYear(parsed.year);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMonth(parsed.month);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDay(parsed.day);
   }, [value]);
 

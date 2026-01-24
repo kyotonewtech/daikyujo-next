@@ -11,13 +11,19 @@ export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // マウント状態を設定
+    const timeoutId = setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
 
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
     }, 7000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(timer);
+    };
   }, []);
 
   return (

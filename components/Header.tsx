@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Header() {
   const pathname = usePathname();
@@ -41,14 +42,14 @@ export default function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-        <a
+        <Link
           href="/"
           className={`font-shippori text-2xl font-bold tracking-wider transition-colors ${
             shouldUseScrolledStyle ? "text-foreground" : "text-white"
           }`}
         >
           園山大弓場
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:block">

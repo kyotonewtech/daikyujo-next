@@ -17,7 +17,10 @@ export default function ExpandableDetail({
   // URLハッシュと一致する場合は自動的に開く
   useEffect(() => {
     if (id && window.location.hash === `#${id}`) {
+      // URLハッシュによる初期状態の設定
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsOpen(true);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsHighlighted(true);
 
       // 展開後にコンテンツ領域にフォーカス（スクリーンリーダー用）
