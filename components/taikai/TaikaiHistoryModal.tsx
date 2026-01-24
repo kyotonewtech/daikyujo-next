@@ -10,6 +10,9 @@ interface TaikaiHistoryModalProps {
 }
 
 export default function TaikaiHistoryModal({ personHistory, onClose }: TaikaiHistoryModalProps) {
+  // 最新の段級位を取得
+  const latestRankTitle = personHistory.history[0]?.rankTitle || '';
+
   // ESCキーでモーダルを閉じる
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -33,7 +36,7 @@ export default function TaikaiHistoryModal({ personHistory, onClose }: TaikaiHis
         {/* ヘッダー */}
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-800">
-            {personHistory.name} の大会成績推移
+            {personHistory.name}{latestRankTitle}の大会成績推移
           </h2>
           <button
             onClick={onClose}
