@@ -57,6 +57,8 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           data={chartData}
           margin={{ top: 20, right: 10, bottom: 80, left: 0 }}
         >
+        <CartesianGrid strokeDasharray="3 3" />
+
         {/* X軸: 年度 */}
         <XAxis
           dataKey="year"
