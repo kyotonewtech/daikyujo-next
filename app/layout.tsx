@@ -6,21 +6,21 @@ const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-sans",
   weight: ["400", "500", "700"],
-  display: "block",
+  display: "swap",
 });
 
 const notoSerif = Noto_Serif_JP({
   subsets: ["latin"],
   variable: "--font-noto-serif",
   weight: ["400", "600"],
-  display: "block",
+  display: "swap",
 });
 
 const shipporiMincho = Shippori_Mincho({
   subsets: ["latin"],
   variable: "--font-shippori",
   weight: ["400", "500", "600", "700", "800"],
-  display: "block",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
