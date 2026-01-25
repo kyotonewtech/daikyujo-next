@@ -10,6 +10,7 @@ export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {
           const isActive = activeTab === tab.id;
           return (
             <button
+              type="button"
               key={tab.id}
               role="tab"
               aria-selected={isActive}

@@ -39,6 +39,7 @@ export default function ExpandableDetail({ summary, children, id }: ExpandableDe
       }`}
     >
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between p-[15px] text-left transition-colors ${
           isOpen ? "border-b border-gray-100 bg-[#fcfcfc]" : "hover:bg-gray-50"

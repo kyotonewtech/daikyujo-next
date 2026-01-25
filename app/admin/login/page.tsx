@@ -33,6 +33,7 @@ function LoginForm() {
       )}
 
       <button
+        type="button"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
         className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 disabled:bg-gray-100 text-gray-700 font-medium py-3 px-4 rounded-md border border-gray-300 transition duration-200"

@@ -61,10 +61,11 @@ export default function ParticipantForm({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={`participant-name-${participant.id}`} className="block text-sm font-medium text-gray-700 mb-1">
             Name <span className="text-red-500">*</span>
           </label>
           <input
+            id={`participant-name-${participant.id}`}
             type="text"
             value={participant.name}
             onChange={(e) => onUpdate(participant.id, "name", e.target.value)}
@@ -75,8 +76,11 @@ export default function ParticipantForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Rank Title</label>
+          <label htmlFor={`participant-rank-title-${participant.id}`} className="block text-sm font-medium text-gray-700 mb-1">
+            Rank Title
+          </label>
           <select
+            id={`participant-rank-title-${participant.id}`}
             value={participant.rankTitle}
             onChange={(e) => onUpdate(participant.id, "rankTitle", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -91,10 +95,11 @@ export default function ParticipantForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={`participant-score1-${participant.id}`} className="block text-sm font-medium text-gray-700 mb-1">
             Score 1 <span className="text-red-500">*</span>
           </label>
           <input
+            id={`participant-score1-${participant.id}`}
             type="number"
             inputMode="numeric"
             min="0"
@@ -109,10 +114,11 @@ export default function ParticipantForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={`participant-score2-${participant.id}`} className="block text-sm font-medium text-gray-700 mb-1">
             Score 2 <span className="text-red-500">*</span>
           </label>
           <input
+            id={`participant-score2-${participant.id}`}
             type="number"
             inputMode="numeric"
             min="0"
@@ -127,10 +133,11 @@ export default function ParticipantForm({
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={`participant-total-score-${participant.id}`} className="block text-sm font-medium text-gray-700 mb-1">
             Total Score (Automatic)
           </label>
           <input
+            id={`participant-total-score-${participant.id}`}
             type="number"
             value={participant.totalScore}
             readOnly

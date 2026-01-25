@@ -191,12 +191,14 @@ export default function AdminTaikaiPage() {
           <h1 className="text-3xl font-bold text-gray-800">Taikai Management</h1>
           <div className="flex gap-3">
             <button
+              type="button"
               onClick={() => router.push("/admin/seiseki")}
               className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md"
             >
               通常成績
             </button>
             <button
+              type="button"
               onClick={handleLogout}
               className="px-4 py-2 text-sm bg-gray-600 hover:bg-gray-700 text-white rounded-md"
             >
@@ -210,8 +212,11 @@ export default function AdminTaikaiPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+              <label htmlFor="taikai-year-select" className="block text-sm font-medium text-gray-700 mb-2">
+                Year
+              </label>
               <select
+                id="taikai-year-select"
                 value={year}
                 onChange={(e) => setYear(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -227,6 +232,7 @@ export default function AdminTaikaiPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
               <button
+                type="button"
                 onClick={loadData}
                 disabled={isLoading}
                 className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-md"
@@ -238,6 +244,7 @@ export default function AdminTaikaiPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
               <button
+                type="button"
                 onClick={createNew}
                 disabled={isLoading}
                 className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white rounded-md"
@@ -267,10 +274,11 @@ export default function AdminTaikaiPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="taikai-name" className="block text-sm font-medium text-gray-700 mb-2">
                   Tournament Name <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="taikai-name"
                   type="text"
                   value={taikaiName}
                   onChange={(e) => setTaikaiName(e.target.value)}
@@ -281,8 +289,11 @@ export default function AdminTaikaiPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Event Year</label>
+                <label htmlFor="taikai-event-year" className="block text-sm font-medium text-gray-700 mb-2">
+                  Event Year
+                </label>
                 <input
+                  id="taikai-event-year"
                   type="text"
                   value={`${year}年`}
                   readOnly
