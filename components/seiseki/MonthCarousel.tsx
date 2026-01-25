@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { SeisekiEntry, SeisekiMonth } from "@/types/seiseki";
 import SeisekiCard from "./SeisekiCard";
@@ -139,8 +140,37 @@ export default function MonthCarousel({
   const paddedEntries = padEntriesToTen(currentMonthData.entries);
   const isLatestMonth = selectedYear === latestYear && currentMonthData.month === latestMonth;
 
+  const hasPrev = currentMonthIndex > 0;
+  const hasNext = currentMonthIndex < monthsData.length - 1;
+
   return (
     <div className="relative overflow-hidden">
+      {/* 左矢印ボタン */}
+      {hasPrev && (
+        <button
+          type="button"
+          onClick={() => handleMonthChange(currentMonthIndex - 1)}
+          disabled={isAnimating}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="前の月"
+        >
+          <ChevronLeft className="w-6 h-6 text-accent" />
+        </button>
+      )}
+
+      {/* 右矢印ボタン */}
+      {hasNext && (
+        <button
+          type="button"
+          onClick={() => handleMonthChange(currentMonthIndex + 1)}
+          disabled={isAnimating}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="次の月"
+        >
+          <ChevronRight className="w-6 h-6 text-accent" />
+        </button>
+      )}
+
       <AnimatePresence mode="wait" custom={direction}>
         <motion.section
           key={`${currentMonthData.year}-${currentMonthData.month}`}
@@ -178,6 +208,27 @@ export default function MonthCarousel({
           </div>
         </motion.section>
       </AnimatePresence>
+
+      {/* ページネーションドット */}
+      {monthsData.length > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-8 pb-4">
+          {monthsData.map((month, index) => (
+            <button
+              type="button"
+              key={`${month.year}-${month.month}`}
+              onClick={() => handleMonthChange(index)}
+              disabled={isAnimating}
+              className={`transition-all duration-300 rounded-full disabled:cursor-not-allowed ${
+                index === currentMonthIndex
+                  ? "w-8 h-3 bg-accent"
+                  : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`${month.month}月の成績を表示`}
+              aria-current={index === currentMonthIndex ? "true" : undefined}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
