@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -16,10 +17,11 @@ export default function About() {
             className="w-full md:w-1/2"
           >
             <div className="relative aspect-[3/4] overflow-hidden rounded-sm shadow-xl">
-              <img
+              <Image
                 src="/image1.png"
                 alt="弓道の様子"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-accent/30 -z-10" />
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent/5 -z-10" />
