@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Coins, Clock, MapPin, Phone } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import TabNav from "@/components/beginners/TabNav";
-import NoticeBox from "@/components/beginners/NoticeBox";
-import InfoCard from "@/components/beginners/InfoCard";
-import ExpandableDetail from "@/components/beginners/ExpandableDetail";
+import { AnimatePresence, motion } from "framer-motion";
+import { Clock, Coins, MapPin, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
 import ChecklistItem from "@/components/beginners/ChecklistItem";
-import type { TabId, Tab } from "@/types/beginners";
+import ExpandableDetail from "@/components/beginners/ExpandableDetail";
+import InfoCard from "@/components/beginners/InfoCard";
+import NoticeBox from "@/components/beginners/NoticeBox";
+import TabNav from "@/components/beginners/TabNav";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import type { Tab, TabId } from "@/types/beginners";
 
 const tabs: Tab[] = [
   { id: "top", label: "トップ" },
@@ -22,10 +22,10 @@ const tabs: Tab[] = [
 export default function BeginnersPage() {
   const [activeTab, setActiveTab] = useState<TabId>(() => {
     // 初期値としてURLクエリパラメータから取得
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get('tab') as TabId | null;
-      if (tabParam && tabs.some(t => t.id === tabParam)) {
+      const tabParam = params.get("tab") as TabId | null;
+      if (tabParam && tabs.some((t) => t.id === tabParam)) {
         return tabParam;
       }
     }
@@ -46,7 +46,7 @@ export default function BeginnersPage() {
 
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       }, 600); // ExpandableDetailのアニメーション(300ms)を考慮して少し長めに
@@ -63,9 +63,7 @@ export default function BeginnersPage() {
             <h1 className="font-shippori text-3xl md:text-4xl font-bold mb-3 text-gray-800">
               初めての方へ
             </h1>
-            <span className="block text-xs text-accent tracking-[0.3em]">
-              FOR BEGINNERS
-            </span>
+            <span className="block text-xs text-accent tracking-[0.3em]">FOR BEGINNERS</span>
           </div>
 
           {/* タブナビゲーション */}
@@ -105,9 +103,7 @@ function TopContent() {
         <p className="mb-2">
           <strong>定休日:</strong> 月曜日・第3火曜日
         </p>
-        <p className="mb-2">
-          年末年始・祝日の営業については、お電話にてご確認ください。
-        </p>
+        <p className="mb-2">年末年始・祝日の営業については、お電話にてご確認ください。</p>
         <p className="flex items-center gap-2 font-bold mt-3">
           <Phone size={16} />
           TEL: 075-561-3568
@@ -160,18 +156,9 @@ function GuideContent() {
           服装・持ち物
         </h2>
         <ul className="space-y-4">
-          <ChecklistItem
-            text="手ぶらでOK！必要な道具は全てご用意しております"
-            delay={0}
-          />
-          <ChecklistItem
-            text="動きやすい服装でお越しください"
-            delay={0.1}
-          />
-          <ChecklistItem
-            text="着物でお越しの方は、たすきをご持参ください"
-            delay={0.2}
-          />
+          <ChecklistItem text="手ぶらでOK！必要な道具は全てご用意しております" delay={0} />
+          <ChecklistItem text="動きやすい服装でお越しください" delay={0.1} />
+          <ChecklistItem text="着物でお越しの方は、たすきをご持参ください" delay={0.2} />
           <ChecklistItem
             text="履物はそのままでも大丈夫です（一部土足禁止エリアあり）"
             delay={0.3}
@@ -195,9 +182,7 @@ function GuideContent() {
             <p className="mb-3">
               当弓場では軽い弓を使用しておりますので、力に自信のない方でも安全にお楽しみいただけます。
             </p>
-            <p>
-              スタッフが一から丁寧にご指導いたしますので、初めての方もご安心ください。
-            </p>
+            <p>スタッフが一から丁寧にご指導いたしますので、初めての方もご安心ください。</p>
           </ExpandableDetail>
 
           <ExpandableDetail summary="経験者の方へ" id="experienced">
@@ -223,9 +208,7 @@ function RulesContent() {
     <div className="space-y-8">
       {/* 警告ボックス */}
       <NoticeBox variant="warning" title="安全のために">
-        <p className="mb-2">
-          弓は本来、武器となり得るものです。
-        </p>
+        <p className="mb-2">弓は本来、武器となり得るものです。</p>
         <p>
           安全にご体験いただくため、スタッフの指示には必ず従っていただきますようお願いいたします。
           <br />
@@ -246,15 +229,11 @@ function RulesContent() {
             <br />
             ・弓のサイズや引く力の問題
           </p>
-          <p>
-            保護者の方が同伴されても、この方針は変わりませんので、あらかじめご了承ください。
-          </p>
+          <p>保護者の方が同伴されても、この方針は変わりませんので、あらかじめご了承ください。</p>
         </ExpandableDetail>
 
         <ExpandableDetail summary="体験をお断りする場合">
-          <p className="mb-2">
-            以下に該当する場合、体験をお断りすることがございます:
-          </p>
+          <p className="mb-2">以下に該当する場合、体験をお断りすることがございます:</p>
           <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
             <li>酒気を帯びている方</li>
             <li>体調が優れない方</li>
@@ -297,9 +276,7 @@ function HistoryContent() {
             園山大弓場は<strong>文久二年（1862年）創業</strong>
             、160年を超える歴史を持つ伝統ある弓道場です。
           </p>
-          <p>
-            初代・園山より受け継がれ、現在は六代目が運営を引き継いでおります。
-          </p>
+          <p>初代・園山より受け継がれ、現在は六代目が運営を引き継いでおります。</p>
           <p>
             単なる「レクリエーション」としてだけでなく、
             <strong>「武道としての修練・心の鍛錬の場」</strong>

@@ -1,8 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useState, Suspense } from "react";
+import { signIn } from "next-auth/react";
+import { Suspense, useState } from "react";
 
 function LoginForm() {
   const searchParams = useSearchParams();
@@ -22,9 +22,7 @@ function LoginForm() {
 
   return (
     <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        管理者ログイン
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">管理者ログイン</h1>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm mb-4">

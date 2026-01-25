@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import TaikaiHistoryChart from "./TaikaiHistoryChart";
 import type { PersonTaikaiHistory } from "@/types/taikai";
+import TaikaiHistoryChart from "./TaikaiHistoryChart";
 
 interface TaikaiHistoryModalProps {
   personHistory: PersonTaikaiHistory;
@@ -11,7 +11,7 @@ interface TaikaiHistoryModalProps {
 
 export default function TaikaiHistoryModal({ personHistory, onClose }: TaikaiHistoryModalProps) {
   // 最新の段級位を取得
-  const latestRankTitle = personHistory.history[0]?.rankTitle || '';
+  const latestRankTitle = personHistory.history[0]?.rankTitle || "";
 
   // ESCキーでモーダルを閉じる
   useEffect(() => {
@@ -36,7 +36,8 @@ export default function TaikaiHistoryModal({ personHistory, onClose }: TaikaiHis
         {/* ヘッダー */}
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-2xl font-bold text-gray-800">
-            {personHistory.name}{latestRankTitle}の大会成績推移
+            {personHistory.name}
+            {latestRankTitle}の大会成績推移
           </h2>
           <button
             onClick={onClose}

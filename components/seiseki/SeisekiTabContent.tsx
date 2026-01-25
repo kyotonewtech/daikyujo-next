@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import SeisekiCard from "./SeisekiCard";
-import MonthCarousel from "./MonthCarousel";
+import { useEffect, useMemo, useState } from "react";
+import type { PersonHistory, SeisekiEntry, SeisekiMonth } from "@/types/seiseki";
 import HistoryModal from "./HistoryModal";
-import type { SeisekiMonth, SeisekiEntry, PersonHistory } from "@/types/seiseki";
+import MonthCarousel from "./MonthCarousel";
+import SeisekiCard from "./SeisekiCard";
 
 interface SeisekiTabContentProps {
   availableYears: number[];
@@ -46,13 +46,18 @@ function reorderEntriesForDesktop(entries: SeisekiEntry[]): SeisekiEntry[] {
 
   const reordered: SeisekiEntry[] = [];
   for (let i = 0; i < 5; i++) {
-    reordered.push(entries[i]);      // 1位, 2位, 3位, 4位, 5位
-    reordered.push(entries[i + 5]);  // 6位, 7位, 8位, 9位, 10位
+    reordered.push(entries[i]); // 1位, 2位, 3位, 4位, 5位
+    reordered.push(entries[i + 5]); // 6位, 7位, 8位, 9位, 10位
   }
   return reordered;
 }
 
-export default function SeisekiTabContent({ availableYears, yearDataMap, latestYear, latestMonth }: SeisekiTabContentProps) {
+export default function SeisekiTabContent({
+  availableYears,
+  yearDataMap,
+  latestYear,
+  latestMonth,
+}: SeisekiTabContentProps) {
   // デフォルトは最新年（配列は降順なので先頭）
   const [selectedYear, setSelectedYear] = useState(availableYears[0]);
   const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
@@ -64,10 +69,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
   const monthsData = yearDataMap.get(selectedYear) || [];
 
   // 利用可能な月のリスト（降順: 12月→1月）
-  const availableMonths = useMemo(
-    () => monthsData.map(m => m.month),
-    [monthsData]
-  );
+  const availableMonths = useMemo(() => monthsData.map((m) => m.month), [monthsData]);
 
   // 選択されている月
   const selectedMonth = monthsData[currentMonthIndex]?.month;
@@ -79,7 +81,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
 
     // 最新月のインデックスを見つける（その年の最新月）
     if (newYear === latestYear && latestMonth) {
-      const latestIndex = newMonthsData.findIndex(m => m.month === latestMonth);
+      const latestIndex = newMonthsData.findIndex((m) => m.month === latestMonth);
       setCurrentMonthIndex(latestIndex >= 0 ? latestIndex : 0);
     } else {
       // その年の最初の月（降順なので12月など）
@@ -89,7 +91,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
 
   // 月変更時の処理
   const handleMonthChange = (month: number) => {
-    const index = monthsData.findIndex(m => m.month === month);
+    const index = monthsData.findIndex((m) => m.month === month);
     if (index >= 0) {
       setCurrentMonthIndex(index);
     }
@@ -103,7 +105,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
   // 初期化：最新年の最新月を表示
   useEffect(() => {
     if (selectedYear === latestYear && latestMonth) {
-      const latestIndex = monthsData.findIndex(m => m.month === latestMonth);
+      const latestIndex = monthsData.findIndex((m) => m.month === latestMonth);
       if (latestIndex >= 0) {
         setCurrentMonthIndex(latestIndex);
       }
@@ -116,13 +118,13 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
     try {
       const response = await fetch(`/api/seiseki/person/${personId}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch person history');
+        throw new Error("Failed to fetch person history");
       }
       const personHistory: PersonHistory = await response.json();
       setSelectedPersonHistory(personHistory);
     } catch (error) {
-      console.error('Error fetching person history:', error);
-      alert('成績履歴の取得に失敗しました');
+      console.error("Error fetching person history:", error);
+      alert("成績履歴の取得に失敗しました");
     } finally {
       setIsLoadingHistory(false);
     }
@@ -196,9 +198,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
               const paddedEntries = padEntriesToTen(monthData.entries);
 
               // この月が最新かどうかを判定
-              const isLatestMonth =
-                selectedYear === latestYear &&
-                monthData.month === latestMonth;
+              const isLatestMonth = selectedYear === latestYear && monthData.month === latestMonth;
 
               return (
                 <motion.section
@@ -236,10 +236,7 @@ export default function SeisekiTabContent({ availableYears, yearDataMap, latestY
 
       {/* 成績推移グラフモーダル */}
       {selectedPersonHistory && (
-        <HistoryModal
-          personHistory={selectedPersonHistory}
-          onClose={handleCloseModal}
-        />
+        <HistoryModal personHistory={selectedPersonHistory} onClose={handleCloseModal} />
       )}
 
       {/* ローディング表示 */}

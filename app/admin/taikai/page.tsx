@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-import type { TaikaiParticipant } from "@/types/taikai";
+import { type FormEvent, useState } from "react";
 import ParticipantForm from "@/components/admin/ParticipantForm";
+import type { TaikaiParticipant } from "@/types/taikai";
 
 export default function AdminTaikaiPage() {
   const router = useRouter();
@@ -30,15 +30,15 @@ export default function AdminTaikaiPage() {
         setParticipants(data.participants || []);
         setMessage({
           type: "success",
-          text: "Data loaded for year " + year,
+          text: `Data loaded for year ${year}`,
         });
       } else {
         setMessage({
           type: "error",
-          text: "Data not found for year " + year,
+          text: `Data not found for year ${year}`,
         });
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage({
         type: "error",
         text: "Error loading data",
@@ -53,7 +53,7 @@ export default function AdminTaikaiPage() {
     setParticipants([]);
     setMessage({
       type: "success",
-      text: "Creating new data for year " + year,
+      text: `Creating new data for year ${year}`,
     });
   };
 
@@ -63,8 +63,8 @@ export default function AdminTaikaiPage() {
       rank: participants.length + 1,
       name: "",
       rankTitle: "",
-      score1: "",  // 初期は空欄
-      score2: "",  // 初期は空欄
+      score1: "", // 初期は空欄
+      score2: "", // 初期は空欄
       totalScore: 0,
     };
 
@@ -166,7 +166,7 @@ export default function AdminTaikaiPage() {
           text: data.error || "Save failed",
         });
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage({
         type: "error",
         text: "Error saving data",
@@ -206,15 +206,11 @@ export default function AdminTaikaiPage() {
         </div>
 
         <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            Select Year
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Select Year</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Year
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
               <select
                 value={year}
                 onChange={(e) => setYear(Number(e.target.value))}
@@ -229,9 +225,7 @@ export default function AdminTaikaiPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                &nbsp;
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
               <button
                 onClick={loadData}
                 disabled={isLoading}
@@ -242,9 +236,7 @@ export default function AdminTaikaiPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                &nbsp;
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
               <button
                 onClick={createNew}
                 disabled={isLoading}
@@ -271,9 +263,7 @@ export default function AdminTaikaiPage() {
 
         <form onSubmit={handleSave}>
           <div className="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              Tournament Information
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Tournament Information</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -291,9 +281,7 @@ export default function AdminTaikaiPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Event Year
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Event Year</label>
                 <input
                   type="text"
                   value={`${year}年`}

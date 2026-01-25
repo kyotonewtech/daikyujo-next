@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "node:fs";
+import path from "node:path";
 
-const DATA_DIR = path.join(process.cwd(), 'data', 'seiseki');
-const PERSONS_FILE = path.join(process.cwd(), 'data', 'persons', 'persons.json');
+const DATA_DIR = path.join(process.cwd(), "data", "seiseki");
+const PERSONS_FILE = path.join(process.cwd(), "data", "persons", "persons.json");
 
 interface SeisekiEntry {
   id: string;
@@ -45,7 +45,7 @@ interface PersonRegistry {
 
 interface ValidationError {
   type: string;
-  severity: 'error' | 'warning';
+  severity: "error" | "warning";
   message: string;
   details?: any;
 }
@@ -53,8 +53,9 @@ interface ValidationError {
 // 年月の昇順でファイルパスを取得
 function getAllDataFiles(): string[] {
   const files: string[] = [];
-  const years = fs.readdirSync(DATA_DIR)
-    .filter(name => !name.includes('.json') && !isNaN(Number(name)))
+  const years = fs
+    .readdirSync(DATA_DIR)
+    .filter((name) => !name.includes(".json") && !Number.isNaN(Number(name)))
     .map(Number)
     .sort((a, b) => a - b);
 
@@ -62,13 +63,14 @@ function getAllDataFiles(): string[] {
     const yearDir = path.join(DATA_DIR, String(year));
     if (!fs.existsSync(yearDir)) continue;
 
-    const months = fs.readdirSync(yearDir)
-      .filter(name => name.endsWith('.json'))
-      .map(name => parseInt(name.replace('.json', '')))
+    const months = fs
+      .readdirSync(yearDir)
+      .filter((name) => name.endsWith(".json"))
+      .map((name) => parseInt(name.replace(".json", ""), 10))
       .sort((a, b) => a - b);
 
     for (const month of months) {
-      files.push(path.join(yearDir, `${String(month).padStart(2, '0')}.json`));
+      files.push(path.join(yearDir, `${String(month).padStart(2, "0")}.json`));
     }
   }
 
@@ -76,34 +78,34 @@ function getAllDataFiles(): string[] {
 }
 
 function main() {
-  console.log('=== personId 整合性検証スクリプト ===\n');
+  console.log("=== personId 整合性検証スクリプト ===\n");
 
   // persons.json を読み込み
   if (!fs.existsSync(PERSONS_FILE)) {
     console.error(`エラー: ${PERSONS_FILE} が見つかりません`);
-    console.error('先に migrate-persons.ts を実行してください');
+    console.error("先に migrate-persons.ts を実行してください");
     process.exit(1);
   }
 
-  const registry: PersonRegistry = JSON.parse(fs.readFileSync(PERSONS_FILE, 'utf-8'));
+  const registry: PersonRegistry = JSON.parse(fs.readFileSync(PERSONS_FILE, "utf-8"));
   const errors: ValidationError[] = [];
 
   console.log(`読み込み: ${PERSONS_FILE}`);
   console.log(`登録人数: ${registry.persons.length}名`);
-  console.log(`次のpersonId: person_${String(registry.nextPersonId).padStart(3, '0')}\n`);
+  console.log(`次のpersonId: person_${String(registry.nextPersonId).padStart(3, "0")}\n`);
 
   // 1. persons.json の内部整合性チェック
-  console.log('[1/5] persons.json の内部整合性をチェック中...');
+  console.log("[1/5] persons.json の内部整合性をチェック中...");
 
   // 重複personIdチェック
   const personIdSet = new Set<string>();
   for (const person of registry.persons) {
     if (personIdSet.has(person.personId)) {
       errors.push({
-        type: 'DUPLICATE_PERSON_ID',
-        severity: 'error',
+        type: "DUPLICATE_PERSON_ID",
+        severity: "error",
         message: `重複したpersonId: ${person.personId}`,
-        details: { personId: person.personId, name: person.name }
+        details: { personId: person.personId, name: person.name },
       });
     }
     personIdSet.add(person.personId);
@@ -113,24 +115,24 @@ function main() {
   for (const person of registry.persons) {
     if (!person.personId.match(/^person_\d{3}$/)) {
       errors.push({
-        type: 'INVALID_PERSON_ID_FORMAT',
-        severity: 'error',
+        type: "INVALID_PERSON_ID_FORMAT",
+        severity: "error",
         message: `不正なpersonIdフォーマット: ${person.personId}`,
-        details: { personId: person.personId, name: person.name }
+        details: { personId: person.personId, name: person.name },
       });
     }
   }
 
   // nextPersonIdチェック
   const maxPersonIdNum = Math.max(
-    ...registry.persons.map(p => parseInt(p.personId.replace('person_', '')))
+    ...registry.persons.map((p) => parseInt(p.personId.replace("person_", ""), 10))
   );
   if (registry.nextPersonId <= maxPersonIdNum) {
     errors.push({
-      type: 'INVALID_NEXT_PERSON_ID',
-      severity: 'error',
+      type: "INVALID_NEXT_PERSON_ID",
+      severity: "error",
       message: `nextPersonId (${registry.nextPersonId}) が既存の最大personId (${maxPersonIdNum}) 以下です`,
-      details: { nextPersonId: registry.nextPersonId, maxPersonIdNum }
+      details: { nextPersonId: registry.nextPersonId, maxPersonIdNum },
     });
   }
 
@@ -139,7 +141,7 @@ function main() {
   console.log(`  ✓ nextPersonIdチェック完了\n`);
 
   // 2. JSONファイルとの整合性チェック
-  console.log('[2/5] JSONファイルとの整合性をチェック中...');
+  console.log("[2/5] JSONファイルとの整合性をチェック中...");
 
   const files = getAllDataFiles();
   const usedPersonIds = new Set<string>();
@@ -147,7 +149,7 @@ function main() {
 
   for (const filePath of files) {
     try {
-      const content = fs.readFileSync(filePath, 'utf-8');
+      const content = fs.readFileSync(filePath, "utf-8");
       const data: SeisekiMonth = JSON.parse(content);
 
       for (const entry of data.entries) {
@@ -156,33 +158,33 @@ function main() {
         usedPersonIds.add(entry.personId);
 
         // persons.jsonに存在するかチェック
-        const person = registry.persons.find(p => p.personId === entry.personId);
+        const person = registry.persons.find((p) => p.personId === entry.personId);
         if (!person) {
           errors.push({
-            type: 'MISSING_IN_REGISTRY',
-            severity: 'error',
+            type: "MISSING_IN_REGISTRY",
+            severity: "error",
             message: `JSONファイルにあるpersonId "${entry.personId}" がpersons.jsonに存在しません`,
             details: {
               file: filePath,
               personId: entry.personId,
               name: entry.name,
               year: data.year,
-              month: data.month
-            }
+              month: data.month,
+            },
           });
         } else {
           // 名前の一致チェック
           if (person.name !== entry.name) {
             errors.push({
-              type: 'NAME_MISMATCH',
-              severity: 'warning',
+              type: "NAME_MISMATCH",
+              severity: "warning",
               message: `personId "${entry.personId}" の名前が不一致です`,
               details: {
                 file: filePath,
                 personId: entry.personId,
                 registryName: person.name,
-                entryName: entry.name
-              }
+                entryName: entry.name,
+              },
             });
           }
 
@@ -195,10 +197,10 @@ function main() {
       }
     } catch (error) {
       errors.push({
-        type: 'FILE_READ_ERROR',
-        severity: 'error',
+        type: "FILE_READ_ERROR",
+        severity: "error",
         message: `ファイル読み込みエラー: ${filePath}`,
-        details: { error }
+        details: { error },
       });
     }
   }
@@ -207,19 +209,17 @@ function main() {
   console.log(`  ✓ ${usedPersonIds.size}個のpersonIdを確認\n`);
 
   // 3. 未使用personIdチェック
-  console.log('[3/5] 未使用personIdをチェック中...');
+  console.log("[3/5] 未使用personIdをチェック中...");
 
-  const unusedPersonIds = registry.persons.filter(
-    p => !usedPersonIds.has(p.personId)
-  );
+  const unusedPersonIds = registry.persons.filter((p) => !usedPersonIds.has(p.personId));
 
   if (unusedPersonIds.length > 0) {
     for (const person of unusedPersonIds) {
       errors.push({
-        type: 'UNUSED_PERSON_ID',
-        severity: 'warning',
+        type: "UNUSED_PERSON_ID",
+        severity: "warning",
         message: `personId "${person.personId}" (${person.name}) はJSONファイルで使用されていません`,
-        details: { personId: person.personId, name: person.name }
+        details: { personId: person.personId, name: person.name },
       });
     }
   }
@@ -227,21 +227,21 @@ function main() {
   console.log(`  ✓ 未使用personId: ${unusedPersonIds.length}件\n`);
 
   // 4. 登場回数の整合性チェック
-  console.log('[4/5] 登場回数の整合性をチェック中...');
+  console.log("[4/5] 登場回数の整合性をチェック中...");
 
   for (const person of registry.persons) {
     const actualCount = actualAppearanceCounts.get(person.personId) || 0;
     if (actualCount !== person.appearanceCount) {
       errors.push({
-        type: 'APPEARANCE_COUNT_MISMATCH',
-        severity: 'warning',
+        type: "APPEARANCE_COUNT_MISMATCH",
+        severity: "warning",
         message: `personId "${person.personId}" (${person.name}) の登場回数が不一致です`,
         details: {
           personId: person.personId,
           name: person.name,
           registryCount: person.appearanceCount,
-          actualCount
-        }
+          actualCount,
+        },
       });
     }
   }
@@ -249,31 +249,33 @@ function main() {
   console.log(`  ✓ 登場回数チェック完了\n`);
 
   // 5. personKeyの整合性チェック
-  console.log('[5/5] personKeyの整合性をチェック中...');
+  console.log("[5/5] personKeyの整合性をチェック中...");
 
   const nameGroups = new Map<string, PersonEntry[]>();
   for (const person of registry.persons) {
     if (!nameGroups.has(person.name)) {
       nameGroups.set(person.name, []);
     }
-    nameGroups.get(person.name)!.push(person);
+    nameGroups.get(person.name)?.push(person);
   }
 
   for (const [name, persons] of nameGroups) {
     if (persons.length > 1) {
       // 同名の人が複数いる場合、全員がpersonKeyを持っているべき
-      const withoutKey = persons.filter(p => !p.personKey);
+      const withoutKey = persons.filter((p) => !p.personKey);
       if (withoutKey.length > 0) {
         errors.push({
-          type: 'MISSING_PERSON_KEY',
-          severity: 'warning',
+          type: "MISSING_PERSON_KEY",
+          severity: "warning",
           message: `同名の別人「${name}」が存在しますが、一部にpersonKeyがありません`,
           details: {
             name,
             totalCount: persons.length,
             withoutKeyCount: withoutKey.length,
-            personIds: persons.map(p => `${p.personId}${p.personKey ? ` (key: ${p.personKey})` : ''}`)
-          }
+            personIds: persons.map(
+              (p) => `${p.personId}${p.personKey ? ` (key: ${p.personKey})` : ""}`
+            ),
+          },
         });
       }
     }
@@ -282,46 +284,50 @@ function main() {
   console.log(`  ✓ personKeyチェック完了\n`);
 
   // 結果出力
-  console.log('='.repeat(60));
-  console.log('=== 検証結果 ===\n');
+  console.log("=".repeat(60));
+  console.log("=== 検証結果 ===\n");
 
   if (errors.length === 0) {
-    console.log('✅ エラーは見つかりませんでした！');
-    console.log('   データの整合性は正常です。\n');
+    console.log("✅ エラーは見つかりませんでした！");
+    console.log("   データの整合性は正常です。\n");
     return;
   }
 
-  const errorCount = errors.filter(e => e.severity === 'error').length;
-  const warningCount = errors.filter(e => e.severity === 'warning').length;
+  const errorCount = errors.filter((e) => e.severity === "error").length;
+  const warningCount = errors.filter((e) => e.severity === "warning").length;
 
   console.log(`🔴 エラー: ${errorCount}件`);
   console.log(`🟡 警告: ${warningCount}件\n`);
 
   // エラー詳細
   if (errorCount > 0) {
-    console.log('--- エラー詳細 ---\n');
-    errors.filter(e => e.severity === 'error').forEach((error, i) => {
-      console.log(`${i + 1}. [${error.type}] ${error.message}`);
-      if (error.details) {
-        console.log(`   詳細:`, JSON.stringify(error.details, null, 2));
-      }
-      console.log();
-    });
+    console.log("--- エラー詳細 ---\n");
+    errors
+      .filter((e) => e.severity === "error")
+      .forEach((error, i) => {
+        console.log(`${i + 1}. [${error.type}] ${error.message}`);
+        if (error.details) {
+          console.log(`   詳細:`, JSON.stringify(error.details, null, 2));
+        }
+        console.log();
+      });
   }
 
   // 警告詳細
   if (warningCount > 0) {
-    console.log('--- 警告詳細 ---\n');
-    errors.filter(e => e.severity === 'warning').forEach((error, i) => {
-      console.log(`${i + 1}. [${error.type}] ${error.message}`);
-      if (error.details) {
-        console.log(`   詳細:`, JSON.stringify(error.details, null, 2));
-      }
-      console.log();
-    });
+    console.log("--- 警告詳細 ---\n");
+    errors
+      .filter((e) => e.severity === "warning")
+      .forEach((error, i) => {
+        console.log(`${i + 1}. [${error.type}] ${error.message}`);
+        if (error.details) {
+          console.log(`   詳細:`, JSON.stringify(error.details, null, 2));
+        }
+        console.log();
+      });
   }
 
-  console.log('='.repeat(60));
+  console.log("=".repeat(60));
 
   // エラーがある場合は終了コード1で終了
   if (errorCount > 0) {

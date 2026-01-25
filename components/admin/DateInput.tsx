@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface DateInputProps {
   value: string;
@@ -33,7 +33,7 @@ function parseJapaneseDate(japaneseDate: string): ParsedDate {
 
 function getMaxDayInMonth(year: number, month: number): number {
   if (month === 2) {
-    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
     return isLeapYear ? 29 : 28;
   }
   if ([4, 6, 9, 11].includes(month)) {
@@ -42,12 +42,7 @@ function getMaxDayInMonth(year: number, month: number): number {
   return 31;
 }
 
-export default function DateInput({
-  value,
-  onChange,
-  label,
-  required = false,
-}: DateInputProps) {
+export default function DateInput({ value, onChange, label, required = false }: DateInputProps) {
   const parsed = parseJapaneseDate(value);
 
   const [year, setYear] = useState<string>(parsed.year);
@@ -78,9 +73,9 @@ export default function DateInput({
       return;
     }
 
-    const yearNum = parseInt(newYear);
-    const monthNum = parseInt(newMonth);
-    const dayNum = parseInt(newDay);
+    const yearNum = parseInt(newYear, 10);
+    const monthNum = parseInt(newMonth, 10);
+    const dayNum = parseInt(newDay, 10);
 
     if (monthNum < 1 || monthNum > 12) {
       setError("Month must be between 1 and 12");
@@ -91,14 +86,14 @@ export default function DateInput({
 
     if (dayNum < 1 || dayNum > maxDay) {
       if (monthNum === 2) {
-        const isLeapYear = (yearNum % 4 === 0 && yearNum % 100 !== 0) || (yearNum % 400 === 0);
+        const isLeapYear = (yearNum % 4 === 0 && yearNum % 100 !== 0) || yearNum % 400 === 0;
         if (isLeapYear) {
-          setError("February " + yearNum + " has only 29 days");
+          setError(`February ${yearNum} has only 29 days`);
         } else {
-          setError("February " + yearNum + " has only 28 days");
+          setError(`February ${yearNum} has only 28 days`);
         }
       } else {
-        setError("This month has only " + maxDay + " days");
+        setError(`This month has only ${maxDay} days`);
       }
       return;
     }
@@ -181,9 +176,7 @@ export default function DateInput({
         <span className="text-gray-600">{DAY_LABEL}</span>
       </div>
 
-      {error && (
-        <p className="text-red-500 text-sm mt-1">{error}</p>
-      )}
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

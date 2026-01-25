@@ -4,11 +4,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, Info } from "lucide-react";
 import type { NoticeBoxProps } from "@/types/beginners";
 
-export default function NoticeBox({
-  variant,
-  title,
-  children,
-}: NoticeBoxProps) {
+export default function NoticeBox({ variant, title, children }: NoticeBoxProps) {
   const isInfo = variant === "info";
 
   return (
@@ -18,9 +14,7 @@ export default function NoticeBox({
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       className={`rounded-sm border p-6 md:p-8 ${
-        isInfo
-          ? "bg-green-50 border-green-200"
-          : "bg-red-50 border-red-200"
+        isInfo ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
       }`}
     >
       <div className="flex items-start gap-4">
@@ -29,18 +23,12 @@ export default function NoticeBox({
         </div>
         <div className="flex-1">
           {title && (
-            <h3
-              className={`font-bold text-lg mb-3 ${
-                isInfo ? "text-green-900" : "text-red-900"
-              }`}
-            >
+            <h3 className={`font-bold text-lg mb-3 ${isInfo ? "text-green-900" : "text-red-900"}`}>
               {title}
             </h3>
           )}
           <div
-            className={`text-base leading-relaxed ${
-              isInfo ? "text-green-800" : "text-red-800"
-            }`}
+            className={`text-base leading-relaxed ${isInfo ? "text-green-800" : "text-red-800"}`}
           >
             {children}
           </div>

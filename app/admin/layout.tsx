@@ -1,8 +1,8 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -38,11 +38,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   return null;
 }
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <AdminLayoutContent>{children}</AdminLayoutContent>

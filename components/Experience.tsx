@@ -33,7 +33,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-32 px-6 bg-[#fcfaf2]">
       <div className="max-w-6xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -55,26 +55,37 @@ export default function Experience() {
             >
               <div className="h-56 overflow-hidden relative">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10" />
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
+                <img
+                  src={item.image}
+                  alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="p-8">
-                <h3 className="font-shippori text-xl mb-4 group-hover:text-accent transition-colors">{item.title}</h3>
+                <h3 className="font-shippori text-xl mb-4 group-hover:text-accent transition-colors">
+                  {item.title}
+                </h3>
                 <p className="text-accent font-bold text-lg mb-4">
-                  {item.price} <span className="text-sm font-normal text-gray-600">{item.unit}</span>
+                  {item.price}{" "}
+                  <span className="text-sm font-normal text-gray-600">{item.unit}</span>
                 </p>
                 <p className="text-gray-600 text-sm leading-relaxed mb-8 min-h-[80px]">
                   {item.desc}
                 </p>
                 <a
-                  href={index === 0 ? "/beginners" : index === 1 ? "/beginners?tab=guide#experienced" : "https://www.the-true-works.com/location-data/enzan-daikyujo"}
+                  href={
+                    index === 0
+                      ? "/beginners"
+                      : index === 1
+                        ? "/beginners?tab=guide#experienced"
+                        : "https://www.the-true-works.com/location-data/enzan-daikyujo"
+                  }
                   className="inline-flex items-center text-sm font-medium border-b border-accent pb-1 hover:text-accent transition-colors group/link"
                 >
                   {item.linkText}
-                  <span className="ml-2 group-hover/link:translate-x-1 transition-transform">→</span>
+                  <span className="ml-2 group-hover/link:translate-x-1 transition-transform">
+                    →
+                  </span>
                 </a>
               </div>
             </motion.div>

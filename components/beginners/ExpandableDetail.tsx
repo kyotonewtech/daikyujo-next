@@ -1,15 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import type { ExpandableDetailProps } from "@/types/beginners";
 
-export default function ExpandableDetail({
-  summary,
-  children,
-  id,
-}: ExpandableDetailProps) {
+export default function ExpandableDetail({ summary, children, id }: ExpandableDetailProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -39,9 +35,7 @@ export default function ExpandableDetail({
     <div
       id={id}
       className={`border rounded-sm overflow-hidden bg-white mb-[10px] transition-all duration-300 ${
-        isHighlighted
-          ? "border-accent shadow-lg ring-2 ring-accent/20"
-          : "border-gray-200"
+        isHighlighted ? "border-accent shadow-lg ring-2 ring-accent/20" : "border-gray-200"
       }`}
     >
       <button

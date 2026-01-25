@@ -25,7 +25,8 @@ const shipporiMincho = Shippori_Mincho({
 
 export const metadata: Metadata = {
   title: "園山大弓場 | 京都・東山 160年の歴史",
-  description: "京都・東山にある創業文久二年の弓道場。初心者から経験者まで、伝統的な弓術体験を提供します。",
+  description:
+    "京都・東山にある創業文久二年の弓道場。初心者から経験者まで、伝統的な弓術体験を提供します。",
 };
 
 export default function RootLayout({
@@ -35,7 +36,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="scroll-smooth">
-      <body className={`${notoSans.variable} ${notoSerif.variable} ${shipporiMincho.variable} font-sans bg-background text-foreground antialiased`}>
+      <body
+        className={`${notoSans.variable} ${notoSerif.variable} ${shipporiMincho.variable} font-sans bg-background text-foreground antialiased`}
+      >
         {children}
       </body>
     </html>

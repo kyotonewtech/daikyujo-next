@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { saveTaikaiData } from "@/lib/taikai";
 import type { TaikaiParticipant } from "@/types/taikai";
@@ -52,10 +52,7 @@ function validateTaikaiData(data: {
       };
     }
 
-    if (
-      !Number.isInteger(participant.rank) ||
-      participant.rank < 1
-    ) {
+    if (!Number.isInteger(participant.rank) || participant.rank < 1) {
       return {
         valid: false,
         error: `Participant ${entryNum}: Rank must be a positive integer`,
@@ -146,10 +143,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!validation.valid) {
-      return NextResponse.json(
-        { success: false, error: validation.error },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: validation.error }, { status: 400 });
     }
 
     // Save tournament data
@@ -158,8 +152,8 @@ export async function POST(request: NextRequest) {
       taikaiName,
       eventDate,
       participants,
-      publishedAt: "",  // Will be set by saveTaikaiData
-      updatedAt: "",    // Will be set by saveTaikaiData
+      publishedAt: "", // Will be set by saveTaikaiData
+      updatedAt: "", // Will be set by saveTaikaiData
     });
 
     return NextResponse.json({

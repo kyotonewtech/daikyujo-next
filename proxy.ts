@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -23,8 +23,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/api/admin/:path*",
-  ],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

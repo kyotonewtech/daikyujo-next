@@ -49,9 +49,7 @@ export default function ParticipantForm({
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-gray-800">
-          Rank {rank}
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-800">Rank {rank}</h3>
         <button
           type="button"
           onClick={() => onRemove(participant.id)}
@@ -77,9 +75,7 @@ export default function ParticipantForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Rank Title
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Rank Title</label>
           <select
             value={participant.rankTitle}
             onChange={(e) => onUpdate(participant.id, "rankTitle", e.target.value)}

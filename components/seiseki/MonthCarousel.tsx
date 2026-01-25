@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import type { SeisekiEntry, SeisekiMonth } from "@/types/seiseki";
 import SeisekiCard from "./SeisekiCard";
-import type { SeisekiMonth, SeisekiEntry } from "@/types/seiseki";
 
 interface MonthCarouselProps {
   monthsData: SeisekiMonth[];
@@ -42,13 +42,13 @@ function padEntriesToTen(entries: SeisekiEntry[]): SeisekiEntry[] {
 }
 
 // エントリーを再配置（デスクトップ用: 左列1-5位、右列6-10位）
-function reorderEntriesForDesktop(entries: SeisekiEntry[]): SeisekiEntry[] {
+function _reorderEntriesForDesktop(entries: SeisekiEntry[]): SeisekiEntry[] {
   if (entries.length !== 10) return entries;
 
   const reordered: SeisekiEntry[] = [];
   for (let i = 0; i < 5; i++) {
-    reordered.push(entries[i]);      // 1位, 2位, 3位, 4位, 5位
-    reordered.push(entries[i + 5]);  // 6位, 7位, 8位, 9位, 10位
+    reordered.push(entries[i]); // 1位, 2位, 3位, 4位, 5位
+    reordered.push(entries[i + 5]); // 6位, 7位, 8位, 9位, 10位
   }
   return reordered;
 }
@@ -119,7 +119,7 @@ export default function MonthCarousel({
   // アニメーションバリアント
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
     center: {
@@ -127,22 +127,17 @@ export default function MonthCarousel({
       opacity: 1,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? '100%' : '-100%',
+      x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
     }),
   };
 
   if (!currentMonthData) {
-    return (
-      <div className="text-center text-gray-500 py-12">
-        データがありません
-      </div>
-    );
+    return <div className="text-center text-gray-500 py-12">データがありません</div>;
   }
 
   const paddedEntries = padEntriesToTen(currentMonthData.entries);
-  const isLatestMonth =
-    selectedYear === latestYear && currentMonthData.month === latestMonth;
+  const isLatestMonth = selectedYear === latestYear && currentMonthData.month === latestMonth;
 
   return (
     <div className="relative overflow-hidden">

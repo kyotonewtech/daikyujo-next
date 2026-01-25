@@ -8,7 +8,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           {/* Image Area */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -27,7 +27,7 @@ export default function About() {
           </motion.div>
 
           {/* Text Area */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -36,20 +36,25 @@ export default function About() {
           >
             <div className="mb-8">
               <h2 className="font-shippori text-4xl font-bold mb-4">ご挨拶</h2>
-              <span className="block text-xs font-sans text-accent tracking-[0.3em]">INTRODUCTION</span>
+              <span className="block text-xs font-sans text-accent tracking-[0.3em]">
+                INTRODUCTION
+              </span>
             </div>
-            
+
             <div className="space-y-6 text-lg leading-loose font-serif text-gray-700">
               <p>
-                京都・東山。円山公園のほど近く。<br />
+                京都・東山。円山公園のほど近く。
+                <br />
                 園山大弓場は、文久二年（1862年）より続く弓道場です。
               </p>
               <p>
-                静寂の中で的を見据え、矢を放つ。<br />
+                静寂の中で的を見据え、矢を放つ。
+                <br />
                 日常の喧騒を離れ、心静かなひとときをお過ごしください。
               </p>
               <p>
-                初めての方でも、手ぶらで気軽にお楽しみいただけます。<br />
+                初めての方でも、手ぶらで気軽にお楽しみいただけます。
+                <br />
                 古都の風情と共に、日本の伝統文化に触れてみませんか。
               </p>
             </div>

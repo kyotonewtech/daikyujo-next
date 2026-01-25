@@ -1,19 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import {
-  ComposedChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import type { PersonHistory } from '@/types/seiseki';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CartesianGrid, ComposedChart, Line, Tooltip, XAxis, YAxis } from "recharts";
+import type { PersonHistory } from "@/types/seiseki";
 
-export type ViewMode = 'all' | 'year';
+export type ViewMode = "all" | "year";
 
 interface HistoryChartProps {
   personHistory: PersonHistory;
@@ -31,7 +22,7 @@ interface VerticalLabelProps {
   };
   fill: string;
   text: string;
-  position: 'left' | 'right';
+  position: "left" | "right";
   fontSize?: number;
 }
 
@@ -48,10 +39,10 @@ const RANK_MAX = 10;
 // 定数: X軸ラベル表示エリアの高さ（plot areaには影響させない）
 const X_AXIS_LABEL_AREA_HEIGHT = 100;
 
-const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
+const _VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: VerticalLabelProps) => {
   if (!viewBox) return null;
 
-  const chars = text.split('');
+  const chars = text.split("");
   const lineHeight = fontSize + LINE_HEIGHT_MARGIN;
 
   // Y軸の中央位置を計算
@@ -61,7 +52,7 @@ const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertica
   // X座標を計算（フォントサイズに応じて調整）
   const xOffset = Math.min(MAX_LABEL_OFFSET, fontSize * LABEL_OFFSET_RATIO);
   let finalX: number;
-  if (position === 'left') {
+  if (position === "left") {
     // 左側Y軸: viewBoxの左端から右に調整
     finalX = viewBox.x + xOffset;
   } else {
@@ -75,7 +66,7 @@ const VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertica
       y={startY}
       fill={fill}
       textAnchor="middle"
-      style={{ fontSize, fontWeight: 'normal' }}
+      style={{ fontSize, fontWeight: "normal" }}
     >
       {chars.map((char, i) => (
         <tspan key={i} x={finalX} dy={i === 0 ? 0 : lineHeight}>
@@ -91,7 +82,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   const [maxPanOffset, setMaxPanOffset] = useState(0); // 最大パンオフセット
   const [isLandscape, setIsLandscape] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(typeof window !== 'undefined' ? window.innerWidth - 100 : 300); // Y軸固定表示用のコンテナ幅（初期推定値）
+  const [containerWidth, setContainerWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth - 100 : 300
+  ); // Y軸固定表示用のコンテナ幅（初期推定値）
   const [isDragging, setIsDragging] = useState(false); // ドラッグ中フラグ（レンダリングに使用）
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
@@ -103,14 +96,15 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   useEffect(() => {
     const checkOrientation = () => {
       const isLandscapeMode = window.innerHeight < window.innerWidth && window.innerHeight < 500;
-      const isMobilePortraitMode = window.innerWidth < 640 && window.innerHeight > window.innerWidth;
+      const isMobilePortraitMode =
+        window.innerWidth < 640 && window.innerHeight > window.innerWidth;
 
       setIsLandscape(isLandscapeMode);
       setIsMobilePortrait(isMobilePortraitMode);
     };
     checkOrientation();
-    window.addEventListener('resize', checkOrientation);
-    return () => window.removeEventListener('resize', checkOrientation);
+    window.addEventListener("resize", checkOrientation);
+    return () => window.removeEventListener("resize", checkOrientation);
   }, []);
 
   // 定数: 表示月数
@@ -132,20 +126,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   }, [isMobilePortrait, isLandscape]);
 
   // グラフ用にデータを整形
-  const allChartData = useMemo(() =>
-    personHistory.history.map(h => ({
-      period: `${h.year}/${String(h.month).padStart(2, '0')}`,
-      rank: h.rank,
-      targetSize: h.targetSizeNumeric,
-      rankTitle: h.rankTitle,
-    })),
+  const allChartData = useMemo(
+    () =>
+      personHistory.history.map((h) => ({
+        period: `${h.year}/${String(h.month).padStart(2, "0")}`,
+        rank: h.rank,
+        targetSize: h.targetSizeNumeric,
+        rankTitle: h.rankTitle,
+      })),
     [personHistory.history]
   );
 
   // 的の大きさの最小値・最大値を計算（minTargetSize=1位、maxTargetSize=10位に配置）
   const targetSizeRange = useMemo(() => {
     const sizes = allChartData
-      .map(d => d.targetSize)
+      .map((d) => d.targetSize)
       .filter((size): size is number => size !== null && size !== undefined);
 
     if (sizes.length === 0) {
@@ -165,9 +160,10 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
     // 順位1単位あたりの的サイズの変化量
     // この計算により、minTargetSize=1位、maxTargetSize=10位と同じ高さに配置される
-    const targetSizePerRankUnit = actualRankRange > 0
-      ? actualTargetRange / actualRankRange  // = dataRange / 9
-      : 0.3; // データが1つしかない場合のデフォルト値
+    const targetSizePerRankUnit =
+      actualRankRange > 0
+        ? actualTargetRange / actualRankRange // = dataRange / 9
+        : 0.3; // データが1つしかない場合のデフォルト値
 
     // 的の大きさのdomainを計算
     // - calculatedMin: minTargetSize - dataRange/18 → minTargetSizeが1位の高さに配置
@@ -179,7 +175,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
       min: calculatedMin,
       max: calculatedMax,
       actualMin: minTargetSize,
-      actualMax: maxTargetSize
+      actualMax: maxTargetSize,
     };
   }, [allChartData]);
 
@@ -198,59 +194,74 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   }, [isMobilePortrait, isLandscape]);
 
   // レスポンシブフォントサイズ設定（useMemoでメモ化）
-  const labelFontSize = useMemo(() => isMobilePortrait ? 10 : 12, [isMobilePortrait]);
-  const tickFontSize = useMemo(() => isMobilePortrait ? 8 : 10, [isMobilePortrait]);
+  const _labelFontSize = useMemo(() => (isMobilePortrait ? 10 : 12), [isMobilePortrait]);
+  const tickFontSize = useMemo(() => (isMobilePortrait ? 8 : 10), [isMobilePortrait]);
 
   // 表示期間のラベルを取得（panOffsetから逆算）
   const getPeriodLabel = useMemo(() => {
-    if (viewMode === 'all' || allChartData.length === 0) return '';
+    if (viewMode === "all" || allChartData.length === 0) return "";
 
     const startMonthIndex = Math.max(0, Math.floor(-panOffset / monthWidth));
     const endMonthIndex = Math.min(startMonthIndex + VISIBLE_MONTHS, totalMonths);
 
-    const startPeriod = allChartData[startMonthIndex]?.period || '';
-    const endPeriod = allChartData[endMonthIndex - 1]?.period || '';
+    const startPeriod = allChartData[startMonthIndex]?.period || "";
+    const endPeriod = allChartData[endMonthIndex - 1]?.period || "";
 
     return `${startPeriod} 〜 ${endPeriod}`;
-  }, [viewMode, allChartData, panOffset, monthWidth, VISIBLE_MONTHS, totalMonths]);
+  }, [viewMode, allChartData, panOffset, monthWidth, totalMonths]);
 
   // 共通のパンオフセット更新関数
-  const updatePanOffset = useCallback((clientX: number) => {
-    if (touchStartX.current === null) return;
-    const diff = clientX - touchStartX.current;
-    const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
-    setPanOffset(newOffset);
-  }, [maxPanOffset]);
+  const updatePanOffset = useCallback(
+    (clientX: number) => {
+      if (touchStartX.current === null) return;
+      const diff = clientX - touchStartX.current;
+      const newOffset = Math.max(maxPanOffset, Math.min(0, dragStartOffset.current + diff));
+      setPanOffset(newOffset);
+    },
+    [maxPanOffset]
+  );
 
   // リアルタイムパンハンドラー
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (viewMode !== 'year') return;
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    dragStartOffset.current = panOffset;
-    setIsDragging(true);
-    isHorizontalSwipe.current = false;
-  }, [viewMode, panOffset]);
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (viewMode !== "year") return;
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+      dragStartOffset.current = panOffset;
+      setIsDragging(true);
+      isHorizontalSwipe.current = false;
+    },
+    [viewMode, panOffset]
+  );
 
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (viewMode !== 'year' || !isDragging || touchStartX.current === null || touchStartY.current === null) return;
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (
+        viewMode !== "year" ||
+        !isDragging ||
+        touchStartX.current === null ||
+        touchStartY.current === null
+      )
+        return;
 
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = currentX - touchStartX.current;
-    const diffY = currentY - touchStartY.current;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = currentX - touchStartX.current;
+      const diffY = currentY - touchStartY.current;
 
-    // 初回の移動で横スワイプか縦スワイプか判定
-    if (!isHorizontalSwipe.current && (Math.abs(diffX) > 5 || Math.abs(diffY) > 5)) {
-      isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
-    }
+      // 初回の移動で横スワイプか縦スワイプか判定
+      if (!isHorizontalSwipe.current && (Math.abs(diffX) > 5 || Math.abs(diffY) > 5)) {
+        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
+      }
 
-    // 横スワイプの場合のみパン
-    if (isHorizontalSwipe.current) {
-      e.preventDefault();
-      updatePanOffset(currentX);
-    }
-  }, [viewMode, isDragging, updatePanOffset]);
+      // 横スワイプの場合のみパン
+      if (isHorizontalSwipe.current) {
+        e.preventDefault();
+        updatePanOffset(currentX);
+      }
+    },
+    [viewMode, isDragging, updatePanOffset]
+  );
 
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
@@ -260,17 +271,23 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   }, []);
 
   // マウスドラッグ対応
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    if (viewMode !== 'year') return;
-    touchStartX.current = e.clientX;
-    dragStartOffset.current = panOffset;
-    setIsDragging(true);
-  }, [viewMode, panOffset]);
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (viewMode !== "year") return;
+      touchStartX.current = e.clientX;
+      dragStartOffset.current = panOffset;
+      setIsDragging(true);
+    },
+    [viewMode, panOffset]
+  );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (viewMode !== 'year' || !isDragging) return;
-    updatePanOffset(e.clientX);
-  }, [viewMode, isDragging, updatePanOffset]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (viewMode !== "year" || !isDragging) return;
+      updatePanOffset(e.clientX);
+    },
+    [viewMode, isDragging, updatePanOffset]
+  );
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -279,7 +296,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
   // 実際の表示領域幅を取得してmaxPanOffsetを計算
   useEffect(() => {
-    if (viewMode !== 'year') {
+    if (viewMode !== "year") {
       // viewMode変更に応じた状態リセット
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setMaxPanOffset(0);
@@ -299,21 +316,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
     // DOMが完全にレンダリングされた後に実行
     const timer = setTimeout(updateMaxPanOffset, 0);
-    window.addEventListener('resize', updateMaxPanOffset);
+    window.addEventListener("resize", updateMaxPanOffset);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('resize', updateMaxPanOffset);
+      window.removeEventListener("resize", updateMaxPanOffset);
     };
-  }, [totalWidth, viewMode, isMobilePortrait, isLandscape]);
+  }, [totalWidth, viewMode]);
 
   // 表示モード変更時にオフセットをリセット
   useEffect(() => {
-    if (viewMode === 'year' && maxPanOffset < 0) {
+    if (viewMode === "year" && maxPanOffset < 0) {
       // viewMode変更時の初期位置設定
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPanOffset(maxPanOffset); // 直近データを表示
-    } else if (viewMode === 'all') {
+    } else if (viewMode === "all") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPanOffset(0);
     }
@@ -323,7 +340,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   const chartHeight = isLandscape ? 300 : 500;
 
   // 全期間モード: 1年モードと同じモーダルサイズ
-  if (viewMode === 'all') {
+  if (viewMode === "all") {
     // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はXAxis heightで確保）
     const allPeriodMargin = { top: 5, right: 0, bottom: 0, left: 0 };
     // 全期間グラフと1年グラフで同じ高さを使用
@@ -335,7 +352,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
         <div className="w-full" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
-            width={typeof window !== 'undefined' ? window.innerWidth - 40 : 800}
+            width={typeof window !== "undefined" ? window.innerWidth - 40 : 800}
             height={allPeriodHeight}
             margin={allPeriodMargin}
           >
@@ -356,7 +373,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               reversed
               allowDataOverflow={true}
               ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-              tick={{ fontSize: tickFontSize, fill: '#8B0000' }}
+              tick={{ fontSize: tickFontSize, fill: "#8B0000" }}
               tickFormatter={(value) => `${value}位`}
               scale="linear"
               type="number"
@@ -379,22 +396,22 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 }
                 return ticks;
               })()}
-              tick={{ fontSize: tickFontSize, fill: '#4A90E2' }}
+              tick={{ fontSize: tickFontSize, fill: "#4A90E2" }}
               tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
             />
 
             <Tooltip
-              contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
+              contentStyle={{ backgroundColor: "white", border: "1px solid #ccc" }}
               formatter={(value: unknown, name: string) => {
                 if (value === null || value === undefined) {
-                  return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
+                  return ["データなし", name === "rank" ? "順位" : "的の大きさ"];
                 }
-                const numValue = typeof value === 'number' ? value : Number(value);
-                if (name === 'rank') {
-                  return [`${numValue}位`, '順位'];
+                const numValue = typeof value === "number" ? value : Number(value);
+                if (name === "rank") {
+                  return [`${numValue}位`, "順位"];
                 }
-                if (name === 'targetSize') {
-                  return [numValue.toFixed(1), '的の大きさ'];
+                if (name === "targetSize") {
+                  return [numValue.toFixed(1), "的の大きさ"];
                 }
                 return [numValue, name];
               }}
@@ -440,36 +457,34 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   return (
     <div className="w-full space-y-2">
       {/* 期間ラベル */}
-      <div className="text-center text-sm text-gray-700 font-medium">
-        {getPeriodLabel}
-      </div>
+      <div className="text-center text-sm text-gray-700 font-medium">{getPeriodLabel}</div>
 
       {/* パン可能なグラフ（Y軸固定） */}
       <div
         className="w-full select-none"
         style={{
-          position: 'relative',
+          position: "relative",
           height: containerHeight,
           paddingLeft: chartMargin.left,
           paddingRight: chartMargin.right,
-          overflow: 'visible',
+          overflow: "visible",
         }}
       >
         {/* 固定Y軸背景層（スワイプしても動かない） */}
         {containerWidth > 100 && (
           <div
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: 0,
               right: 0,
               top: 0,
               bottom: 0,
-              pointerEvents: 'none',
+              pointerEvents: "none",
               zIndex: 10,
-              overflow: 'visible',
+              overflow: "visible",
             }}
           >
-            <svg width="100%" height={containerHeight} style={{ overflow: 'visible' }}>
+            <svg width="100%" height={containerHeight} style={{ overflow: "visible" }}>
               {/* 左Y軸エリア (順位: reversed, 1位=上, 10位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
@@ -504,7 +519,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               </g>
 
               {/* 右Y軸エリア (的の大きさ: 人物ごとに可変、X軸は視覚的に底辺) */}
-              <g transform={`translate(${containerWidth + chartMargin.left}, ${rechartsMargin.top})`}>
+              <g
+                transform={`translate(${containerWidth + chartMargin.left}, ${rechartsMargin.top})`}
+              >
                 {(() => {
                   const chartAreaHeight = plotAreaHeight;
                   const { min, max, actualMin, actualMax } = targetSizeRange;
@@ -538,14 +555,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   });
                 })()}
                 {/* Y軸線（全範囲） */}
-                <line
-                  x1={0}
-                  y1={0}
-                  x2={0}
-                  y2={plotAreaHeight}
-                  stroke="#ccc"
-                  strokeWidth={1}
-                />
+                <line x1={0} y1={0} x2={0} y2={plotAreaHeight} stroke="#ccc" strokeWidth={1} />
               </g>
             </svg>
           </div>
@@ -555,20 +565,20 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
         <div
           ref={containerRef}
           style={{
-            position: 'absolute',
+            position: "absolute",
             left: chartMargin.left,
             right: chartMargin.right,
             top: 0,
             height: containerHeight,
-            overflowX: 'hidden',
-            overflowY: 'visible',
+            overflowX: "hidden",
+            overflowY: "visible",
             zIndex: 5,
           }}
         >
           <div
             className="cursor-grab active:cursor-grabbing"
             style={{
-              height: '100%',
+              height: "100%",
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -581,10 +591,10 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             <div
               style={{
                 transform: `translateX(${panOffset}px)`,
-                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                transition: isDragging ? "none" : "transform 0.2s ease-out",
                 width: totalWidth,
-                willChange: 'transform',
-                background: 'rgba(255, 255, 255, 0.01)',
+                willChange: "transform",
+                background: "rgba(255, 255, 255, 0.01)",
               }}
             >
               <ComposedChart
@@ -602,7 +612,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   height={X_AXIS_LABEL_AREA_HEIGHT}
                   tick={{ fontSize: tickFontSize, dy: 5 }}
                   interval={2}
-                  tickLine={{ transform: 'translate(0, 0)' }}
+                  tickLine={{ transform: "translate(0, 0)" }}
                 />
 
                 {/* Y軸は座標系のみ使用、表示は固定層で行う */}
@@ -628,17 +638,17 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 />
 
                 <Tooltip
-                  contentStyle={{ backgroundColor: 'white', border: '1px solid #ccc' }}
+                  contentStyle={{ backgroundColor: "white", border: "1px solid #ccc" }}
                   formatter={(value: unknown, name: string) => {
                     if (value === null || value === undefined) {
-                      return ['データなし', name === 'rank' ? '順位' : '的の大きさ'];
+                      return ["データなし", name === "rank" ? "順位" : "的の大きさ"];
                     }
-                    const numValue = typeof value === 'number' ? value : Number(value);
-                    if (name === 'rank') {
-                      return [`${numValue}位`, '順位'];
+                    const numValue = typeof value === "number" ? value : Number(value);
+                    if (name === "rank") {
+                      return [`${numValue}位`, "順位"];
                     }
-                    if (name === 'targetSize') {
-                      return [numValue.toFixed(1), '的の大きさ'];
+                    if (name === "targetSize") {
+                      return [numValue.toFixed(1), "的の大きさ"];
                     }
                     return [numValue, name];
                   }}

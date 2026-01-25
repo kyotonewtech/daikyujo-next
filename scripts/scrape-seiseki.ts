@@ -4,12 +4,12 @@
  * Usage: npx tsx scripts/scrape-seiseki.ts [year] [month]
  */
 
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
+import { execSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
 
-const SEISEKI_URL = 'https://daikyujyo.com/seiseki.html';
-const OUTPUT_DIR = path.join(process.cwd(), 'data', 'seiseki');
+const SEISEKI_URL = "https://daikyujyo.com/seiseki.html";
+const _OUTPUT_DIR = path.join(process.cwd(), "data", "seiseki");
 
 interface SeisekiEntry {
   rank: number;
@@ -26,8 +26,8 @@ interface SeisekiEntry {
 function runBrowser(command: string): string {
   try {
     const result = execSync(`agent-browser ${command}`, {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe']
+      encoding: "utf-8",
+      stdio: ["pipe", "pipe", "pipe"],
     });
     return result;
   } catch (error: any) {
@@ -41,28 +41,28 @@ function runBrowser(command: string): string {
  * ブラウザを開いてページをロード
  */
 function openPage(): void {
-  console.log('Opening page:', SEISEKI_URL);
+  console.log("Opening page:", SEISEKI_URL);
   runBrowser(`open "${SEISEKI_URL}"`);
 
   // ページ読み込み待機
-  runBrowser('wait 2000');
+  runBrowser("wait 2000");
 }
 
 /**
  * スクリーンショットを取得（デバッグ用）
  */
 function takeScreenshot(filename: string): void {
-  const screenshotPath = path.join(process.cwd(), 'tmp', filename);
+  const screenshotPath = path.join(process.cwd(), "tmp", filename);
   fs.mkdirSync(path.dirname(screenshotPath), { recursive: true });
   runBrowser(`screenshot "${screenshotPath}"`);
-  console.log('Screenshot saved:', screenshotPath);
+  console.log("Screenshot saved:", screenshotPath);
 }
 
 /**
  * ページのHTMLを取得
  */
 function getPageHTML(): string {
-  const html = runBrowser('get html body');
+  const html = runBrowser("get html body");
   return html;
 }
 
@@ -70,7 +70,7 @@ function getPageHTML(): string {
  * アクセシビリティスナップショットを取得
  */
 function getSnapshot(): string {
-  const snapshot = runBrowser('snapshot');
+  const snapshot = runBrowser("snapshot");
   return snapshot;
 }
 
@@ -80,10 +80,10 @@ function getSnapshot(): string {
 function parseSeisekiData(html: string): SeisekiEntry[] {
   // TODO: HTMLパースロジックを実装
   // 現時点では構造を確認するためにHTMLを出力
-  const tmpPath = path.join(process.cwd(), 'tmp', 'seiseki.html');
+  const tmpPath = path.join(process.cwd(), "tmp", "seiseki.html");
   fs.mkdirSync(path.dirname(tmpPath), { recursive: true });
-  fs.writeFileSync(tmpPath, html, 'utf-8');
-  console.log('HTML saved to:', tmpPath);
+  fs.writeFileSync(tmpPath, html, "utf-8");
+  console.log("HTML saved to:", tmpPath);
 
   return [];
 }
@@ -93,44 +93,43 @@ function parseSeisekiData(html: string): SeisekiEntry[] {
  */
 async function main() {
   try {
-    console.log('Starting scraper...');
+    console.log("Starting scraper...");
 
     // ページを開く
     openPage();
 
     // スクリーンショット取得
-    takeScreenshot('seiseki-page.png');
+    takeScreenshot("seiseki-page.png");
 
     // スナップショット取得
-    console.log('\nAccessibility Snapshot:');
+    console.log("\nAccessibility Snapshot:");
     const snapshot = getSnapshot();
-    const snapshotPath = path.join(process.cwd(), 'tmp', 'snapshot.txt');
-    fs.writeFileSync(snapshotPath, snapshot, 'utf-8');
-    console.log('Snapshot saved to:', snapshotPath);
+    const snapshotPath = path.join(process.cwd(), "tmp", "snapshot.txt");
+    fs.writeFileSync(snapshotPath, snapshot, "utf-8");
+    console.log("Snapshot saved to:", snapshotPath);
 
     // HTML取得
-    console.log('\nFetching HTML...');
+    console.log("\nFetching HTML...");
     const html = getPageHTML();
     const entries = parseSeisekiData(html);
 
     console.log(`Found ${entries.length} entries`);
 
     // ブラウザを閉じる
-    runBrowser('close');
+    runBrowser("close");
 
-    console.log('\nScraping completed!');
-    console.log('Next steps:');
-    console.log('1. Check tmp/seiseki-page.png to see the page');
-    console.log('2. Check tmp/seiseki.html to see the HTML structure');
-    console.log('3. Check tmp/snapshot.txt to see accessibility tree');
-
+    console.log("\nScraping completed!");
+    console.log("Next steps:");
+    console.log("1. Check tmp/seiseki-page.png to see the page");
+    console.log("2. Check tmp/seiseki.html to see the HTML structure");
+    console.log("3. Check tmp/snapshot.txt to see accessibility tree");
   } catch (error) {
-    console.error('Scraping failed:', error);
+    console.error("Scraping failed:", error);
 
     // エラー時もブラウザを閉じる
     try {
-      runBrowser('close');
-    } catch (e) {
+      runBrowser("close");
+    } catch (_e) {
       // ignore
     }
 

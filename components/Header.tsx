@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -12,7 +12,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // /seiseki, /beginners ページでは常にスクロール済みスタイルを適用
-  const shouldUseScrolledStyle = isScrolled || pathname === '/seiseki' || pathname === '/beginners';
+  const shouldUseScrolledStyle = isScrolled || pathname === "/seiseki" || pathname === "/beginners";
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

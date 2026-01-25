@@ -11,11 +11,7 @@ interface TabNavProps {
 export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {
   return (
     <div className="mb-12">
-      <nav
-        className="flex gap-0 justify-center"
-        role="tablist"
-        aria-label="成績タブ"
-      >
+      <nav className="flex gap-0 justify-center" aria-label="成績タブ">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (

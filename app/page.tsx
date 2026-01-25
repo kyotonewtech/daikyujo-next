@@ -1,12 +1,12 @@
 "use client";
 
+import About from "@/components/About";
+import Access from "@/components/Access";
+import Experience from "@/components/Experience";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import Info from "@/components/Info";
-import Experience from "@/components/Experience";
-import Access from "@/components/Access";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   return (

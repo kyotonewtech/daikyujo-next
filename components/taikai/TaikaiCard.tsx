@@ -48,7 +48,7 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
 
   // キーボードハンドラー
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.key === 'Enter' || e.key === ' ') && onClick) {
+    if ((e.key === "Enter" || e.key === " ") && onClick) {
       e.preventDefault();
       onClick(participant.name);
     }
@@ -59,7 +59,7 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
   return (
     <div
       className={`${bgColor} border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 ${
-        isClickable ? 'cursor-pointer' : ''
+        isClickable ? "cursor-pointer" : ""
       }`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -75,16 +75,15 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
 
           {/* 名前+段位 */}
           <span className="font-shippori text-lg text-gray-800 flex-shrink-0">
-            {participant.name}{participant.rankTitle}
+            {participant.name}
+            {participant.rankTitle}
           </span>
         </div>
 
         {/* スコア */}
         <span className="text-base sm:text-lg text-gray-700 ml-8 sm:ml-0">
           {participant.score1}+{participant.score2}={" "}
-          <span className={`font-bold text-xl ${rankColor}`}>
-            {participant.totalScore}
-          </span>
+          <span className={`font-bold text-xl ${rankColor}`}>{participant.totalScore}</span>
         </span>
       </div>
     </div>

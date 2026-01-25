@@ -21,18 +21,11 @@ const RANK_OPTIONS = [
   { value: "\u4e94\u7d1a", label: "\u4e94\u7d1a" },
 ];
 
-export default function EntryForm({
-  entry,
-  onUpdate,
-  onRemove,
-  rank,
-}: EntryFormProps) {
+export default function EntryForm({ entry, onUpdate, onRemove, rank }: EntryFormProps) {
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-gray-800">
-          Rank {rank}
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-800">Rank {rank}</h3>
         <button
           type="button"
           onClick={() => onRemove(entry.id)}
@@ -58,9 +51,7 @@ export default function EntryForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Rank Title
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Rank Title</label>
           <select
             value={entry.rankTitle}
             onChange={(e) => onUpdate(entry.id, "rankTitle", e.target.value)}

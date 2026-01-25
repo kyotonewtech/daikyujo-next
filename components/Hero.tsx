@@ -1,10 +1,10 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const HERO_IMAGES = ['/hero-image.jpg', '/hero2.jpg'] as const;
+const HERO_IMAGES = ["/hero-image.jpg", "/hero2.jpg"] as const;
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -37,10 +37,10 @@ export default function Hero() {
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1 },
-            scale: { duration: 10, ease: "easeOut" }
+            scale: { duration: 10, ease: "easeOut" },
           }}
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${HERO_IMAGES[currentImageIndex]}')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${HERO_IMAGES[currentImageIndex]}')`,
           }}
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         />
