@@ -1,6 +1,12 @@
 {
   "archives": [
     {
+      "year": 2026,
+      "month": 1,
+      "entryCount": 10,
+      "publishedAt": "2026-01-31T00:00:00.000Z"
+    },
+    {
       "year": 2025,
       "month": 12,
       "entryCount": 10,
@@ -1039,5 +1045,5 @@
       "publishedAt": "2025-12-09T23:44:47.855Z"
     }
   ],
-  "lastUpdated": "2025-12-31T00:00:00.000Z"
+  "lastUpdated": "2026-01-31T00:00:00.000Z"
 }
