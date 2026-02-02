@@ -85,6 +85,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   const [containerWidth, setContainerWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth - 100 : 300
   ); // Y軸固定表示用のコンテナ幅（初期推定値）
+  const [windowWidth, setWindowWidth] = useState(800); // 全期間グラフ用の画面幅（SSR対応）
   const [isDragging, setIsDragging] = useState(false); // ドラッグ中フラグ（レンダリングに使用）
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
@@ -101,6 +102,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
       setIsLandscape(isLandscapeMode);
       setIsMobilePortrait(isMobilePortraitMode);
+      setWindowWidth(window.innerWidth - 40); // 全期間グラフ用の画面幅を更新
     };
     checkOrientation();
     window.addEventListener("resize", checkOrientation);
@@ -342,17 +344,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   // 全期間モード: 1年モードと同じモーダルサイズ
   if (viewMode === "all") {
     // 全期間グラフ用のマージン（上部はRANK_PADDINGがあるため最小限、下部はXAxis heightで確保）
-    const allPeriodMargin = { top: 5, right: 0, bottom: 0, left: 0 };
+    const allPeriodMargin = { top: 5, right: 30, bottom: 0, left: 30 };
     // 全期間グラフと1年グラフで同じ高さを使用
     const allPeriodHeight = chartHeight; // isLandscape ? 300 : 500
 
+    // 全期間グラフの幅を計算（各月に最低15pxを確保、画面幅より小さい場合は画面幅を使用）
+    const minWidthPerMonth = 15;
+    const calculatedWidth = Math.max(windowWidth, totalMonths * minWidthPerMonth + allPeriodMargin.left + allPeriodMargin.right);
+
     return (
       <div className="w-full">
-        {/* 全期間グラフ（モーダル領域最大化、凡例なし） */}
-        <div className="w-full" style={{ height: allPeriodHeight }}>
+        {/* 全期間グラフ（モーダル領域最大化、凡例なし、横スクロール可能） */}
+        <div className="w-full overflow-x-auto" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
-            width={typeof window !== "undefined" ? window.innerWidth - 40 : 800}
+            width={calculatedWidth}
             height={allPeriodHeight}
             margin={allPeriodMargin}
           >
