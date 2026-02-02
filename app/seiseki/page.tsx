@@ -1,13 +1,13 @@
-import { getAvailableYears, getYearSeisekiData, getLatestSeisekiData } from "@/lib/seiseki";
-import { getTaikaiArchiveList, getTaikaiData } from "@/lib/taikai";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SeisekiPageClient from "./SeisekiPageClient";
+import Header from "@/components/Header";
+import { getAvailableYears, getLatestSeisekiData, getYearSeisekiData } from "@/lib/seiseki";
+import { getTaikaiArchiveList, getTaikaiData } from "@/lib/taikai";
 import type { SeisekiMonth } from "@/types/seiseki";
 import type { TaikaiData } from "@/types/taikai";
+import SeisekiPageClient from "./SeisekiPageClient";
 
 // キャッシュを無効化し、毎回動的にレンダリング
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function SeisekiPage() {
   // 通常成績データ取得
@@ -39,9 +39,12 @@ export default async function SeisekiPage() {
     }
   }
 
-  console.log('[Server] taikaiArchiveList.archives:', taikaiArchiveList.archives);
-  console.log('[Server] taikaiList length:', taikaiList.length);
-  console.log('[Server] taikaiList:', taikaiList.map(t => ({ year: t.year, name: t.taikaiName, count: t.participants.length })));
+  console.log("[Server] taikaiArchiveList.archives:", taikaiArchiveList.archives);
+  console.log("[Server] taikaiList length:", taikaiList.length);
+  console.log(
+    "[Server] taikaiList:",
+    taikaiList.map((t) => ({ year: t.year, name: t.taikaiName, count: t.participants.length }))
+  );
 
   // データが全くない場合
   if (availableYears.length === 0 && taikaiList.length === 0) {
@@ -50,15 +53,9 @@ export default async function SeisekiPage() {
         <Header />
         <section className="py-32 px-6 bg-background min-h-screen">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="font-shippori text-3xl font-bold text-gray-800 mb-2">
-              弓術競技会成績
-            </h2>
-            <span className="block text-xs text-accent tracking-[0.3em] mb-12">
-              RESULTS
-            </span>
-            <p className="text-gray-600 mt-8">
-              現在、公開中の成績データはありません。
-            </p>
+            <h2 className="font-shippori text-3xl font-bold text-gray-800 mb-2">弓術競技会成績</h2>
+            <span className="block text-xs text-accent tracking-[0.3em] mb-12">RESULTS</span>
+            <p className="text-gray-600 mt-8">現在、公開中の成績データはありません。</p>
           </div>
         </section>
         <Footer />
@@ -80,12 +77,8 @@ export default async function SeisekiPage() {
         <div className="max-w-6xl mx-auto">
           {/* タイトル */}
           <div className="text-center mb-12">
-            <h2 className="font-shippori text-3xl font-bold text-gray-800 mb-2">
-              弓術競技会成績
-            </h2>
-            <span className="block text-xs text-accent tracking-[0.3em]">
-              RESULTS
-            </span>
+            <h2 className="font-shippori text-3xl font-bold text-gray-800 mb-2">弓術競技会成績</h2>
+            <span className="block text-xs text-accent tracking-[0.3em]">RESULTS</span>
           </div>
 
           {/* Client Component */}

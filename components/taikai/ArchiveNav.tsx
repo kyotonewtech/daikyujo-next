@@ -8,10 +8,7 @@ interface ArchiveNavProps {
   currentYear: number;
 }
 
-export default function ArchiveNav({
-  archives,
-  currentYear,
-}: ArchiveNavProps) {
+export default function ArchiveNav({ archives, currentYear }: ArchiveNavProps) {
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -26,10 +23,7 @@ export default function ArchiveNav({
 
   return (
     <div className="mb-8">
-      <label
-        htmlFor="archive-select"
-        className="block text-sm font-medium text-gray-700 mb-2"
-      >
+      <label htmlFor="archive-select" className="block text-sm font-medium text-gray-700 mb-2">
         Select Tournament Year
       </label>
       <select

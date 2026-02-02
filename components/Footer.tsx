@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
           <p className="font-shippori text-white text-2xl tracking-widest mb-2">園山大弓場</p>
           <p className="text-xs tracking-[0.2em] opacity-50">ENZAN DAIKYUJYO</p>
         </div>
-        
+
         <div className="w-12 h-[1px] bg-gray-600 mx-auto mb-8"></div>
 
         <div className="mb-4">

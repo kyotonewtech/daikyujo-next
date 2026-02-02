@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import TaikaiCard from "@/components/taikai/TaikaiCard";
 import TaikaiHistoryModal from "@/components/taikai/TaikaiHistoryModal";
-import type { TaikaiData, PersonTaikaiHistory } from "@/types/taikai";
+import type { PersonTaikaiHistory, TaikaiData } from "@/types/taikai";
 
 interface TaikaiTabContentProps {
   taikaiList: TaikaiData[];
@@ -12,7 +12,9 @@ interface TaikaiTabContentProps {
 
 export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) {
   // モーダル状態管理
-  const [selectedPersonHistory, setSelectedPersonHistory] = useState<PersonTaikaiHistory | null>(null);
+  const [selectedPersonHistory, setSelectedPersonHistory] = useState<PersonTaikaiHistory | null>(
+    null
+  );
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
 
   // カードクリック処理
@@ -23,14 +25,14 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
       const response = await fetch(`/api/taikai/person/${encodedName}`);
 
       if (!response.ok) {
-        throw new Error('Failed to fetch person taikai history');
+        throw new Error("Failed to fetch person taikai history");
       }
 
       const personHistory: PersonTaikaiHistory = await response.json();
       setSelectedPersonHistory(personHistory);
     } catch (error) {
-      console.error('Error fetching person taikai history:', error);
-      alert('大会参加履歴の取得に失敗しました');
+      console.error("Error fetching person taikai history:", error);
+      alert("大会参加履歴の取得に失敗しました");
     } finally {
       setIsLoadingHistory(false);
     }
@@ -41,11 +43,7 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
     setSelectedPersonHistory(null);
   };
   if (taikaiList.length === 0) {
-    return (
-      <div className="text-center text-gray-500 py-12">
-        大会データがありません
-      </div>
-    );
+    return <div className="text-center text-gray-500 py-12">大会データがありません</div>;
   }
 
   return (
@@ -87,10 +85,7 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
 
       {/* 大会参加履歴グラフモーダル */}
       {selectedPersonHistory && (
-        <TaikaiHistoryModal
-          personHistory={selectedPersonHistory}
-          onClose={handleCloseModal}
-        />
+        <TaikaiHistoryModal personHistory={selectedPersonHistory} onClose={handleCloseModal} />
       )}
 
       {/* ローディング表示 */}

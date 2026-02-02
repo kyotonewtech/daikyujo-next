@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -11,7 +12,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // /seiseki, /beginners ページでは常にスクロール済みスタイルを適用
-  const shouldUseScrolledStyle = isScrolled || pathname === '/seiseki' || pathname === '/beginners';
+  const shouldUseScrolledStyle = isScrolled || pathname === "/seiseki" || pathname === "/beginners";
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -41,14 +42,14 @@ export default function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-        <a
+        <Link
           href="/"
           className={`font-shippori text-2xl font-bold tracking-wider transition-colors ${
             shouldUseScrolledStyle ? "text-foreground" : "text-white"
           }`}
         >
           園山大弓場
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:block">

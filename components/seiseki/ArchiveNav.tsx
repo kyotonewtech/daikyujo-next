@@ -8,12 +8,7 @@ interface ArchiveNavProps {
   currentMonth: number;
 }
 
-export default function ArchiveNav({
-  archives,
-  currentYear,
-  currentMonth,
-}: ArchiveNavProps) {
-
+export default function ArchiveNav({ archives, currentYear, currentMonth }: ArchiveNavProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const [year, month] = e.target.value.split("-");
     if (year && month) {

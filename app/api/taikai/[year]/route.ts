@@ -1,19 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { getTaikaiData } from "@/lib/taikai";
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ year: string }> }
 ) {
   try {
     const resolvedParams = await params;
     const year = parseInt(resolvedParams.year, 10);
 
-    if (isNaN(year)) {
-      return NextResponse.json(
-        { error: "Invalid year parameter" },
-        { status: 400 }
-      );
+    if (Number.isNaN(year)) {
+      return NextResponse.json({ error: "Invalid year parameter" }, { status: 400 });
     }
 
     const data = getTaikaiData(year);
@@ -28,9 +25,6 @@ export async function GET(
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching taikai data:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

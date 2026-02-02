@@ -1,20 +1,27 @@
-import fs from 'fs';
-import path from 'path';
-import type { SeisekiMonth, SeisekiEntry, ArchiveIndex, ArchiveMetadata, PersonHistory, PersonHistoryEntry } from '@/types/seiseki';
-import { parseTargetSize } from './utils';
+import fs from "node:fs";
+import path from "node:path";
+import type {
+  ArchiveIndex,
+  ArchiveMetadata,
+  PersonHistory,
+  PersonHistoryEntry,
+  SeisekiEntry,
+  SeisekiMonth,
+} from "@/types/seiseki";
+import { parseTargetSize } from "./utils";
 
-const DATA_DIR = path.join(process.cwd(), 'data', 'seiseki');
-const INDEX_FILE = path.join(DATA_DIR, 'index.json');
+const DATA_DIR = path.join(process.cwd(), "data", "seiseki");
+const INDEX_FILE = path.join(DATA_DIR, "index.json");
 
 /**
  * 年月のバリデーション（パストラバーサル対策）
  */
 function validateYearMonth(year: number, month: number): void {
   if (year < 2000 || year > 2100) {
-    throw new Error('Invalid year');
+    throw new Error("Invalid year");
   }
   if (month < 1 || month > 12) {
-    throw new Error('Invalid month');
+    throw new Error("Invalid month");
   }
 }
 
@@ -24,7 +31,7 @@ function validateYearMonth(year: number, month: number): void {
 function getFilePath(year: number, month: number): string {
   validateYearMonth(year, month);
   const yearDir = path.join(DATA_DIR, year.toString());
-  const fileName = `${month.toString().padStart(2, '0')}.json`;
+  const fileName = `${month.toString().padStart(2, "0")}.json`;
   return path.join(yearDir, fileName);
 }
 
@@ -36,10 +43,10 @@ export function getArchiveList(): ArchiveIndex {
     if (!fs.existsSync(INDEX_FILE)) {
       return { archives: [], lastUpdated: new Date().toISOString() };
     }
-    const content = fs.readFileSync(INDEX_FILE, 'utf-8');
+    const content = fs.readFileSync(INDEX_FILE, "utf-8");
     return JSON.parse(content) as ArchiveIndex;
   } catch (error) {
-    console.error('Error reading archive index:', error);
+    console.error("Error reading archive index:", error);
     return { archives: [], lastUpdated: new Date().toISOString() };
   }
 }
@@ -53,7 +60,7 @@ export function getSeisekiData(year: number, month: number): SeisekiMonth | null
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    const content = fs.readFileSync(filePath, 'utf-8');
+    const content = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(content) as SeisekiMonth;
   } catch (error) {
     console.error(`Error reading seiseki data for ${year}/${month}:`, error);
@@ -64,15 +71,15 @@ export function getSeisekiData(year: number, month: number): SeisekiMonth | null
 /**
  * 月次データを保存し、index.jsonを自動更新
  */
-export function saveSeisekiData(year: number, month: number, entries: any[]): void {
+export function saveSeisekiData(year: number, month: number, entries: SeisekiEntry[]): void {
   validateYearMonth(year, month);
 
-  console.log('saveSeisekiData called with:', { year, month, entries });
+  console.log("saveSeisekiData called with:", { year, month, entries });
 
   // entriesの検証
   if (!Array.isArray(entries)) {
-    console.error('entries is not an array:', entries);
-    throw new Error('entries must be an array');
+    console.error("entries is not an array:", entries);
+    throw new Error("entries must be an array");
   }
 
   // 年ディレクトリを作成
@@ -96,9 +103,9 @@ export function saveSeisekiData(year: number, month: number, entries: any[]): vo
     publishedAt: existingData?.publishedAt || now,
   };
 
-  console.log('dataToSave:', JSON.stringify(dataToSave, null, 2));
+  console.log("dataToSave:", JSON.stringify(dataToSave, null, 2));
 
-  fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), 'utf-8');
+  fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), "utf-8");
 
   // index.jsonを更新
   updateArchiveIndex(year, month, dataToSave);
@@ -126,14 +133,12 @@ function updateArchiveIndex(year: number, month: number, data: SeisekiMonth): vo
   const index = getArchiveList();
 
   // 既存のエントリを探す
-  const existingIndex = index.archives.findIndex(
-    (a) => a.year === year && a.month === month
-  );
+  const existingIndex = index.archives.findIndex((a) => a.year === year && a.month === month);
 
   // データの検証
   if (!data || !data.entries || !Array.isArray(data.entries)) {
-    console.error('Invalid data structure in updateArchiveIndex:', data);
-    throw new Error('Invalid data structure: entries must be an array');
+    console.error("Invalid data structure in updateArchiveIndex:", data);
+    throw new Error("Invalid data structure: entries must be an array");
   }
 
   const metadata: ArchiveMetadata = {
@@ -164,7 +169,7 @@ function updateArchiveIndex(year: number, month: number, data: SeisekiMonth): vo
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
 
-  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), 'utf-8');
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), "utf-8");
 }
 
 /**
@@ -173,13 +178,11 @@ function updateArchiveIndex(year: number, month: number, data: SeisekiMonth): vo
 function removeFromArchiveIndex(year: number, month: number): void {
   const index = getArchiveList();
 
-  index.archives = index.archives.filter(
-    (a) => !(a.year === year && a.month === month)
-  );
+  index.archives = index.archives.filter((a) => !(a.year === year && a.month === month));
 
   index.lastUpdated = new Date().toISOString();
 
-  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), 'utf-8');
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), "utf-8");
 }
 
 /**
@@ -218,7 +221,7 @@ export function getYearSeisekiData(year: number): SeisekiMonth[] {
  */
 export function getAvailableYears(): number[] {
   const index = getArchiveList();
-  const years = [...new Set(index.archives.map(a => a.year))];
+  const years = [...new Set(index.archives.map((a) => a.year))];
   return years.sort((a, b) => b - a); // 降順
 }
 
@@ -228,34 +231,36 @@ export function getAvailableYears(): number[] {
  * データがない月はnull値として記録
  */
 export function getPersonHistory(personId: string): PersonHistory | null {
-  console.log('[getPersonHistory] Called with personId:', personId);
+  console.log("[getPersonHistory] Called with personId:", personId);
 
   const index = getArchiveList();
-  console.log('[getPersonHistory] Total archives:', index.archives.length);
+  console.log("[getPersonHistory] Total archives:", index.archives.length);
 
-  let personName = '';
+  let personName = "";
   const dataPoints: Array<{ year: number; month: number; entry: SeisekiEntry }> = [];
 
   // 1. まず全期間でデータがある月を収集
   const sortedArchives = [...index.archives].reverse();
-  console.log('[getPersonHistory] Searching through archives...');
+  console.log("[getPersonHistory] Searching through archives...");
 
   for (const archive of sortedArchives) {
     const monthData = getSeisekiData(archive.year, archive.month);
     if (!monthData) continue;
 
-    const entry = monthData.entries.find(e => e.personId === personId);
+    const entry = monthData.entries.find((e) => e.personId === personId);
     if (entry) {
       personName = entry.name;
       dataPoints.push({ year: archive.year, month: archive.month, entry });
-      console.log(`[getPersonHistory] Found data: ${archive.year}/${archive.month} - ${entry.name}`);
+      console.log(
+        `[getPersonHistory] Found data: ${archive.year}/${archive.month} - ${entry.name}`
+      );
     }
   }
 
-  console.log('[getPersonHistory] Total data points found:', dataPoints.length);
+  console.log("[getPersonHistory] Total data points found:", dataPoints.length);
 
   if (dataPoints.length === 0) {
-    console.log('[getPersonHistory] No data found for personId:', personId);
+    console.log("[getPersonHistory] No data found for personId:", personId);
     return null;
   }
 
@@ -273,9 +278,7 @@ export function getPersonHistory(personId: string): PersonHistory | null {
     (currentYear === lastData.year && currentMonth <= lastData.month)
   ) {
     // その月のデータを探す
-    const found = dataPoints.find(
-      dp => dp.year === currentYear && dp.month === currentMonth
-    );
+    const found = dataPoints.find((dp) => dp.year === currentYear && dp.month === currentMonth);
 
     if (found) {
       // データあり
@@ -293,9 +296,9 @@ export function getPersonHistory(personId: string): PersonHistory | null {
         year: currentYear,
         month: currentMonth,
         rank: null,
-        targetSize: '-',
+        targetSize: "-",
         targetSizeNumeric: null,
-        rankTitle: '',
+        rankTitle: "",
       });
     }
 

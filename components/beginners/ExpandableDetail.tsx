@@ -1,15 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import type { ExpandableDetailProps } from "@/types/beginners";
 
-export default function ExpandableDetail({
-  summary,
-  children,
-  id,
-}: ExpandableDetailProps) {
+export default function ExpandableDetail({ summary, children, id }: ExpandableDetailProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -17,7 +13,10 @@ export default function ExpandableDetail({
   // URLハッシュと一致する場合は自動的に開く
   useEffect(() => {
     if (id && window.location.hash === `#${id}`) {
+      // URLハッシュによる初期状態の設定
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsOpen(true);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsHighlighted(true);
 
       // 展開後にコンテンツ領域にフォーカス（スクリーンリーダー用）
@@ -36,12 +35,11 @@ export default function ExpandableDetail({
     <div
       id={id}
       className={`border rounded-sm overflow-hidden bg-white mb-[10px] transition-all duration-300 ${
-        isHighlighted
-          ? "border-accent shadow-lg ring-2 ring-accent/20"
-          : "border-gray-200"
+        isHighlighted ? "border-accent shadow-lg ring-2 ring-accent/20" : "border-gray-200"
       }`}
     >
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between p-[15px] text-left transition-colors ${
           isOpen ? "border-b border-gray-100 bg-[#fcfcfc]" : "hover:bg-gray-50"

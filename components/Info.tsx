@@ -1,16 +1,16 @@
 "use client";
 
-import { Clock, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { AlertCircle, Clock } from "lucide-react";
 
 export default function Info() {
   return (
     <section id="info" className="py-24 px-6 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50" />
-      
+
       <div className="max-w-4xl mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -20,7 +20,7 @@ export default function Info() {
           <span className="block text-xs font-sans text-accent tracking-[0.3em]">INFORMATION</span>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

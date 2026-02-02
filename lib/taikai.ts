@@ -1,16 +1,22 @@
-import fs from 'fs';
-import path from 'path';
-import type { TaikaiData, TaikaiArchiveIndex, TaikaiArchiveMetadata, PersonTaikaiHistory, PersonTaikaiHistoryEntry } from '@/types/taikai';
+import fs from "node:fs";
+import path from "node:path";
+import type {
+  PersonTaikaiHistory,
+  PersonTaikaiHistoryEntry,
+  TaikaiArchiveIndex,
+  TaikaiArchiveMetadata,
+  TaikaiData,
+} from "@/types/taikai";
 
-const DATA_DIR = path.join(process.cwd(), 'data', 'taikai');
-const INDEX_FILE = path.join(DATA_DIR, 'index.json');
+const DATA_DIR = path.join(process.cwd(), "data", "taikai");
+const INDEX_FILE = path.join(DATA_DIR, "index.json");
 
 /**
  * Validate year (path traversal protection)
  */
 function validateYear(year: number): void {
   if (year < 1900 || year > 2100) {
-    throw new Error('Invalid year');
+    throw new Error("Invalid year");
   }
 }
 
@@ -30,10 +36,10 @@ export function getTaikaiArchiveList(): TaikaiArchiveIndex {
     if (!fs.existsSync(INDEX_FILE)) {
       return { archives: [], lastUpdated: new Date().toISOString() };
     }
-    const content = fs.readFileSync(INDEX_FILE, 'utf-8');
+    const content = fs.readFileSync(INDEX_FILE, "utf-8");
     return JSON.parse(content) as TaikaiArchiveIndex;
   } catch (error) {
-    console.error('Error reading taikai archive index:', error);
+    console.error("Error reading taikai archive index:", error);
     return { archives: [], lastUpdated: new Date().toISOString() };
   }
 }
@@ -47,7 +53,7 @@ export function getTaikaiData(year: number): TaikaiData | null {
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    const content = fs.readFileSync(filePath, 'utf-8');
+    const content = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(content) as TaikaiData;
   } catch (error) {
     console.error(`Error reading taikai data for ${year}:`, error);
@@ -80,7 +86,7 @@ export function saveTaikaiData(year: number, data: TaikaiData): void {
     publishedAt: existingData?.publishedAt || now,
   };
 
-  fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), 'utf-8');
+  fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), "utf-8");
 
   // Update index.json
   updateTaikaiArchiveIndex(year, dataToSave);
@@ -112,8 +118,8 @@ function updateTaikaiArchiveIndex(year: number, data: TaikaiData): void {
 
   // Data validation
   if (!data || !data.participants || !Array.isArray(data.participants)) {
-    console.error('Invalid data structure in updateTaikaiArchiveIndex:', data);
-    throw new Error('Invalid data structure: participants must be an array');
+    console.error("Invalid data structure in updateTaikaiArchiveIndex:", data);
+    throw new Error("Invalid data structure: participants must be an array");
   }
 
   const metadata: TaikaiArchiveMetadata = {
@@ -142,7 +148,7 @@ function updateTaikaiArchiveIndex(year: number, data: TaikaiData): void {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
 
-  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), 'utf-8');
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), "utf-8");
 }
 
 /**
@@ -155,7 +161,7 @@ function removeFromTaikaiArchiveIndex(year: number): void {
 
   index.lastUpdated = new Date().toISOString();
 
-  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), 'utf-8');
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2), "utf-8");
 }
 
 /**
@@ -187,9 +193,7 @@ export function getPersonTaikaiHistory(personName: string): PersonTaikaiHistory 
     if (!taikaiData) continue;
 
     // 該当者を検索（全順位）
-    const participant = taikaiData.participants.find(
-      p => p.name === personName
-    );
+    const participant = taikaiData.participants.find((p) => p.name === personName);
 
     if (participant) {
       historyEntries.push({
@@ -211,6 +215,6 @@ export function getPersonTaikaiHistory(personName: string): PersonTaikaiHistory 
 
   return {
     name: personName,
-    history: historyEntries,  // 既に降順（index.archivesが降順のため）
+    history: historyEntries, // 既に降順（index.archivesが降順のため）
   };
 }

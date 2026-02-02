@@ -1,6 +1,6 @@
+import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import type { NextAuthConfig } from "next-auth";
 
 export const config = {
   providers: [
@@ -19,9 +19,8 @@ export const config = {
         return false;
       }
 
-      const allowedEmails = process.env.ALLOWED_ADMIN_EMAILS?.split(",").map(
-        (email) => email.trim()
-      ) || [];
+      const allowedEmails =
+        process.env.ALLOWED_ADMIN_EMAILS?.split(",").map((email) => email.trim()) || [];
 
       if (!user.email || !allowedEmails.includes(user.email)) {
         console.warn(`Unauthorized login attempt: ${user.email}`);

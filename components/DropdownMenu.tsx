@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface DropdownOption {
   label: string;
@@ -47,11 +47,7 @@ export default function DropdownMenu({
   };
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <button
         onClick={handleClick}
         className={`flex items-center gap-1 text-sm tracking-wide transition-colors hover:text-accent ${
@@ -61,9 +57,7 @@ export default function DropdownMenu({
         {label}
         <ChevronDown
           size={16}
-          className={`transition-transform duration-200 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}
         />
       </button>
 
