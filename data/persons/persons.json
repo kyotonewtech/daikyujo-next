@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "2026-01-09T14:21:46.854Z",
-  "nextPersonId": 122,
+  "nextPersonId": 123,
   "persons": [
     {
       "personId": "person_001",
@@ -1937,6 +1937,22 @@
       },
       "appearanceCount": 1,
       "createdAt": "2026-01-09T14:21:46.854Z",
+      "note": ""
+    },
+    {
+      "personId": "person_122",
+      "name": "小西",
+      "personKey": null,
+      "firstAppearance": {
+        "year": 2026,
+        "month": 1
+      },
+      "lastAppearance": {
+        "year": 2026,
+        "month": 1
+      },
+      "appearanceCount": 1,
+      "createdAt": "2026-02-02T00:00:00.000Z",
       "note": ""
     }
   ]
