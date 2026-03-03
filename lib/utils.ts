@@ -33,3 +33,20 @@ export function parseTargetSize(targetSize: string): number | null {
 
   return null;
 }
+
+/**
+ * 的のサイズ数値を文字列に変換（寸・分単位）
+ * @param value - 寸単位の数値（例: 0.9, 1.3）
+ * @returns 単位付き文字列（例: "9分", "1寸3分"）
+ * @example
+ * formatTargetSize(0.9) // => "9分"
+ * formatTargetSize(1.0) // => "1寸"
+ * formatTargetSize(1.3) // => "1寸3分"
+ */
+export function formatTargetSize(value: number): string {
+  const sun = Math.floor(value);
+  const bu = Math.round((value - sun) * 10);
+  if (sun === 0) return `${bu}分`;
+  if (bu === 0) return `${sun}寸`;
+  return `${sun}寸${bu}分`;
+}
