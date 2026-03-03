@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CartesianGrid, ComposedChart, Line, Tooltip, XAxis, YAxis } from "recharts";
+import { formatTargetSize } from "@/lib/utils";
 import type { PersonHistory } from "@/types/seiseki";
 
 export type ViewMode = "all" | "year";
@@ -403,21 +404,21 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 return ticks;
               })()}
               tick={{ fontSize: tickFontSize, fill: "#4A90E2" }}
-              tickFormatter={(value) => `${Number(value).toFixed(1)}寸`}
+              tickFormatter={(value) => formatTargetSize(Number(value))}
             />
 
             <Tooltip
               contentStyle={{ backgroundColor: "white", border: "1px solid #ccc" }}
               formatter={(value: unknown, name: string) => {
                 if (value === null || value === undefined) {
-                  return ["データなし", name === "rank" ? "順位" : "的の大きさ"];
+                  return ["データなし", name === "rank" ? "順位" : "的"];
                 }
                 const numValue = typeof value === "number" ? value : Number(value);
                 if (name === "rank") {
                   return [`${numValue}位`, "順位"];
                 }
                 if (name === "targetSize") {
-                  return [numValue.toFixed(1), "的の大きさ"];
+                  return [formatTargetSize(numValue), "的"];
                 }
                 return [numValue, name];
               }}
@@ -555,7 +556,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                         fontSize={tickFontSize}
                         fill="#4A90E2"
                       >
-                        {value.toFixed(1)}寸
+                        {formatTargetSize(value)}
                       </text>
                     );
                   });
@@ -647,14 +648,14 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   contentStyle={{ backgroundColor: "white", border: "1px solid #ccc" }}
                   formatter={(value: unknown, name: string) => {
                     if (value === null || value === undefined) {
-                      return ["データなし", name === "rank" ? "順位" : "的の大きさ"];
+                      return ["データなし", name === "rank" ? "順位" : "的"];
                     }
                     const numValue = typeof value === "number" ? value : Number(value);
                     if (name === "rank") {
                       return [`${numValue}位`, "順位"];
                     }
                     if (name === "targetSize") {
-                      return [numValue.toFixed(1), "的の大きさ"];
+                      return [formatTargetSize(numValue), "的"];
                     }
                     return [numValue, name];
                   }}
