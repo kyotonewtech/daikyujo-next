@@ -87,6 +87,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
     typeof window !== "undefined" ? window.innerWidth - 100 : 300
   ); // Y軸固定表示用のコンテナ幅（初期推定値）
   const [windowWidth, setWindowWidth] = useState(800); // 全期間グラフ用の画面幅（SSR対応）
+  const [windowHeight, setWindowHeight] = useState(
+    typeof window !== "undefined" ? window.innerHeight : 800
+  ); // チャート高さ動的計算用
   const [isDragging, setIsDragging] = useState(false); // ドラッグ中フラグ（レンダリングに使用）
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
@@ -104,6 +107,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
       setIsLandscape(isLandscapeMode);
       setIsMobilePortrait(isMobilePortraitMode);
       setWindowWidth(window.innerWidth - 40); // 全期間グラフ用の画面幅を更新
+      setWindowHeight(window.innerHeight); // チャート高さ動的計算用
     };
     checkOrientation();
     window.addEventListener("resize", checkOrientation);
@@ -340,7 +344,9 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
   }, [viewMode, maxPanOffset]);
 
   // グラフの実際のheight（数値）- 両モード共通
-  const chartHeight = isLandscape ? 300 : 500;
+  const chartHeight = isLandscape
+    ? 300
+    : Math.min(500, Math.max(300, Math.floor(windowHeight * 0.9) - 140));
 
   // 全期間モード: 1年モードと同じモーダルサイズ
   if (viewMode === "all") {
