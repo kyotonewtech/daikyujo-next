@@ -18,12 +18,16 @@ interface TaikaiHistoryChartProps {
 
 export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChartProps) {
   const [isLandscape, setIsLandscape] = useState(false);
+  const [windowHeight, setWindowHeight] = useState(
+    typeof window !== "undefined" ? window.innerHeight : 800
+  ); // チャート高さ動的計算用
 
   // 画面方向検知
   useEffect(() => {
     const checkOrientation = () => {
       const isLandscapeMode = window.innerHeight < window.innerWidth && window.innerHeight < 500;
       setIsLandscape(isLandscapeMode);
+      setWindowHeight(window.innerHeight); // チャート高さ動的計算用
     };
     checkOrientation();
     window.addEventListener("resize", checkOrientation);
@@ -48,7 +52,9 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
   const RANK_PADDING = 0.5;
 
   // グラフサイズ設定
-  const chartHeight = isLandscape ? 400 : 700;
+  const chartHeight = isLandscape
+    ? 400
+    : Math.min(700, Math.max(400, Math.floor(windowHeight * 0.9) - 140));
 
   return (
     <div className="w-full" style={{ height: chartHeight }}>
