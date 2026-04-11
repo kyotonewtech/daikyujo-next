@@ -1,0 +1,108 @@
+{
+  "year": 2026,
+  "month": 3,
+  "entries": [
+    {
+      "id": "6cbec52f-49ee-4cff-b06e-f1ef7ba9c35c",
+      "rank": 1,
+      "name": "大﨑",
+      "rankTitle": "一級",
+      "targetSize": "8分",
+      "updatedDate": "2026-03-08",
+      "expiryDate": "2026-06-14",
+      "personId": "person_116"
+    },
+    {
+      "id": "9bf890d3-661e-4c7e-a916-228fb3b57ee4",
+      "rank": 2,
+      "name": "駒田",
+      "rankTitle": "一級",
+      "targetSize": "8分",
+      "updatedDate": "2026-03-22",
+      "expiryDate": "2026-06-28",
+      "personId": "person_117"
+    },
+    {
+      "id": "486475ff-45b5-4475-9c00-8cb193fb228a",
+      "rank": 3,
+      "name": "津守",
+      "rankTitle": "三段",
+      "targetSize": "9分",
+      "updatedDate": "2026-02-28",
+      "expiryDate": "2026-07-05",
+      "personId": "person_001"
+    },
+    {
+      "id": "ef4d220e-4f1b-475a-aa0e-3d0ca8fcb8fc",
+      "rank": 4,
+      "name": "土井",
+      "rankTitle": "二級",
+      "targetSize": "1寸1分",
+      "updatedDate": "2026-02-08",
+      "expiryDate": "2026-06-14",
+      "personId": "person_120"
+    },
+    {
+      "id": "1957e225-1375-4411-90cd-68004d8b356b",
+      "rank": 5,
+      "name": "城戸",
+      "rankTitle": "二級",
+      "targetSize": "1寸1分",
+      "updatedDate": "2026-03-11",
+      "expiryDate": "2026-06-14",
+      "personId": "person_059"
+    },
+    {
+      "id": "ede60cd0-02d2-4fbe-b619-bda4f03f2b60",
+      "rank": 6,
+      "name": "松本",
+      "rankTitle": "三級",
+      "targetSize": "2寸",
+      "updatedDate": "2026-02-11",
+      "expiryDate": "2026-06-21",
+      "personId": "person_115"
+    },
+    {
+      "id": "98266c49-8f17-4144-a274-1911fb203bc7",
+      "rank": 7,
+      "name": "山田功",
+      "rankTitle": "三級",
+      "targetSize": "2寸4分",
+      "updatedDate": "2025-12-13",
+      "expiryDate": "2026-04-19",
+      "personId": "person_084"
+    },
+    {
+      "id": "4f9e9774-6ee1-442e-966d-887a72bf6ae5",
+      "rank": 8,
+      "name": "濱野",
+      "rankTitle": "二級",
+      "targetSize": "2寸4分",
+      "updatedDate": "2026-01-22",
+      "expiryDate": "2026-05-31",
+      "personId": "person_065"
+    },
+    {
+      "id": "fc3ee4da-0fec-4484-a4df-a3b6a60ea13d",
+      "rank": 9,
+      "name": "小西",
+      "rankTitle": "二段",
+      "targetSize": "2寸8分",
+      "updatedDate": "2026-01-29",
+      "expiryDate": "2026-06-07",
+      "personId": "person_122"
+    },
+    {
+      "id": "31330e37-6a5d-48cd-b279-30001f82df49",
+      "rank": 10,
+      "name": "榎本",
+      "rankTitle": "四級",
+      "targetSize": "2寸8分",
+      "updatedDate": "2025-10-23",
+      "expiryDate": "2026-04-05",
+      "personId": "person_119"
+    }
+  ],
+  "publishedAt": "2026-03-31T00:00:00.000Z",
+  "updatedAt": "2026-03-31T00:00:00.000Z"
+}
