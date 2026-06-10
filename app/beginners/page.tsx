@@ -20,17 +20,17 @@ const tabs: Tab[] = [
 ];
 
 export default function BeginnersPage() {
-  const [activeTab, setActiveTab] = useState<TabId>(() => {
-    // 初期値としてURLクエリパラメータから取得
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab") as TabId | null;
-      if (tabParam && tabs.some((t) => t.id === tabParam)) {
-        return tabParam;
-      }
+  const [activeTab, setActiveTab] = useState<TabId>("top");
+
+  // URLクエリパラメータからのタブ初期化はマウント後に行う
+  // （useState初期化関数内でwindowを参照するとSSRとのhydration mismatchになるため）
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get("tab") as TabId | null;
+    if (tabParam && tabs.some((t) => t.id === tabParam)) {
+      setActiveTab(tabParam);
     }
-    return "top";
-  });
+  }, []);
 
   // ハッシュがある場合のスクロール処理
   useEffect(() => {

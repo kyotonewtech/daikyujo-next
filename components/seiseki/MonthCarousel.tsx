@@ -110,13 +110,14 @@ export default function MonthCarousel({
     <div>
       {/* ヘッダー行: 月タイトルと前後ナビゲーション矢印をまとめて配置 */}
       <div className="flex items-center justify-between mb-6 border-b-2 border-accent pb-2">
-        {/* 前の月ボタン（44×44px以上のタップ領域確保） */}
+        {/* 新しい月へ戻るボタン（44×44px以上のタップ領域確保）
+            monthsData は降順（index 0 = 最新月）のため index-1 = 時間的に次の月 */}
         <button
           type="button"
           onClick={() => hasPrev && handleMonthChange(currentMonthIndex - 1)}
           disabled={!hasPrev || isAnimating}
           className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          aria-label="前の月"
+          aria-label="次の月へ"
         >
           <ChevronLeft className="w-6 h-6 text-accent" />
         </button>
@@ -124,13 +125,14 @@ export default function MonthCarousel({
         {/* 月タイトル */}
         <h2 className="text-2xl font-bold text-accent">{currentMonthData.month}月の成績</h2>
 
-        {/* 次の月ボタン（44×44px以上のタップ領域確保） */}
+        {/* 前の月へ戻るボタン（44×44px以上のタップ領域確保）
+            index+1 = 時間的に前の月（古い月） */}
         <button
           type="button"
           onClick={() => hasNext && handleMonthChange(currentMonthIndex + 1)}
           disabled={!hasNext || isAnimating}
           className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          aria-label="次の月"
+          aria-label="前の月へ"
         >
           <ChevronRight className="w-6 h-6 text-accent" />
         </button>
