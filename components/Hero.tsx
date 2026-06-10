@@ -64,7 +64,7 @@ export default function Hero() {
             className="writing-vertical text-upright tracking-[0.4em] flex flex-col items-center h-full border-r-2 border-white/30 pr-8 mr-8 md:mr-12"
           >
             <h1 className="font-shippori hero-main-text drop-shadow-lg whitespace-nowrap leading-relaxed">
-              創業百六十余年　日本の心を引く。
+              日本の心を引く。
             </h1>
           </motion.div>
 
@@ -74,7 +74,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 1.5 }}
             className="font-serif hero-subtitle-text tracking-widest drop-shadow-md writing-vertical text-upright h-auto max-h-[40vh] flex items-center"
           >
-            <p>園山大弓場</p>
+            <p>創業百六十余年 園山大弓場</p>
           </motion.div>
         </div>
       </div>
