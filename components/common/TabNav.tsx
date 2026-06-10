@@ -1,21 +1,32 @@
 "use client";
 
-import type { SeisekiTab, SeisekiTabId } from "@/types/seiseki";
-
-interface TabNavProps {
-  tabs: SeisekiTab[];
-  activeTab: SeisekiTabId;
-  onTabChange: (tabId: SeisekiTabId) => void;
+export interface TabItem<T extends string = string> {
+  id: T;
+  label: string;
 }
 
-export default function TabNav({ tabs, activeTab, onTabChange }: TabNavProps) {
+interface TabNavProps<T extends string = string> {
+  tabs: TabItem<T>[];
+  activeTab: T;
+  onTabChange: (tabId: T) => void;
+  ariaLabel?: string;
+}
+
+/** 汎用タブナビゲーション（seiseki・beginners 両方で使用可能） */
+export default function TabNav<T extends string = string>({
+  tabs,
+  activeTab,
+  onTabChange,
+  ariaLabel = "タブ",
+}: TabNavProps<T>) {
   return (
     <div className="mb-12">
-      <nav className="flex gap-0 justify-center" aria-label="成績タブ">
+      <nav className="flex gap-0 justify-center" aria-label={ariaLabel}>
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
             <button
+              type="button"
               key={tab.id}
               role="tab"
               aria-selected={isActive}

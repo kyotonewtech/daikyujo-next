@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import SectionHeading from "@/components/common/SectionHeading";
 
 const experiences = [
   {
@@ -32,22 +33,14 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 px-6 bg-[#fcfaf2]">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <h2 className="font-shippori text-3xl font-bold mb-3">体験・料金</h2>
-          <span className="block text-xs font-sans text-accent tracking-[0.3em]">EXPERIENCE</span>
-        </motion.div>
+    <section id="experience" className="py-24 md:py-32 px-6 bg-background">
+      <div className="max-w-5xl mx-auto">
+        <SectionHeading eng="EXPERIENCE">体験・料金</SectionHeading>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {experiences.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

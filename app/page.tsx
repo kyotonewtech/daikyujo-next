@@ -1,5 +1,3 @@
-"use client";
-
 import About from "@/components/About";
 import Access from "@/components/Access";
 import Experience from "@/components/Experience";
@@ -10,7 +8,7 @@ import Info from "@/components/Info";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#fcfaf2]">
+    <main className="min-h-screen bg-background">
       <Header />
       <Hero />
       <About />

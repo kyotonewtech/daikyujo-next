@@ -37,7 +37,7 @@ export default function Header() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         shouldUseScrolledStyle
-          ? "bg-[#fcfaf2]/95 backdrop-blur-md border-b border-gray-200 py-3 shadow-sm"
+          ? "bg-background/95 backdrop-blur-md border-b border-gray-200 py-3 shadow-sm"
           : "bg-transparent py-6"
       }`}
     >
@@ -56,14 +56,14 @@ export default function Header() {
           <ul className="flex gap-8 items-center">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
+                <Link
                   href={link.href}
                   className={`text-sm tracking-wide transition-colors hover:text-accent ${
                     shouldUseScrolledStyle ? "text-foreground" : "text-white/90 hover:text-white"
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -71,6 +71,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           onClick={toggleMenu}
           className={`md:hidden p-2 transition-colors ${
             shouldUseScrolledStyle ? "text-foreground" : "text-white"
@@ -87,18 +88,18 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-0 w-full bg-[#fcfaf2] border-b border-gray-200 shadow-lg py-4 px-6"
+            className="md:hidden absolute top-full left-0 w-full bg-background border-b border-gray-200 shadow-lg py-4 px-6"
           >
             <ul className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block py-2 text-lg border-b border-gray-100 font-serif"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

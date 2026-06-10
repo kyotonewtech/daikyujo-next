@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 
 const HERO_IMAGES = ["/hero-image.jpg", "/hero2.jpg"] as const;
 
+const HERO_IMAGE_LABELS: Record<string, string> = {
+  "/hero-image.jpg": "射場から的を望む園山大弓場の道場内",
+  "/hero2.jpg": "「弓場」の扁額と暖簾がかかる園山大弓場の入口",
+};
+
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -39,6 +44,8 @@ export default function Hero() {
             opacity: { duration: 1 },
             scale: { duration: 10, ease: "easeOut" },
           }}
+          role="img"
+          aria-label={HERO_IMAGE_LABELS[HERO_IMAGES[currentImageIndex]] ?? "園山大弓場の風景写真"}
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${HERO_IMAGES[currentImageIndex]}')`,
           }}
@@ -57,7 +64,7 @@ export default function Hero() {
             className="writing-vertical text-upright tracking-[0.4em] flex flex-col items-center h-full border-r-2 border-white/30 pr-8 mr-8 md:mr-12"
           >
             <h1 className="font-shippori hero-main-text drop-shadow-lg whitespace-nowrap leading-relaxed">
-              日本の心を引く。
+              創業百六十余年　日本の心を引く。
             </h1>
           </motion.div>
 
@@ -67,7 +74,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 1.5 }}
             className="font-serif hero-subtitle-text tracking-widest drop-shadow-md writing-vertical text-upright h-auto max-h-[40vh] flex items-center"
           >
-            <p>創業百六十余年 園山大弓場</p>
+            <p>園山大弓場</p>
           </motion.div>
         </div>
       </div>

@@ -34,7 +34,7 @@ const getRankBgColor = (rank: number): string => {
   }
 };
 
-export default function TaikaiCard({ participant, index, onClick }: TaikaiCardProps) {
+export default function TaikaiCard({ participant, index: _index, onClick }: TaikaiCardProps) {
   const rankColor = getRankColor(participant.rank);
   const bgColor = getRankBgColor(participant.rank);
 
@@ -57,6 +57,8 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
   const isClickable = onClick !== undefined;
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: role="button" が isClickable の場合に付与されるため
+    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: role="button" と対でのみ aria-label を付与
     <div
       className={`${bgColor} border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 ${
         isClickable ? "cursor-pointer" : ""
@@ -65,6 +67,7 @@ export default function TaikaiCard({ participant, index, onClick }: TaikaiCardPr
       onKeyDown={handleKeyDown}
       role={isClickable ? "button" : undefined}
       tabIndex={isClickable ? 0 : undefined}
+      aria-label={isClickable ? `${participant.name}の大会成績推移を表示` : undefined}
     >
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
         <div className="flex items-center gap-3 sm:gap-6">

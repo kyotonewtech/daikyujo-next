@@ -26,7 +26,7 @@ function formatShortDate(dateString: string): string {
 
 export default function SeisekiCard({
   entry,
-  index,
+  index: _index,
   isEmpty = false,
   className,
   isLatestMonth = false,
@@ -59,6 +59,8 @@ export default function SeisekiCard({
   const isClickable = !isEmpty && onClick;
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: role="button" が isClickable の場合に付与されるため
+    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: role="button" と対でのみ aria-label を付与
     <div
       className={`bg-white rounded-lg shadow-md p-4 transition-shadow duration-300 ${
         isEmpty ? "opacity-50 cursor-default" : "hover:shadow-lg"
@@ -67,6 +69,7 @@ export default function SeisekiCard({
       onKeyDown={handleKeyDown}
       role={isClickable ? "button" : undefined}
       tabIndex={isClickable ? 0 : undefined}
+      aria-label={isClickable ? `${entry.name}の成績推移を表示` : undefined}
     >
       {/* 最新月の場合は2行表示 */}
       {!isEmpty && isLatestMonth ? (

@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import SectionHeading from "@/components/common/SectionHeading";
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6 bg-[#fcfaf2]">
+    <section id="about" className="py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           {/* Image Area */}
@@ -37,10 +38,9 @@ export default function About() {
             className="w-full md:w-1/2"
           >
             <div className="mb-8">
-              <h2 className="font-shippori text-4xl font-bold mb-4">ご挨拶</h2>
-              <span className="block text-xs font-sans text-accent tracking-[0.3em]">
-                INTRODUCTION
-              </span>
+              <SectionHeading eng="INTRODUCTION" align="left">
+                ご挨拶
+              </SectionHeading>
             </div>
 
             <div className="space-y-6 text-lg leading-loose font-serif text-gray-700">

@@ -39,13 +39,6 @@ export default async function SeisekiPage() {
     }
   }
 
-  console.log("[Server] taikaiArchiveList.archives:", taikaiArchiveList.archives);
-  console.log("[Server] taikaiList length:", taikaiList.length);
-  console.log(
-    "[Server] taikaiList:",
-    taikaiList.map((t) => ({ year: t.year, name: t.taikaiName, count: t.participants.length }))
-  );
-
   // データが全くない場合
   if (availableYears.length === 0 && taikaiList.length === 0) {
     return (

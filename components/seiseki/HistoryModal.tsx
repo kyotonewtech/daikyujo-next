@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 import type { PersonHistory } from "@/types/seiseki";
 import HistoryChart, { type ViewMode } from "./HistoryChart";
 
@@ -12,6 +14,10 @@ interface HistoryModalProps {
 export default function HistoryModal({ personHistory, onClose }: HistoryModalProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("all");
   const [isLandscape, setIsLandscape] = useState(false);
+  const titleId = useId();
+
+  // フォーカストラップ（ESCハンドリングはこちらに委譲）
+  const dialogRef = useFocusTrap<HTMLDivElement>(true, onClose);
 
   // 横画面検知
   useEffect(() => {
@@ -25,28 +31,12 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
 
   // モーダル表示中は背景のスクロールを無効化
   useEffect(() => {
-    // 現在のoverflow値を保存
     const originalOverflow = document.body.style.overflow;
-    // スクロールを無効化
     document.body.style.overflow = "hidden";
-
-    // クリーンアップ: モーダルが閉じたら元に戻す
     return () => {
       document.body.style.overflow = originalOverflow;
     };
   }, []);
-
-  // ESCキーで閉じる
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
 
   // 背景クリックで閉じる
   const handleBackgroundClick = useCallback(
@@ -58,13 +48,19 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
     [onClose]
   );
 
-  return (
+  return createPortal(
+    // biome-ignore lint/a11y/noStaticElementInteractions: モーダルオーバーレイの背景クリックで閉じるパターン。フォーカスはダイアログ内でトラップ済み
     <div
+      role="presentation"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
       onClick={handleBackgroundClick}
       style={{ touchAction: "none" }}
     >
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         className="bg-white rounded-lg shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col"
         style={{ touchAction: "auto" }}
       >
@@ -72,7 +68,10 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
         <div
           className={`flex items-center justify-between gap-4 px-6 border-b border-gray-200 ${isLandscape ? "py-2" : "py-4"}`}
         >
-          <h2 className={`font-bold text-gray-800 ${isLandscape ? "text-lg" : "text-2xl"}`}>
+          <h2
+            id={titleId}
+            className={`font-bold text-gray-800 ${isLandscape ? "text-lg" : "text-2xl"}`}
+          >
             {personHistory.name}
             {personHistory.history[personHistory.history.length - 1]?.rankTitle || ""} の成績推移
           </h2>
@@ -80,6 +79,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
           {/* 期間切替ボタン */}
           <div className="inline-flex bg-gray-100 rounded-lg p-1">
             <button
+              type="button"
               onClick={() => setViewMode("all")}
               className={`px-4 py-1 rounded-md font-medium text-sm ${
                 viewMode === "all"
@@ -90,6 +90,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
               全期間
             </button>
             <button
+              type="button"
               onClick={() => setViewMode("year")}
               className={`px-4 py-1 rounded-md font-medium text-sm ${
                 viewMode === "year"
@@ -102,6 +103,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
           </div>
 
           <button
+            type="button"
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full flex-shrink-0"
             aria-label="閉じる"
@@ -111,6 +113,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -131,6 +134,7 @@ export default function HistoryModal({ personHistory, onClose }: HistoryModalPro
           />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
