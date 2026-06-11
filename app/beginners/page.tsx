@@ -7,7 +7,7 @@ import ChecklistItem from "@/components/beginners/ChecklistItem";
 import ExpandableDetail from "@/components/beginners/ExpandableDetail";
 import InfoCard from "@/components/beginners/InfoCard";
 import NoticeBox from "@/components/beginners/NoticeBox";
-import TabNav from "@/components/beginners/TabNav";
+import TabNav from "@/components/common/TabNav";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import type { Tab, TabId } from "@/types/beginners";
@@ -20,17 +20,17 @@ const tabs: Tab[] = [
 ];
 
 export default function BeginnersPage() {
-  const [activeTab, setActiveTab] = useState<TabId>(() => {
-    // 初期値としてURLクエリパラメータから取得
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab") as TabId | null;
-      if (tabParam && tabs.some((t) => t.id === tabParam)) {
-        return tabParam;
-      }
+  const [activeTab, setActiveTab] = useState<TabId>("top");
+
+  // URLクエリパラメータからのタブ初期化はマウント後に行う
+  // （useState初期化関数内でwindowを参照するとSSRとのhydration mismatchになるため）
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get("tab") as TabId | null;
+    if (tabParam && tabs.some((t) => t.id === tabParam)) {
+      setActiveTab(tabParam);
     }
-    return "top";
-  });
+  }, []);
 
   // ハッシュがある場合のスクロール処理
   useEffect(() => {
@@ -67,7 +67,12 @@ export default function BeginnersPage() {
           </div>
 
           {/* タブナビゲーション */}
-          <TabNav tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+          <TabNav
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            ariaLabel="コンテンツタブ"
+          />
 
           {/* タブコンテンツ */}
           <AnimatePresence mode="wait">
@@ -178,7 +183,7 @@ function GuideContent() {
           初めての方でも、スタッフが丁寧に指導いたしますので、ご安心ください。
         </p>
         <div className="space-y-4">
-          <ExpandableDetail summary="初心者・女性・シニアの方へ">
+          <ExpandableDetail summary="初心者・女性・シニアの方へ" id="beginner-senior">
             <p className="mb-3">
               当弓場では軽い弓を使用しておりますので、力に自信のない方でも安全にお楽しみいただけます。
             </p>
@@ -218,7 +223,7 @@ function RulesContent() {
 
       {/* 展開可能セクション */}
       <div className="space-y-4">
-        <ExpandableDetail summary="14歳以下のお子様について">
+        <ExpandableDetail summary="14歳以下のお子様について" id="age-restriction">
           <p className="mb-3 font-medium text-gray-800">
             <strong>14歳以下のお子様は体験をお断りしております。</strong>
           </p>
@@ -232,7 +237,7 @@ function RulesContent() {
           <p>保護者の方が同伴されても、この方針は変わりませんので、あらかじめご了承ください。</p>
         </ExpandableDetail>
 
-        <ExpandableDetail summary="体験をお断りする場合">
+        <ExpandableDetail summary="体験をお断りする場合" id="refusal-policy">
           <p className="mb-2">以下に該当する場合、体験をお断りすることがございます:</p>
           <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
             <li>酒気を帯びている方</li>
@@ -245,7 +250,7 @@ function RulesContent() {
           </p>
         </ExpandableDetail>
 
-        <ExpandableDetail summary="免責事項">
+        <ExpandableDetail summary="免責事項" id="disclaimer">
           <p className="mb-3">
             これまで初心者の方で大きな怪我をされた方はおりませんが、万が一怪我をされた場合、以下の場合には責任を負いかねます:
           </p>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CartesianGrid, ComposedChart, Line, Tooltip, XAxis, YAxis } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 import { formatTargetSize } from "@/lib/utils";
 import type { PersonHistory } from "@/types/seiseki";
 
@@ -70,7 +71,7 @@ const _VerticalLabel = ({ viewBox, fill, text, position, fontSize = 14 }: Vertic
       style={{ fontSize, fontWeight: "normal" }}
     >
       {chars.map((char, i) => (
-        <tspan key={i} x={finalX} dy={i === 0 ? 0 : lineHeight}>
+        <tspan key={`${i}-${char}`} x={finalX} dy={i === 0 ? 0 : lineHeight}>
           {char}
         </tspan>
       ))}
@@ -357,11 +358,29 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
 
     // 全期間グラフの幅を計算（各月に最低15pxを確保、画面幅より小さい場合は画面幅を使用）
     const minWidthPerMonth = 15;
-    const calculatedWidth = Math.max(windowWidth, totalMonths * minWidthPerMonth + allPeriodMargin.left + allPeriodMargin.right);
+    const calculatedWidth = Math.max(
+      windowWidth,
+      totalMonths * minWidthPerMonth + allPeriodMargin.left + allPeriodMargin.right
+    );
 
     return (
       <div className="w-full">
-        {/* 全期間グラフ（モーダル領域最大化、凡例なし、横スクロール可能） */}
+        {/* 全期間グラフ 凡例（2系列表示時のみ） */}
+        <div className="flex justify-center gap-6 mb-2">
+          <span className="flex items-center gap-1.5 text-sm text-gray-700">
+            <svg width="20" height="4" aria-hidden="true">
+              <line x1="0" y1="2" x2="20" y2="2" stroke={CHART_COLORS.rank} strokeWidth="2" />
+            </svg>
+            順位
+          </span>
+          <span className="flex items-center gap-1.5 text-sm text-gray-700">
+            <svg width="20" height="4" aria-hidden="true">
+              <line x1="0" y1="2" x2="20" y2="2" stroke={CHART_COLORS.target} strokeWidth="2" />
+            </svg>
+            的サイズ
+          </span>
+        </div>
+        {/* 全期間グラフ（モーダル領域最大化、横スクロール可能） */}
         <div className="w-full overflow-x-auto" style={{ height: allPeriodHeight }}>
           <ComposedChart
             data={allChartData}
@@ -386,7 +405,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               reversed
               allowDataOverflow={true}
               ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-              tick={{ fontSize: tickFontSize, fill: "#8B0000" }}
+              tick={{ fontSize: tickFontSize, fill: CHART_COLORS.rank }}
               tickFormatter={(value) => `${value}位`}
               scale="linear"
               type="number"
@@ -409,7 +428,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                 }
                 return ticks;
               })()}
-              tick={{ fontSize: tickFontSize, fill: "#4A90E2" }}
+              tick={{ fontSize: tickFontSize, fill: CHART_COLORS.target }}
               tickFormatter={(value) => formatTargetSize(Number(value))}
             />
 
@@ -435,7 +454,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               yAxisId="rank"
               type="monotone"
               dataKey="rank"
-              stroke="#8B0000"
+              stroke={CHART_COLORS.rank}
               strokeWidth={2}
               dot={{ r: 4 }}
               name="rank"
@@ -445,7 +464,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               yAxisId="size"
               type="monotone"
               dataKey="targetSize"
-              stroke="#4A90E2"
+              stroke={CHART_COLORS.target}
               strokeWidth={2}
               dot={{ r: 4 }}
               name="targetSize"
@@ -497,7 +516,12 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
               overflow: "visible",
             }}
           >
-            <svg width="100%" height={containerHeight} style={{ overflow: "visible" }}>
+            <svg
+              width="100%"
+              height={containerHeight}
+              style={{ overflow: "visible" }}
+              aria-hidden="true"
+            >
               {/* 左Y軸エリア (順位: reversed, 1位=上, 10位=下) */}
               <g transform={`translate(0, ${rechartsMargin.top})`}>
                 {Array.from({ length: RANK_MAX }, (_, i) => i + 1).map((value) => {
@@ -514,7 +538,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                       textAnchor="end"
                       dominantBaseline="middle"
                       fontSize={tickFontSize}
-                      fill="#8B0000"
+                      fill={CHART_COLORS.rank}
                     >
                       {`${value}位`}
                     </text>
@@ -549,18 +573,18 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                     ticks.push(Number(v.toFixed(1)));
                   }
 
-                  return ticks.map((value, index) => {
+                  return ticks.map((value) => {
                     // 座標系は動的min〜max、小さい値が上（reversed）
                     const y = ((value - min) / range) * chartAreaHeight;
                     return (
                       <text
-                        key={index}
+                        key={value.toFixed(1)}
                         x={5}
                         y={y}
                         textAnchor="start"
                         dominantBaseline="middle"
                         fontSize={tickFontSize}
-                        fill="#4A90E2"
+                        fill={CHART_COLORS.target}
                       >
                         {formatTargetSize(value)}
                       </text>
@@ -588,6 +612,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
             zIndex: 5,
           }}
         >
+          {/* biome-ignore lint/a11y/noStaticElementInteractions: グラフのスワイプ/ドラッグ操作は補助的なナビゲーション機能のためキーボード非対応 */}
           <div
             className="cursor-grab active:cursor-grabbing"
             style={{
@@ -674,7 +699,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   yAxisId="rank"
                   type="monotone"
                   dataKey="rank"
-                  stroke="#8B0000"
+                  stroke={CHART_COLORS.rank}
                   strokeWidth={2}
                   dot={{ r: 4 }}
                   name="rank"
@@ -685,7 +710,7 @@ export default function HistoryChart({ personHistory, viewMode }: HistoryChartPr
                   yAxisId="size"
                   type="monotone"
                   dataKey="targetSize"
-                  stroke="#4A90E2"
+                  stroke={CHART_COLORS.target}
                   strokeWidth={2}
                   dot={{ r: 4 }}
                   name="targetSize"

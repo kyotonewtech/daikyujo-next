@@ -6,6 +6,11 @@ import { useEffect, useState } from "react";
 
 const HERO_IMAGES = ["/hero-image.jpg", "/hero2.jpg"] as const;
 
+const HERO_IMAGE_LABELS: Record<string, string> = {
+  "/hero-image.jpg": "射場から的を望む園山大弓場の道場内",
+  "/hero2.jpg": "「弓場」の扁額と暖簾がかかる園山大弓場の入口",
+};
+
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -39,6 +44,8 @@ export default function Hero() {
             opacity: { duration: 1 },
             scale: { duration: 10, ease: "easeOut" },
           }}
+          role="img"
+          aria-label={HERO_IMAGE_LABELS[HERO_IMAGES[currentImageIndex]] ?? "園山大弓場の風景写真"}
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${HERO_IMAGES[currentImageIndex]}')`,
           }}

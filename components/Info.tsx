@@ -2,30 +2,23 @@
 
 import { motion } from "framer-motion";
 import { AlertCircle, Clock } from "lucide-react";
+import SectionHeading from "@/components/common/SectionHeading";
 
 export default function Info() {
   return (
-    <section id="info" className="py-24 px-6 bg-white relative overflow-hidden">
+    <section id="info" className="py-24 md:py-32 px-6 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gray-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="font-shippori text-3xl font-bold mb-3">営業案内</h2>
-          <span className="block text-xs font-sans text-accent tracking-[0.3em]">INFORMATION</span>
-        </motion.div>
+      <div className="max-w-5xl mx-auto relative z-10">
+        <SectionHeading eng="INFORMATION">営業案内</SectionHeading>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="bg-[#fcfaf2] p-8 md:p-12 rounded-sm border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+          className="bg-background p-8 md:p-12 rounded-sm border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
         >
           <div className="space-y-8">
             {/* Hours */}

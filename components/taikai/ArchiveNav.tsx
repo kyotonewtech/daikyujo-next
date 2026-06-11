@@ -24,7 +24,7 @@ export default function ArchiveNav({ archives, currentYear }: ArchiveNavProps) {
   return (
     <div className="mb-8">
       <label htmlFor="archive-select" className="block text-sm font-medium text-gray-700 mb-2">
-        Select Tournament Year
+        大会開催年を選択
       </label>
       <select
         id="archive-select"
@@ -34,7 +34,7 @@ export default function ArchiveNav({ archives, currentYear }: ArchiveNavProps) {
       >
         {archives.map((archive) => (
           <option key={archive.year} value={archive.year}>
-            {archive.taikaiName} ({archive.participantCount} participants)
+            {archive.taikaiName} ({archive.participantCount}名参加)
           </option>
         ))}
       </select>

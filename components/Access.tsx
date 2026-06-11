@@ -2,20 +2,13 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
+import SectionHeading from "@/components/common/SectionHeading";
 
 export default function Access() {
   return (
-    <section id="access" className="py-32 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <h2 className="font-shippori text-3xl font-bold mb-3">アクセス</h2>
-          <span className="block text-xs font-sans text-accent tracking-[0.3em]">ACCESS</span>
-        </motion.div>
+    <section id="access" className="py-24 md:py-32 px-6 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <SectionHeading eng="ACCESS">アクセス</SectionHeading>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Map Area */}
@@ -28,6 +21,7 @@ export default function Access() {
             <div className="absolute inset-0 flex items-center justify-center text-gray-400 bg-gray-100">
               {/* Placeholder for map */}
               <iframe
+                title="園山大弓場の地図"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.123456789012!2d135.780000!3d35.003000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDAwJzEwLjgiTiAxMzXCsDQ2JzQ4LjAiRQ!5e0!3m2!1sja!2sjp!4v1620000000000!5m2!1sja!2sjp"
                 width="100%"
                 height="100%"
@@ -67,8 +61,8 @@ export default function Access() {
                   <div>
                     <p className="text-sm text-gray-500 mb-1">住所</p>
                     <p className="text-lg font-medium">
-                      〒605-0071 <br />
-                      京都市東山区円山町（円山公園内）
+                      〒605-0073 <br />
+                      京都市東山区円山公園北林
                     </p>
                   </div>
                 </div>

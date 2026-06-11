@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 import type { PersonTaikaiHistory } from "@/types/taikai";
 
 interface TaikaiHistoryChartProps {
@@ -78,7 +79,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
             reversed
             allowDataOverflow={true}
             ticks={Array.from({ length: maxRank }, (_, i) => i + 1)}
-            tick={{ fontSize: 11, fill: "#8B0000" }}
+            tick={{ fontSize: 11, fill: CHART_COLORS.rank }}
             tickFormatter={(value) => `${value}位`}
             scale="linear"
             type="number"
@@ -102,7 +103,7 @@ export default function TaikaiHistoryChart({ personHistory }: TaikaiHistoryChart
           <Line
             type="monotone"
             dataKey="rank"
-            stroke="#8B0000"
+            stroke={CHART_COLORS.rank}
             strokeWidth={3}
             dot={{ r: 5 }}
             name="rank"

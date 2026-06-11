@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
-import type { SeisekiEntry, SeisekiMonth } from "@/types/seiseki";
+import { padEntriesToTen } from "@/lib/seiseki-entry-utils";
+import type { SeisekiMonth } from "@/types/seiseki";
 import SeisekiCard from "./SeisekiCard";
 
 interface MonthCarouselProps {
@@ -14,44 +15,6 @@ interface MonthCarouselProps {
   latestMonth: number | null;
   selectedYear: number;
   onCardClick: (personId: string) => void;
-}
-
-// 空エントリーを生成（10件未満の場合に埋めるため）
-function createEmptyEntry(rank: number): SeisekiEntry {
-  return {
-    id: `empty-${rank}`,
-    personId: "",
-    rank,
-    name: "該当なし",
-    rankTitle: "",
-    targetSize: "-",
-    updatedDate: "",
-    expiryDate: "",
-    isEmpty: true,
-  };
-}
-
-// エントリーを10件に揃える
-function padEntriesToTen(entries: SeisekiEntry[]): SeisekiEntry[] {
-  if (entries.length >= 10) return entries.slice(0, 10);
-
-  const padded = [...entries];
-  for (let i = entries.length; i < 10; i++) {
-    padded.push(createEmptyEntry(i + 1));
-  }
-  return padded;
-}
-
-// エントリーを再配置（デスクトップ用: 左列1-5位、右列6-10位）
-function _reorderEntriesForDesktop(entries: SeisekiEntry[]): SeisekiEntry[] {
-  if (entries.length !== 10) return entries;
-
-  const reordered: SeisekiEntry[] = [];
-  for (let i = 0; i < 5; i++) {
-    reordered.push(entries[i]); // 1位, 2位, 3位, 4位, 5位
-    reordered.push(entries[i + 5]); // 6位, 7位, 8位, 9位, 10位
-  }
-  return reordered;
 }
 
 export default function MonthCarousel({
@@ -144,70 +107,71 @@ export default function MonthCarousel({
   const hasNext = currentMonthIndex < monthsData.length - 1;
 
   return (
-    <div className="relative overflow-hidden">
-      {/* 左矢印ボタン */}
-      {hasPrev && (
+    <div>
+      {/* ヘッダー行: 月タイトルと前後ナビゲーション矢印をまとめて配置 */}
+      <div className="flex items-center justify-between mb-6 border-b-2 border-accent pb-2">
+        {/* 新しい月へ戻るボタン（44×44px以上のタップ領域確保）
+            monthsData は降順（index 0 = 最新月）のため index-1 = 時間的に次の月 */}
         <button
           type="button"
-          onClick={() => handleMonthChange(currentMonthIndex - 1)}
-          disabled={isAnimating}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          aria-label="前の月"
+          onClick={() => hasPrev && handleMonthChange(currentMonthIndex - 1)}
+          disabled={!hasPrev || isAnimating}
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+          aria-label="次の月へ"
         >
           <ChevronLeft className="w-6 h-6 text-accent" />
         </button>
-      )}
 
-      {/* 右矢印ボタン */}
-      {hasNext && (
+        {/* 月タイトル */}
+        <h2 className="text-2xl font-bold text-accent">{currentMonthData.month}月の成績</h2>
+
+        {/* 前の月へ戻るボタン（44×44px以上のタップ領域確保）
+            index+1 = 時間的に前の月（古い月） */}
         <button
           type="button"
-          onClick={() => handleMonthChange(currentMonthIndex + 1)}
-          disabled={isAnimating}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          aria-label="次の月"
+          onClick={() => hasNext && handleMonthChange(currentMonthIndex + 1)}
+          disabled={!hasNext || isAnimating}
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/90 hover:bg-white shadow-md hover:shadow-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+          aria-label="前の月へ"
         >
           <ChevronRight className="w-6 h-6 text-accent" />
         </button>
-      )}
+      </div>
 
-      <AnimatePresence mode="wait" custom={direction}>
-        <motion.section
-          key={`${currentMonthData.year}-${currentMonthData.month}`}
-          custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          className="will-change-transform"
-        >
-          {/* 月ヘッダー */}
-          <h2 className="text-2xl font-bold text-accent mb-6 border-b-2 border-accent pb-2">
-            {currentMonthData.month}月の成績
-          </h2>
-
-          {/* 成績カードグリッド */}
-          <div className="space-y-4">
-            {paddedEntries.map((entry, index) => (
-              <SeisekiCard
-                key={entry.id}
-                entry={entry}
-                index={index}
-                isEmpty={entry.isEmpty}
-                isLatestMonth={isLatestMonth}
-                onClick={onCardClick}
-              />
-            ))}
-          </div>
-        </motion.section>
-      </AnimatePresence>
+      <div className="overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.section
+            key={`${currentMonthData.year}-${currentMonthData.month}`}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+            className="will-change-transform"
+          >
+            {/* 成績カードグリッド */}
+            <div className="space-y-4">
+              {paddedEntries.map((entry, index) => (
+                <SeisekiCard
+                  key={entry.id}
+                  entry={entry}
+                  index={index}
+                  isEmpty={entry.isEmpty}
+                  isLatestMonth={isLatestMonth}
+                  onClick={onCardClick}
+                />
+              ))}
+            </div>
+          </motion.section>
+        </AnimatePresence>
+      </div>
 
       {/* ページネーションドット */}
       {monthsData.length > 1 && (

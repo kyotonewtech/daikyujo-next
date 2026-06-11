@@ -28,9 +28,3 @@ export interface ChecklistItemProps {
   text: string;
   delay?: number;
 }
-
-export interface TabNavProps {
-  tabs: Tab[];
-  activeTab: TabId;
-  onTabChange: (id: TabId) => void;
-}

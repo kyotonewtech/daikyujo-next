@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import LoadingOverlay from "@/components/common/LoadingOverlay";
+import Toast from "@/components/common/Toast";
 import TaikaiCard from "@/components/taikai/TaikaiCard";
 import TaikaiHistoryModal from "@/components/taikai/TaikaiHistoryModal";
 import type { PersonTaikaiHistory, TaikaiData } from "@/types/taikai";
@@ -16,6 +18,7 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
     null
   );
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // カードクリック処理
   const handleCardClick = async (personName: string) => {
@@ -32,7 +35,7 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
       setSelectedPersonHistory(personHistory);
     } catch (error) {
       console.error("Error fetching person taikai history:", error);
-      alert("大会参加履歴の取得に失敗しました");
+      setToastMessage("大会参加履歴の取得に失敗しました");
     } finally {
       setIsLoadingHistory(false);
     }
@@ -88,17 +91,11 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
         <TaikaiHistoryModal personHistory={selectedPersonHistory} onClose={handleCloseModal} />
       )}
 
+      {/* エラートースト */}
+      <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+
       {/* ローディング表示 */}
-      {isLoadingHistory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-white rounded-lg p-6 shadow-2xl">
-            <div className="flex items-center space-x-3">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
-              <span className="text-lg font-bold text-gray-800">データ読み込み中...</span>
-            </div>
-          </div>
-        </div>
-      )}
+      {isLoadingHistory && <LoadingOverlay />}
     </div>
   );
 }
