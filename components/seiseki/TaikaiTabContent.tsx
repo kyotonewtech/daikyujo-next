@@ -6,7 +6,19 @@ import LoadingOverlay from "@/components/common/LoadingOverlay";
 import Toast from "@/components/common/Toast";
 import TaikaiCard from "@/components/taikai/TaikaiCard";
 import TaikaiHistoryModal from "@/components/taikai/TaikaiHistoryModal";
-import type { PersonTaikaiHistory, TaikaiData } from "@/types/taikai";
+import type { PersonTaikaiHistory, TaikaiData, TaikaiParticipant } from "@/types/taikai";
+
+function reorderParticipantsForDesktop(participants: TaikaiParticipant[]): TaikaiParticipant[] {
+  const half = Math.ceil(participants.length / 2);
+  const reordered: TaikaiParticipant[] = [];
+  for (let i = 0; i < half; i++) {
+    reordered.push(participants[i]);
+    if (i + half < participants.length) {
+      reordered.push(participants[i + half]);
+    }
+  }
+  return reordered;
+}
 
 interface TaikaiTabContentProps {
   taikaiList: TaikaiData[];
@@ -73,7 +85,7 @@ export default function TaikaiTabContent({ taikaiList }: TaikaiTabContentProps) 
 
             {/* 参加者カードグリッド */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {taikai.participants.map((participant, index) => (
+              {reorderParticipantsForDesktop(taikai.participants).map((participant, index) => (
                 <TaikaiCard
                   key={participant.id}
                   participant={participant}
